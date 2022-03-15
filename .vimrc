@@ -24,6 +24,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/changesPlugin'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
 
 " Webdev
 Plug 'ap/vim-css-color'
