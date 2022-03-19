@@ -15,7 +15,9 @@ export ZSH="/data/data/com.termux/files/home/.oh-my-zsh"
 alias gi='git init'
 alias gs='git status'
 alias ga='git add'
-alias gc='git commit -m'
+alias gl='git log'
+alias gp='git pull'
+alias gc='git commit'
 alias gp='git push'
 
 # Others aliases
