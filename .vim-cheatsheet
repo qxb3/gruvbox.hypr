@@ -1,0 +1,30 @@
+# Navigation
+h - move left
+l - move right
+j - move down
+k - move up
+
+# Editing
+i - insert mode
+I - insert mode on the beginning of the line
+a - insert mode on the next letter
+A - insert mode on the end of the line
+
+# Deleting
+x - deletes the letter on the right of the cursor
+X - deletes the current letter
+dd - deletes the whole line
+D - deletes the right content of cursor
+
+# Yank
+y - copying things on visual mode
+Y - copying the whole line without visual mode
+
+# Visual mode
+v - enter visual mode
+V - visual mode on the entire line
+ctrl-v - enter visual block
+
+# Playground
+
+fuck u xd hello world!
