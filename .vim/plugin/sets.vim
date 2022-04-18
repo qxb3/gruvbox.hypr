@@ -1,7 +1,6 @@
 set nocompatible
 set encoding=utf-8
 set hidden
-set nobackup
 
 " Personal options
 syntax on
