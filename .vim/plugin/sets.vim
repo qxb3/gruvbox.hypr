@@ -1,8 +1,11 @@
 set nocompatible
 set encoding=utf-8
 set hidden
+set noswapfile
+set updatetime=300
 
 " Personal options
+let mapleader = " "
 syntax on
 set number
 set nowrap

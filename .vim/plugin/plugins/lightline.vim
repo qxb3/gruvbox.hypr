@@ -1,7 +1,7 @@
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
+      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename' ] ]
       \ },
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
