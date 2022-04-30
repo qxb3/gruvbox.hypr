@@ -5,7 +5,6 @@ set noswapfile
 set updatetime=300
 
 " Personal options
-let mapleader = " "
 syntax on
 set number
 set nowrap

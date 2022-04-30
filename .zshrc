@@ -15,15 +15,7 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 
-# Git aliases
-alias gi='git init'
-alias gs='git status'
-alias ga='git add'
-alias gl='git log'
-alias gc='git commit'
-alias gp='git push'
-
-# Others aliases
+# Aliases
 alias c='clear'
 alias x='exit'
 alias open='xdg-open'
@@ -31,3 +23,7 @@ alias rs='termux-reload-settings'
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

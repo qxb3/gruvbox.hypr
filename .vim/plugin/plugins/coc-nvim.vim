@@ -17,6 +17,6 @@ function! s:show_documentation()
 endfunction
 
 " Joyfull stuf
-nmap <leader>rn <Plug>(coc-rename)
-xmap <leader>f <Plug>(coc-format-selected)
-nmap <leader>f <Plug>(coc-format-selected)
+nmap rn <Plug>(coc-rename)
+xmap f <Plug>(coc-format-selected)
+nmap f <Plug>(coc-format-selected)
