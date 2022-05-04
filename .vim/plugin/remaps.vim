@@ -1,1 +1,2 @@
-inoremap qq <Esc>
+inoremap qq <ESC>
+vnoremap qq <ESC>

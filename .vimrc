@@ -7,6 +7,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/changesPlugin'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'preservim/nerdtree'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'elixir-editors/vim-elixir'
 
@@ -15,7 +16,6 @@ Plug 'ap/vim-css-color'
 Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
-Plug 'nikvdp/ejs-syntax'
 
 " - Customization - "
 Plug 'morhetz/gruvbox'
@@ -28,5 +28,4 @@ let g:svelte_indent_script = 2
 let g:svelte_indent_style = 2
 let g:closetag_filenames = '*.html,*.svelte,*.ejs'
 
-au BufNewFile,BufRead *.ejs set filetype=html
 filetype plugin indent on
