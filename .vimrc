@@ -26,8 +26,4 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-let g:svelte_indent_script = 2
-let g:svelte_indent_style = 2
-let g:closetag_filenames = '*.html,*.svelte,*.ejs'
-
 filetype plugin indent on
