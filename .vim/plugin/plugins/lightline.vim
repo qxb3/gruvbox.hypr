@@ -14,7 +14,6 @@ let g:lightline = {
       \   'buffers': 'tabsel'
       \ }
       \ }
-let g:lightline#bufferline#enable_nerdfont = 1
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#show_number = 1
 let g:lightline#bufferline#unnamed = '[No Name]'

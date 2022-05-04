@@ -11,3 +11,4 @@ let g:closetag_filenames = '*.html,*.svelte,*.ejs'
 " Vim better whitespace
 let g:strip_whitespace_on_save = 1
 let g:strip_whitespace_confirm = 0
+let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git \) -prune -o -print'

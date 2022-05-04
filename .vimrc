@@ -12,6 +12,7 @@ Plug 'tpope/vim-surround'
 Plug 'elixir-editors/vim-elixir'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 
 " Webdev
 Plug 'ap/vim-css-color'
