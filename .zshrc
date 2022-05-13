@@ -1,31 +1,26 @@
-source "${HOME}/.zgen/zgen.zsh"
-
-if ! zgen saved; then
-  zgen load romkatv/powerlevel10k powerlevel10k
-
-  zgen save
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,underline"
-ZSH_AUTOSUGGEST_STRATEGY="completion"
-HISTFILE=$HOME/.zsh/.zsh_history
-HISTSIZE=100000
-SAVEHIST=$HISTSIZ
+export ZSH="/data/data/com.termux/files/home/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+zstyle ':omz:update' frequency 12
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 
-bindkey "^[[H" beginning-of-line
-bindkey "^[[F" end-of-line
+source $ZSH/oh-my-zsh.sh
+export LANG=en_US.UTF-8
+export EDITOR='vim'
 
-zstyle ':completion:*' list-colors 'di=1;34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
-zstyle ':completion:*' menu select
-zstyle ':completion:*' group-name ''
-zstyle ':completion:::::' completer _expand _complete _ignored _approximate
-
+# Aliases
 alias c='clear'
 alias x='exit'
 alias open='xdg-open'
 alias rs='termux-reload-settings'
 
-[[ ! -f ~/.zsh/.p10k.zsh ]] || source ~/.zsh/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH" #For yarn
