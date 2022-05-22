@@ -12,3 +12,6 @@ let g:closetag_filenames = '*.html,*.svelte,*.ejs'
 let g:strip_whitespace_on_save = 1
 let g:strip_whitespace_confirm = 0
 let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git \) -prune -o -print'
+
+" Vim commentary
+autocmd FileType apache setlocal commentstring=#\ %s

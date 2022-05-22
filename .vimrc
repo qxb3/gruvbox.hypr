@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/changesPlugin'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'preservim/nerdtree'
