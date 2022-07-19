@@ -20,4 +20,6 @@ inoremap <expr> <CR> ExpandTag()
 
 " Auto source .vimrc
 autocmd! bufwritepost .vimrc source %
-au BufNewFile,BufRead *.ejs,*.md set filetype=html
+
+au BufNewFile,BufRead *.ejs,*.marko,*.md set filetype=html
+nnoremap mm ``

@@ -3,6 +3,7 @@ set encoding=utf-8
 set hidden
 set noswapfile
 set updatetime=300
+set backupcopy=yes
 
 " Personal options
 syntax on

@@ -17,7 +17,6 @@ let g:lightline = {
       \ }
       \ }
 let g:lightline#bufferline#enable_devicons = 1
-let g:lightline#bufferline#show_number = 1
 let g:lightline#bufferline#unnamed = '[No Name]'
 nnoremap <silent> <C-x> :bdelete<CR>
 nnoremap <silent> <C-o> :bprev<CR>
