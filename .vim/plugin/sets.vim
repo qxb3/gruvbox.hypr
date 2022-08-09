@@ -5,7 +5,6 @@ set noswapfile
 set updatetime=300
 set backupcopy=yes
 
-" Personal options
 syntax on
 set number
 set nowrap
@@ -13,6 +12,7 @@ set ruler
 set showtabline=2
 set termguicolors
 set background=dark
+set relativenumber
 
 " Indentation
 set tabstop=2 softtabstop=2

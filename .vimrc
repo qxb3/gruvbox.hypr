@@ -8,10 +8,10 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'elixir-editors/vim-elixir'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
+Plug 'djoshea/vim-autoread'
+" Plug 'airblade/vim-rooter'
 
 " Webdev
 Plug 'ap/vim-css-color'
