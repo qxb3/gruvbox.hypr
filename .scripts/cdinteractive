@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# its cd but intractive 🔥
+
+paths=$(find ~/dev -maxdepth 2 -type d | awk '{ gsub(/\/data\/data\/com.termux\/files\/home\//, ""); print }')
+result=$( \
+  echo "$paths" | \
+  fzf \
+  --reverse \
+  --border=rounded \
+  --margin 5% \
+  --preview=" cat {}" \
+  --preview-window hidden \
+  --prompt="❯ " \
+  --pointer="❯" \
+  --color="spinner:yellow,border:bright-white"
+)
+echo "$HOME/$result"
