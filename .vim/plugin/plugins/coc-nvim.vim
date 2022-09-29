@@ -20,3 +20,6 @@ endfunction
 nmap rn <Plug>(coc-rename)
 xmap f <Plug>(coc-format-selected)
 nmap f <Plug>(coc-format-selected)
+
+" Autocomplete when enter
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
