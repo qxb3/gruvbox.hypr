@@ -13,6 +13,7 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
+  yarn
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -24,6 +25,7 @@ export GPG_TTY=$TTY
 alias c='clear'
 alias x='exit'
 alias open='xdg-open'
+alias s='du -sh'
 alias rs='termux-reload-settings'
 alias cdi='cd $(cdinteractive)'
 alias ts='test-screen'
@@ -33,6 +35,7 @@ alias cc='rm -rf ~/.cache/yarn ~/.cache/typescript ~/.npm/_cacache'
 alias fzf='fzf --reverse --border=rounded --margin 5% --preview=" cat {}" --preview-window=up,30% --prompt="❯ " --pointer="❯" --color="spinner:yellow,border:bright-white"'
 alias top='gotop'
 alias lserver='live-server'
+alias http='restish'
 
 [[ ! -f ~/.zsh/.p10k.zsh ]] || source ~/.zsh/.p10k.zsh
 
