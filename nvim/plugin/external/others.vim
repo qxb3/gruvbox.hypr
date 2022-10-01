@@ -1,3 +1,6 @@
+" vim-impatient (Startup optimization)
+lua require('impatient')
+
 " vim-svelte-plugin
 let g:svelte_indent_script = 2
 let g:svelte_indent_style = 2
