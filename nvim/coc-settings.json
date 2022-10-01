@@ -1,0 +1,5 @@
+{
+  "svelte.ask-to-enable-ts-plugin": false,
+  "suggest.virtualText": true,
+  "diagnostic.messageTarget": "float"
+}
