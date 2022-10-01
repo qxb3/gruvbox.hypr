@@ -18,7 +18,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
-export EDITOR='vim'
+export EDITOR='nvim'
 export GPG_TTY=$TTY
 
 # Aliases
@@ -28,6 +28,7 @@ alias open='xdg-open'
 alias s='du -sh'
 alias rs='termux-reload-settings'
 alias cdi='cd $(cdinteractive)'
+alias vim='nvim'
 alias ts='test-screen'
 alias bf='brainfuck'
 alias grex='grex -c'
