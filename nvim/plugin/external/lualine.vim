@@ -1,7 +1,9 @@
 lua << EOF
 require('lualine').setup({
   options = {
-    theme = 'edge'
+    theme = 'edge',
+    component_separators = { left = '|', right = '|' },
+    section_separators = { left = '', right = '' }
   }
 })
 EOF
