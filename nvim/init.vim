@@ -18,7 +18,7 @@ Plug 'ap/vim-css-color'
 Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'alvan/vim-closetag'
 
-Plug 'sainnhe/edge'
+Plug 'gruvbox-community/gruvbox'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }

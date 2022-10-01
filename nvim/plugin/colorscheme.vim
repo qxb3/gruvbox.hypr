@@ -1,7 +1,5 @@
-let g:edge_style = 'neon'
-let g:edge_diagnostic_line_highlight = 1
-let g:edge_diagnostic_virtual_text = 'colored'
-let g:edge_diagnostic_text_highlight = 1
-let g:edge_disable_italic_comment = 1
-let g:edge_better_performance = 1
-colorscheme edge
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_light='hard'
+let g:gruvbox_hls_cursor = 'gray'
+let g:gruvbox_improved_warnings = '1'
+colorscheme gruvbox
