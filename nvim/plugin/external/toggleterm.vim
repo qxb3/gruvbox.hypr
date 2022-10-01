@@ -1,10 +1,10 @@
 lua << EOF
 require('toggleterm').setup({
   open_mapping = [[tt]],
-  direction = 'float',
+  direction = 'horizontal',
   size = function(term)
     if term.direction == 'horizontal' then
-      return 10
+      return 18
     elseif term.direction == 'vertical' then
       return 35
     end
