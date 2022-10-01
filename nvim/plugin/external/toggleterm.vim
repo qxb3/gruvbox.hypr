@@ -1,3 +1,4 @@
+
 lua << EOF
 require('toggleterm').setup({
   open_mapping = [[tt]],
@@ -20,3 +21,6 @@ require('toggleterm').setup({
   }
 })
 EOF
+
+" Map <Esc> to exit terminal mode
+tmap <Esc> [[<C-\><C-n>]]
