@@ -14,6 +14,7 @@ Plug 'tpope/vim-commentary'
 Plug 'chrisbra/changesPlugin'
 " Plug 'airblade/vim-rooter'
 Plug 'djoshea/vim-autoread'
+Plug 'rcarriga/nvim-notify'
 
 Plug 'ap/vim-css-color'
 Plug 'leafOfTree/vim-svelte-plugin'
