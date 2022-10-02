@@ -3,6 +3,7 @@ set termguicolors
 set guicursor=
 set mouse=a
 set relativenumber
+set number
 set sidescrolloff=12
 set scrolloff=5
 set nowrap
