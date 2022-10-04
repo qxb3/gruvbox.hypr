@@ -1,7 +1,6 @@
-
 lua << EOF
 require('toggleterm').setup({
-  open_mapping = [[tt]],
+  open_mapping = [[<C-t>]],
   direction = 'horizontal',
   size = function(term)
     if term.direction == 'horizontal' then
