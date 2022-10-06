@@ -1,4 +1,3 @@
-lua << EOF
 require('lualine').setup({
   options = {
     theme = 'gruvbox_dark',
@@ -6,4 +5,3 @@ require('lualine').setup({
     section_separators = { left = '', right = '' }
   }
 })
-EOF

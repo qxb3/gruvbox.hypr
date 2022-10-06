@@ -1,4 +1,3 @@
-lua << EOF
 require('bufferline').setup({
   options = {
     modified_icon = '*',
@@ -6,8 +5,3 @@ require('bufferline').setup({
     diagnostics = 'coc'
   }
 })
-EOF
-
-nnoremap <silent><C-o> :bprevious<CR>
-nnoremap <silent><C-p> :bnext<CR>
-nnoremap <silent><C-x> :bd<CR>

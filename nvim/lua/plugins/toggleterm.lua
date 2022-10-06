@@ -1,4 +1,3 @@
-lua << EOF
 require('toggleterm').setup({
   open_mapping = [[<C-t>]],
   direction = 'horizontal',
@@ -19,7 +18,3 @@ require('toggleterm').setup({
     enabled = true
   }
 })
-EOF
-
-" Map <Esc> to exit terminal mode
-tmap <Esc> [[<C-\><C-n>]]
