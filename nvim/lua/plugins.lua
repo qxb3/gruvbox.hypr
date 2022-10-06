@@ -5,6 +5,9 @@ require('packer').startup(function(use)
   ------------------------------------------------------------
   -- General Plugins
   ------------------------------------------------------------
+  -- Autocompletion
+  use {'neoclide/coc.nvim', branch = 'release'}
+
   -- File tree
   use {
     'kyazdani42/nvim-tree.lua',
