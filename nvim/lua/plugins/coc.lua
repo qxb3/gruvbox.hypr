@@ -1,25 +1,37 @@
-" Show autocomplete and docs
-inoremap <silent><expr> <c-@> coc#refresh()
-nnoremap <silent> D :call <SID>show_documentation()<CR>
+function _G.show_documentation()
+  local cw = vim.fn.expand('<cword>')
+  if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
+    vim.api.nvim_command('h ' .. cw)
+  elseif vim.api.nvim_eval('coc#rpc#ready()') then
+    vim.fn.CocActionAsync('doHover')
+  else
+    vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
+  end
+end
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+-- Use D to show documantation
+map('n', 'D', '<CMD>lua _G.show_documentation()<CR>')
 
-function! s:show_documentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-   else
-    call feedkeys('K', 'in')
-  endif
-endfunction
+-- Use <C-space> to show competion
+map('i', '<C-space>', 'coc#refresh()', { expr = true })
 
-" Joyfull stuf
-nmap rn <Plug>(coc-rename)
-xmap f <Plug>(coc-format-selected)
-nmap f <Plug>(coc-format-selected)
+-- Code navigation
+map('n', 'gd', '<Plug>(coc-definition)')
+map('n', 'gy', '<Plug>(coc-type-definition)')
+map('n', 'gi', '<Plug>(coc-implementation)')
+map('n', 'gr', '<Plug>(coc-references)')
 
-" Autocomplete when enter
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>""
+-- Use `[g` and `]g` to navigate diagnostics
+map('n', '[g', '<Plug>(coc-diagnostic-prev)')
+map('n', ']g', '<Plug>(coc-diagnostic-next)')
+
+-- Use <leader>f to format selected code.
+map('x', '<leader>f', '<Plug>(coc-format-selected)')
+map('n', '<leader>f', '<Plug>(coc-format-selected)')
+
+-- Use rn to rename variables
+map('n', 'rn', '<Plug>(coc-rename)')
+
+-- Autocomplete when enter
+vim.cmd([[inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : '\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>']])
+-- map('i', '<CR>', 'coc#pum#visible() ? coc#pum#confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"', { expr = true })
