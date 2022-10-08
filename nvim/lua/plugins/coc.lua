@@ -33,5 +33,6 @@ map('n', '<leader>f', '<Plug>(coc-format-selected)')
 map('n', 'rn', '<Plug>(coc-rename)')
 
 -- Autocomplete when enter
-vim.cmd([[inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : '\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>']])
--- map('i', '<CR>', 'coc#pum#visible() ? coc#pum#confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"', { expr = true })
+vim.cmd([[
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>""
+]])
