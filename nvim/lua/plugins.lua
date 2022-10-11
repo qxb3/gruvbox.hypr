@@ -46,6 +46,7 @@ require('packer').startup(function(use)
   use 'alvan/vim-closetag'              -- Automatically closes html tags
   use 'tpope/vim-commentary'            -- For fast commenting
   use 'djoshea/vim-autoread'            -- Updates the buffer if the file updates externally
+  use 'airblade/vim-rooter'             -- Updates the root to the root of the project
 
   ------------------------------------------------------------
   -- Other Plugins

@@ -29,6 +29,9 @@ map('n', ']g', '<Plug>(coc-diagnostic-next)')
 map('x', '<leader>f', '<Plug>(coc-format-selected)')
 map('n', '<leader>f', '<Plug>(coc-format-selected)')
 
+-- Use <leader>o to organize the imports
+map('n', '<leader>o', ':call CocActionAsync("runCommand", "editor.action.organizeImport")<CR>')
+
 -- Use rn to rename variables
 map('n', 'rn', '<Plug>(coc-rename)')
 
