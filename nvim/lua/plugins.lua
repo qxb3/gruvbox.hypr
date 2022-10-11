@@ -53,7 +53,7 @@ require('packer').startup(function(use)
   ------------------------------------------------------------
   use 'leafOfTree/vim-svelte-plugin'    -- Svelte specific plugin
   use 'lewis6991/impatient.nvim'        -- Startup optimzation
-  use 'akinsho/toggleterm.nvim'         -- Toggleterm
+  use 'voldikss/vim-floaterm'           -- Floaterm
   use 'norcalli/nvim-colorizer.lua'     -- Adds color to hex, rbg etc... values
 
 end)

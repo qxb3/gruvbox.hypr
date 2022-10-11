@@ -43,3 +43,9 @@ map('n', '<C-g>', ':Rg<CR>')
 
 -- Mappings for nvim-tree
 map('n', '<C-s>', ':NvimTreeFindFileToggle<CR>')
+
+-- Mappings for floaterm
+vim.g.floaterm_keymap_new    = '<leader>tn'
+vim.g.floaterm_keymap_prev   = '<leader>to'
+vim.g.floaterm_keymap_next   = '<leader>tp'
+vim.g.floaterm_keymap_toggle = '<leader>tt'
