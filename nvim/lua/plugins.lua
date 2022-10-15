@@ -1,7 +1,6 @@
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-
   ------------------------------------------------------------
   -- General Plugins
   ------------------------------------------------------------
@@ -39,6 +38,7 @@ require('packer').startup(function(use)
   ------------------------------------------------------------
   -- Useful Plugins
   ------------------------------------------------------------
+  use 'uga-rosa/ccc.nvim'               -- Color picker
   use 'jiangmiao/auto-pairs'            -- Auto pairs
   use 'ntpeters/vim-better-whitespace'  -- Removes whitespaces
   use 'mattn/emmet-vim'                 -- Emmet
