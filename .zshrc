@@ -43,3 +43,5 @@ alias http='restish'
 export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH #For yarn
 export PATH=./node_modules/.bin:./vendor/bin:$PATH
 export PATH=$HOME/.scripts:$PATH
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
