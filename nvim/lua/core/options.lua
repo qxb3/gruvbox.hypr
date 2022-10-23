@@ -34,7 +34,7 @@ option.hidden = true
 option.history = 100
 option.lazyredraw = true
 option.synmaxcol = 240
-option.updatetime = 700
+option.updatetime = 250
 
 ------------------------------------------------------------
 -- Colorscheme
