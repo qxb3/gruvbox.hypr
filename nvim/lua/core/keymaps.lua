@@ -7,7 +7,7 @@ function _G.map(mode, lhs, rhs, opts)
 end
 
 -- Change leader to comma
-vim.g.mapleader = '0'
+vim.g.mapleader = '*'
 
 -- Map Esc to qq
 map('i', 'qq', '<Esc>')
