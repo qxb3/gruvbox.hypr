@@ -6,7 +6,7 @@ function _G.map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- Change leader to comma
+-- Changes default leader
 vim.g.mapleader = '*'
 
 -- Map Esc to qq
