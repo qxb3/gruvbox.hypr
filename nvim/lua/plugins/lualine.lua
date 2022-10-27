@@ -1,6 +1,6 @@
 require('lualine').setup({
   options = {
-    theme = 'gruvbox_dark',
+    theme = 'tokyonight',
     component_separators = { left = '|', right = '|' },
     section_separators = { left = '', right = '' }
   }

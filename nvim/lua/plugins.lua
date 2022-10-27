@@ -33,7 +33,8 @@ require('packer').startup(function(use)
   use 'ryanoasis/vim-devicons'          -- Dev icons without color
   use 'kyazdani42/nvim-web-devicons'    -- Dev icons with color
   use 'rcarriga/nvim-notify'            -- Fancy notification ui
-  use 'gruvbox-community/gruvbox'       -- Colorscheme
+  use 'gruvbox-community/gruvbox'       -- Gruvbox Colorscheme
+  use 'folke/tokyonight.nvim'           -- Tokyonight Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins
