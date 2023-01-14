@@ -34,7 +34,7 @@ require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'    -- Dev icons with color
   use 'rcarriga/nvim-notify'            -- Fancy notification ui
   use 'gruvbox-community/gruvbox'       -- Gruvbox Colorscheme
-  use 'folke/tokyonight.nvim'           -- Tokyonight Colorscheme
+  use 'flazz/vim-colorschemes'          -- Colorschemes
 
   ------------------------------------------------------------
   -- Useful Plugins
@@ -56,6 +56,7 @@ require('packer').startup(function(use)
   use 'lewis6991/impatient.nvim'        -- Startup optimzation
   use 'voldikss/vim-floaterm'           -- Floaterm
   use 'norcalli/nvim-colorizer.lua'     -- Adds color to hex, rbg etc... values
+  use 'ThePrimeagen/vim-be-good'        -- A game to practice vim-motion
 
 end)
 

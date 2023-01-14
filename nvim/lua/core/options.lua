@@ -4,6 +4,7 @@ local option = vim.opt
 -- General
 ------------------------------------------------------------
 option.mouse = 'a'
+option.backupcopy = 'yes'
 option.swapfile = false
 option.sidescrolloff = 12
 option.scrolloff = 5
@@ -39,9 +40,8 @@ option.updatetime = 250
 ------------------------------------------------------------
 -- Colorscheme
 ------------------------------------------------------------
--- vim.g.gruvbox_contrast_dark = 'hard'
--- vim.g.gruvbox_contrast_light='hard'
--- vim.g.gruvbox_hls_cursor = 'gray'
--- vim.g.gruvbox_improved_warnings = '1'
--- vim.cmd('colorscheme gruvbox')
-vim.cmd('colorscheme tokyonight')
+vim.g.gruvbox_contrast_dark = 'hard'
+vim.g.gruvbox_contrast_light='hard'
+vim.g.gruvbox_hls_cursor = 'gray'
+vim.g.gruvbox_improved_warnings = '1'
+vim.cmd('colorscheme gruvbox')
