@@ -4,8 +4,30 @@ require('packer').startup(function(use)
   ------------------------------------------------------------
   -- General Plugins
   ------------------------------------------------------------
-  -- Autocompletion
-  use {'neoclide/coc.nvim', branch = 'release'}
+  -- LSP
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {'williamboman/mason.nvim'},           -- Optional
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},     -- Required
+      {'hrsh7th/cmp-nvim-lsp'}, -- Required
+      {'L3MON4D3/LuaSnip'},     -- Required
+    }
+  }
+
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
+
+  -- Plenary
+  use 'nvim-lua/plenary.nvim'
 
   -- File tree
   use {
@@ -15,39 +37,45 @@ require('packer').startup(function(use)
     }
   }
 
-  -- Fuzzy finder using fzf
+  -- Fuzzy finder using telescope
   use {
-    'junegunn/fzf',
-    dir = '~/.fzf',
-    run = './install --all'
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} }
   }
-	use 'junegunn/fzf.vim'
+
+  -- Renames variables / functions
+  use {
+    'filipdutescu/renamer.nvim',
+    branch = 'master',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 
   ------------------------------------------------------------
   -- UI Plugins
   ------------------------------------------------------------
-  use 'akinsho/bufferline.nvim'         -- BufferLine
-  use 'nvim-lualine/lualine.nvim'       -- LuaLine
-  use 'sheerun/vim-polyglot'            -- Syntax highlighting
-  use 'chrisbra/changesPlugin'          -- Easy visibility on changes i made on a file
-  use 'ryanoasis/vim-devicons'          -- Dev icons without color
-  use 'kyazdani42/nvim-web-devicons'    -- Dev icons with color
-  use 'rcarriga/nvim-notify'            -- Fancy notification ui
-  use 'gruvbox-community/gruvbox'       -- Gruvbox Colorscheme
-  use 'flazz/vim-colorschemes'          -- Colorschemes
+  use 'akinsho/bufferline.nvim'                       -- BufferLine
+  use 'nvim-lualine/lualine.nvim'                     -- LuaLine
+  use 'sheerun/vim-polyglot'                          -- Syntax highlighting
+  use 'chrisbra/changesPlugin'                        -- Easy visibility on changes i made on a file
+  use 'ryanoasis/vim-devicons'                        -- Dev icons without color
+  use 'lukas-reineke/indent-blankline.nvim'           -- Indent Guide lines
+  use 'echasnovski/mini.indentscope'                  -- Highlight indent scope
+  use 'kyazdani42/nvim-web-devicons'                  -- Dev icons with color
+  use 'rcarriga/nvim-notify'                          -- Fancy notification ui
+  use 'xiyaowong/transparent.nvim'                    -- Remove Background
+  use 'folke/tokyonight.nvim'                         -- Tokyonight Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins
   ------------------------------------------------------------
-  use 'uga-rosa/ccc.nvim'               -- Color picker
-  use 'jiangmiao/auto-pairs'            -- Auto pairs
-  use 'ntpeters/vim-better-whitespace'  -- Removes whitespaces
-  use 'mattn/emmet-vim'                 -- Emmet
-  use 'tpope/vim-surround'              -- Vim surround
-  use 'alvan/vim-closetag'              -- Automatically closes html tags
-  use 'tpope/vim-commentary'            -- For fast commenting
-  use 'djoshea/vim-autoread'            -- Updates the buffer if the file updates externally
-  use 'airblade/vim-rooter'             -- Updates the root to the root of the project
+  use 'uga-rosa/ccc.nvim'                             -- Color picker
+  use 'ntpeters/vim-better-whitespace'                -- Removes whitespaces
+  use 'mattn/emmet-vim'                               -- Emmet
+  use 'windwp/nvim-autopairs'                         -- AutoPairs
+  use 'tpope/vim-commentary'                          -- For fast commenting
+  use 'djoshea/vim-autoread'                          -- Updates the buffer if the file updates externally
+  use 'airblade/vim-rooter'                           -- Updates the root to the root of the project
 
   ------------------------------------------------------------
   -- Other Plugins
@@ -60,11 +88,11 @@ require('packer').startup(function(use)
 
 end)
 
--- impatient.nvim
+-- setups
 require('impatient')
-
--- nvim-colorizer.lua
 require('colorizer').setup()
+require('nvim-autopairs').setup()
+require('renamer').setup()
 
 -- vim-svelte-plugin
 vim.g.svelte_indent_script = 2

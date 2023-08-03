@@ -19,6 +19,7 @@ option.number = true
 option.cursorline = true
 option.guicursor = ''
 option.wrap = false
+option.cmdheight = 1
 
 ------------------------------------------------------------
 -- Tabs, Indenting
@@ -36,12 +37,3 @@ option.history = 100
 option.lazyredraw = true
 option.synmaxcol = 240
 option.updatetime = 250
-
-------------------------------------------------------------
--- Colorscheme
-------------------------------------------------------------
-vim.g.gruvbox_contrast_dark = 'hard'
-vim.g.gruvbox_contrast_light='hard'
-vim.g.gruvbox_hls_cursor = 'gray'
-vim.g.gruvbox_improved_warnings = '1'
-vim.cmd('colorscheme gruvbox')

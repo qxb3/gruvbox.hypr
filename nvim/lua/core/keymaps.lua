@@ -7,11 +7,13 @@ function _G.map(mode, lhs, rhs, opts)
 end
 
 -- Changes default leader
-vim.g.mapleader = '*'
+vim.g.mapleader = 'z'
 
 -- Map Esc to qq
 map('i', 'qq', '<Esc>')
 map('v', 'qq', '<Esc>')
+map('i', 'QQ', '<Esc>')
+map('v', 'QQ', '<Esc>')
 
 -- Map :source to mm
 map('n', 'mm', ':source<CR>')
@@ -26,7 +28,6 @@ map('n', '<leader>n', ':nohl<CR>')
 
 -- Fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
-map('i', '<leader>s', '<C-c>:w<CR>')
 
 -- Close all windows and exit from Neovim with <leader> and q
 map('n', '<leader>q', ':qa!<CR>')
@@ -37,9 +38,11 @@ map('t', 'qq', [[<C-\><C-n>]])
 ------------------------------------------------------------
 -- Plugin Mappings
 ------------------------------------------------------------
--- Mappings for for fzf.vim
-map('n', '<C-f>', ':Files<CR>')
-map('n', '<C-g>', ':Rg<CR>')
+
+-- Mappings for renamer.nvim
+map('i', '<F2>', '<cmd>lua require("renamer").rename()<cr>')
+map('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>')
+map('v', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>')
 
 -- Mappings for nvim-tree
 map('n', '<C-s>', ':NvimTreeFindFileToggle<CR>')
