@@ -21,6 +21,7 @@ require('packer').startup(function(use)
     }
   }
 
+  -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
@@ -43,6 +44,14 @@ require('packer').startup(function(use)
     branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
+
+  -- Fuzzy finder using fzf
+  use {
+    'junegunn/fzf',
+    dir = '~/.fzf',
+    run = './install --all'
+  }
+	use 'junegunn/fzf.vim'
 
   -- Renames variables / functions
   use {
