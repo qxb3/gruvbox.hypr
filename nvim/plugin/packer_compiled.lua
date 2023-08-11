@@ -99,6 +99,21 @@ _G.packer_plugins = {
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["cmp-nvim-lsp-signature-help"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp-signature-help",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp-signature-help"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
   ["emmet-vim"] = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/emmet-vim",
@@ -119,10 +134,20 @@ _G.packer_plugins = {
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
   },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
     url = "https://github.com/VonHeikemen/lsp-zero.nvim"
+  },
+  ["lspkind.nvim"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/lspkind.nvim",
+    url = "https://github.com/onsails/lspkind.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -143,11 +168,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/mini.indentscope",
     url = "https://github.com/echasnovski/mini.indentscope"
-  },
-  ["neovim-ayu"] = {
-    loaded = true,
-    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/neovim-ayu",
-    url = "https://github.com/Shatur/neovim-ayu"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -199,10 +219,25 @@ _G.packer_plugins = {
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["presence.nvim"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/presence.nvim",
+    url = "https://github.com/andweeb/presence.nvim"
+  },
   ["renamer.nvim"] = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/renamer.nvim",
     url = "https://github.com/filipdutescu/renamer.nvim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["tokyonight.nvim"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
+    url = "https://github.com/folke/tokyonight.nvim"
   },
   ["transparent.nvim"] = {
     loaded = true,
@@ -253,6 +288,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/vim-svelte-plugin",
     url = "https://github.com/leafOfTree/vim-svelte-plugin"
+  },
+  ["vim-tmux-navigator"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
+    url = "https://github.com/christoomey/vim-tmux-navigator"
   }
 }
 

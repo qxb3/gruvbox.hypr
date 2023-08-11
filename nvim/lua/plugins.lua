@@ -10,14 +10,23 @@ require('packer').startup(function(use)
     branch = 'v2.x',
     requires = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},             -- Required
-      {'williamboman/mason.nvim'},           -- Optional
-      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+      {'neovim/nvim-lspconfig'},                          -- Lsp Config
+      {'williamboman/mason.nvim'},                        -- Lsp Package Manegr
+      {'williamboman/mason-lspconfig.nvim'},              -- Mason lsp config
 
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},     -- Required
-      {'hrsh7th/cmp-nvim-lsp'}, -- Required
-      {'L3MON4D3/LuaSnip'},     -- Required
+      {'hrsh7th/nvim-cmp'},                               -- Cmp Completion Plugin
+      {'hrsh7th/cmp-nvim-lsp'},                           -- Cmp LSP
+
+      -- Snippets
+      {'saadparwaiz1/cmp_luasnip'},
+      {'L3MON4D3/LuaSnip'},
+
+      -- Others
+      {'onsails/lspkind.nvim'},                           -- VSCode-Like Pictograms
+      {'hrsh7th/cmp-nvim-lsp-signature-help'},            -- Functions signature
+      {'hrsh7th/cmp-path'},                               -- Path
+      {'MunifTanjim/prettier.nvim'}                       -- Prettier
     }
   }
 
@@ -85,6 +94,8 @@ require('packer').startup(function(use)
   use 'tpope/vim-commentary'                          -- For fast commenting
   use 'djoshea/vim-autoread'                          -- Updates the buffer if the file updates externally
   use 'airblade/vim-rooter'                           -- Updates the root to the root of the project
+  use 'christoomey/vim-tmux-navigator'                -- Tmux Navigator
+  use 'andweeb/presence.nvim'                         -- Discord Rich Presence
 
   ------------------------------------------------------------
   -- Other Plugins
@@ -100,8 +111,8 @@ end)
 -- setups
 require('impatient')
 require('colorizer').setup()
-require('nvim-autopairs').setup()
 require('renamer').setup()
+require('presence').setup()
 
 -- vim-svelte-plugin
 vim.g.svelte_indent_script = 2

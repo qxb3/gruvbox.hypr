@@ -1,14 +1,24 @@
+-- General Stuff
 require('core/options')
 require('core/keymaps')
 
+-- packer.nvim plugins
 require('plugins')
-require('plugins/colorscheme')
-require('plugins/transparent')
+
+-- LSP
 require('plugins/zero')
+require('plugins/cmp')
+
+-- Usefull Stuff
 require('plugins/telescope')
-require('plugins/bufferline')
-require('plugins/lualine')
 require('plugins/nvim-tree')
-require('plugins/indent-lines')
 require('plugins/floaterm')
 require('plugins/ccc')
+require('plugins/autopairs')
+
+-- UI
+require('plugins/colorscheme')
+require('plugins/transparent')
+require('plugins/bufferline')
+require('plugins/lualine')
+require('plugins/indent-lines')
