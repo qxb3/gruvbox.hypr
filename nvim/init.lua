@@ -1,3 +1,6 @@
+-- Improves startup
+vim.loader.enable()
+
 -- General Stuff
 require('core/options')
 require('core/keymaps')

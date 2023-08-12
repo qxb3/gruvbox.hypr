@@ -12,7 +12,7 @@ require('toggleterm').setup({
     border = 'single',
     width = 60,
     height = 13,
-    winblend = 100
+    winblend = 0
   },
   winbar = {
     enabled = true

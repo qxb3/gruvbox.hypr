@@ -95,7 +95,6 @@ require('packer').startup(function(use)
   use 'djoshea/vim-autoread'           -- Updates the buffer if the file updates externally
   use 'airblade/vim-rooter'            -- Updates the root to the root of the project
   use 'christoomey/vim-tmux-navigator' -- Tmux Navigator
-  use 'lewis6991/impatient.nvim'       -- Startup optimzation
 
   ------------------------------------------------------------
   -- Other Plugins
@@ -108,7 +107,6 @@ require('packer').startup(function(use)
 end)
 
 -- setups
-require('impatient')
 require('colorizer').setup()
 require('renamer').setup()
 require('presence').setup()
