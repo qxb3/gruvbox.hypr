@@ -10,23 +10,23 @@ require('packer').startup(function(use)
     branch = 'v2.x',
     requires = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},                          -- Lsp Config
-      {'williamboman/mason.nvim'},                        -- Lsp Package Manegr
-      {'williamboman/mason-lspconfig.nvim'},              -- Mason lsp config
+      { 'neovim/nvim-lspconfig' },             -- Lsp Config
+      { 'williamboman/mason.nvim' },           -- Lsp Package Manegr
+      { 'williamboman/mason-lspconfig.nvim' }, -- Mason lsp config
 
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},                               -- Cmp Completion Plugin
-      {'hrsh7th/cmp-nvim-lsp'},                           -- Cmp LSP
+      { 'hrsh7th/nvim-cmp' },     -- Cmp Completion Plugin
+      { 'hrsh7th/cmp-nvim-lsp' }, -- Cmp LSP
 
       -- Snippets
-      {'saadparwaiz1/cmp_luasnip'},
-      {'L3MON4D3/LuaSnip'},
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'L3MON4D3/LuaSnip' },
 
       -- Others
-      {'onsails/lspkind.nvim'},                           -- VSCode-Like Pictograms
-      {'hrsh7th/cmp-nvim-lsp-signature-help'},            -- Functions signature
-      {'hrsh7th/cmp-path'},                               -- Path
-      {'MunifTanjim/prettier.nvim'}                       -- Prettier
+      { 'onsails/lspkind.nvim' },                -- VSCode-Like Pictograms
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' }, -- Functions signature
+      { 'hrsh7th/cmp-path' },                    -- Path
+      { 'MunifTanjim/prettier.nvim' }            -- Prettier
     }
   }
 
@@ -51,7 +51,7 @@ require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
   -- Fuzzy finder using fzf
@@ -60,52 +60,51 @@ require('packer').startup(function(use)
     dir = '~/.fzf',
     run = './install --all'
   }
-	use 'junegunn/fzf.vim'
+  use 'junegunn/fzf.vim'
 
   -- Renames variables / functions
   use {
     'filipdutescu/renamer.nvim',
     branch = 'master',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
   ------------------------------------------------------------
   -- UI Plugins
   ------------------------------------------------------------
-  use 'akinsho/bufferline.nvim'                       -- BufferLine
-  use 'nvim-lualine/lualine.nvim'                     -- LuaLine
-  use 'sheerun/vim-polyglot'                          -- Syntax highlighting
-  use 'chrisbra/changesPlugin'                        -- Easy visibility on changes i made on a file
-  use 'ryanoasis/vim-devicons'                        -- Dev icons without color
-  use 'lukas-reineke/indent-blankline.nvim'           -- Indent Guide lines
-  use 'echasnovski/mini.indentscope'                  -- Highlight indent scope
-  use 'kyazdani42/nvim-web-devicons'                  -- Dev icons with color
-  use 'rcarriga/nvim-notify'                          -- Fancy notification ui
-  use 'xiyaowong/transparent.nvim'                    -- Remove Background
-  use 'folke/tokyonight.nvim'                         -- Tokyonight Colorscheme
+  use 'akinsho/bufferline.nvim'             -- BufferLine
+  use 'nvim-lualine/lualine.nvim'           -- LuaLine
+  use 'sheerun/vim-polyglot'                -- Syntax highlighting
+  use 'chrisbra/changesPlugin'              -- Easy visibility on changes i made on a file
+  use 'ryanoasis/vim-devicons'              -- Dev icons without color
+  use 'lukas-reineke/indent-blankline.nvim' -- Indent Guide lines
+  use 'echasnovski/mini.indentscope'        -- Highlight indent scope
+  use 'kyazdani42/nvim-web-devicons'        -- Dev icons with color
+  use 'rcarriga/nvim-notify'                -- Fancy notification ui
+  use 'xiyaowong/transparent.nvim'          -- Remove Background
+  use 'folke/tokyonight.nvim'               -- Tokyonight Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins
   ------------------------------------------------------------
-  use 'uga-rosa/ccc.nvim'                             -- Color picker
-  use 'ntpeters/vim-better-whitespace'                -- Removes whitespaces
-  use 'mattn/emmet-vim'                               -- Emmet
-  use 'windwp/nvim-autopairs'                         -- AutoPairs
-  use 'tpope/vim-commentary'                          -- For fast commenting
-  use 'djoshea/vim-autoread'                          -- Updates the buffer if the file updates externally
-  use 'airblade/vim-rooter'                           -- Updates the root to the root of the project
-  use 'christoomey/vim-tmux-navigator'                -- Tmux Navigator
-  use 'andweeb/presence.nvim'                         -- Discord Rich Presence
+  use 'uga-rosa/ccc.nvim'              -- Color picker
+  use 'ntpeters/vim-better-whitespace' -- Removes whitespaces
+  use 'mattn/emmet-vim'                -- Emmet
+  use 'windwp/nvim-autopairs'          -- AutoPairs
+  use 'tpope/vim-commentary'           -- For fast commenting
+  use 'djoshea/vim-autoread'           -- Updates the buffer if the file updates externally
+  use 'airblade/vim-rooter'            -- Updates the root to the root of the project
+  use 'christoomey/vim-tmux-navigator' -- Tmux Navigator
+  use 'lewis6991/impatient.nvim'       -- Startup optimzation
 
   ------------------------------------------------------------
   -- Other Plugins
   ------------------------------------------------------------
-  use 'leafOfTree/vim-svelte-plugin'    -- Svelte specific plugin
-  use 'lewis6991/impatient.nvim'        -- Startup optimzation
-  use 'voldikss/vim-floaterm'           -- Floaterm
-  use 'norcalli/nvim-colorizer.lua'     -- Adds color to hex, rbg etc... values
-  use 'ThePrimeagen/vim-be-good'        -- A game to practice vim-motion
-
+  use 'leafOfTree/vim-svelte-plugin' -- Svelte specific plugin
+  use 'andweeb/presence.nvim'        -- Discord Rich Presence
+  use 'akinsho/toggleterm.nvim'      -- Floaterm
+  use 'norcalli/nvim-colorizer.lua'  -- Adds color to hex, rbg etc... values
+  use 'ThePrimeagen/vim-be-good'     -- A game to practice vim-motion
 end)
 
 -- setups
@@ -129,6 +128,7 @@ vim.g.closetag_filenames = '*.html,*.svelte,*.ejs'
 -- vim-better-whitespace
 vim.g.strip_whitespace_on_save = 1
 vim.g.strip_whitespace_confirm = 0
+vim.g.better_whitespace_guicolor = '#00ffff'
 
 -- vim-commentary
 vim.cmd([[autocmd FileType apache setlocal commentstring=#\ %s]])

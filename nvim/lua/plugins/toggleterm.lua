@@ -3,18 +3,18 @@ require('toggleterm').setup({
   direction = 'horizontal',
   size = function(term)
     if term.direction == 'horizontal' then
-      return 18
+      return 5
     elseif term.direction == 'vertical' then
       return 35
     end
   end,
   float_opts = {
-    border = 'double',
+    border = 'single',
     width = 60,
     height = 13,
-    winblend = 30
+    winblend = 100
   },
   winbar = {
     enabled = true
-  }
+  },
 })

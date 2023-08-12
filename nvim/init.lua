@@ -8,13 +8,14 @@ require('plugins')
 -- LSP
 require('plugins/zero')
 require('plugins/cmp')
+require('plugins/prettier')
 
 -- Usefull Stuff
 require('plugins/telescope')
 require('plugins/nvim-tree')
-require('plugins/floaterm')
-require('plugins/ccc')
 require('plugins/autopairs')
+require('plugins/toggleterm')
+require('plugins/ccc')
 
 -- UI
 require('plugins/colorscheme')

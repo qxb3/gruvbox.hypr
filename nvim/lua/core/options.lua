@@ -9,6 +9,7 @@ option.swapfile = false
 option.sidescrolloff = 12
 option.scrolloff = 5
 option.completeopt = 'menuone,noinsert,noselect'
+option.shell = '/bin/zsh'
 
 ------------------------------------------------------------
 -- UI
