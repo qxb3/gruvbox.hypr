@@ -91,7 +91,7 @@ require('packer').startup(function(use)
   use 'ntpeters/vim-better-whitespace' -- Removes whitespaces
   use 'mattn/emmet-vim'                -- Emmet
   use 'windwp/nvim-autopairs'          -- AutoPairs
-  use 'tpope/vim-commentary'           -- For fast commenting
+  use 'numToStr/Comment.nvim'          -- For fast commenting
   use 'djoshea/vim-autoread'           -- Updates the buffer if the file updates externally
   use 'airblade/vim-rooter'            -- Updates the root to the root of the project
   use 'christoomey/vim-tmux-navigator' -- Tmux Navigator
@@ -107,6 +107,7 @@ require('packer').startup(function(use)
 end)
 
 -- setups
+require('Comment').setup()
 require('colorizer').setup()
 require('renamer').setup()
 require('presence').setup()
@@ -122,11 +123,3 @@ vim.g.changes_modified_sign = '█'
 
 -- vim-closetag
 vim.g.closetag_filenames = '*.html,*.svelte,*.ejs'
-
--- vim-better-whitespace
-vim.g.strip_whitespace_on_save = 1
-vim.g.strip_whitespace_confirm = 0
-vim.g.better_whitespace_guicolor = '#00ffff'
-
--- vim-commentary
-vim.cmd([[autocmd FileType apache setlocal commentstring=#\ %s]])

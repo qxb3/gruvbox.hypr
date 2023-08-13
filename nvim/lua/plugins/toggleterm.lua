@@ -1,6 +1,7 @@
 require('toggleterm').setup({
   open_mapping = [[<C-t>]],
-  direction = 'horizontal',
+  direction = 'float',
+  shade_terminals = false,
   size = function(term)
     if term.direction == 'horizontal' then
       return 5
@@ -10,11 +11,7 @@ require('toggleterm').setup({
   end,
   float_opts = {
     border = 'single',
-    width = 60,
-    height = 13,
-    winblend = 0
-  },
-  winbar = {
-    enabled = true
+    width = 130,
+    height = 25,
   },
 })
