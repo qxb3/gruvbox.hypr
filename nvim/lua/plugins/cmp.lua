@@ -10,26 +10,28 @@ cmp.setup({
     end
   },
   mapping = {
-    ['<CR>'] = cmp.mapping.confirm({ select = true,  })
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-Space>'] = cmp.mapping.complete()
   },
   sources = cmp.config.sources({
+    { name = 'buffer' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'nvim_lsp_signature_help' },
   }),
   formatting = {
-    fields = {'abbr', 'kind', 'menu'},
+    fields = { 'abbr', 'kind', 'menu' },
     format = require('lspkind').cmp_format({
       mode = 'symbol_text',
       ellipsis_char = '...',
     })
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered()
   },
-  -- experimental = {
-  --   ghost_text = true
-  -- }
+  experimental = {
+    ghost_text = true
+  }
 })

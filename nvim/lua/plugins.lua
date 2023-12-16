@@ -3,8 +3,7 @@ require('packer').startup(function(use)
 
   ------------------------------------------------------------
   -- General Plugins
-  ------------------------------------------------------------
-  -- LSP
+  ------------------------------------------------------------ LSP
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
@@ -26,7 +25,7 @@ require('packer').startup(function(use)
       { 'onsails/lspkind.nvim' },                -- VSCode-Like Pictograms
       { 'hrsh7th/cmp-nvim-lsp-signature-help' }, -- Functions signature
       { 'hrsh7th/cmp-path' },                    -- Path
-      { 'MunifTanjim/prettier.nvim' }            -- Prettier
+      -- { 'MunifTanjim/prettier.nvim' }            -- Prettier
     }
   }
 
@@ -74,7 +73,6 @@ require('packer').startup(function(use)
   ------------------------------------------------------------
   use 'akinsho/bufferline.nvim'             -- BufferLine
   use 'nvim-lualine/lualine.nvim'           -- LuaLine
-  use 'sheerun/vim-polyglot'                -- Syntax highlighting
   use 'chrisbra/changesPlugin'              -- Easy visibility on changes i made on a file
   use 'ryanoasis/vim-devicons'              -- Dev icons without color
   use 'lukas-reineke/indent-blankline.nvim' -- Indent Guide lines
@@ -83,6 +81,7 @@ require('packer').startup(function(use)
   use 'rcarriga/nvim-notify'                -- Fancy notification ui
   use 'xiyaowong/transparent.nvim'          -- Remove Background
   use 'folke/tokyonight.nvim'               -- Tokyonight Colorscheme
+  use 'ellisonleao/gruvbox.nvim'            -- Gruvbox Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins
@@ -95,6 +94,7 @@ require('packer').startup(function(use)
   use 'djoshea/vim-autoread'           -- Updates the buffer if the file updates externally
   use 'airblade/vim-rooter'            -- Updates the root to the root of the project
   use 'christoomey/vim-tmux-navigator' -- Tmux Navigator
+  use 'tpope/vim-surround'             -- Surround changer
 
   ------------------------------------------------------------
   -- Other Plugins

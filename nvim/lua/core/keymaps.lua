@@ -35,6 +35,9 @@ map('n', '<leader>q', ':qa!<CR>')
 -- Map <Esc> to exit in terminal mode
 map('t', 'qq', [[<C-\><C-n>]])
 
+-- Map record macro to <leader>Q
+map('n', 'q', '<leader>r')
+
 ------------------------------------------------------------
 -- Plugin Mappings
 ------------------------------------------------------------

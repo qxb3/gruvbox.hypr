@@ -8,7 +8,8 @@ require('core/keymaps')
 -- packer.nvim plugins
 require('plugins')
 
--- LSP
+-- LSP & Treesitter
+require('plugins/treesitter')
 require('plugins/zero')
 require('plugins/cmp')
 require('plugins/prettier')
@@ -18,6 +19,7 @@ require('plugins/telescope')
 require('plugins/nvim-tree')
 require('plugins/autopairs')
 require('plugins/toggleterm')
+require('plugins/whitespace')
 require('plugins/ccc')
 
 -- UI

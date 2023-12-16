@@ -6,12 +6,12 @@ require('toggleterm').setup({
     if term.direction == 'horizontal' then
       return 5
     elseif term.direction == 'vertical' then
-      return 35
+      return 20
     end
   end,
   float_opts = {
     border = 'single',
-    width = 130,
-    height = 25,
+    width = 100,
+    height = 30,
   },
 })

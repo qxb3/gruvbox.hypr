@@ -4,13 +4,10 @@ vim.g.better_whitespace_guicolor = '#00ffff'
 vim.g.better_whitespace_filetypes_blacklist = {
   "terminal",
   "nofile",
-  "markdown",
   "help",
   "startify",
   "dashboard",
   "packer",
-  "neogitstatus",
   "NvimTree",
-  "Trouble",
   "toggleterm"
 }

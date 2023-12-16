@@ -1,6 +1,6 @@
 require('telescope').setup({
   defaults = {
-    file_ignore_patterns = { 'node_modules', 'packer_compiled.lua', 'nvim-tree.lua' }
+    file_ignore_patterns = { 'node_modules', 'dist', 'build', 'static', 'packer_compiled.lua', 'nvim-tree.lua' }
   }
 })
 
