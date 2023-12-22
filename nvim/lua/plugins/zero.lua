@@ -5,7 +5,7 @@ local zero = require('lsp-zero').preset({
   suggest_lsp_servers = true
 })
 
-zero.on_attach(function(client, bufnr)
+zero.on_attach(function(_client, bufnr)
   zero.default_keymaps({ buffer = bufnr })
 
   zero.format_on_save({
@@ -15,9 +15,13 @@ zero.on_attach(function(client, bufnr)
   },
   servers = {
     ['tsserver'] = {'javascript', 'typescript'},
-    ['svelte'] = {'svelte'}
+    ['svelte-language-server'] = {'svelte'},
+    ['rust_anaylzer'] = {'rust'},
   }
 })
 end)
+
+-- require('lspconfig').rust_anaylzer.setup({
+-- })
 
 zero.setup()
