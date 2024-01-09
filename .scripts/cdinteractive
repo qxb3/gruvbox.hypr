@@ -1,18 +1,37 @@
 #!/bin/bash
 
-# its cd but intractive 🔥
+project_paths=$(find "$HOME/Dev" -maxdepth 2 -type d | awk -v home="$HOME" '{ gsub(home "/Dev", home "/Dev"); print }')
+custom_paths=(
+  "$HOME/.config"
+  "$HOME/.config/hypr"
+  "$HOME/.config/eww"
+  "$HOME/.config/waybar"
+  "$HOME/.config/swww"
+  "$HOME/.config/rofi"
+  "$HOME/.config/wlogout"
+  "$HOME/.config/nvim"
+  "$HOME/.config/kitty"
+  "$HOME/.config/neofetch"
+  "$HOME/.config/cava"
+)
 
-paths=$(find ~/dev -maxdepth 2 -type d | awk '{ gsub(/\/data\/data\/com.termux\/files\/home\//, ""); print }')
+paths="$project_paths\n"
+
+for path in "${custom_paths[@]}"; do
+  paths+="$path\n"
+done
+
 result=$( \
-  echo "$paths" | \
+  echo -e "$paths" | \
   fzf \
   --reverse \
   --border=rounded \
   --margin 5% \
-  --preview=" cat {}" \
+  --preview="cat {}" \
   --preview-window hidden \
   --prompt="❯ " \
   --pointer="❯" \
   --color="spinner:yellow,border:bright-white"
 )
-echo "$HOME/$result"
+
+echo "$result"

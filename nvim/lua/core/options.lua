@@ -20,7 +20,7 @@ option.number = true
 option.cursorline = true
 option.guicursor = ''
 option.wrap = false
-option.cmdheight = 1
+option.cmdheight = 0
 
 ------------------------------------------------------------
 -- Tabs, Indenting

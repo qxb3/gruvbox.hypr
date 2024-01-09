@@ -1,8 +1,8 @@
-vim.opt.laststatus = 3
+vim.opt.laststatus = 1
 
 require('lualine').setup({
   options = {
-    theme = 'tokyonight',
+    theme = 'auto',
     component_separators = { left = '|', right = '|' },
     section_separators = { left = '', right = '' },
     disabled_filetypes = { 'packer', 'NVimTree' }

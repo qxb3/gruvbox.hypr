@@ -8,5 +8,17 @@ require('tokyonight').setup({
 })
 
 vim.cmd('colorscheme tokyonight')
+
 -- vim.o.background = "dark"
 -- vim.cmd("colorscheme gruvbox")
+
+-- vim.o.background = "dark"
+-- vim.cmd('colorscheme komau')
+
+-- vim.o.background = "dark"
+-- vim.cmd("colorscheme plain")
+
+-- vim.o.background = "dark"
+-- vim.cmd("colorscheme zazen")
+
+-- vim.cmd("colorscheme graphite")
