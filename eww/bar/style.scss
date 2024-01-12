@@ -1,0 +1,63 @@
+.bar {
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 10px;
+  font-weight: 900;
+  color: $fg;
+
+  & .container {
+    margin-top: 0.9rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  & .widget {
+    background-color: $bg;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8;
+    border-radius: 10px;
+    border: solid $bgh 3px;
+  }
+
+  & .menu {
+    &.cava { font-size: 8px; }
+    &.arch { font-size: 14px; padding-right: 10px; }
+
+    &:hover {
+      background-color: $bgh;
+      color: $orange;
+    }
+  }
+
+  & .workspaces {
+    & button {
+      font-size: 10px;
+      padding: 2px 8px 2px 8px;
+      border-radius: 6px;
+
+      &:hover {
+        color: $orange;
+      }
+    }
+
+    & button.active { color: $red; }
+  }
+
+  & .activewindow {
+    padding: 0 2rem;
+  }
+
+  & .controls {
+    font-size: 14px;
+    padding: 0 1rem;
+
+    & button {
+      padding: 4px 8px;
+    }
+
+    & .network { color: $yellow; }
+    & .notif { color: $blue; }
+    & .shutdown { color: $red; }
+  }
+}

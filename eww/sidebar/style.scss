@@ -1,0 +1,133 @@
+* {
+  all: unset;
+}
+
+.sidebar {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 10px;
+
+  & .container {
+    background-color: $bg;
+    color: $fg;
+    border-top: solid #1d2021 3px;
+    border-right: solid #1d2021 3px;
+    border-bottom: solid #1d2021 3px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 1rem 1rem 1rem 1.5rem;
+    font-weight: 700;
+  }
+
+  & .card {
+    background-color: $bg1;
+    border-radius: 8px;
+    border: solid $bgh 3px;
+    margin: 0.5rem;
+  }
+
+  & .calendar {
+    font-size: 32px;
+    padding: 1rem;
+
+    & .icon { color: $blue; font-size: 42px; padding-right: 1.5rem; }
+    & .date { color: $orange; }
+    & .month { color: $green; }
+  }
+
+  & .weather {
+    padding: 1rem;
+
+    & .temp {
+      font-size: 18px;
+    }
+
+    & .status {
+      color: $yellow;
+      font-size: 24px;
+      font-weight: 900;
+      text-decoration: underline;
+    }
+  }
+
+  & .time {
+    & .current {
+      font-size: 24px;
+    }
+
+    & .day {
+      color: $blue;
+      font-size: 24px;
+      font-weight: 900;
+    }
+  }
+
+  & .music-player {
+    padding: 1rem;
+
+    & .thumbnail {
+      border-radius: 8px;
+      background-size: cover;
+    }
+
+    & .player {
+      padding: 1rem 0rem;
+
+      & .meta {
+        & .name { font-size: 24px; }
+        & .album, & .artist { font-size: 12px; color: $yellow; }
+      }
+
+      & .controls {
+        font-size: 32px;
+        padding: 0 0.5rem;
+
+        & .prev, & .play, & .next {
+          padding: 1rem;
+          border-radius: 999px;
+
+          &:hover {
+            background-color: $bgh;
+          }
+        }
+
+        & .play {
+          background-color: $green;
+        }
+      }
+    }
+  }
+
+  & .desktop-controls {
+    padding: 1rem;
+
+    & .metric {
+      & trough {
+        border-radius: 12px;
+        background-color: $bg2;
+        min-width: 20px;
+
+        & highlight {
+          border-radius: 12px;
+        }
+      }
+    }
+
+    & .cpu trough highlight { background-color: $orange; }
+    & .ram trough highlight { background-color: $blue; }
+    & .brightness trough highlight { background-color: $fg; }
+    & .music trough highlight { background-color: $green; }
+    & .volume trough highlight { background-color: $aqua; }
+  }
+
+  & .system-controls {
+    & .icon {
+      &.shutdown { color: $red; }
+      &.reboot { color: $blue; }
+      &.suspend { color: $aqua; }
+      &.logout { color: $orange; }
+
+      padding: 0 1.5rem 0 1rem;
+      font-size: 28px;
+    }
+  }
+}

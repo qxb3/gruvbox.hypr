@@ -1,0 +1,370 @@
+(defpoll music :interval "1s" `/home/qxb3/.config/eww/sidebar/scripts/music.sh get`)
+(defpoll date :interval "1s" `date +'{"date": "%d", "month": "%b", "time": "%I : %M %p", "day": "%A"}'`)
+(defpoll brightness :interval "0.5s" `brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'`)
+(defpoll volume :interval "0.5s" `pamixer --get-volume`)
+
+(defwindow sidebar
+  :monitor 0
+  :stacking "overlay"
+  :exclusive true
+  :geometry (geometry
+    :x "-1%"
+    :y "0px"
+    :width "1%"
+    :anchor "left center"
+  )
+
+  (revealer
+    :reveal reveal_sidebar
+    :transition "slideright"
+    :duration "250ms"
+
+    (box
+      :class "container"
+      :orientation "v"
+
+      (box
+        :orientation "h"
+        :space-evenly false
+
+        (Calendar)
+
+        (box
+          :orientation "v"
+          :space-evenly true
+          :hexpand true
+
+          (Weather)
+          (Clock)
+        )
+      )
+
+      (MusicPlayer)
+
+      (box
+        :orientation "h"
+        :space-evenly false
+
+        (DesktopContols)
+        (SystemControls)
+      )
+    )
+  )
+)
+
+(defwidget Calendar []
+  (box
+    :class "calendar card"
+    :orientation "v"
+    :space-evenly true
+    :spacing 12
+
+    (label
+      :class "icon"
+      :text ""
+    )
+
+    ;; (image
+    ;;   :path "/home/qxb3/.config/eww/sidebar/assets/calendar.png"
+    ;;   :image-width 40
+    ;;   :image-height 40
+    ;; )
+
+    (label
+      :class "date"
+      :text {date.date}
+    )
+
+    (label
+      :class "month"
+      :text {date.month}
+    )
+  )
+)
+
+(defwidget Weather []
+  (box
+    :class "weather card"
+    :orientation "h"
+
+    (image
+      :halign "start"
+      :path "/home/qxb3/.config/eww/sidebar/assets/cloud.png"
+      :image-width 64
+      :image-height 64
+    )
+
+    (box
+      :orientation "v"
+      :space-evenly true
+      :halign "end"
+
+      (label
+        :class "temp"
+        :xalign 1
+        :text "21°C "
+      )
+
+      (label
+        :class "status"
+        :xalign 1
+        :text "Cloudy"
+      )
+    )
+  )
+)
+
+(defwidget Clock []
+  (box
+    :class "time card"
+    :orientation "v"
+    :space-evenly true
+
+    (label
+      :class "current"
+      :text {date.time}
+    )
+
+    (label
+      :class "day"
+      :text {date.day}
+    )
+  )
+)
+
+(defwidget MusicPlayer []
+  (box
+    :class "music-player card"
+    :orientation "h"
+    :space-evenly true
+    :spacing 16
+
+    (box
+      :class "thumbnail"
+      :style "background-image: url('${music.thumb}');"
+    )
+
+    (box
+      :class "player"
+      :orientation "v"
+      :space-evenly true
+
+      (overlay
+        (box)
+        (box
+          :class "meta"
+          :orientation "v"
+          :space-evenly false
+          :spacing 5
+
+          (label
+            :class "name"
+            :text {music.title}
+            :limit-width 10
+            :show-truncated false
+            :wrap false
+          )
+
+          (label
+            :class "album"
+            :text {music.album}
+            :limit-width 12
+            :show-truncated true
+          )
+
+          (label
+            :class "artist"
+            :text {music.artist}
+            :limit-width 10
+            :show-truncated true
+          )
+        )
+      )
+
+      (box
+        :class "controls"
+
+        (centerbox
+          :orientation "h"
+          :valign "end"
+
+          (eventbox :cursor "pointer" :halign "start"
+            (button
+              :onclick `~/.config/eww/sidebar/scripts/music.sh prev`
+              :class "prev"
+
+              (image
+                :path "/home/qxb3/.config/eww/sidebar/assets/player/prev.png"
+                :image-width 24
+                :image-height 24
+              )
+            )
+          )
+
+          (eventbox :cursor "pointer" :halign "center"
+            (button
+              :onclick `~/.config/eww/sidebar/scripts/music.sh play`
+              :class "play"
+
+              (image
+                :path {
+                  music.status != "Playing"
+                    ? "/home/qxb3/.config/eww/sidebar/assets/player/play.png"
+                    : "/home/qxb3/.config/eww/sidebar/assets/player/pause.png"
+                }
+                :image-width 24
+                :image-height 24
+              )
+            )
+          )
+
+          (eventbox :cursor "pointer" :halign "end"
+            (button
+              :onclick `~/.config/eww/sidebar/scripts/music.sh next`
+              :class "next"
+
+              (image
+                :path "/home/qxb3/.config/eww/sidebar/assets/player/next.png"
+                :image-width 24
+                :image-height 24
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget DesktopContols []
+  (box
+    :class "desktop-controls card"
+    :hexpand true
+
+    (metric
+      :class "cpu"
+      :image-name "cpu.png"
+      :min 0
+      :max 100
+      :value {EWW_CPU.avg}
+      :active false
+    )
+
+    (metric
+      :class "ram"
+      :image-name "ram.png"
+      :min 0
+      :max 100
+      :value {EWW_RAM.used_mem_perc}
+      :active false
+    )
+
+    (metric
+      :class "brightness"
+      :image-name "brightness.png"
+      :onchange "brightnessctl s {}%"
+      :min 0
+      :max 100
+      :value brightness
+      :active true
+    )
+
+    (metric
+      :class "music"
+      :image-name "music.png"
+      :min 0
+      :max 100
+      :value 100
+      :active true
+    )
+
+    (metric
+      :class "volume"
+      :image-name "volume.png"
+      :onchange "pamixer --set-volume {}"
+      :min 0
+      :max 100
+      :value volume
+      :active true
+    )
+  )
+)
+
+(defwidget SystemControls []
+  (box
+    :class "system-controls card"
+    :orientation "v"
+    :space-evenly true
+
+    (eventbox :cursor "pointer" :halign "center" :tooltip "Shutdown"
+      (button
+        :onclick "systemctl poweroff"
+
+        (label
+          :class "icon shutdown"
+          :text "󰐥"
+        )
+      )
+    )
+
+    (eventbox :cursor "pointer" :halign "center" :tooltip "Reboot"
+      (button
+        :onclick "systemctl reboot"
+
+        (label
+          :class "icon reboot"
+          :text ""
+        )
+      )
+    )
+
+    (eventbox :cursor "pointer" :halign "center" :tooltip "Suspend"
+      (button
+        :onclick ""
+
+        (label
+          :class "icon suspend"
+          :text "󰤄"
+        )
+      )
+    )
+
+    (eventbox :cursor "pointer" :halign "center" :tooltip "Logout"
+      (button
+        :onclick "hyprctl dispatch exit 0"
+
+        (label
+          :class "icon logout"
+          :text "󰍃"
+        )
+      )
+    )
+  )
+)
+
+(defwidget metric [class min max value ?onchange active image-name]
+  (box
+    :orientation "v"
+    :space-evenly false
+    :spacing 12
+
+    (eventbox :cursor {active ? "pointer" : ""} :vexpand true
+      (scale
+        :class "${class} metric"
+        :orientation "v"
+        :min min
+        :max max
+        :value value
+        :onchange onchange
+        :flipped true
+        :active active
+      )
+    )
+
+    (image
+      :path "/home/qxb3/.config/eww/sidebar/assets/desktop-controls/${image-name}"
+      :image-width 24
+      :image-height 24
+    )
+  )
+)

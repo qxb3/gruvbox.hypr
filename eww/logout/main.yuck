@@ -1,0 +1,76 @@
+(defwindow logout
+  :monitor 0
+  :stacking "overlay"
+  :namespace "dadada"
+  :exclusive false
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :anchor "center"
+  )
+
+  (box
+    :class "container"
+    :orientation "h"
+    :width "40%"
+
+    (Action
+      :icon "⏻"
+      :description "Shutdown"
+      :action ""
+    )
+
+    (Action
+      :icon ""
+      :description "Reboot"
+      :action ""
+    )
+
+    (Action
+      :icon ""
+      :description "Lock"
+      :action ""
+    )
+
+    (Action
+      :icon "󰤄"
+      :description "Suspend"
+      :action ""
+    )
+
+    (Action
+      :icon "󰍃"
+      :description "Logout"
+      :action ""
+    )
+
+    (Action
+      :icon ""
+      :description "Cancel"
+      :action ""
+    )
+  )
+)
+
+(defwidget Action [action icon description]
+  (eventbox :cursor "pointer"
+    (box
+      :orientation "v"
+      :space-evenly false
+
+      (box
+        :class "card"
+
+        (label
+          :class "icon"
+          :text icon
+        )
+      )
+
+      (label
+        :class "description"
+        :text description
+      )
+    )
+  )
+)

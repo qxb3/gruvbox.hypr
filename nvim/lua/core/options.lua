@@ -20,7 +20,7 @@ option.number = true
 option.cursorline = true
 option.guicursor = ''
 option.wrap = false
-option.cmdheight = 0
+option.cmdheight = 1
 
 ------------------------------------------------------------
 -- Tabs, Indenting
@@ -37,4 +37,4 @@ option.hidden = true
 option.history = 100
 option.lazyredraw = true
 option.synmaxcol = 240
-option.updatetime = 250
+option.updatetime = 4000

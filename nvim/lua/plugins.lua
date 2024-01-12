@@ -80,7 +80,6 @@ require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'        -- Dev icons with color
   use 'rcarriga/nvim-notify'                -- Fancy notification ui
   use 'xiyaowong/transparent.nvim'          -- Remove Background
-  use 'folke/tokyonight.nvim'               -- Tokyonight Colorscheme
   use 'ellisonleao/gruvbox.nvim'            -- Gruvbox Colorscheme
 
   ------------------------------------------------------------

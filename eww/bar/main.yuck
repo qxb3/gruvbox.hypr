@@ -1,0 +1,139 @@
+;; ╻ ╻┏━┓┏━┓╻┏━┓┏┓ ╻  ┏━╸┏━┓
+;; ┃┏┛┣━┫┣┳┛┃┣━┫┣┻┓┃  ┣╸ ┗━┓
+;; ┗┛ ╹ ╹╹┗╸╹╹ ╹┗━┛┗━╸┗━╸┗━┛
+
+(deflisten v_workspaces `~/.config/eww/bar/scripts/workspaces.sh`)
+(deflisten v_cava :initial "▁▁▁▁" `~/.config/eww/bar/scripts/cava.sh`)
+(deflisten v_activewindow `~/.config/eww/bar/scripts/activewindow.sh`)
+
+;; ┏┓ ┏━┓┏━┓
+;; ┣┻┓┣━┫┣┳┛
+;; ┗━┛╹ ╹╹┗╸
+
+(defwindow bar
+  :monitor 0
+  :stacking "fg"
+  :exclusive true
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :anchor "top center"
+  )
+
+  (centerbox
+    :orientation "h"
+    :class "container"
+
+    (left)
+    (center)
+    (right)
+  )
+)
+
+;; ┏━┓┏━╸┏━╸╺┳╸╻┏━┓┏┓╻┏━┓
+;; ┗━┓┣╸ ┃   ┃ ┃┃ ┃┃┗┫┗━┓
+;; ┗━┛┗━╸┗━╸ ╹ ╹┗━┛╹ ╹┗━┛
+
+(defwidget left []
+  (box
+    :orientation "h"
+    :halign "start"
+    :space-evenly false
+    :spacing 6
+
+    (menu)
+    (workspaces)
+  )
+)
+
+(defwidget center []
+  (box
+    :orientation "h"
+    :halign "center"
+
+    (activewindow)
+  )
+)
+
+(defwidget right []
+  (box
+    :orientation "h"
+    :halign "end"
+
+    (box
+      :class "controls widget"
+      :orientation "h"
+      :space-evenly true
+
+      (eventbox :cursor "pointer"
+        (button
+          :class "network"
+
+          ""
+        )
+      )
+
+      (eventbox :cursor "pointer"
+        (button
+          :class "notif"
+
+          "󰂚"
+        )
+      )
+
+      (label :text "")
+
+      (eventbox :cursor "pointer"
+        (button
+          :class "shutdown"
+          :onclick "wlogout"
+
+          "⏻"
+        )
+      )
+    )
+  )
+)
+
+;; ╻ ╻╻╺┳┓┏━╸┏━╸╺┳╸┏━┓
+;; ┃╻┃┃ ┃┃┃╺┓┣╸  ┃ ┗━┓
+;; ┗┻┛╹╺┻┛┗━┛┗━╸ ╹ ┗━┛
+
+(defwidget menu []
+  (eventbox :cursor "pointer"
+    (button
+      :class "widget menu ${music.status == 'Playing' ? 'cava' : 'arch'}"
+      :onclick "eww update reveal_sidebar=${!reveal_sidebar}"
+
+      {music.status == "Playing" ? v_cava : "󰣇"}
+  ))
+)
+
+(defwidget workspaces []
+  (box
+    :class "widget workspaces"
+    :orientation "h"
+
+    (for workspace in v_workspaces
+      (eventbox :cursor "pointer"
+        (button
+          :class {workspace.active ? "active" : ""}
+          :onclick "hyprctl dispatch workspace ${workspace.name}"
+
+          ""
+      ))
+    )
+  )
+)
+
+(defwidget activewindow []
+  (box
+    :class "widget activewindow"
+
+    (label
+      :text v_activewindow
+      :limit-width 32
+    )
+  )
+)

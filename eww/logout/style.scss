@@ -1,0 +1,34 @@
+.blur {
+
+}
+
+.logout {
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 10px;
+  font-weight: 900;
+  color: $fg;
+
+  & .container {
+    background-color: $bgh;
+    padding: 2rem;
+    border: solid $gray 3px;
+    border-radius: 12px;
+  }
+
+  & .card {
+    background-color: $bg2;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 0 0.5rem;
+  }
+
+  & .icon {
+    font-size: 64px;
+    margin: 0 3.5rem 0 2rem;
+  }
+
+  & .description {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+}
