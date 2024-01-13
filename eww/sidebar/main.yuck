@@ -10,7 +10,7 @@
   :monitor 0
   :stacking "overlay"
   :namespace "sidebar"
-  :exclusive true
+  :exclusive false
   :geometry (geometry
     :x "-1%"
     :y "0px"
@@ -42,6 +42,7 @@
           (Clock)
         )
       )
+
 
       (MusicPlayer)
 
@@ -209,7 +210,7 @@
 
               (label
                 :class "icon"
-                :text {has_player.yes == true ? music.status == "Playing" ? "󰏤" : "" : "󰏤"}
+                :text {has_player.yes == true ? music.status == "Playing" ? "󰏤" : "" : "󰓛"}
               )
             )
           )
@@ -247,7 +248,7 @@
 
     (metric
       :class "ram"
-      :icon ""
+      :icon ""
       :min 0
       :max 100
       :value {EWW_RAM.used_mem_perc}
@@ -266,12 +267,12 @@
 
     (metric
       :class "music"
-      :icon "󰝚"
+      :icon {has_player.yes == true ? "󰝚" : "󰝛"}
       :onchange "~/.config/eww/sidebar/scripts/music.sh vol-set {}"
       :min 0
       :max 110
-      :value {music.volume}
-      :active true
+      :value {has_player.yes == true ? music.volume : has_player.volume}
+      :active {has_player.yes == true}
     )
 
     (metric
@@ -316,7 +317,7 @@
 
     (eventbox :cursor "pointer" :halign "center" :tooltip "Suspend"
       (button
-        :onclick ""
+        :onclick "~/.config/eww/logout/scripts/suspend.sh"
 
         (label
           :class "icon suspend"

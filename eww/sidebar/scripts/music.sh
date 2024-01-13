@@ -26,7 +26,7 @@ case $1 in
       TITLE='"title": "No Music"'
       ALBUM='"album": "Album"'
       ARTIST='"artist": "Artist"'
-      VOLUME='"volume": 110'
+      VOLUME='"volume": 0'
       THUMB='"thumb": "/home/qxb3/.cache/thumbnails/music-player/default-thumb.png"'
 
       echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}"

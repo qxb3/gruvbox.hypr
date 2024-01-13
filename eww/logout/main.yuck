@@ -1,6 +1,6 @@
 (defwindow logout
   :monitor 0
-  :stacking "bg"
+  :stacking "overlay"
   :namespace "logout"
   :exclusive false
   :geometry (geometry

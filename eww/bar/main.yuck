@@ -71,7 +71,7 @@
         (button
           :class "network"
 
-          ""
+          "󰈀"
         )
       )
 
@@ -79,7 +79,7 @@
         (button
           :class "notif"
 
-          "󰂚"
+          ""
         )
       )
 
@@ -88,7 +88,7 @@
       (eventbox :cursor "pointer"
         (button
           :class "shutdown"
-          :onclick "wlogout"
+          :onclick "eww open --toggle logout"
 
           "⏻"
         )
@@ -104,10 +104,10 @@
 (defwidget menu []
   (eventbox :cursor "pointer"
     (button
-      :class "widget menu ${music.status == 'Playing' ? 'cava' : 'arch'}"
+      :class "widget menu ${has_player.status == true ? music.status == 'Playing' ? 'cava' : 'arch' : 'arch'}"
       :onclick "eww update reveal_sidebar=${!reveal_sidebar}"
 
-      {music.status == "Playing" ? v_cava : "󰣇"}
+      {has_player.status == true ? music.status == "Playing" ? v_cava : "󰣇" : "󰣇"}
   ))
 )
 
