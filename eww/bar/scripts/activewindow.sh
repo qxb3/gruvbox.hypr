@@ -2,7 +2,7 @@
 
 function active_window() {
   if [[ ${1:0:12} == "activewindow" ]]; then
-    window=`hyprctl activewindow -j | jq -r '.title'`
+    window=`hyprctl activewindow -j | jq -r '.initialClass'`
 
     active_workspace=`hyprctl activeworkspace -j | jq '.name'`
     icon=""

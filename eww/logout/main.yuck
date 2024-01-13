@@ -1,7 +1,7 @@
 (defwindow logout
   :monitor 0
-  :stacking "overlay"
-  :namespace "dadada"
+  :stacking "bg"
+  :namespace "logout"
   :exclusive false
   :geometry (geometry
     :x "0%"
@@ -12,24 +12,23 @@
   (box
     :class "container"
     :orientation "h"
-    :width "40%"
 
     (Action
       :icon "⏻"
       :description "Shutdown"
-      :action ""
+      :action "systemctl poweroff"
     )
 
     (Action
       :icon ""
       :description "Reboot"
-      :action ""
+      :action "systemctl reboot"
     )
 
     (Action
       :icon ""
       :description "Lock"
-      :action ""
+      :action "swaylock"
     )
 
     (Action
@@ -41,13 +40,13 @@
     (Action
       :icon "󰍃"
       :description "Logout"
-      :action ""
+      :action "hyprctl dispatch exit 0"
     )
 
     (Action
       :icon ""
       :description "Cancel"
-      :action ""
+      :action "~/.config/eww/logout/scripts/togglelogout.sh"
     )
   )
 )
@@ -58,8 +57,9 @@
       :orientation "v"
       :space-evenly false
 
-      (box
+      (button
         :class "card"
+        :onclick action
 
         (label
           :class "icon"

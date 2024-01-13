@@ -29,13 +29,17 @@
     font-size: 32px;
     padding: 1rem;
 
-    & .icon { color: $blue; font-size: 42px; padding-right: 1.5rem; }
+    & .icon { color: $blue; font-size: 34px; padding-right: 1rem; }
     & .date { color: $orange; }
     & .month { color: $green; }
   }
 
   & .weather {
     padding: 1rem;
+
+    & .icon {
+      font-size: 50px;
+    }
 
     & .temp {
       font-size: 18px;
@@ -78,12 +82,13 @@
       }
 
       & .controls {
-        font-size: 32px;
+        font-size: 28px;
         padding: 0 0.5rem;
 
         & .prev, & .play, & .next {
-          padding: 1rem;
-          border-radius: 999px;
+          border-radius: 12px;
+          padding: 0.2rem 1.3rem 0.2rem 1rem;
+          margin: 0 2px;
 
           &:hover {
             background-color: $bgh;
@@ -101,16 +106,27 @@
     padding: 1rem;
 
     & .metric {
+
       & trough {
-        border-radius: 12px;
+        border-radius: 6px;
         background-color: $bg2;
         min-width: 20px;
 
         & highlight {
-          border-radius: 12px;
+          border-radius: 6px;
         }
       }
     }
+
+    & .icon {
+      font-size: 28px; padding: 0 1rem 0 0;
+    }
+
+    & .cpu.icon { color: $orange; }
+    & .ram.icon { color: $blue; font-size: 28px; }
+    & .brightness.icon { color: $fg; }
+    & .music.icon { color: $green; }
+    & .volume.icon { color: $aqua; }
 
     & .cpu trough highlight { background-color: $orange; }
     & .ram trough highlight { background-color: $blue; }

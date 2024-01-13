@@ -1,11 +1,15 @@
-(defpoll music :interval "1s" `/home/qxb3/.config/eww/sidebar/scripts/music.sh get`)
-(defpoll date :interval "1s" `date +'{"date": "%d", "month": "%b", "time": "%I : %M %p", "day": "%A"}'`)
-(defpoll brightness :interval "0.5s" `brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'`)
-(defpoll volume :interval "0.5s" `pamixer --get-volume`)
+;; (deflisten music_title `~/.config/eww/sidebar/scripts/music.sh title`)
+(deflisten music `~/.config/eww/sidebar/scripts/music.sh meta`)
+(defpoll has_player :interval "10s" `~/.config/eww/sidebar/scripts/music.sh check-player`)
+(deflisten date `~/.config/eww/sidebar/scripts/getdate.sh`)
+(deflisten weather :initial '{"status": "Fetching", "icon": "", "temp": "0"}' `~/.config/eww/sidebar/scripts/weather.sh`)
+(deflisten brightness `~/.config/eww/sidebar/scripts/getbrightness.sh`)
+(deflisten volume `~/.config/eww/sidebar/scripts/getvol.sh`)
 
 (defwindow sidebar
   :monitor 0
   :stacking "overlay"
+  :namespace "sidebar"
   :exclusive true
   :geometry (geometry
     :x "-1%"
@@ -62,13 +66,8 @@
     (label
       :class "icon"
       :text ""
+      :halign "center"
     )
-
-    ;; (image
-    ;;   :path "/home/qxb3/.config/eww/sidebar/assets/calendar.png"
-    ;;   :image-width 40
-    ;;   :image-height 40
-    ;; )
 
     (label
       :class "date"
@@ -86,12 +85,16 @@
   (box
     :class "weather card"
     :orientation "h"
+    :space-evenly true
 
-    (image
+    (box
       :halign "start"
-      :path "/home/qxb3/.config/eww/sidebar/assets/cloud.png"
-      :image-width 64
-      :image-height 64
+      :valign "center"
+
+      (label
+        :class "icon"
+        :text {weather.icon}
+      )
     )
 
     (box
@@ -101,14 +104,14 @@
 
       (label
         :class "temp"
+        :text "${weather.temp}°C "
         :xalign 1
-        :text "21°C "
       )
 
       (label
         :class "status"
+        :text {weather.status}
         :xalign 1
-        :text "Cloudy"
       )
     )
   )
@@ -132,8 +135,7 @@
   )
 )
 
-(defwidget MusicPlayer []
-  (box
+(defwidget MusicPlayer [] (box
     :class "music-player card"
     :orientation "h"
     :space-evenly true
@@ -141,7 +143,7 @@
 
     (box
       :class "thumbnail"
-      :style "background-image: url('${music.thumb}');"
+      :style "background-image: url('${has_player.yes == true ? music.thumb : has_player.thumb}');"
     )
 
     (box
@@ -159,22 +161,22 @@
 
           (label
             :class "name"
-            :text {music.title}
+            :text {has_player.yes == true ? music.title : has_player.title}
+            ;; :text {music.status == "Playing" ? music_title : music.title}
             :limit-width 10
             :show-truncated false
-            :wrap false
           )
 
           (label
             :class "album"
-            :text {music.album}
-            :limit-width 12
+            :text {has_player.yes == true ? music.album : has_player.album}
+            :limit-width 10
             :show-truncated true
           )
 
           (label
             :class "artist"
-            :text {music.artist}
+            :text {has_player.yes == true ? music.artist : has_player.artist}
             :limit-width 10
             :show-truncated true
           )
@@ -193,10 +195,9 @@
               :onclick `~/.config/eww/sidebar/scripts/music.sh prev`
               :class "prev"
 
-              (image
-                :path "/home/qxb3/.config/eww/sidebar/assets/player/prev.png"
-                :image-width 24
-                :image-height 24
+              (label
+                :class "icon"
+                :text "󰒮"
               )
             )
           )
@@ -206,14 +207,9 @@
               :onclick `~/.config/eww/sidebar/scripts/music.sh play`
               :class "play"
 
-              (image
-                :path {
-                  music.status != "Playing"
-                    ? "/home/qxb3/.config/eww/sidebar/assets/player/play.png"
-                    : "/home/qxb3/.config/eww/sidebar/assets/player/pause.png"
-                }
-                :image-width 24
-                :image-height 24
+              (label
+                :class "icon"
+                :text {has_player.yes == true ? music.status == "Playing" ? "󰏤" : "" : "󰏤"}
               )
             )
           )
@@ -223,10 +219,9 @@
               :onclick `~/.config/eww/sidebar/scripts/music.sh next`
               :class "next"
 
-              (image
-                :path "/home/qxb3/.config/eww/sidebar/assets/player/next.png"
-                :image-width 24
-                :image-height 24
+              (label
+                :class "icon"
+                :text "󰒭"
               )
             )
           )
@@ -243,7 +238,7 @@
 
     (metric
       :class "cpu"
-      :image-name "cpu.png"
+      :icon ""
       :min 0
       :max 100
       :value {EWW_CPU.avg}
@@ -252,7 +247,7 @@
 
     (metric
       :class "ram"
-      :image-name "ram.png"
+      :icon ""
       :min 0
       :max 100
       :value {EWW_RAM.used_mem_perc}
@@ -261,7 +256,7 @@
 
     (metric
       :class "brightness"
-      :image-name "brightness.png"
+      :icon "󰃠"
       :onchange "brightnessctl s {}%"
       :min 0
       :max 100
@@ -271,16 +266,17 @@
 
     (metric
       :class "music"
-      :image-name "music.png"
+      :icon "󰝚"
+      :onchange "~/.config/eww/sidebar/scripts/music.sh vol-set {}"
       :min 0
-      :max 100
-      :value 100
+      :max 110
+      :value {music.volume}
       :active true
     )
 
     (metric
       :class "volume"
-      :image-name "volume.png"
+      :icon "󰕾"
       :onchange "pamixer --set-volume {}"
       :min 0
       :max 100
@@ -342,7 +338,7 @@
   )
 )
 
-(defwidget metric [class min max value ?onchange active image-name]
+(defwidget metric [class min max value ?onchange active icon]
   (box
     :orientation "v"
     :space-evenly false
@@ -361,10 +357,14 @@
       )
     )
 
-    (image
-      :path "/home/qxb3/.config/eww/sidebar/assets/desktop-controls/${image-name}"
-      :image-width 24
-      :image-height 24
+    (box
+      :halign "center"
+
+      (label
+        :class "${class} icon"
+        :text icon
+        :halign "center"
+      )
     )
   )
 )

@@ -13,6 +13,7 @@
 (defwindow bar
   :monitor 0
   :stacking "fg"
+  :namespace "bar"
   :exclusive true
   :geometry (geometry
     :x "0%"
