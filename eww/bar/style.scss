@@ -22,7 +22,7 @@
 
   & .menu {
     &.cava { font-size: 8px; }
-    &.arch { font-size: 14px; padding-right: 10px; }
+    &.arch { font-size: 12px; padding-right: 12px; }
 
     &:hover {
       background-color: $bgh;
@@ -33,15 +33,17 @@
   & .workspaces {
     & button {
       font-size: 10px;
-      padding: 2px 8px 2px 8px;
       border-radius: 6px;
 
       &:hover {
-        color: $orange;
+        background-color: $gray;
+      }
+
+      &.active {
+        background-color: $red;
+        padding: 0px 15px 0px 10px;
       }
     }
-
-    & button.active { color: $red; }
   }
 
   & .activewindow {
@@ -49,13 +51,29 @@
   }
 
   & .controls {
-    font-size: 14px;
-    padding: 0 1rem;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 12px;
 
-    & button {
-      padding: 4px 8px;
+    & .time {
+      font-weight: 900;
+      margin-right: 4px;
     }
 
-    & .shutdown { color: $red; }
+    & .menu {
+      background-color: $bg2;
+      border-radius: 8px;
+      padding-right: 2px;
+    }
+
+    & button, .divider {
+      padding: 4px 8px;
+      font-size: 14px;
+    }
+
+    & .shutdown {
+      color: $red;
+      font-size: 14px;
+    }
   }
 }

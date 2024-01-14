@@ -1,0 +1,69 @@
+.notifbar {
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 10px;
+  font-weight: 900;
+  color: $fg;
+
+  & .container {
+    background-color: $bg;
+    border: solid $bgh 3px;
+    border-radius: 12px;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    padding: 1rem;
+  }
+
+  & .card {
+    background-color: $bg1;
+    border-radius: 8px;
+    border: solid $bgh 3px;
+  }
+
+  & .header {
+    & .notif-title {
+      font-size: 14px;
+    }
+
+    & .clear-all {
+      border-radius: 16px;
+      padding: 8px 12px;
+
+      &:hover {
+        background-color: $orange;
+        border-color: $orange;
+      }
+    }
+  }
+
+  & .notifs {
+    margin-top: 1rem;
+
+    // & * { border: solid green 1px; }
+
+    & .thumb {
+      border-radius: 8px;
+      background-size: cover;
+    }
+
+    & .notif {
+      padding: 1rem;
+
+      & .title {
+        color: $green;
+      }
+
+      & .body {
+        font-size: 12px;
+      }
+
+      & .x {
+        font-size: 16px;
+        padding-right: 8px;
+
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+  }
+}

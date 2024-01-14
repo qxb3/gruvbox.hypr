@@ -1,10 +1,6 @@
-;; (deflisten music_title `~/.config/eww/sidebar/scripts/music.sh title`)
-(deflisten music `~/.config/eww/sidebar/scripts/music.sh meta`)
-(defpoll has_player :interval "10s" `~/.config/eww/sidebar/scripts/music.sh check-player`)
-(deflisten date `~/.config/eww/sidebar/scripts/getdate.sh`)
-(deflisten weather :initial '{"status": "Fetching", "icon": "", "temp": "0"}' `~/.config/eww/sidebar/scripts/weather.sh`)
-(deflisten brightness `~/.config/eww/sidebar/scripts/getbrightness.sh`)
-(deflisten volume `~/.config/eww/sidebar/scripts/getvol.sh`)
+;; ┏━┓╻╺┳┓┏━╸┏┓ ┏━┓┏━┓
+;; ┗━┓┃ ┃┃┣╸ ┣┻┓┣━┫┣┳┛
+;; ┗━┛╹╺┻┛┗━╸┗━┛╹ ╹╹┗╸
 
 (defwindow sidebar
   :monitor 0
@@ -72,12 +68,12 @@
 
     (label
       :class "date"
-      :text {date.date}
+      :text {v_date.date}
     )
 
     (label
       :class "month"
-      :text {date.month}
+      :text {v_date.month}
     )
   )
 )
@@ -94,7 +90,7 @@
 
       (label
         :class "icon"
-        :text {weather.icon}
+        :text {v_weather.icon}
       )
     )
 
@@ -105,13 +101,13 @@
 
       (label
         :class "temp"
-        :text "${weather.temp}°C "
+        :text "${v_weather.temp}°C "
         :xalign 1
       )
 
       (label
         :class "status"
-        :text {weather.status}
+        :text {v_weather.status}
         :xalign 1
       )
     )
@@ -126,12 +122,12 @@
 
     (label
       :class "current"
-      :text {date.time}
+      :text {v_date.time}
     )
 
     (label
       :class "day"
-      :text {date.day}
+      :text {v_date.day}
     )
   )
 )
@@ -144,7 +140,7 @@
 
     (box
       :class "thumbnail"
-      :style "background-image: url('${has_player.yes == true ? music.thumb : has_player.thumb}');"
+      :style "background-image: url('${v_has_player.yes == true ? v_music.thumb : v_has_player.thumb}');"
     )
 
     (box
@@ -162,22 +158,22 @@
 
           (label
             :class "name"
-            :text {has_player.yes == true ? music.title : has_player.title}
-            ;; :text {music.status == "Playing" ? music_title : music.title}
+            :text {v_has_player.yes == true ? v_music.title : v_has_player.title}
+            ;; :text {v_music.status == "Playing" ? music_title : music.title}
             :limit-width 10
             :show-truncated false
           )
 
           (label
             :class "album"
-            :text {has_player.yes == true ? music.album : has_player.album}
+            :text {v_has_player.yes == true ? v_music.album : v_has_player.album}
             :limit-width 10
             :show-truncated true
           )
 
           (label
             :class "artist"
-            :text {has_player.yes == true ? music.artist : has_player.artist}
+            :text {v_has_player.yes == true ? v_music.artist : v_has_player.artist}
             :limit-width 10
             :show-truncated true
           )
@@ -210,7 +206,7 @@
 
               (label
                 :class "icon"
-                :text {has_player.yes == true ? music.status == "Playing" ? "󰏤" : "" : "󰓛"}
+                :text {v_has_player.yes == true ? v_music.status == "Playing" ? "󰏤" : "" : "󰓛"}
               )
             )
           )
@@ -243,6 +239,7 @@
       :min 0
       :max 100
       :value {EWW_CPU.avg}
+      :tooltip true
       :active false
     )
 
@@ -252,6 +249,7 @@
       :min 0
       :max 100
       :value {EWW_RAM.used_mem_perc}
+      :tooltip true
       :active false
     )
 
@@ -261,18 +259,20 @@
       :onchange "brightnessctl s {}%"
       :min 0
       :max 100
-      :value brightness
+      :value v_brightness
+      :tooltip true
       :active true
     )
 
     (metric
       :class "music"
-      :icon {has_player.yes == true ? "󰝚" : "󰝛"}
+      :icon {v_has_player.yes == true ? "󰝚" : "󰝛"}
       :onchange "~/.config/eww/sidebar/scripts/music.sh vol-set {}"
       :min 0
       :max 110
-      :value {has_player.yes == true ? music.volume : has_player.volume}
-      :active {has_player.yes == true}
+      :value {v_has_player.yes == true ? v_music.volume : v_has_player.volume}
+      :active {v_has_player.yes == true}
+      :tooltip true
     )
 
     (metric
@@ -281,7 +281,8 @@
       :onchange "pamixer --set-volume {}"
       :min 0
       :max 100
-      :value volume
+      :value v_volume
+      :tooltip true
       :active true
     )
   )
@@ -295,7 +296,7 @@
 
     (eventbox :cursor "pointer" :halign "center" :tooltip "Shutdown"
       (button
-        :onclick "systemctl poweroff"
+        :onclick `~/.config/eww/shared/scripts/openyesno.sh "cursor" "systemctl poweroff"`
 
         (label
           :class "icon shutdown"
@@ -306,7 +307,7 @@
 
     (eventbox :cursor "pointer" :halign "center" :tooltip "Reboot"
       (button
-        :onclick "systemctl reboot"
+        :onclick `~/.config/eww/shared/scripts/openyesno.sh "cursor" "systemctl reboot"`
 
         (label
           :class "icon reboot"
@@ -317,7 +318,7 @@
 
     (eventbox :cursor "pointer" :halign "center" :tooltip "Suspend"
       (button
-        :onclick "~/.config/eww/logout/scripts/suspend.sh"
+        :onclick `~/.config/eww/shared/scripts/openyesno.sh "cursor" "~/.config/eww/logout/scripts/suspend.sh"`
 
         (label
           :class "icon suspend"
@@ -328,7 +329,7 @@
 
     (eventbox :cursor "pointer" :halign "center" :tooltip "Logout"
       (button
-        :onclick "hyprctl dispatch exit 0"
+        :onclick `~/.config/eww/shared/scripts/openyesno.sh "cursor" "hyprctl dispatch exit 0"`
 
         (label
           :class "icon logout"
@@ -339,7 +340,7 @@
   )
 )
 
-(defwidget metric [class min max value ?onchange active icon]
+(defwidget metric [class min max value ?onchange ?tooltip active icon]
   (box
     :orientation "v"
     :space-evenly false
@@ -353,6 +354,7 @@
         :max max
         :value value
         :onchange onchange
+        :tooltip {tooltip == true ? "${round(value, 1)}%" : ""}
         :flipped true
         :active active
       )

@@ -2,5 +2,5 @@
 
 while true; do
   pamixer --get-volume
-  sleep 0.5
+  sleep 1
 done

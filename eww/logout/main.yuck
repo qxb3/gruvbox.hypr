@@ -34,7 +34,7 @@
     (Action
       :icon "󰤄"
       :description "Suspend"
-      :action ""
+      :action "~/.config/eww/shared/scripts/suspend.sh"
     )
 
     (Action
@@ -46,7 +46,7 @@
     (Action
       :icon ""
       :description "Cancel"
-      :action "~/.config/eww/logout/scripts/togglelogout.sh"
+      :action "~/.config/eww/shared/scripts/togglelogout.sh"
     )
   )
 )

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-loc=`curl -sS ipinfo.io | jq -r '.loc'`
+loc=`curl -sS "ipinfo.io?token=878fa5750052fa" | jq -r '.loc'`
 lat=`echo $loc | cut -d ',' -f1`
 long=`echo $loc | cut -d ',' -f2`
 

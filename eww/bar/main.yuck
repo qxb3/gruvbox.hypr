@@ -1,11 +1,3 @@
-;; ╻ ╻┏━┓┏━┓╻┏━┓┏┓ ╻  ┏━╸┏━┓
-;; ┃┏┛┣━┫┣┳┛┃┣━┫┣┻┓┃  ┣╸ ┗━┓
-;; ┗┛ ╹ ╹╹┗╸╹╹ ╹┗━┛┗━╸┗━╸┗━┛
-
-(deflisten v_workspaces `~/.config/eww/bar/scripts/workspaces.sh`)
-(deflisten v_cava :initial "▁▁▁▁" `~/.config/eww/bar/scripts/cava.sh`)
-(deflisten v_activewindow `~/.config/eww/bar/scripts/activewindow.sh`)
-
 ;; ┏┓ ┏━┓┏━┓
 ;; ┣┻┓┣━┫┣┳┛
 ;; ┗━┛╹ ╹╹┗╸
@@ -43,8 +35,8 @@
     :space-evenly false
     :spacing 6
 
-    (menu)
-    (workspaces)
+    (Menu)
+    (Workspaces)
   )
 )
 
@@ -53,7 +45,7 @@
     :orientation "h"
     :halign "center"
 
-    (activewindow)
+    (ActiveWindow)
   )
 )
 
@@ -62,38 +54,7 @@
     :orientation "h"
     :halign "end"
 
-    (box
-      :class "controls widget"
-      :orientation "h"
-      :space-evenly true
-
-      (eventbox :cursor "pointer"
-        (button
-          :class "network"
-
-          "󰈀"
-        )
-      )
-
-      (eventbox :cursor "pointer"
-        (button
-          :class "notif"
-
-          ""
-        )
-      )
-
-      (label :text "")
-
-      (eventbox :cursor "pointer"
-        (button
-          :class "shutdown"
-          :onclick "eww open --toggle logout"
-
-          "⏻"
-        )
-      )
-    )
+    (Controls)
   )
 )
 
@@ -101,17 +62,17 @@
 ;; ┃╻┃┃ ┃┃┃╺┓┣╸  ┃ ┗━┓
 ;; ┗┻┛╹╺┻┛┗━┛┗━╸ ╹ ┗━┛
 
-(defwidget menu []
+(defwidget Menu []
   (eventbox :cursor "pointer"
     (button
-      :class "widget menu ${has_player.status == true ? music.status == 'Playing' ? 'cava' : 'arch' : 'arch'}"
-      :onclick "eww update reveal_sidebar=${!reveal_sidebar}"
+      :class "widget menu ${v_has_player.yes == true ? v_music.status == 'Playing' ? 'cava' : 'arch' : 'arch'}"
+      :onclick `~/.config/eww/shared/scripts/togglesidebar.sh`
 
-      {has_player.status == true ? music.status == "Playing" ? v_cava : "󰣇" : "󰣇"}
+      {v_has_player.yes == true ? v_music.status == "Playing" ? v_cava : "󰣇" : "󰣇"}
   ))
 )
 
-(defwidget workspaces []
+(defwidget Workspaces []
   (box
     :class "widget workspaces"
     :orientation "h"
@@ -122,19 +83,76 @@
           :class {workspace.active ? "active" : ""}
           :onclick "hyprctl dispatch workspace ${workspace.name}"
 
-          ""
+          {workspace.active ? "" : ""}
       ))
     )
   )
 )
 
-(defwidget activewindow []
+(defwidget ActiveWindow []
   (box
     :class "widget activewindow"
 
     (label
       :text v_activewindow
       :limit-width 32
+    )
+  )
+)
+
+(defwidget Controls []
+  (box
+    :class "controls widget"
+    :orientation "h"
+    :space-evenly false
+
+    (label
+      :class "time"
+      :text {v_date.time}
+    )
+
+    (label
+      :class "divider"
+      :text ""
+    )
+
+    (eventbox :cursor "pointer"
+      (button
+        :class "network"
+
+        "󰈀"
+      )
+    )
+
+    (eventbox :cursor "pointer"
+      (button
+        :class "battery"
+
+        "󱟨"
+      )
+    )
+
+    (eventbox :cursor "pointer"
+      (button
+        :class "notif"
+        :onclick "eww update reveal_notif=${!reveal_notif}"
+
+        "󰂚"
+      )
+    )
+
+    (label
+      :class "divider"
+      :text ""
+    )
+
+    (eventbox :cursor "pointer"
+      (button
+        :class "shutdown"
+        :onclick "~/.config/eww/shared/scripts/togglelogout.sh"
+
+        "⏻"
+      )
     )
   )
 )

@@ -1,0 +1,150 @@
+(defwindow notifbar
+  :monitor 0
+  :stacking "fg"
+  :namespace "notifbar"
+  :exclusive false
+  :geometry (geometry
+    :x "0%"
+    :y "10px"
+    :width "30%"
+    :height "1%"
+    :anchor "top right"
+  )
+
+  (revealer
+    :reveal reveal_notif
+    :transition "slidedown"
+    :duration "250ms"
+
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 8
+
+      (Notification)
+
+      ;; Yet to be decided
+      (box
+        :class "container"
+        :orientation "v"
+        :space-evenly false
+        :height 150
+      )
+    )
+  )
+)
+
+(defwidget Notification []
+  (box
+    :class "container"
+    :orientation "v"
+    :space-evenly false
+    :height 300
+
+    (box
+      :class "header"
+      :orientation "h"
+
+      (label
+        :class "notif-title"
+        :text "Notification"
+        :halign "start"
+      )
+
+      (eventbox :cursor "pointer" :halign "end"
+        (button
+          :class "card clear-all"
+          :onclick ""
+
+          "Clear All"
+        )
+      )
+    )
+
+    (scroll
+      :class "notifs"
+      :vscroll true
+      :vexpand true
+
+      (box
+        :orientation "v"
+        :spacing 12
+
+        (Notif
+          :thumb "/home/qxb3/.cache/thumbnails/music-player/711.png"
+          :title "notify-send"
+          :body "Hello mother fucka"
+        )
+
+        (Notif
+          :thumb "/home/qxb3/.cache/thumbnails/music-player/Imahe.png"
+          :title "notify-send"
+          :body "A really long bs text to check for design stuff, idk what im doing and i can actually make this faster by using lorem using my editor but im too lazy to add a ext in emmet lsp config so yeah that whats up"
+        )
+
+        (Notif
+          :thumb "/home/qxb3/.cache/thumbnails/music-player/Demonyo.png"
+          :title "notify-send"
+          :body "Hello mother fucka"
+        )
+      )
+    )
+  )
+)
+
+;; Notif Card
+(defwidget Notif [?thumb title body]
+  (box
+    :class "notif card"
+    :orientation "h"
+    :space-evenly false
+    :spacing 10
+    :height 120
+
+    (image
+      :class "thumb"
+      :path thumb
+      :image-width 40
+      :image-height 40
+      :valign "start"
+    )
+
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 4
+
+      (label
+        :class "title"
+        :text title
+        :xalign 0
+        :yalign 0
+      )
+
+      (label
+        :class "body"
+        :text body
+        :xalign 0
+        :yalign 0
+        :wrap true
+        :limit-width 100
+      )
+    )
+
+    (box
+      :halign "end"
+      :hexpand true
+      :space-evenly false
+      :orientation "v"
+
+      (eventbox :cursor "pointer"
+        (button
+          :class "x"
+          :onclick ""
+
+          ""
+        )
+      )
+    )
+  )
+)

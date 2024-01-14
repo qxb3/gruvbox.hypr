@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-
 if [ -z "$XDG_PICTURES_DIR" ] ; then
     XDG_PICTURES_DIR="$HOME/Pictures"
 fi
@@ -43,6 +42,6 @@ esac
 rm "$temp_screenshot"
 
 if [ -f "$save_dir/$save_file" ] ; then
-    dunstify "t1" -a "saved in $save_dir" -i "$save_dir/$save_file" -r 91190 -t 2200
+  notify-send -a "Screenshot" -i "${save_dir}/${save_file}" -t 2200 "Screenshot saved at ${save_dir}/${save_file}"
 fi
 

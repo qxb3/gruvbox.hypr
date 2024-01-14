@@ -18,37 +18,44 @@ case $1 in
   ;;
 
   check-player)
-    playerctl -p spotify status &>/dev/null
-    has_player=$?
+    while true; do
+      playerctl -p spotify status &>/dev/null
+      has_player=$?
 
-    if [[ $has_player -eq 1 ]]; then
-      STATUS='"status": "Stopped"'
-      TITLE='"title": "No Music"'
-      ALBUM='"album": "Album"'
-      ARTIST='"artist": "Artist"'
-      VOLUME='"volume": 0'
-      THUMB='"thumb": "/home/qxb3/.cache/thumbnails/music-player/default-thumb.png"'
+      if [[ $has_player -eq 1 ]]; then
+        STATUS='"status": "Stopped"'
+        TITLE='"title": "No Music"'
+        ALBUM='"album": "Album"'
+        ARTIST='"artist": "Artist"'
+        VOLUME='"volume": 0'
+        THUMB='"thumb": "/home/qxb3/.config/eww/sidebar/assets/no-music.png"'
 
-      echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}"
-    else
-      echo '{"yes": true}'
-    fi
+        echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}"
+      else
+        echo '{"yes": true}'
+      fi
+
+      sleep 10
+    done
   ;;
 
   meta)
     function handle() {
       while read -r line; do
-        title=`echo $line | jq -r '.title' | tr -d "'"`
+        status=`echo $line | jq -r '.status'`
+        title=`echo $line | jq -r '.title' | tr -d "'/.,"`
         thumb=`echo $line | jq -r '.thumb'`
 
         # Only download the thumbnail if it did not exist yet
-        if ! test -f "/home/qxb3/.cache/thumbnails/music-player/${title}.png"; then
-          wget $thumb -O "/home/qxb3/.cache/thumbnails/music-player/${title}.png" -q
+        if ! test -f "$HOME/.cache/thumbnails/music-player/${title}.png"; then
+          wget $thumb -O "$HOME/.cache/thumbnails/music-player/${title}.png"
         fi
 
-        cached_thumb="/home/qxb3/.cache/thumbnails/music-player/${title}.png"
+        cached_thumb="$HOME/.cache/thumbnails/music-player/${title}.png"
 
         echo $line | jq -c --arg cached_thumb "$cached_thumb" '.thumb = $cached_thumb | .volume *= 110'
+
+        # notify-send -a "Spotify" -i "$cached_thumb" -t 5000 -w "Playing - ${title}"
       done
     }
 
@@ -63,17 +70,17 @@ case $1 in
   ;;
 
   prev)
-    playerctl previous
+    playerctl -p spotify previous
     echo "prev"
   ;;
 
   play)
-    playerctl play-pause
+    playerctl -p spotify play-pause
     echo "play"
   ;;
 
   next)
-    playerctl next
+    playerctl -p spotify next
     echo "next"
   ;;
 
