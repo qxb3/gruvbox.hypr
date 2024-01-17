@@ -1,22 +1,26 @@
 #!/bin/sh
 
 function active_window() {
-  if [[ ${1:0:12} == "activewindow" ]]; then
-    window=`hyprctl activewindow -j | jq -r '.initialClass'`
+  window=`hyprctl activewindow -j | jq -r '.initialClass'`
 
-    active_workspace=`hyprctl activeworkspace -j | jq '.name'`
-    icon=""
-    if [[ $active_workspace == '"1"' ]]; then icon=""; fi
-    if [[ $active_workspace == '"2"' ]]; then icon="󰈹"; fi
-    if [[ $active_workspace == '"3"' ]]; then icon="󰙯"; fi
-    if [[ $active_workspace == '"4"' ]]; then icon="󰓇"; fi
-    if [[ $active_workspace == '"5"' ]]; then icon="󰇘"; fi
+  active_workspace=`hyprctl monitors -j | jq '.[0].activeWorkspace.name'`
+  icon=""
+  if [[ $active_workspace == '"1"' ]]; then icon=""; fi
+  if [[ $active_workspace == '"2"' ]]; then icon="󰈹"; fi
+  if [[ $active_workspace == '"3"' ]]; then icon="󰙯"; fi
+  if [[ $active_workspace == '"4"' ]]; then icon=""; fi
+  if [[ $active_workspace == '"5"' ]]; then icon=""; fi
 
-    if [[ $window != "null" ]]; then
-      echo "$icon    $window"
-    else
-      echo "$icon    ~"
-    fi
+  if [[ $window != "null" ]]; then
+    ICON='"icon": "%s"'
+    WINDOW='"window": "%s"'
+
+    printf "{${ICON}, ${WINDOW}}\n" "$icon" "$window"
+  else
+    ICON='"icon": "%s"'
+    WINDOW='"window": "~"'
+
+    printf "{${ICON}, ${WINDOW}}\n" "$icon"
   fi
 }
 

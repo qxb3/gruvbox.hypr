@@ -25,7 +25,7 @@
     font = JetBrains Mono Nerd Font 8
     line_height = 3
     markup = full
-    format = "> %a\n<b> %s</b>\n%b"
+    format = "<b> %a</b>\n%s %b"
     alignment = left
     vertical_alignment = center
     show_age_threshold = 60
@@ -104,30 +104,30 @@
   script = "~/.config/dunst/scripts/spotify.sh"
 
 [Type-1]
-    summary = "t1"
-    format = "<b>%a</b>"
+  summary = "t1"
+  format = "<b>%a</b>"
 
 [Type-2]
-    summary = "t2"
-    format = "<span size="250%">%a</span>\n%b"
+  summary = "t2"
+  format = "<span size="250%">%a</span>\n%b"
 
 [urgency_critical]
-    background = "#cc241d"
-    foreground = "#ebdbb2"
-    frame_color = "#3c3836"
-    icon = "~/.config/dunst/icons/critical.svg"
-    timeout = 0
+  background = "#cc241d"
+  foreground = "#ebdbb2"
+  frame_color = "#3c3836"
+  icon = "~/.config/dunst/icons/critical.svg"
+  timeout = 0
 
 [urgency_low]
-    background = "#1d2021"
-    foreground = "#ebdbb2"
-    frame_color = "#3c3836"
-    icon = "~/.config/dunst/icons/hyprdots.svg"
-    timeout = 10
+  background = "#1d2021"
+  foreground = "#ebdbb2"
+  frame_color = "#3c3836"
+  icon = "~/.config/dunst/icons/hyprdots.svg"
+  timeout = 10
 
 [urgency_normal]
-    background = "#1d2021"
-    foreground = "#ebdbb2"
-    frame_color = "#3c3836"
-    icon = "~/.config/dunst/icons/hyprdots.svg"
-    timeout = 10
+  background = "#1d2021"
+  foreground = "#ebdbb2"
+  frame_color = "#3c3836"
+  icon = "~/.config/dunst/icons/hyprdots.svg"
+  timeout = 10

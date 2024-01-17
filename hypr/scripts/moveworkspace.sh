@@ -1,5 +1,7 @@
 #!/bin/bash
 
+hyprctl dispatch workspace $1
+
 # Close special workspace if open
 special_open=`hyprctl monitors -j | jq ".[0].specialWorkspace.name" | grep "special"`
 if [ ! -z $special_open ]; then
@@ -23,5 +25,3 @@ yesno_open=`eww active-windows | grep "yesno"`
 if [ ! -z $yesno_open ]; then
   eww close yesno
 fi
-
-hyprctl dispatch workspace $1

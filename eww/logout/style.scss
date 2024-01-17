@@ -1,7 +1,3 @@
-.blur {
-
-}
-
 .logout {
   font-family: "JetBrains Mono Nerd Font";
   font-size: 10px;
@@ -9,10 +5,10 @@
   color: $fg;
 
   & .container {
-    background-color: $bgh;
-    padding: 2rem;
-    border: solid $gray 3px;
+    background-color: $bg;
+    border: solid $bgh 2px;
     border-radius: 12px;
+    padding: 1.5rem;
   }
 
   & .card {
@@ -22,7 +18,7 @@
     margin: 0 0.5rem;
 
     &:hover {
-      background-color: $bg;
+      background-color: $bgh;
     }
   }
 

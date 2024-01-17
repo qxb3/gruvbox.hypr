@@ -7,14 +7,22 @@ fi
 
 case $1 in
   title)
-    zscroll \
-      -l 10 \
-      --delay 0.1 \
-      --match-command "playerctl status &>/dev/null" \
-      --match-text "Playing" "--scroll 1" \
-      --match-text "Paused" "--scroll 0" \
-      --update-check true \
-          'playerctl -p spotify metadata --format "{{ title }}"'
+    function handle() {
+      while read -r title; do
+        zscroll -l 10 "echo ${title}"
+      done
+    }
+
+    playerctl -s -p spotify metadata --follow --format "{{ title }}" | handle
+
+    # zscroll \
+    #   -l 10 \
+    #   --delay 0.3 \
+    #   --match-command "playerctl -p spotify status" \
+    #   --match-text "Playing" "--scroll 1" \
+    #   --match-text "Paused" "--scroll 0" \
+    #   --update-check true \
+    #       'playerctl -p spotify metadata --format "{{ title }}"'
   ;;
 
   check-player)
@@ -35,23 +43,40 @@ case $1 in
         echo '{"yes": true}'
       fi
 
-      sleep 10
+      sleep 0.5
     done
   ;;
 
   meta)
     function handle() {
+      playerctl -p spotify status &>/dev/null
+      has_player=$?
+
+      if [[ $has_player -eq 1 ]]; then
+        STATUS='"status": "Stopped"'
+        TITLE='"title": "No Music"'
+        ALBUM='"album": "Album"'
+        ARTIST='"artist": "Artist"'
+        VOLUME='"volume": 0'
+        THUMB='"thumb": "/home/qxb3/.config/eww/sidebar/assets/no-music.png"'
+
+        echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}"
+      else
+        echo '{"yes": true}'
+      fi
+
       while read -r line; do
         status=`echo $line | jq -r '.status'`
         title=`echo $line | jq -r '.title' | tr -d "'/.,"`
         thumb=`echo $line | jq -r '.thumb'`
 
-        # Only download the thumbnail if it did not exist yet
-        if ! test -f "$HOME/.cache/thumbnails/music-player/${title}.png"; then
-          wget $thumb -O "$HOME/.cache/thumbnails/music-player/${title}.png"
-        fi
-
         cached_thumb="$HOME/.cache/thumbnails/music-player/${title}.png"
+
+        # Only download the thumbnail if it did not exist yet
+        if ! test -f "$cached_thumb"; then
+          wget "$thumb" -O "/tmp/${title}.png" -q
+          mv "/tmp/${title}.png" "$cached_thumb"
+        fi
 
         echo $line | jq -c --arg cached_thumb "$cached_thumb" '.thumb = $cached_thumb | .volume *= 110'
 

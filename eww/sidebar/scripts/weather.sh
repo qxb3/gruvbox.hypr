@@ -16,7 +16,7 @@ while true; do
   icon=""
 
   case $weather_code in
-    0|1|2)        status="Clear"; icon="󰖨" ;;
+    0|1|2)        status="Clear"; icon="" ;;
     3)            status="Cloudy"; icon="󰅟" ;;
     45|48)        status="Foggy"; icon="󰖑" ;;
     61|63|65)     status="Raining"; icon="" ;;

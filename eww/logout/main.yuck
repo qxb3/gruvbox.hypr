@@ -1,3 +1,7 @@
+;; ╻  ┏━┓┏━╸┏━┓╻ ╻╺┳╸
+;; ┃  ┃ ┃┃╺┓┃ ┃┃ ┃ ┃
+;; ┗━╸┗━┛┗━┛┗━┛┗━┛ ╹
+
 (defwindow logout
   :monitor 0
   :stacking "overlay"
@@ -28,7 +32,7 @@
     (Action
       :icon ""
       :description "Lock"
-      :action "swaylock"
+      :action "~/.config/eww/shared/scripts/logout.sh"
     )
 
     (Action

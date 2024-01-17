@@ -5,9 +5,9 @@
   & .container {
     background-color: $bg;
     color: $fg;
-    border-top: solid $bgh 3px;
-    border-right: solid $bgh 3px;
-    border-bottom: solid $bgh 3px;
+    border-top: solid $bgh 2px;
+    border-right: solid $bgh 2px;
+    border-bottom: solid $bgh 2px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     padding: 1rem 1rem 1rem 1.5rem;
@@ -17,7 +17,7 @@
   & .card {
     background-color: $bg1;
     border-radius: 8px;
-    border: solid $bgh 3px;
+    border: solid $bgh 2px;
     margin: 0.5rem;
   }
 
@@ -62,12 +62,13 @@
   }
 
   & .music-player {
-    padding: 1rem;
+    padding: 0.5rem 1rem;
 
     & .thumbnail {
       background-color: $bg;
       border-radius: 8px;
       background-size: cover;
+      margin: 1rem 0;
     }
 
     & .player {
@@ -120,13 +121,15 @@
     }
 
     & .cpu.icon { color: $orange; }
-    & .ram.icon { color: $blue; font-size: 28px; }
+    & .cpu_temp.icon { color: $blue; font-size: 30px; padding-left: 1rem; }
+    & .ram.icon { color: $purple; font-size: 28px; }
     & .brightness.icon { color: $fg; }
     & .music.icon { color: $green; }
     & .volume.icon { color: $aqua; }
 
     & .cpu trough highlight { background-color: $orange; }
-    & .ram trough highlight { background-color: $blue; }
+    & .cpu_temp trough highlight { background-color: $blue; }
+    & .ram trough highlight { background-color: $purple; }
     & .brightness trough highlight { background-color: $fg; }
     & .music trough highlight { background-color: $green; }
     & .volume trough highlight { background-color: $aqua; }

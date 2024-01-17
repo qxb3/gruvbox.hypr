@@ -65,10 +65,10 @@
 (defwidget Menu []
   (eventbox :cursor "pointer"
     (button
-      :class "widget menu ${v_has_player.yes == true ? v_music.status == 'Playing' ? 'cava' : 'arch' : 'arch'}"
+      :class "widget menu ${v_music.status == 'Playing' ? 'cava' : 'arch'}"
       :onclick `~/.config/eww/shared/scripts/togglesidebar.sh`
 
-      {v_has_player.yes == true ? v_music.status == "Playing" ? v_cava : "󰣇" : "󰣇"}
+      {v_music.status == "Playing" ? v_cava : "󰣇"}
   ))
 )
 
@@ -82,8 +82,8 @@
         (button
           :class {workspace.active ? "active" : ""}
           :onclick "hyprctl dispatch workspace ${workspace.name}"
-
-          {workspace.active ? "" : ""}
+          :valign "center"
+          :halign "center"
       ))
     )
   )
@@ -92,9 +92,22 @@
 (defwidget ActiveWindow []
   (box
     :class "widget activewindow"
+    :space-evenly false
+    :spacing 16
 
     (label
-      :text v_activewindow
+      :class "icon"
+      :text {v_activewindow.icon}
+    )
+
+    (label
+      :class "divider"
+      :text ""
+    )
+
+    (label
+      :class "window"
+      :text {v_activewindow.window}
       :limit-width 32
     )
   )

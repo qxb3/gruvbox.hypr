@@ -85,24 +85,25 @@ require('packer').startup(function(use)
   ------------------------------------------------------------
   -- Useful Plugins
   ------------------------------------------------------------
-  use 'uga-rosa/ccc.nvim'              -- Color picker
-  use 'ntpeters/vim-better-whitespace' -- Removes whitespaces
-  use 'mattn/emmet-vim'                -- Emmet
-  use 'windwp/nvim-autopairs'          -- AutoPairs
-  use 'numToStr/Comment.nvim'          -- For fast commenting
-  use 'djoshea/vim-autoread'           -- Updates the buffer if the file updates externally
-  use 'airblade/vim-rooter'            -- Updates the root to the root of the project
-  use 'christoomey/vim-tmux-navigator' -- Tmux Navigator
-  use 'tpope/vim-surround'             -- Surround changer
+  use 'uga-rosa/ccc.nvim'                   -- Color picker
+  use 'ntpeters/vim-better-whitespace'      -- Removes whitespaces
+  use 'mattn/emmet-vim'                     -- Emmet
+  use 'windwp/nvim-autopairs'               -- AutoPairs
+  use 'numToStr/Comment.nvim'               -- For fast commenting
+  use 'djoshea/vim-autoread'                -- Updates the buffer if the file updates externally
+  use 'airblade/vim-rooter'                 -- Updates the root to the root of the project
+  use 'christoomey/vim-tmux-navigator'      -- Tmux Navigator
+  use 'tpope/vim-surround'                  -- Surround changer
 
   ------------------------------------------------------------
   -- Other Plugins
   ------------------------------------------------------------
-  use 'leafOfTree/vim-svelte-plugin' -- Svelte specific plugin
-  use 'andweeb/presence.nvim'        -- Discord Rich Presence
-  use 'akinsho/toggleterm.nvim'      -- Floaterm
-  use 'norcalli/nvim-colorizer.lua'  -- Adds color to hex, rbg etc... values
-  use 'ThePrimeagen/vim-be-good'     -- A game to practice vim-motion
+  use 'leafOfTree/vim-svelte-plugin'        -- Svelte specific plugin
+  -- use 'elkowar/yuck.vim'                    -- A plugin for eww.yuck
+  use 'andweeb/presence.nvim'               -- Discord Rich Presence
+  use 'akinsho/toggleterm.nvim'             -- Floaterm
+  use 'norcalli/nvim-colorizer.lua'         -- Adds color to hex, rbg etc... values
+  use 'ThePrimeagen/vim-be-good'            -- A game to practice vim-motion
 end)
 
 -- setups

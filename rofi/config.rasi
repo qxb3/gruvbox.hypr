@@ -14,7 +14,7 @@ window {
     fullscreen:                  false;
     enabled:                     true;
     border-color:                @main-fg;
-    border-radius:               8px;
+    border-radius:               4px;
     background-color:            transparent;
 }
 

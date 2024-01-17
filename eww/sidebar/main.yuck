@@ -140,7 +140,7 @@
 
     (box
       :class "thumbnail"
-      :style "background-image: url('${v_has_player.yes == true ? v_music.thumb : v_has_player.thumb}');"
+      :style "background-image: url('${v_music.thumb}');"
     )
 
     (box
@@ -158,22 +158,21 @@
 
           (label
             :class "name"
-            :text {v_has_player.yes == true ? v_music.title : v_has_player.title}
-            ;; :text {v_music.status == "Playing" ? music_title : music.title}
+            :text {v_music.title}
             :limit-width 10
             :show-truncated false
           )
 
           (label
             :class "album"
-            :text {v_has_player.yes == true ? v_music.album : v_has_player.album}
+            :text {v_music.album}
             :limit-width 10
             :show-truncated true
           )
 
           (label
             :class "artist"
-            :text {v_has_player.yes == true ? v_music.artist : v_has_player.artist}
+            :text {v_music.artist}
             :limit-width 10
             :show-truncated true
           )
@@ -201,12 +200,12 @@
 
           (eventbox :cursor "pointer" :halign "center"
             (button
-              :onclick `~/.config/eww/sidebar/scripts/music.sh play`
+              :onclick {v_music.status == "Stopped" ? "spotify &" : `~/.config/eww/sidebar/scripts/music.sh play`}
               :class "play"
 
               (label
                 :class "icon"
-                :text {v_has_player.yes == true ? v_music.status == "Playing" ? "󰏤" : "" : "󰓛"}
+                :text {v_music.status == "Playing" ? "󰏤" : ""}
               )
             )
           )
@@ -239,7 +238,17 @@
       :min 0
       :max 100
       :value {EWW_CPU.avg}
-      :tooltip true
+      :tooltip "CPU USAGE: ${round(EWW_CPU.avg, 1)}%"
+      :active false
+    )
+
+    (metric
+      :class "cpu_temp"
+      :icon ""
+      :min 0
+      :max 110
+      :value {EWW_TEMPS.CORETEMP_PACKAGE_ID_0}
+      :tooltip "CPU TEMP: ${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C"
       :active false
     )
 
@@ -249,7 +258,7 @@
       :min 0
       :max 100
       :value {EWW_RAM.used_mem_perc}
-      :tooltip true
+      :tooltip "RAM USAGE: ${round(EWW_RAM.used_mem_perc, 1)}%"
       :active false
     )
 
@@ -260,19 +269,19 @@
       :min 0
       :max 100
       :value v_brightness
-      :tooltip true
+      :tooltip "BRIGHTNESS: ${v_brightness}%"
       :active true
     )
 
     (metric
       :class "music"
-      :icon {v_has_player.yes == true ? "󰝚" : "󰝛"}
+      :icon {v_music.status == "Stopped" ? "󰝛" : "󰝚"}
       :onchange "~/.config/eww/sidebar/scripts/music.sh vol-set {}"
       :min 0
       :max 110
-      :value {v_has_player.yes == true ? v_music.volume : v_has_player.volume}
-      :active {v_has_player.yes == true}
-      :tooltip true
+      :value {v_music.status == "Stopped" ? 110 : v_music.volume}
+      :tooltip "MUSIC VOL: ${v_music.volume}%"
+      :active true
     )
 
     (metric
@@ -282,7 +291,7 @@
       :min 0
       :max 100
       :value v_volume
-      :tooltip true
+      :tooltip "GLOBAL VOL: ${v_volume}%"
       :active true
     )
   )
@@ -340,7 +349,7 @@
   )
 )
 
-(defwidget metric [class min max value ?onchange ?tooltip active icon]
+(defwidget metric [class min max value tooltip active icon ?onchange]
   (box
     :orientation "v"
     :space-evenly false
@@ -354,7 +363,7 @@
         :max max
         :value value
         :onchange onchange
-        :tooltip {tooltip == true ? "${round(value, 1)}%" : ""}
+        :tooltip tooltip
         :flipped true
         :active active
       )
@@ -367,6 +376,7 @@
         :class "${class} icon"
         :text icon
         :halign "center"
+        :xalign 0.5
       )
     )
   )

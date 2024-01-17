@@ -28,10 +28,10 @@ ring-clear-color=#9ccfd8
 line-clear-color=#cc241d
 line-wrong-color=#cc241d
 bs-hl-color=#31748f
-grace=2
+grace=0
 grace-no-mouse
 grace-no-touch
 datestr=%a, %B %e
 timestr=%I:%M %p
-fade-in=0.3
+fade-in=0.1
 ignore-empty-password

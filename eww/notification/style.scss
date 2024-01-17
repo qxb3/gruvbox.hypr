@@ -6,7 +6,7 @@
 
   & .container {
     background-color: $bg;
-    border: solid $bgh 3px;
+    border: solid $bgh 2px;
     border-radius: 12px;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
@@ -16,7 +16,7 @@
   & .card {
     background-color: $bg1;
     border-radius: 8px;
-    border: solid $bgh 3px;
+    border: solid $bgh 2px;
   }
 
   & .header {
@@ -25,12 +25,11 @@
     }
 
     & .clear-all {
-      border-radius: 16px;
-      padding: 8px 12px;
+      border-radius: 12px;
+      padding: 8px;
 
       &:hover {
-        background-color: $orange;
-        border-color: $orange;
+        background-color: $gray;
       }
     }
   }
@@ -38,22 +37,22 @@
   & .notifs {
     margin-top: 1rem;
 
-    // & * { border: solid green 1px; }
-
     & .thumb {
       border-radius: 8px;
-      background-size: cover;
+      background-size: contain;
     }
 
     & .notif {
       padding: 1rem;
 
-      & .title {
-        color: $green;
-      }
+      & .meta {
+        & .title {
+          color: $orange;
+        }
 
-      & .body {
-        font-size: 12px;
+        & .body {
+          font-size: 12px;
+        }
       }
 
       & .x {
@@ -61,9 +60,23 @@
         padding-right: 8px;
 
         &:hover {
-          color: $red;
+          color: $blue;
         }
       }
+    }
+  }
+
+  & .no_notif {
+    color: $gray;
+    margin-bottom: 2rem;
+
+    & .icon {
+      font-size: 64px;
+      padding-right: 3rem;
+    }
+
+    & .text {
+      font-size: 16px;
     }
   }
 }

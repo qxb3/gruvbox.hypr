@@ -1,0 +1,32 @@
+.app_launcher {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 10px;
+
+  & .container {
+    background-color: $bg;
+    color: $fg;
+    border: solid $bgh 3px;
+    border-radius: 8px;
+    padding: 1rem;
+
+    // & * { border: solid green 0.5px; }
+  }
+
+  & .header {
+    & .icon {
+      background-color: $bg1;
+      font-size: 1.8rem;
+      padding: 0 1.5rem 0 1rem;
+      border: solid $bgh 3px;
+      border-radius: 8px;
+    }
+
+    & .input-container {
+      background-color: $bg1;
+      font-size: 14px;
+      padding: 10px;
+      border: solid $bgh 3px;
+      border-radius: 8px;
+    }
+  }
+}

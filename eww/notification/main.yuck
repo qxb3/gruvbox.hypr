@@ -1,3 +1,7 @@
+;; ┏┓╻┏━┓╺┳╸╻┏━╸╻┏━╸┏━┓╺┳╸╻┏━┓┏┓╻
+;; ┃┗┫┃ ┃ ┃ ┃┣╸ ┃┃  ┣━┫ ┃ ┃┃ ┃┃┗┫
+;; ╹ ╹┗━┛ ╹ ╹╹  ╹┗━╸╹ ╹ ╹ ╹┗━┛╹ ╹
+
 (defwindow notification
   :monitor 0
   :stacking "fg"
@@ -39,7 +43,7 @@
     :class "container"
     :orientation "v"
     :space-evenly false
-    :height 300
+    :height 350
 
     (box
       :class "header"
@@ -61,22 +65,55 @@
       )
     )
 
-    (scroll
-      :class "notifs"
-      :vscroll true
-      :vexpand true
+    (revealer
+      :reveal {arraylength(v_notifs) > 0}
+      :vexpand {arraylength(v_notifs) > 0}
+      :transition "none"
+
+      (scroll
+        :class "notifs"
+        :vscroll true
+        :vexpand true
+
+        (box
+          :orientation "v"
+          :space-evenly false
+          :spacing 4
+          :vexpand true
+
+          (for notif in {v_notifs}
+            (Notif
+              :id {notif.id.data}
+              :thumb {notif.icon_path.data}
+              :title {notif.appname.data}
+              :body {replace(notif.summary.data, "<[^>]*>", "")}
+            )
+          )
+        )
+      )
+    )
+
+    (revealer
+      :reveal {arraylength(v_notifs) <= 0}
+      :vexpand {arraylength(v_notifs) <= 0}
+      :transition "none"
 
       (box
+        :class "no_notif"
+        :valign "center"
         :orientation "v"
-        :spacing 12
+        :space-evenly false
+        :spacing 8
 
-        (for notif in {v_notifs[0]}
-          (Notif
-            :id {notif.id.data}
-            :thumb {notif.icon_path.data}
-            :title {notif.appname.data}
-            :body {replace(notif.message.data, "<[^>]*>", "")}
-          )
+        (label
+          :class "icon"
+          :text ""
+          :justify "center"
+        )
+
+        (label
+          :class "text"
+          :text "You Have No Notification :("
         )
       )
     )
@@ -91,19 +128,23 @@
     :space-evenly false
     :spacing 10
     :height 120
+    :vexpand false
+    :valign "start"
 
-    (image
+    (box
       :class "thumb"
-      :path {replace(thumb, "~/", "/home/qxb3/")}
-      :image-width 60
-      :image-height 60
+      :style `background-image: url('${replace(thumb, "~/", "/home/qxb3")}')`
+      :width 60
+      :height 60
       :valign "start"
     )
 
     (box
+      :class "meta"
       :orientation "v"
       :space-evenly false
       :spacing 4
+      :valign "start"
 
       (label
         :class "title"
@@ -127,6 +168,7 @@
       :hexpand true
       :space-evenly false
       :orientation "v"
+      :valign "start"
 
       (eventbox :cursor "pointer"
         (button
