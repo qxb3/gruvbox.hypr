@@ -1,12 +1,10 @@
-.app_launcher {
+.app_launcher .container {
+  padding: 1rem;
   background-color: @bg;
   border: solid @bgh 2px;
   border-radius: 8px;
   color: @fg;
 }
-
-.app_launcher .container { padding: 1rem; }
-.app_launcher .container { padding: 1rem; }
 
 .app_launcher .icon_input {
   font-size: 32px; padding: 0 10px;

@@ -66,6 +66,12 @@ function AppLauncher() {
     vertical: true,
     spacing: 16,
     children: [
+      Widget.Scrollable({
+        class_name: 'applications',
+        hscroll: 'automatic',
+        child: list
+      }),
+
       Widget.Box({
         spacing: 8,
         children: [
@@ -86,12 +92,6 @@ function AppLauncher() {
             })
           })
         ]
-      }),
-
-      Widget.Scrollable({
-        class_name: 'applications',
-        hscroll: 'automatic',
-        child: list
       })
     ]
   })
@@ -101,14 +101,15 @@ export default Widget.Window({
   name: 'app_launcher',
   class_name: 'app_launcher',
   layer: 'overlay',
-  anchor: ['bottom'],
+  anchor: ['top'],
+  margins: [15, 0, 0, 0],
   focusable: reveal_applauncher.bind(),
   child: Widget.Box({
-    css: `padding: 0.1px;`,
+    css: `padding: 0.01px;`,
     children: [
       Widget.Revealer({
         reveal_child: reveal_applauncher.bind(),
-        transition: 'slide_up',
+        transition: 'slide_down',
         transition_duration: 250,
         child: AppLauncher(),
       })

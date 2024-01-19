@@ -90,25 +90,30 @@
 )
 
 (defwidget ActiveWindow []
-  (box
-    :class "widget activewindow"
-    :space-evenly false
-    :spacing 16
+  (eventbox
+    :cursor "pointer"
+    :onclick "~/.config/ags/shared/scripts/toggle_applauncher.sh"
 
-    (label
-      :class "icon"
-      :text {v_activewindow.icon}
-    )
+    (box
+      :class "widget activewindow"
+      :space-evenly false
+      :spacing 16
 
-    (label
-      :class "divider"
-      :text ""
-    )
+      (label
+        :class "icon"
+        :text {v_activewindow.icon}
+      )
 
-    (label
-      :class "window"
-      :text {v_activewindow.window}
-      :limit-width 32
+      (label
+        :class "divider"
+        :text ""
+      )
+
+      (label
+        :class "window"
+        :text {v_activewindow.window}
+        :limit-width 32
+      )
     )
   )
 )

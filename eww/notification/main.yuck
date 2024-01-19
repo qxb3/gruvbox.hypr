@@ -9,7 +9,7 @@
   :exclusive false
   :geometry (geometry
     :x "0%"
-    :y "10px"
+    :y "15px"
     :width "30%"
     :height "1%"
     :anchor "top right"
