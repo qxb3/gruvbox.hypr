@@ -119,7 +119,10 @@ function AppLauncher() {
       Widget.Scrollable({
         className: 'applications',
         hscroll: 'never',
-        child: List
+        child: List,
+        setup: (self) => self.hook(reveal_applauncher, () => {
+          self.vfunc_scroll_child(14, false)
+        })
       }),
 
       Widget.Box({
