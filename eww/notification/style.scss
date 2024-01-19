@@ -39,7 +39,7 @@
 
     & .thumb {
       border-radius: 8px;
-      background-size: contain;
+      background-size: cover;
     }
 
     & .notif {
@@ -77,6 +77,21 @@
 
     & .text {
       font-size: 16px;
+    }
+  }
+
+  & .apps {
+    & .app {
+      font-size: 24px;
+
+      &.terminal { color: $fgh; }
+      &.firefox { color: $orange; }
+      &.discord { color: $blue; }
+      &.spotify { color: $green; }
+      &.folder { color: $aqua; }
+      &.htop { color: $purple; }
+
+      &:hover { color: $fg; }
     }
   }
 }

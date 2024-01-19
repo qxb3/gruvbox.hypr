@@ -47,7 +47,7 @@ function check_workspaces() {
       result=`print_workspace "$persistent_workspaces" "$current_workspace"`
 
       echo "$result"
-      sleep 0.05
+      sleep 0.01
     done
 
     prev_workspace=$active_workspace

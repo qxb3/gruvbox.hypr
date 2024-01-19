@@ -16,11 +16,12 @@ while true; do
   icon=""
 
   case $weather_code in
-    0|1|2)        status="Clear"; icon="" ;;
-    3)            status="Cloudy"; icon="󰅟" ;;
-    45|48)        status="Foggy"; icon="󰖑" ;;
-    61|63|65)     status="Raining"; icon="" ;;
-    95)           status="Storm"; icon="" ;;
+    0|1|2)       status="Clear"; icon="" ;;
+    3)           status="Cloudy"; icon="󰅟" ;;
+    45|48)       status="Foggy"; icon="󰖑" ;;
+    80|81|82)    status="Shower"; icon="" ;;
+    61|63|65)    status="Raining"; icon="" ;;
+    95)          status="Storm"; icon="" ;;
   esac
 
   printf '{"status": "%s", "icon": "%s", "temp": "%s"}\n' $status $icon $temparature

@@ -34,6 +34,5 @@ if [ ! -z "${RofiSel}" ] ; then
   ln -s $selected "${wallPath}/current.set"
   ln -s $selected "/usr/share/sddm/themes/corners/backgrounds/background.png"
 
-  dunstify "Wallpaper" -a " ${RofiSel}" -i "${wallPath}/${RofiSel}" -r 91190 -t 2200
+  dunstify "Changed Wallpaper to ${RofiSel}" -a "Wallpaper" -i "${wallPath}/${RofiSel}" -r 91190 -t 2200
 fi
-

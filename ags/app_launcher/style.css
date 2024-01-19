@@ -1,0 +1,27 @@
+.app_launcher {
+  background-color: @bg;
+  border: solid @bgh 2px;
+  border-radius: 8px;
+  color: @fg;
+}
+
+.app_launcher .container { padding: 1rem; }
+.app_launcher .container { padding: 1rem; }
+
+.app_launcher .icon_input {
+  font-size: 32px; padding: 0 10px;
+  border: solid @bgh 2px;
+  border-radius: 8px;
+ }
+
+.app_launcher .input {
+  padding: 10px;
+  border: solid @bgh 2px;
+  border-radius: 8px;
+ }
+
+.app_launcher .applications { min-width: 500px; min-height: 300px; }
+.app_launcher .application { padding: 8px; border-radius: 10px; }
+.app_launcher .application .icon { font-size: 50px; }
+
+.app_launcher .application:focus { background-color: @bgh; }

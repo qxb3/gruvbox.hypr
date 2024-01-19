@@ -1,0 +1,24 @@
+@define-color bgh       #1d2021;
+@define-color bg        #282828;
+@define-color bg1       #3c3836;
+@define-color bg2       #504945;
+
+@define-color fgh       #fbf1c7;
+@define-color fg        #ebdbb2;
+@define-color fg1       #d5c4a1;
+@define-color fg2       #bdae93;
+
+@define-color red       #cc241d;
+@define-color green     #98971a;
+@define-color yellow    #d79921;
+@define-color orange    #d65d0e;
+@define-color blue      #458588;
+@define-color purple    #b16286;
+@define-color aqua      #689d6a;
+@define-color gray      #928374;
+
+* {
+  all: unset;
+}
+
+@import url("./app_launcher/style.css");

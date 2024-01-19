@@ -1,8 +1,6 @@
 #!/bin/bash
 
-reveal_sidebar=`eww state -a | grep -oP 'reveal_sidebar: \K\w+'`
-if [[ $reveal_sidebar == "true" ]]; then
-  eww update reveal_sidebar=false
-fi
+eww update reveal_sidebar=false
+eww update reveal_notif=false
 
 eww open --toggle logout

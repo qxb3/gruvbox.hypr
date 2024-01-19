@@ -40,7 +40,7 @@
     max_icon_size = 128
     icon_path = /usr/share/icons/Tela-circle-dracula/16/actions:/usr/share/icons/Tela-circle-dracula/16/apps:/usr/share/icons/Tela-circle-dracula/16/devices:/usr/share/icons/Tela-circle-dracula/16/mimetypes:/usr/share/icons/Tela-circle-dracula/16/panel:/usr/share/icons/Tela-circle-dracula/16/places:/usr/share/icons/Tela-circle-dracula/16/status
     sticky_history = yes
-    history_length = 20
+    history_length = 10
     dmenu = /usr/bin/rofi -dmenu -p dunst:
     browser = /usr/bin/xdg-open
     always_run_script = true

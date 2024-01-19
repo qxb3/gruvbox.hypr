@@ -9,6 +9,6 @@ if [ $? -eq 1 ]; then
   swww init
 fi
 
-swww img "${wallPath}/current.set" \
-  --transition-type "wipe" \
-  --transition-duration 2
+# swww img "${wallPath}/current.set" \
+#   --transition-type "wipe" \
+#   --transition-duration 2

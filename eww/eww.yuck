@@ -14,8 +14,8 @@
 
 ;; Sidebar
 ;; (deflisten music_title `~/.config/eww/sidebar/scripts/music.sh title`)
-(deflisten v_music `~/.config/eww/sidebar/scripts/music.sh meta`)
 ;; (deflisten v_has_player `~/.config/eww/sidebar/scripts/music.sh check-player`)
+(deflisten v_music `~/.config/eww/sidebar/scripts/music.sh meta`)
 (deflisten v_date `~/.config/eww/shared/scripts/getdate.sh`)
 (deflisten v_weather :initial '{"status": "Fetching", "icon": "", "temp": "0"}' `~/.config/eww/sidebar/scripts/weather.sh`)
 (deflisten v_brightness `~/.config/eww/sidebar/scripts/getbrightness.sh`)
@@ -30,8 +30,6 @@
 
 (include "./bar/main.yuck")
 (include "./sidebar/main.yuck")
-(include "./app_launcher/main.yuck")
 (include "./notification/main.yuck")
 (include "./logout/main.yuck")
-
 (include "./prompts/main.yuck")
