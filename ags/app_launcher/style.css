@@ -20,6 +20,6 @@
 
 .app_launcher .applications { min-width: 500px; min-height: 300px; }
 .app_launcher .application { padding: 8px; border-radius: 10px; }
-.app_launcher .application .icon { font-size: 50px; }
+.app_launcher .application .icon { font-size: 42px; }
 
 .app_launcher .application:focus { background-color: @bgh; }

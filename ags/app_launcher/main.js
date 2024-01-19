@@ -1,17 +1,18 @@
 import Widget from 'resource:///com/github/Aylur/ags/widget.js'
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js'
 import Variable from 'resource:///com/github/Aylur/ags/variable.js'
+import Utils from 'resource:///com/github/Aylur/ags/utils.js'
 
 globalThis.reveal_applauncher = Variable(false)
 
 function Application(app) {
   return Widget.Button({
     class_name: 'application',
+    hpack: 'fill',
     on_clicked: () => {
       reveal_applauncher.setValue(false)
       app.launch()
     },
-    hpack: 'fill',
     child: Widget.Box({
       vertical: true,
       spacing: 8,
@@ -34,10 +35,10 @@ function Application(app) {
 
 function AppLauncher() {
   function query(q) {
-    const rowSize = 4
+    const rowSize = 5
     const rows = []
     const applications = Applications.query(q)
-      .sort((a, b) => a.frequency - b.frequency)
+      .sort((a, b) => b.frequency - a.frequency)
       .map(Application)
 
     for (let i = 0; i < applications.length; i += rowSize) {
@@ -68,7 +69,7 @@ function AppLauncher() {
     children: [
       Widget.Scrollable({
         class_name: 'applications',
-        hscroll: 'automatic',
+        hscroll: 'never',
         child: list
       }),
 
