@@ -278,8 +278,8 @@
       :icon {v_music.status == "Stopped" ? "󰝛" : "󰝚"}
       :onchange "~/.config/eww/sidebar/scripts/music.sh vol-set {}"
       :min 0
-      :max 110
-      :value {v_music.status == "Stopped" ? 110 : v_music.volume}
+      :max 100
+      :value {v_music.status == "Stopped" ? 100 : v_music.volume}
       :tooltip "MUSIC VOL: ${round(v_music.volume, 1)}%"
       :active true
     )

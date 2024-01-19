@@ -25,11 +25,11 @@
     }
 
     & .clear-all {
-      border-radius: 12px;
-      padding: 8px;
+      font-size: 24px;
+      padding-right: 1rem;
 
       &:hover {
-        background-color: $gray;
+        color: $gray;
       }
     }
   }

@@ -50,10 +50,10 @@
 
       (eventbox :cursor "pointer" :halign "end"
         (button
-          :class "card clear-all"
+          :class "clear-all"
           :onclick "dunstctl history-clear"
 
-          "Clear All"
+          "󰎟"
         )
       )
     )

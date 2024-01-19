@@ -6,10 +6,26 @@
   color: @fg;
 }
 
+.app_launcher .header .icon { font-size: 24px; padding-left: 1rem; }
+.app_launcher .header .title { font-size: 14px; }
+
 .app_launcher .icon_input {
-  font-size: 32px; padding: 0 10px;
+  font-size: 32px;
+  padding: 5px 10px;
   border: solid @bgh 2px;
   border-radius: 8px;
+ }
+
+.app_launcher .close {
+  font-size: 30px;
+  padding: 0 10px;
+  border: solid @bgh 2px;
+  border-radius: 8px;
+ }
+
+.app_launcher .place_holder_input {
+  padding: 10px 12px;
+  color: @gray;
  }
 
 .app_launcher .input {
@@ -18,8 +34,16 @@
   border-radius: 8px;
  }
 
-.app_launcher .applications { min-width: 500px; min-height: 300px; }
-.app_launcher .application { padding: 8px; border-radius: 10px; }
-.app_launcher .application .icon { font-size: 42px; }
+.app_launcher .applications {
+  min-width: 500px;
+  min-height: 300px;
+}
 
+.app_launcher .application {
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.app_launcher .application .icon { font-size: 42px; }
+.app_launcher .application:hover { background-color: @bgh; }
 .app_launcher .application:focus { background-color: @bgh; }
