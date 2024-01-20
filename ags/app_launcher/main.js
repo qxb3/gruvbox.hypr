@@ -39,7 +39,6 @@ function Application(app) {
 }
 
 function AppLauncher() {
-
   function query(q) {
     const rowSize = 4
     const rows = []
