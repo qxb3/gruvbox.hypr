@@ -2,7 +2,7 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js'
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js'
 import Variable from 'resource:///com/github/Aylur/ags/variable.js'
 
-globalThis.reveal_applauncher = Variable(false)
+globalThis.revealAppLauncher = Variable(false)
 globalThis.selectedApp = Variable()
 
 function Application(app) {
@@ -12,7 +12,7 @@ function Application(app) {
     cursor: 'pointer',
     attribute: { app },
     onClicked: () => {
-      reveal_applauncher.setValue(false)
+      revealAppLauncher.setValue(false)
       app.launch()
     },
     setup: (self) => self.connect('focus', (widget) => {
@@ -29,7 +29,7 @@ function Application(app) {
         Widget.Label({
           className: 'name',
           label: app.name,
-          max_width_chars: 12,
+          maxWidthChars: 12,
           justification: 'center',
           wrap: true
         })
@@ -119,7 +119,7 @@ function AppLauncher() {
         className: 'applications',
         hscroll: 'never',
         child: List,
-        setup: (self) => self.hook(reveal_applauncher, () => {
+        setup: (self) => self.hook(revealAppLauncher, () => {
           self.vfunc_scroll_child(14, false)
         })
       }),
@@ -127,10 +127,17 @@ function AppLauncher() {
       Widget.Box({
         spacing: 8,
         children: [
-          Widget.Icon({
-            className: 'icon_input',
-            setup: (self) => self.hook(selectedApp, () => {
-              self.icon = selectedApp.getValue().icon_name
+          Widget.Button({
+            cursor: 'pointer',
+            onClicked: () => {
+              revealAppLauncher.setValue(false)
+              selectedApp.getValue().launch()
+            },
+            child: Widget.Icon({
+              className: 'icon_input',
+              setup: (self) => self.hook(selectedApp, () => {
+                self.icon = selectedApp.getValue().icon_name
+              })
             })
           }),
           Widget.Entry({
@@ -138,21 +145,21 @@ function AppLauncher() {
             placeholder_text: 'Search Apps...',
             hexpand: true,
             onAccept: () => {
-              reveal_applauncher.setValue(false)
+              revealAppLauncher.setValue(false)
               selectedApp.getValue().launch()
             },
             onChange: debounce(({ text }) => {
               List.children = query(text)
             }),
-            setup: (self) => self.hook(reveal_applauncher, () => {
-              if (reveal_applauncher.getValue()) self.grab_focus()
+            setup: (self) => self.hook(revealAppLauncher, () => {
+              if (revealAppLauncher.getValue()) self.grab_focus()
               else self.text = ''
             })
           }),
           Widget.Button({
             className: 'close',
             cursor: 'pointer',
-            onClicked: () => reveal_applauncher.setValue(false),
+            onClicked: () => revealAppLauncher.setValue(false),
             child: Widget.Label({
               label: '󰅖'
             })
@@ -169,12 +176,12 @@ export default Widget.Window({
   layer: 'overlay',
   anchor: ['top'],
   margins: [15, 0, 0, 0],
-  focusable: reveal_applauncher.bind(),
+  focusable: revealAppLauncher.bind(),
   child: Widget.Box({
     css: `padding: 0.01px;`,
     children: [
       Widget.Revealer({
-        reveal_child: reveal_applauncher.bind(),
+        reveal_child: revealAppLauncher.bind(),
         transition: 'slide_down',
         transition_duration: 250,
         child: AppLauncher(),
