@@ -27,7 +27,7 @@
 
 ## Installation
 
-> [!IMPORTANT]
+> [!CAUTION]
 > Backup your config files first.
 
 ```bash
