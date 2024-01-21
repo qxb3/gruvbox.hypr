@@ -74,8 +74,12 @@
       padding-right: 2px;
     }
 
+    & .battery {
+      padding-left: 8px;
+    }
+
     & button, .divider {
-      padding: 4px 8px;
+      padding: 4px 7px;
       font-size: 14px;
     }
 
