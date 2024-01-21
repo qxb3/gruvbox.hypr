@@ -21,6 +21,8 @@
     <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/9.png" />
 </p>
 
+<br>
+
 ## Installation
 
 > [!CAUTION]
