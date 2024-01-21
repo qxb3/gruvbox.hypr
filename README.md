@@ -1,4 +1,4 @@
-<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/logo.png"><br><br>
+<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/logo.png"><br><br>
 
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
 &ensp;[<kbd> <br> Packages Needed <br> </kbd>](#Packages)&ensp;
