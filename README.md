@@ -11,8 +11,6 @@
 > [!CAUTION]
 > The script is still being made. But for the mean time just copy the config files in your config directory.
 
-<br>
-
 ## Packages
 
 <table><tr><td>
@@ -33,9 +31,6 @@
     <tr><td>neovim</td><td>text editor</td></tr>
     <tr><td>neofetch</td><td>beautiful sys info</td></tr></table>
 </td></tr></table>
-
-## Keybindings
-
 
 ## Keybindings
 
