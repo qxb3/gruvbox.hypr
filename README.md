@@ -1,10 +1,25 @@
 <div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/logo.png"><br><br>
 
+&ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
 &ensp;[<kbd> <br> Packages Needed <br> </kbd>](#Packages)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
 &ensp;[<kbd> <br> Credits <br> </kbd>](#Credits)&ensp;
 <br><br></div>
+
+## Screenshots
+
+<p align="center">
+    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/1.png" />
+    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/2.png" />
+    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/3.png" />
+    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/4.png" />
+    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/5.png" />
+    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/6.png" />
+    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/7.png" />
+    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/8.png" />
+    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/9.png" />
+</p>
 
 ## Installation
 
