@@ -41,6 +41,8 @@
   <tr><td>firefox</td><td>browser</td></tr></table>
 </td></tr></table>
 
+<br>
+
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
   <tr><td>cava</td><td>music visualizer</td></tr>
@@ -57,7 +59,7 @@
   <code>s</code><br><code>h</code><br><code>e</code><br><code>l</code><br><code>l</code></td><td><table>
   <tr><td>zsh</td><td>main shell</td></tr>
   <tr><td>neovim</td><td>text editor</td></tr>
-  <tr><td>neofetch</td><td>beautiful sys info</td></tr></table>
+  <tr><td>neofetch</td><td>beautiful sys info</td></tr>
   <tr><td>playerctl</td><td>control music player</td></tr></table>
 </td></tr></table>
 
