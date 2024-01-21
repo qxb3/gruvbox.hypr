@@ -27,8 +27,14 @@
 
 ## Installation
 
-> [!CAUTION]
-> The script is still being made. But for the mean time just copy the config files in your config directory.
+> [!IMPORTANT]
+> Backup your config files first.
+
+```bash
+git clone https://github.com/qxb3/gruvbox.hypr
+cd gruvbox.hypr
+cp config/* $HOME/.config/
+```
 
 <br>
 
