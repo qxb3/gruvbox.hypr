@@ -10,15 +10,17 @@
 ## Screenshots
 
 <p align="center">
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/1.png" />
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/2.png" />
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/3.png" />
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/4.png" />
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/5.png" />
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/6.png" />
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/7.png" />
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/8.png" />
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/9.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/1.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/2.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/3.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/4.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/5.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/6.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/7.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/8.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/9.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/10.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/11.png" />
 </p>
 
 <br>
@@ -33,22 +35,30 @@
 ## Packages
 
 <table><tr><td>
-    <code>c</code><br><code>o</code><br><code>r</code><br><code>e</code><br></td><td><table>
-    <tr><td>kitty</td><td>terminal emulator</td></tr>
-    <tr><td>dolphin</td><td>file explorer</td></tr>
-    <tr><td>firefox</td><td>browser</td></tr>
-    <tr><td>firefox</td><td>browser</td></tr>
-    <tr><td>ags</td><td>aylur's gtk widget</td>
-    <tr><td>eww</td><td>elkowars wacky widgets</td></tr></table>
+  <code>a</code><br><code>p</code><br><code>p</code><br><code>s</code><br></td><td><table>
+  <tr><td>kitty</td><td>terminal emulator</td></tr>
+  <tr><td>dolphin</td><td>file explorer</td></tr>
+  <tr><td>firefox</td><td>browser</td></tr>
+</td></tr></table>
+
+<table><tr><td>
+  <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
+  <tr><td>cava</td><td>music visualizer</td></tr>
+  <tr><td>dunst</td><td>notification daemon</td></tr>
+  <tr><td>swww</td><td>wallpaper daemon</td></tr>
+  <tr><td>swaylock</td><td>screen locker</td></tr>
+  <tr><td>ags</td><td>aylur's gtk widget</td>
+  <tr><td>eww</td><td>elkowars wacky widgets</td></tr></table>
 </td></tr></table>
 
 <br>
 
 <table><tr><td>
-    <code>s</code><br><code>h</code><br><code>e</code><br><code>l</code><br><code>l</code></td><td><table>
-    <tr><td>zsh</td><td>main shell</td></tr>
-    <tr><td>neovim</td><td>text editor</td></tr>
-    <tr><td>neofetch</td><td>beautiful sys info</td></tr></table>
+  <code>s</code><br><code>h</code><br><code>e</code><br><code>l</code><br><code>l</code></td><td><table>
+  <tr><td>zsh</td><td>main shell</td></tr>
+  <tr><td>neovim</td><td>text editor</td></tr>
+  <tr><td>neofetch</td><td>beautiful sys info</td></tr></table>
+  <tr><td>playerctl</td><td>control music player</td></tr></table>
 </td></tr></table>
 
 <br>
