@@ -11,6 +11,8 @@
 > [!CAUTION]
 > The script is still being made. But for the mean time just copy the config files in your config directory.
 
+<br>
+
 ## Packages
 
 <table><tr><td>
@@ -31,6 +33,8 @@
     <tr><td>neovim</td><td>text editor</td></tr>
     <tr><td>neofetch</td><td>beautiful sys info</td></tr></table>
 </td></tr></table>
+
+<br>
 
 ## Keybindings
 
@@ -61,6 +65,8 @@
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>[0-5]</kbd> | move active window to workspace [0-5] (silently)
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> | move window to special workspace
 | <kbd>Super</kbd> + <kbd>S</kbd> | toogle to special workspace
+
+<br>
 
 ## Credits
 
