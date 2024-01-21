@@ -33,7 +33,7 @@
 ```bash
 git clone https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
-cp config/* $HOME/.config/
+cp -r config/* ~/.config
 ```
 
 <br>
