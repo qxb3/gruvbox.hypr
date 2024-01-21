@@ -38,7 +38,7 @@
   <code>a</code><br><code>p</code><br><code>p</code><br><code>s</code><br></td><td><table>
   <tr><td>kitty</td><td>terminal emulator</td></tr>
   <tr><td>dolphin</td><td>file explorer</td></tr>
-  <tr><td>firefox</td><td>browser</td></tr>
+  <tr><td>firefox</td><td>browser</td></tr></table>
 </td></tr></table>
 
 <table><tr><td>
