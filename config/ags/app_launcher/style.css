@@ -23,7 +23,7 @@
   border-radius: 8px;
  }
 
-.app_launcher .place_holder_input {
+.app_launcher .input_placeholder {
   padding: 10px 12px;
   color: @gray;
  }
