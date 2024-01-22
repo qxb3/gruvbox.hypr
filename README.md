@@ -30,6 +30,9 @@
 > [!CAUTION]
 > Backup your config files first.
 
+> [!IMPORTANT]
+> Please see [Packages Needed](#Packages)
+
 ```bash
 git clone https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
@@ -44,6 +47,7 @@ cp -r config/* ~/.config
   <code>a</code><br><code>p</code><br><code>p</code><br><code>s</code><br></td><td><table>
   <tr><td>kitty</td><td>terminal emulator</td></tr>
   <tr><td>dolphin</td><td>file explorer</td></tr>
+  <tr><td>spotify</td><td>music player</td></tr>
   <tr><td>firefox</td><td>browser</td></tr></table>
 </td></tr></table>
 
