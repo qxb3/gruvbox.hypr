@@ -77,31 +77,51 @@ cp -r config/* ~/.config
 
 ## Keybindings
 
+#### Window Mangement
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>Q</kbd> | quit active/focused window
 | <kbd>Alt</kbd> + <kbd>F4</kbd> | kill window using cursor
 | <kbd>Super</kbd> + <kbd>W</kbd> | toggle window on focus to float
 | <kbd>Alt</kbd> + <kbd>Enter</kbd> | toggle window on focus to fullscreen
+| <kbd>Super</kbd> + <kbd>RightClick</kbd> | resize the window
+| <kbd>Super</kbd> + <kbd>LeftClick</kbd> | change the window position
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd>| resize windows (hold)
 | <kbd>Super</kbd> + <kbd>J</kbd> | toggle dwindle
+
+#### Application Shortcuts
+| Keys | Action |
+| :--  | :-- |
 | <kbd>Super</kbd> + <kbd>T</kbd> | launch kitty terminal
 | <kbd>Super</kbd> + <kbd>E</kbd> | launch dolphin file explorer
 | <kbd>Super</kbd> + <kbd>F</kbd> | launch firefox
+| <kbd>Super</kbd> + <kbd>D</kbd> | launch vencord (replace it with normal discord if u want)
+
+#### Widgets
+| Keys | Action |
+| :--  | :-- |
 | <kbd>Super</kbd> + <kbd>A</kbd> | toggle app launcher
 | <kbd>Super</kbd> + <kbd>Tab</kbd> | toggle sidebar
 | <kbd>Super</kbd> + <kbd>O</kbd> | toggle notification center
 | <kbd>Super</kbd> + <kbd>L</kbd> | lock screen
+
+#### Print Screen
+| Keys | Action |
+| :--  | :-- |
 | <kbd>Super</kbd> + <kbd>P</kbd> | drag to select area or click on a window to print
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd> | print current screen
 | <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>P</kbd> | print current screen (frozen)
-| <kbd>Super</kbd> + <kbd>RightClick</kbd> | resize the window
-| <kbd>Super</kbd> + <kbd>LeftClick</kbd> | change the window position
+
+#### Workspaces
+| Keys | Action |
+| :--  | :-- |
 | <kbd>Super</kbd> + <kbd>MouseScroll</kbd> | cycle through workspaces
-| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd>| resize windows (hold)
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>Ctrl</kbd> + <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd>| move active window within the current workspace
 | <kbd>Super</kbd> + <kbd>[0-5]</kbd> | switch to workspace [0-5]
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>[0-5]</kbd> | move active window to workspace [0-5]
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>[0-5]</kbd> | move active window to workspace [0-5] (silently)
+
+#### Special Workspaces
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> | move window to special workspace
 | <kbd>Super</kbd> + <kbd>S</kbd> | toogle to special workspace
 
