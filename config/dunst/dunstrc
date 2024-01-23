@@ -93,10 +93,6 @@
   appname = *
   script = "~/.config/dunst/scripts/closenotification.sh"
 
-# [discord]
-#   appname = ""
-#   new_icon = "dadawdwad"
-
 [spotify]
   appname = "Spotify"
   skip_display = true
@@ -105,10 +101,12 @@
 
 [Type-1]
   summary = "t1"
+  history_ignore = true
   format = "<b>%a</b>"
 
 [Type-2]
   summary = "t2"
+  history_ignore = true
   format = "<span size="250%">%a</span>\n%b"
 
 [urgency_critical]
