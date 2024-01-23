@@ -36,6 +36,7 @@
 ```bash
 git clone https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
+cp -r font/* ~/.local/share/fonts
 cp -r config/* ~/.config
 ```
 
