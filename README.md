@@ -122,6 +122,8 @@ cp -r config/* ~/.config
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>[0-5]</kbd> | move active window to workspace [0-5] (silently)
 
 #### Special Workspaces
+| Keys | Action |
+| :--  | :-- |
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> | move window to special workspace
 | <kbd>Super</kbd> + <kbd>S</kbd> | toogle to special workspace
 
