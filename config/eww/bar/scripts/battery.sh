@@ -35,7 +35,7 @@ case $command in
           elif (( $capacity >= 71 && $capacity <= 80  )); then icon="󰢞"
           elif (( $capacity >= 81 && $capacity <= 90  )); then icon="󰂊"
           elif (( $capacity >= 91 && $capacity <= 99  )); then icon="󰂋"
-          elif (( $capacity >= 100                    )); then icon="󰂅"
+          elif (( $capacity >= 100                    )); then icon="󱟢"
           fi
         ;;
 

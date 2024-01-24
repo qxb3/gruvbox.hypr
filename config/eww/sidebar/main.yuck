@@ -4,7 +4,7 @@
 
 (defwindow sidebar
   :monitor 0
-  :stacking "overlay"
+  :stacking "fg"
   :namespace "sidebar"
   :exclusive false
   :geometry (geometry
