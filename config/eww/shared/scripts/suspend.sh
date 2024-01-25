@@ -7,6 +7,7 @@ yesno_open=`echo $active_windows | grep "yesno"`
 
 # Close logout window if opened
 if [[ ! -z $logout_open ]]; then
+  eww open bar
   eww close logout
 fi
 
