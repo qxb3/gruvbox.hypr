@@ -79,6 +79,7 @@ cp -r config/* ~/.config
 ## Keybindings
 
 #### Window Mangement
+
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>Q</kbd> | quit active/focused window
@@ -92,6 +93,7 @@ cp -r config/* ~/.config
 | <kbd>Super</kbd> + <kbd>J</kbd> | toggle dwindle
 
 #### Application Shortcuts
+
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>T</kbd> | launch kitty terminal
@@ -100,14 +102,15 @@ cp -r config/* ~/.config
 | <kbd>Super</kbd> + <kbd>D</kbd> | launch vencord (replace it with normal discord if u want)
 
 #### Widgets
+
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>A</kbd> | toggle app launcher
 | <kbd>Super</kbd> + <kbd>Tab</kbd> | toggle sidebar
 | <kbd>Super</kbd> + <kbd>O</kbd> | toggle notification center
-| <kbd>Super</kbd> + <kbd>L</kbd> | lock screen
 
 #### Print Screen
+
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>P</kbd> | drag to select area or click on a window to print
@@ -115,6 +118,7 @@ cp -r config/* ~/.config
 | <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>P</kbd> | print current screen (frozen)
 
 #### Workspaces
+
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>MouseScroll</kbd> | cycle through workspaces
@@ -123,11 +127,18 @@ cp -r config/* ~/.config
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>[0-5]</kbd> | move active window to workspace [0-5]
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>[0-5]</kbd> | move active window to workspace [0-5] (silently)
 
-#### Special Workspaces
+#### Special Workspace
+
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> | move window to special workspace
 | <kbd>Super</kbd> + <kbd>S</kbd> | toogle to special workspace
+
+#### Others
+| Keys | Action |
+| :--  | :-- |
+| <kbd>Super</kbd> + <kbd>L</kbd> | lock screen
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>W</kbd> | wallpaper select
 
 <br>
 
