@@ -2,9 +2,9 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js'
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js'
 import Variable from 'resource:///com/github/Aylur/ags/variable.js'
 
-import { debounce } from '../shared/utils.js'
+import { state, debounce } from '../shared/utils.js'
 
-globalThis.revealAppLauncher = Variable(false)
+globalThis.revealAppLauncher = state('app_launcher', false)
 globalThis.selectedApp = Variable()
 
 function launchApp(app) {
