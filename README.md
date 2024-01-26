@@ -2,7 +2,7 @@
 
 &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
-&ensp;[<kbd> <br> Packages Needed <br> </kbd>](#Packages)&ensp;
+&ensp;[<kbd> <br> Packages Needed <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
 &ensp;[<kbd> <br> Credits <br> </kbd>](#Credits)&ensp;
 <br><br></div>
@@ -31,7 +31,7 @@
 > Backup your config files first.
 
 > [!IMPORTANT]
-> Please see [Packages Needed](#Packages)
+> Please see [Dependecies](#Dependecies)
 
 ```bash
 git clone https://github.com/qxb3/gruvbox.hypr
@@ -42,13 +42,15 @@ cp -r config/* ~/.config
 
 <br>
 
-## Packages
+## Dependecies
 
 <table><tr><td>
   <code>a</code><br><code>p</code><br><code>p</code><br><code>s</code><br></td><td><table>
   <tr><td>kitty</td><td>terminal emulator</td></tr>
   <tr><td>dolphin</td><td>file explorer</td></tr>
   <tr><td>spotify</td><td>music player</td></tr>
+  <tr><td>grimblast</td><td>screenshot tool</td></tr>
+  <tr><td>swappy</td><td>screenshot editor</td></tr>
   <tr><td>firefox</td><td>browser</td></tr></table>
 </td></tr></table>
 
@@ -56,7 +58,6 @@ cp -r config/* ~/.config
 
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
-  <tr><td>cava</td><td>music visualizer</td></tr>
   <tr><td>dunst</td><td>notification daemon</td></tr>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
   <tr><td>swaylock</td><td>screen locker</td></tr>
@@ -71,6 +72,8 @@ cp -r config/* ~/.config
   <tr><td>zsh</td><td>main shell</td></tr>
   <tr><td>neovim</td><td>text editor</td></tr>
   <tr><td>neofetch</td><td>beautiful sys info</td></tr>
+  <tr><td>cava</td><td>music visualizer</td></tr>
+  <tr><td>cliphist</td><td>clipboard tool</td></tr>
   <tr><td>playerctl</td><td>control music player</td></tr></table>
 </td></tr></table>
 
