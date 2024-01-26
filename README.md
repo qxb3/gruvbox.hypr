@@ -2,7 +2,7 @@
 
 &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
-&ensp;[<kbd> <br> Packages Needed <br> </kbd>](#Dependecies)&ensp;
+&ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
 &ensp;[<kbd> <br> Credits <br> </kbd>](#Credits)&ensp;
 <br><br></div>
