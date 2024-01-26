@@ -167,7 +167,7 @@ export default Widget.Window({
   name: 'app_launcher',
   className: 'app_launcher',
   layer: 'overlay',
-  anchor: ['top'],
+  anchor: ['bottom'],
   margins: [15, 0, 0, 0],
   focusable: revealAppLauncher.bind(),
   child: Widget.Box({
@@ -175,7 +175,7 @@ export default Widget.Window({
     children: [
       Widget.Revealer({
         reveal_child: revealAppLauncher.bind(),
-        transition: 'slide_down',
+        transition: 'slide_up',
         transition_duration: 250,
         child: AppLauncher(),
       })
