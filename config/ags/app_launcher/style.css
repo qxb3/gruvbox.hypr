@@ -16,12 +16,16 @@
   border-radius: 8px;
  }
 
+.app_launcher .icon_input:hover { background-color: @bgh; }
+
 .app_launcher .close {
   font-size: 30px;
   padding: 0 10px;
   border: solid @bgh 2px;
   border-radius: 8px;
  }
+
+.app_launcher .close:hover { background-color: @bgh; }
 
 .app_launcher .input_placeholder {
   padding: 10px 12px;
