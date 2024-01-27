@@ -1,7 +1,8 @@
+import App from 'resource:///com/github/Aylur/ags/app.js';
 import Variable from 'resource:///com/github/Aylur/ags/variable.js'
 import Utils from 'resource:///com/github/Aylur/ags/utils.js'
 
-const STATES_PATH = '/home/qxb3/.config/ags/.states.json'
+const STATES_PATH = `${App.configDir}/.states.json`
 
 /**
  * Manage state on ~/.config/ags/.states.json
