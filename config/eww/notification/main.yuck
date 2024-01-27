@@ -197,7 +197,7 @@
       :height 50
 
       (image
-        :path "${replace(thumb, '~/', '/home/qxb3')}"
+        :path thumb
         :image-width 50
         :image-height 50
         :halign "start"

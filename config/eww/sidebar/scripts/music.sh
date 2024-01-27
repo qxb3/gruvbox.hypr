@@ -36,14 +36,15 @@ case $1 in
         ALBUM='"album": "Album"'
         ARTIST='"artist": "Artist"'
         VOLUME='"volume": 0'
-        THUMB='"thumb": "/home/qxb3/.config/eww/sidebar/assets/no-music.png"'
+        THUMB='"thumb": ""'
 
-        echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}"
+        echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}" | \
+          jq -c --arg home $HOME '.thumb |= $home + "/.config/eww/sidebar/assets/no-music.png"'
       else
         echo '{"yes": true}'
       fi
 
-      sleep 0.5
+      sleep 1
     done
   ;;
 
@@ -58,9 +59,10 @@ case $1 in
         ALBUM='"album": "Album"'
         ARTIST='"artist": "Artist"'
         VOLUME='"volume": 0'
-        THUMB='"thumb": "/home/qxb3/.config/eww/sidebar/assets/no-music.png"'
+        THUMB='"thumb": ""'
 
-        echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}"
+        echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}" | \
+          jq -c --arg home $HOME '.thumb |= $home + "/.config/eww/sidebar/assets/no-music.png"'
       else
         echo '{"yes": true}'
       fi
