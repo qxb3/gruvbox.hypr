@@ -90,9 +90,9 @@
 )
 
 (defwidget ActiveWindow []
-  (eventbox
-    :cursor "pointer"
-    :onclick "~/.config/ags/shared/scripts/toggle_applauncher.sh"
+  ;; (eventbox
+  ;;   :cursor "pointer"
+  ;;   :onclick "~/.config/ags/shared/scripts/toggle_applauncher.sh"
 
     (box
       :class "widget activewindow"
@@ -114,7 +114,7 @@
         :text {v_activewindow.window}
         :limit-width 32
       )
-    )
+  ;;   )
   )
 )
 
