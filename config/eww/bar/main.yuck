@@ -9,18 +9,25 @@
   :exclusive true
   :geometry (geometry
     :x "0%"
-    :y "0%"
+    :y "-1%"
     :width "100%"
+    :height "1%"
     :anchor "top center"
   )
 
-  (centerbox
-    :orientation "h"
-    :class "container"
+  (revealer
+    :reveal reveal_bar
+    :transition "slidedown"
+    :duration "250ms"
 
-    (left)
-    (center)
-    (right)
+    (centerbox
+      :orientation "h"
+      :class "container"
+
+      (left)
+      (center)
+      (right)
+    )
   )
 )
 
@@ -154,7 +161,7 @@
     (eventbox :cursor "pointer"
       (button
         :class "notif"
-        :onclick "eww update reveal_notif=${!reveal_notif}"
+        :onclick "~/.config/eww/shared/scripts/togglenotif.sh"
 
         "󰂚"
       )

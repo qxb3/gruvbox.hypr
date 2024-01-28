@@ -3,6 +3,7 @@
 ;; ┗┛ ╹ ╹╹┗╸╹╹ ╹┗━┛┗━╸┗━╸┗━┛
 
 ;; Controls
+(defvar reveal_bar true)
 (defvar reveal_sidebar false)
 (defvar reveal_applauncher false)
 (defvar reveal_notif false)
