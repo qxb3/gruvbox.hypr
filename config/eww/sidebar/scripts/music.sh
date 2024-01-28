@@ -44,29 +44,12 @@ case $1 in
         echo '{"yes": true}'
       fi
 
-      sleep 1
+      sleep 2.5
     done
   ;;
 
   meta)
     function handle() {
-      playerctl -p spotify status &>/dev/null
-      has_player=$?
-
-      if [[ $has_player -eq 1 ]]; then
-        STATUS='"status": "Stopped"'
-        TITLE='"title": "No Music"'
-        ALBUM='"album": "Album"'
-        ARTIST='"artist": "Artist"'
-        VOLUME='"volume": 0'
-        THUMB='"thumb": ""'
-
-        echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}" | \
-          jq -c --arg home $HOME '.thumb |= $home + "/.config/eww/sidebar/assets/no-music.png"'
-      else
-        echo '{"yes": true}'
-      fi
-
       while read -r line; do
         status=`echo $line | jq -r '.status'`
         title=`echo $line | jq -r '.title' | tr -d "'/.,"`

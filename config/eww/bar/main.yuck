@@ -42,7 +42,7 @@
     :space-evenly false
     :spacing 6
 
-    (Menu)
+    (Menu :music {v_has_player.yes == true ? v_music : v_has_player})
     (Workspaces)
   )
 )
@@ -69,13 +69,13 @@
 ;; ┃╻┃┃ ┃┃┃╺┓┣╸  ┃ ┗━┓
 ;; ┗┻┛╹╺┻┛┗━┛┗━╸ ╹ ┗━┛
 
-(defwidget Menu []
+(defwidget Menu [music]
   (eventbox :cursor "pointer"
     (button
-      :class "widget menu ${v_music.status == 'Playing' ? 'cava' : 'arch'}"
+      :class "widget menu ${music.status == 'Playing' ? 'cava' : 'arch'}"
       :onclick `~/.config/eww/shared/scripts/togglesidebar.sh`
 
-      {v_music.status == "Playing" ? v_cava : "󰣇"}
+      {music.status == "Playing" ? v_cava : "󰣇"}
   ))
 )
 

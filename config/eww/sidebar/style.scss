@@ -95,6 +95,10 @@
 
         & .play {
           background-color: $green;
+
+          & .icon.spotify {
+            padding-right: 4px;
+          }
         }
       }
     }

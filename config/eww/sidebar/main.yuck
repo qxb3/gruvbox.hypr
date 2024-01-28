@@ -40,13 +40,13 @@
       )
 
 
-      (MusicPlayer)
+      (MusicPlayer :music {v_has_player.yes == true ? v_music : v_has_player})
 
       (box
         :orientation "h"
         :space-evenly false
 
-        (DesktopContols)
+        (DesktopContols :music {v_has_player.yes == true ? v_music : v_has_player})
         (SystemControls)
       )
     )
@@ -132,7 +132,8 @@
   )
 )
 
-(defwidget MusicPlayer [] (box
+(defwidget MusicPlayer [music]
+  (box
     :class "music-player card"
     :orientation "h"
     :space-evenly true
@@ -140,7 +141,7 @@
 
     (box
       :class "thumbnail"
-      :style "background-image: url('${v_music.thumb}');"
+      :style "background-image: url('${music.thumb}');"
     )
 
     (box
@@ -158,21 +159,21 @@
 
           (label
             :class "name"
-            :text {v_music.title}
+            :text {music.title}
             :limit-width 10
             :show-truncated false
           )
 
           (label
             :class "album"
-            :text {v_music.album}
+            :text {music.album}
             :limit-width 10
             :show-truncated true
           )
 
           (label
             :class "artist"
-            :text {v_music.artist}
+            :text {music.artist}
             :limit-width 10
             :show-truncated true
           )
@@ -200,12 +201,12 @@
 
           (eventbox :cursor "pointer" :halign "center"
             (button
-              :onclick {v_music.status == "Stopped" ? "spotify &" : `~/.config/eww/sidebar/scripts/music.sh play`}
+              :onclick {music.status == "Stopped" ? "spotify &" : `~/.config/eww/sidebar/scripts/music.sh play`}
               :class "play"
 
               (label
-                :class "icon"
-                :text {v_music.status == "Playing" ? "󰏤" : ""}
+                :class "icon ${music.status == "Stopped" ? 'spotify' : ''}"
+                :text {music.status == "Stopped" ? "󰝛" : music.status == "Playing" ? "󰏤" : ""}
               )
             )
           )
@@ -227,7 +228,7 @@
   )
 )
 
-(defwidget DesktopContols []
+(defwidget DesktopContols [music]
   (box
     :class "desktop-controls card"
     :hexpand true
@@ -275,12 +276,12 @@
 
     (metric
       :class "music"
-      :icon {v_music.status == "Stopped" ? "󰝛" : "󰝚"}
+      :icon {music.status == "Stopped" ? "󰝛" : "󰝚"}
       :onchange "~/.config/eww/sidebar/scripts/music.sh vol-set {}"
       :min 0
       :max 100
-      :value {v_music.status == "Stopped" ? 100 : v_music.volume}
-      :tooltip "MUSIC VOL: ${round(v_music.volume, 1)}%"
+      :value {music.status == "Stopped" ? 0 : music.volume}
+      :tooltip "MUSIC VOL: ${round(music.volume, 1)}%"
       :active true
     )
 
