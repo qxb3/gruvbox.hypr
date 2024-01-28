@@ -3,6 +3,7 @@
 ;; ┗┛ ╹ ╹╹┗╸╹╹ ╹┗━┛┗━╸┗━╸┗━┛
 
 ;; Controls
+(defvar reveal_desktop_clock false)
 (defvar reveal_bar true)
 (defvar reveal_sidebar false)
 (defvar reveal_applauncher false)
@@ -30,6 +31,7 @@
 ;; ┃╻┃┃┃┗┫ ┃┃┃ ┃┃╻┃┗━┓
 ;; ┗┻┛╹╹ ╹╺┻┛┗━┛┗┻┛┗━┛
 
+(include "./desktop_clock/main.yuck")
 (include "./bar/main.yuck")
 (include "./sidebar/main.yuck")
 (include "./notification/main.yuck")
