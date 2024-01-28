@@ -107,6 +107,7 @@ cp -r .scripts ~/ # Optional
 
 | Keys | Action |
 | :--  | :-- |
+| <kbd>Super</kbd> + <kbd>C</kbd> | toggle desktop clock
 | <kbd>Super</kbd> + <kbd>B</kbd> | toggle top bar
 | <kbd>Super</kbd> + <kbd>Tab</kbd> | toggle sidebar
 | <kbd>Super</kbd> + <kbd>O</kbd> | toggle notification center
