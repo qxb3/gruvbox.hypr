@@ -7,7 +7,7 @@
   & .container {
     background-color: $bg;
     border: solid $bgh 2px;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 1.5rem;
     margin: 25rem 18rem;
   }
@@ -15,7 +15,7 @@
   & .card {
     background-color: $bg2;
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 4px;
     margin: 0 0.5rem;
 
     &:hover {
