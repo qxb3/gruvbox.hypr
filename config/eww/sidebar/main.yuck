@@ -5,7 +5,7 @@
 (defwindow sidebar
   :monitor 0
   :stacking "fg"
-  :namespace "sidebar"
+  :namespace "widget"
   :exclusive false
   :geometry (geometry
     :x "-1%"

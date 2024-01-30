@@ -5,7 +5,7 @@
 (defwindow notification
   :monitor 0
   :stacking "overlay"
-  :namespace "notification"
+  :namespace "widget"
   :exclusive false
   :geometry (geometry
     :x "0%"
