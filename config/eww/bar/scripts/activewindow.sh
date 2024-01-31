@@ -9,7 +9,7 @@ function active_window() {
   if [[ $active_workspace == '"2"' ]]; then icon="󰈹"; fi
   if [[ $active_workspace == '"3"' ]]; then icon="󰙯"; fi
   if [[ $active_workspace == '"4"' ]]; then icon=""; fi
-  if [[ $active_workspace == '"5"' ]]; then icon=""; fi
+  if [[ $active_workspace == '"5"' ]]; then icon=""; fi
 
   if [[ $window != "null" ]]; then
     ICON='"icon": "%s"'
