@@ -290,7 +290,7 @@
       :icon "󰕾"
       :onchange "pamixer --set-volume {}"
       :min 0
-      :max 100
+      :max 101
       :value v_volume
       :tooltip "GLOBAL VOL: ${v_volume}%"
       :active true
