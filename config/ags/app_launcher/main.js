@@ -5,12 +5,10 @@ import Variable from 'resource:///com/github/Aylur/ags/variable.js'
 import { state, debounce } from '../shared/utils.js'
 
 globalThis.revealAppLauncher = state('app_launcher', false)
-globalThis.selectedApp = Variable()
 
-function launchApp(app) {
-  revealAppLauncher.value = false
-  app.launch()
-}
+const selectedApp = Variable()
+const query = Variable()
+const queriedApps = Variable(queryApps(''))
 
 function queryApps(q) {
   const rowSize = 4
@@ -35,6 +33,11 @@ function queryApps(q) {
   selectedApp.value = applications[0].attribute.app
 
   return rows
+}
+
+function launchApp(app) {
+  revealAppLauncher.value = false
+  app.launch()
 }
 
 function Application(app) {
@@ -93,7 +96,7 @@ function AppsContainer() {
   const Apps = Widget.Box({
     vertical: true,
     spacing: 8,
-    children: queryApps('')
+    setup: (self) => self.hook(queriedApps, () => self.children = queriedApps.value)
   })
 
   return Widget.Scrollable({
@@ -105,8 +108,6 @@ function AppsContainer() {
 }
 
 function Footer() {
-  const query = Variable('')
-
   const SelectedApp = Widget.Button({
     cursor: 'pointer',
     onClicked: () => launchApp(selectedApp.value),
@@ -134,7 +135,7 @@ function Footer() {
         onAccept: () => launchApp(selectedApp.value),
         onChange: debounce({
           called: ({ text }) => query.value = text,
-          fn: ({ text }) => Apps.children = queryApps(text)
+          fn: ({ text }) => queriedApps.value = queryApps(text)
         }),
         setup: (self) => self.hook(revealAppLauncher, () => {
           if (revealAppLauncher.value) self.grab_focus()
