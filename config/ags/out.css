@@ -1,0 +1,65 @@
+* {
+  all: unset;
+}
+
+.container {
+  padding: 1rem;
+  background-color: #282828;
+  border: solid #1d2021 2px;
+  border-radius: 8px;
+}
+
+.app_launcher {
+  font-family: "JetBrainsMono Nerd Font";
+}
+.app_launcher .header .icon {
+  font-size: 24px;
+  padding-left: 1rem;
+}
+.app_launcher .header .title {
+  font-size: 14px;
+}
+.app_launcher .divider {
+  border: solid #1d2021 1px;
+}
+.app_launcher .applications {
+  min-width: 500px;
+  min-height: 300px;
+}
+.app_launcher .application {
+  border-radius: 10px;
+  padding: 8px;
+}
+.app_launcher .application .icon {
+  font-size: 42px;
+}
+.app_launcher .application:hover, .app_launcher .application:focus {
+  background-color: #1d2021;
+}
+.app_launcher .selected_app {
+  font-size: 32px;
+  padding: 5px 10px;
+  border: solid #1d2021 2px;
+  border-radius: 8px;
+}
+.app_launcher .selected_app:hover {
+  background-color: #1d2021;
+}
+.app_launcher .input_container .placeholder {
+  padding: 10px 12px;
+  color: #928374;
+}
+.app_launcher .input_container .input {
+  padding: 10px;
+  border: solid #1d2021 2px;
+  border-radius: 8px;
+}
+.app_launcher .close {
+  font-size: 32px;
+  border: solid #1d2021 2px;
+  border-radius: 8px;
+  padding: 0 1rem;
+}
+.app_launcher .close:hover {
+  background-color: #1d2021;
+}

@@ -65,10 +65,8 @@ function Application(app) {
   })
 }
 
-function AppLauncher() {
-  const query = Variable('')
-
-  const Header = Widget.Box({
+function Header() {
+  return Widget.Box({
     className: 'header',
     spacing: 8,
     vertical: true,
@@ -86,79 +84,92 @@ function AppLauncher() {
           })
         ]
       }),
-      Widget.Box({
-        css: `border: solid @bgh 1px;`
-      })
+      Widget.Box({ className: 'divider' })
     ]
   })
+}
 
-  const AppsGrid = Widget.Box({
+function AppsContainer() {
+  const Apps = Widget.Box({
     vertical: true,
     spacing: 8,
     children: queryApps('')
   })
 
-  const Apps = Widget.Scrollable({
+  return Widget.Scrollable({
     className: 'applications',
     hscroll: 'never',
-    child: AppsGrid,
+    child: Apps,
     setup: (self) => self.hook(revealAppLauncher, () => self.vfunc_scroll_child(14, false))
   })
+}
 
-  const Input = Widget.Box({
-    spacing: 8,
-    children: [
-      Widget.Button({
-        cursor: 'pointer',
-        onClicked: () => launchApp(selectedApp.value),
-        child: Widget.Icon({
-          className: 'icon_input',
-          setup: (self) => self.hook(selectedApp, () => self.icon = selectedApp.value.iconName)
-        })
-      }),
-      Widget.Overlay({
-        child: Widget.Label({
-          className: 'input_placeholder',
-          xalign: 0,
-          setup: (self) => self.hook(query, () => {
-            if (query.value.length > 0) self.label = ''
-            else self.label = 'Search Apps...'
-          })
+function Footer() {
+  const query = Variable('')
+
+  const SelectedApp = Widget.Button({
+    cursor: 'pointer',
+    onClicked: () => launchApp(selectedApp.value),
+    child: Widget.Icon({
+      className: 'selected_app',
+      setup: (self) => self.hook(selectedApp, () => self.icon = selectedApp.value.iconName)
+    })
+  })
+
+  const InputContainer = Widget.Overlay({
+    className: 'input_container',
+    child: Widget.Label({
+      className: 'placeholder',
+      xalign: 0,
+      setup: (self) => self.hook(query, () => {
+        if (query.value.length > 0) self.label = ''
+        else self.label = 'Search Apps...'
+      })
+    }),
+    overlays: [
+      Widget.Entry({
+        className: 'input',
+        placeholder_text: 'Search Apps...',
+        hexpand: true,
+        onAccept: () => launchApp(selectedApp.value),
+        onChange: debounce({
+          called: ({ text }) => query.value = text,
+          fn: ({ text }) => Apps.children = queryApps(text)
         }),
-        overlays: [
-          Widget.Entry({
-            className: 'input',
-            placeholder_text: 'Search Apps...',
-            hexpand: true,
-            onAccept: () => launchApp(selectedApp.value),
-            onChange: debounce({
-              called: ({ text }) => query.value = text,
-              fn: ({ text }) => AppsGrid.children = queryApps(text)
-            }),
-            setup: (self) => self.hook(revealAppLauncher, () => {
-              if (revealAppLauncher.value) self.grab_focus()
-              else self.text = ''
-            })
-          })
-        ]
-      }),
-      Widget.Button({
-        className: 'close',
-        cursor: 'pointer',
-        onClicked: () => revealAppLauncher.value = false,
-        child: Widget.Label('󰅖')
+        setup: (self) => self.hook(revealAppLauncher, () => {
+          if (revealAppLauncher.value) self.grab_focus()
+          else self.text = ''
+        })
       })
     ]
   })
 
+  const Close = Widget.Button({
+    className: 'close',
+    cursor: 'pointer',
+    onClicked: () => revealAppLauncher.value = false,
+    child: Widget.Label('󰅖')
+  })
+
+  return Widget.Box({
+    spacing: 8,
+    children: [
+      SelectedApp,
+      InputContainer,
+      Close
+    ]
+  })
+}
+
+function AppLauncher() {
   return Widget.Box({
     className: 'container',
     vertical: true,
     spacing: 16,
     children: [
-      Header,
-      Apps,
-      Input
+      Header(),
+      AppsContainer(),
+      Footer()
     ]
   })
 }
