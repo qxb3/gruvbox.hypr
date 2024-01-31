@@ -2,7 +2,7 @@
 
 # set variables
 ScrDir=`dirname "$(realpath "$0")"`
-RofiConf="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/wallselect.rasi"
+RofiConf="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/wallpaperselect.rasi"
 wallPath="${XDG_CONFIG_HOME:-$HOME/.config}/swww"
 
 # scale for monitor x res
