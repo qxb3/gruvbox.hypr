@@ -5,6 +5,9 @@ if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
     exit 1
 fi
 
+# Add more players in comma seperated (spotify,firefox)
+PLAYER='spotify'
+
 case $1 in
   title)
     function handle() {
@@ -13,21 +16,19 @@ case $1 in
       done
     }
 
-    playerctl -s -p spotify metadata --follow --format "{{ title }}" | handle
-
-    # zscroll \
-    #   -l 10 \
-    #   --delay 0.3 \
-    #   --match-command "playerctl -p spotify status" \
-    #   --match-text "Playing" "--scroll 1" \
-    #   --match-text "Paused" "--scroll 0" \
-    #   --update-check true \
-    #       'playerctl -p spotify metadata --format "{{ title }}"'
+    zscroll \
+      -l 10 \
+      --delay 0.3 \
+      --match-command "playerctl -p ${PLAYER} status" \
+      --match-text "Playing" "--scroll 1" \
+      --match-text "Paused" "--scroll 0" \
+      --update-check true \
+          'playerctl -p spotify metadata --format "{{ title }}"'
   ;;
 
   check-player)
     while true; do
-      playerctl -p spotify status &>/dev/null
+      playerctl -p "${PLAYER}" status &>/dev/null
       has_player=$?
 
       if [[ $has_player -eq 1 ]]; then
@@ -64,8 +65,6 @@ case $1 in
         fi
 
         echo $line | jq -c --arg cached_thumb "$cached_thumb" '.thumb = $cached_thumb | .volume *= 110'
-
-        # notify-send -a "Spotify" -i "$cached_thumb" -t 5000 -w "Playing - ${title}"
       done
     }
 
@@ -76,21 +75,21 @@ case $1 in
     VOLUME='"volume": {{ volume }}'
     THUMB='"thumb": "{{ mpris:artUrl }}"'
 
-    playerctl -s -p spotify metadata --follow --format "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}" | handle
+    playerctl -s -p "${PLAYER}" metadata --follow --format "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}" | handle
   ;;
 
   prev)
-    playerctl -p spotify previous
+    playerctl -p "${PLAYER}" previous
     echo "prev"
   ;;
 
   play)
-    playerctl -p spotify play-pause
+    playerctl -p "${PLAYER}" play-pause
     echo "play"
   ;;
 
   next)
-    playerctl -p spotify next
+    playerctl -p "${PLAYER}" next
     echo "next"
   ;;
 
