@@ -114,8 +114,9 @@ cp -r .scripts ~/ # Optional
 | <kbd>Super</kbd> + <kbd>C</kbd> | toggle desktop clock
 | <kbd>Super</kbd> + <kbd>B</kbd> | toggle top bar
 | <kbd>Super</kbd> + <kbd>Tab</kbd> | toggle sidebar
-| <kbd>Super</kbd> + <kbd>O</kbd> | toggle notification center
 | <kbd>Super</kbd> + <kbd>A</kbd> | toggle app launcher
+| <kbd>Super</kbd> + <kbd>O</kbd> | toggle notification center
+| <kbd>Super</kbd> + <kbd>N</kbd> | toggle network bar
 
 #### Print Screen
 
