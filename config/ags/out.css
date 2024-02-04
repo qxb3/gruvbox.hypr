@@ -9,8 +9,41 @@
   border-radius: 8px;
 }
 
+.bar {
+  font-family: "JetBrainsMono Nerd Font";
+  color: #ebdbb2;
+}
+.bar .box {
+  background-color: #282828;
+  border: solid #1d2021 1px;
+  border-radius: 8px;
+  padding: 5px 7px;
+}
+.bar .menu .arch {
+  font-size: 16px;
+  padding: 0 7px 0 5px;
+}
+.bar .menu:hover {
+  background-color: #1d2021;
+}
+.bar .workspaces {
+  padding: 12px 10px;
+}
+.bar .workspaces .workspace {
+  border-radius: 999px;
+  min-width: 10px;
+  min-height: 10px;
+  background-color: #ebdbb2;
+}
+.bar .workspaces .workspace.active {
+  background-color: #cc241d;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+
 .app_launcher {
   font-family: "JetBrainsMono Nerd Font";
+  color: #ebdbb2;
 }
 .app_launcher .header .icon {
   font-size: 24px;

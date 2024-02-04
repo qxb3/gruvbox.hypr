@@ -176,7 +176,7 @@ function AppLauncher() {
 }
 
 export default Widget.Window({
-  name: 'widget',
+  name: 'app_launcher',
   className: 'app_launcher',
   layer: 'overlay',
   anchor: ['bottom'],
