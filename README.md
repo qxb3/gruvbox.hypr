@@ -4,6 +4,7 @@
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
 &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
+&ensp;[<kbd> <br> Issues <br> </kbd>](#Issues)&ensp;
 &ensp;[<kbd> <br> Credits <br> </kbd>](#Credits)&ensp;
 <br><br></div>
 
@@ -145,6 +146,15 @@ cp -r .scripts ~/ # Optional
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>L</kbd> | lock screen
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>W</kbd> | wallpaper select
+
+<br>
+
+## Issues
+
+* This is built for a laptop with a resolution of 1366x768 so the widgets/wallpaper or the overall look might be messed up for you.
+* I have only one monitor (which is from the laptop) so multiple monitor support is not really in mind, so you might need to tweak the config for it to work properly.
+* The AppLauncher widget has a problem with focus where if your cursor is inside of it and you close the AppLauncher the focus will not be transferred back to the active window. Solutions: Move the cursor or Move the cursor outside the AppLauncher when you open it. (idk why this is happening but i think its a gtk problem)
+* Not really a problem but if you want to support multiple music players and not just spotify change the `PLAYER` variable in `config/eww/sidebar/scripts/music.sh`.
 
 <br>
 
