@@ -39,6 +39,7 @@ cd gruvbox.hypr
 cp -r font/* ~/.local/share/fonts
 cp -r config/* ~/.config
 cp -r .scripts ~/ # Optional
+# Restart your pc
 ```
 
 <br>
