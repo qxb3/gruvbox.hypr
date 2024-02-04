@@ -20,7 +20,6 @@
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/7.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/8.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/9.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/10.png" />
 </p>
 
 <br>
