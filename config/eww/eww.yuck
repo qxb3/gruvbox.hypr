@@ -2,17 +2,21 @@
 ;; ┃┏┛┣━┫┣┳┛┃┣━┫┣┻┓┃  ┣╸ ┗━┓
 ;; ┗┛ ╹ ╹╹┗╸╹╹ ╹┗━┛┗━╸┗━╸┗━┛
 
-;; Controls
+;; Reveals
 (defvar reveal_desktop_clock false)
 (defvar reveal_bar true)
 (defvar reveal_sidebar false)
 (defvar reveal_applauncher false)
 (defvar reveal_notif false)
+(defvar reveal_network false)
 
 ;; Bar
 (deflisten v_workspaces `~/.config/eww/bar/scripts/workspaces.sh`)
 (deflisten v_cava :initial "▁▁▁▁" `~/.config/eww/bar/scripts/cava.sh`)
 (deflisten v_activewindow `~/.config/eww/bar/scripts/activewindow.sh`)
+(deflisten v_network_primary `~/.config/eww/bar/scripts/network.sh primary`)
+(deflisten v_network_wifi_scanning `~/.config/eww/bar/scripts/network.sh scan`)
+(deflisten v_network_wifi `~/.config/eww/bar/scripts/network.sh wifi`)
 (deflisten v_battery `~/.config/eww/bar/scripts/battery.sh get`)
 
 ;; Sidebar
@@ -33,7 +37,8 @@
 
 (include "./desktop_clock/main.yuck")
 (include "./bar/main.yuck")
-(include "./sidebar/main.yuck")
 (include "./notification/main.yuck")
+(include "./network/main.yuck")
+(include "./sidebar/main.yuck")
 (include "./logout/main.yuck")
 (include "./prompts/main.yuck")

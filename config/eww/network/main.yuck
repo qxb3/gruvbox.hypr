@@ -1,0 +1,168 @@
+(defvar wifi_dropdown "")
+
+(defwindow network
+  :monitor 0
+  :stacking "overlay"
+  :namespace "widget"
+  :exclusive false
+  :geometry (geometry
+    :x "15px"
+    :y "15px"
+    :width "18%"
+    :height "1%"
+    :anchor "top right"
+  )
+
+  (revealer
+    :reveal reveal_network
+    :transition "slidedown"
+    :duration "250ms"
+
+    (box
+      :class "container"
+      :orientation "v"
+      :space-evenly false
+      :spacing 10
+
+      (box
+        :orientation "v"
+        :space-evenly false
+        :spacing 8
+
+        (box
+          :class "header"
+          :orientation "h"
+          :space-evenly false
+
+          (label
+            :text "Wifi Networks"
+            :xalign 0
+          )
+
+          (box
+            :halign "end"
+            :hexpand true
+
+            (label
+              :text {v_network_wifi_scanning == 'yes' ? '' : ''}
+              :halign "end"
+            )
+          )
+        )
+
+        (box :class "divider")
+      )
+
+      (box
+        :orientation "v"
+        :spacing 4
+        :style "min-height: 25rem;"
+
+        (box
+          :class "wifi_unavailable"
+          :visible {v_network_wifi.status == "unavailable"}
+          :orientation "v"
+          :space-evenly false
+
+          (label
+            :class "icon"
+            :text "󰤭"
+            :xalign 0.5
+          )
+
+          (label
+            :class "text"
+            :text "Wifi Unavailable"
+            :xalign 0.5
+          )
+        )
+
+        (scroll
+          :vscroll true
+          :vexpand true
+          :visible {v_network_wifi.status != "unavailable"}
+
+          (box
+            :orientation "v"
+            :space-evenly false
+            :spacing 4
+            :vexpand true
+
+            (for wifi in {v_network_wifi.networks}
+              (WifiNetwork :wifi {wifi})
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget WifiNetwork [wifi]
+  (box
+    :class "wifi_network"
+    :orientation "v"
+    :spacing 4
+    :space-evenly false
+
+    (eventbox :cursor "pointer"
+      (button
+        :class "button ${wifi_dropdown == wifi.bssid ? 'active' : ''} ${v_network_wifi.connected.bssid == wifi.bssid ? 'connected' : ''}"
+        :onclick `${wifi_dropdown == wifi.bssid ? 'eww update wifi_dropdown=""' : 'eww update wifi_dropdown=${wifi.bssid}'}`
+
+        (box
+          :space-evenly false
+          :spacing 12
+
+          (label
+            :class "icon"
+            :text {wifi.icon}
+          )
+
+          (label
+            :class "name"
+            :text "${wifi.ssid} ${wifi_dropdown == wifi.bssid ? '' : ''}"
+          )
+        )
+      )
+    )
+
+    (revealer
+      :reveal {wifi_dropdown == wifi.bssid}
+      :transition "slidedown"
+      :duration "250ms"
+
+      (box
+        :class "dropdown"
+        :orientation "v"
+        :space-evenly false
+        :spacing 8
+
+        (box
+          :class "info"
+          :orientation "v"
+          :space-evenly false
+
+          (label :xalign 0 :text "BSSID: ${wifi.bssid}")
+          (label :xalign 0 :text "SSID: ${wifi.ssid}")
+          (label :xalign 0 :text "CHANNEL: ${wifi.channel}")
+          (label :xalign 0 :text "SPEED: ${wifi.speed}")
+          (label :xalign 0 :text "SIGNAL: ${wifi.icon}")
+          (label :xalign 0 :text "SECURITY: ${wifi.security}")
+        )
+
+        (box
+          :class "actions"
+
+          (eventbox :cursor "pointer"
+            (button
+              :class "dis-connect"
+
+              (label :text {v_network_wifi.connected.bssid == wifi.bssid ? 'Disconnect' : 'Connect'})
+            )
+          )
+        )
+      )
+    )
+  )
+)

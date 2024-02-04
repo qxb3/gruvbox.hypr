@@ -109,6 +109,7 @@
       (label
         :class "icon"
         :text {v_activewindow.icon}
+        :wrap true
       )
 
       (label
@@ -141,11 +142,12 @@
       :text ""
     )
 
-    (eventbox :cursor "pointer"
+    (eventbox :cursor "pointer" :visible {v_network_primary != ""}
       (button
-        :class "network"
+        :class "network ${reveal_network == true ? 'active' : ''}"
+        :onclick "~/.config/eww/shared/scripts/togglenetwork.sh"
 
-        "󰈀"
+        {v_network_primary == "ethernet" ? "󰈀" : v_network_wifi.connected.icon}
       )
     )
 
@@ -160,7 +162,7 @@
 
     (eventbox :cursor "pointer"
       (button
-        :class "notif"
+        :class "notif ${reveal_notif == true ? 'active' : ''}"
         :onclick "~/.config/eww/shared/scripts/togglenotif.sh"
 
         "󰂚"

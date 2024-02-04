@@ -1,0 +1,69 @@
+.network {
+  font-family: "JetBrains Mono Nerd Font";
+  color: $fg;
+
+  & .container {
+    background-color: $bg;
+    border: solid $bgh 2px;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  & .header {
+    font-size: 16px;
+    font-weight: 900;
+    padding-right: 8px;
+  }
+
+  & .divider {
+    min-height: 1px;
+    background-color: #1d2021;
+  }
+
+  & .wifi_unavailable {
+    color: $gray;
+    padding-top: 7rem;
+
+    & .icon {
+      font-size: 42px;
+      padding-right: 1rem;
+    }
+
+    & .text {
+      font-size: 16px;
+    }
+  }
+
+  & .wifi_network {
+    & .button {
+      padding: 2px 8px;
+      border-radius: 4px;
+
+      &.connected { background-color: $green; }
+      &.active { background-color: $bg2; }
+
+      & .icon { font-size: 18px; }
+      &:hover { background-color: $bg2; }
+    }
+
+    & .dropdown {
+      background-color: $bgh;
+      border-radius: 4px;
+      padding: 8px;
+
+      & .info { font-size: 9px; }
+
+      & .actions {
+        font-size: 10px;
+
+        & .dis-connect {
+          background-color: $bg1;
+          padding: 4px;
+          border-radius: 4px;
+
+          &:hover { background-color: $green; }
+        }
+      }
+    }
+  }
+}

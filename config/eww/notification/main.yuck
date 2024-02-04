@@ -8,7 +8,7 @@
   :namespace "widget"
   :exclusive false
   :geometry (geometry
-    :x "0%"
+    :x "15px"
     :y "15px"
     :width "30%"
     :height "1%"

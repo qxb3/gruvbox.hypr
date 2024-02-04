@@ -7,6 +7,7 @@ if [[ "${reveal_bar}" == "true" ]]; then
   if [[ "${reveal_notif}" == "true" ]]; then
     eww update reveal_notif=false
   else
+    eww update reveal_network=false
     eww update reveal_notif=true
   fi
 fi

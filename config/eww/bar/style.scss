@@ -74,6 +74,10 @@
       padding-right: 2px;
     }
 
+    & .network.active, & .notif.active {
+      color: $aqua;
+    }
+
     & .battery {
       padding-left: 8px;
     }
