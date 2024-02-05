@@ -33,7 +33,7 @@
 
 (defwidget Notification []
   (box
-    :class "container"
+    :class "box"
     :orientation "v"
     :space-evenly false
     :height 350
@@ -115,7 +115,7 @@
 
 (defwidget Apps []
   (box
-    :class "container apps"
+    :class "box apps"
     :orientation "h"
     :space-evenly true
 

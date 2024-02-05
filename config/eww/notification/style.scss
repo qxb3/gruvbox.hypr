@@ -4,14 +4,6 @@
   font-weight: 900;
   color: $fg;
 
-  & .container {
-    background-color: $bg;
-    border: solid $bgh 2px;
-    border-radius: 8px;
-    margin-left: 1.5rem;
-    padding: 1rem;
-  }
-
   & .card {
     background-color: $bg1;
     border-radius: 8px;

@@ -19,7 +19,7 @@
     :duration "250ms"
 
     (box
-      :class "container"
+      :class "box"
       :orientation "v"
       :space-evenly false
       :spacing 10

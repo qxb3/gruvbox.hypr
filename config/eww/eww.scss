@@ -1,9 +1,22 @@
-* {
-  all: unset;
-}
+* { all: unset; }
 
 @import "./colors.scss";
 
+.box {
+  background-color: $bg;
+  border-radius: 8px;
+  border: solid $bgh 2px;
+  padding: 1rem;
+}
+
+.inner_box {
+  background-color: $bg1;
+  border-radius: 8px;
+  border: solid $bgh 2px;
+  margin: 0.5rem;
+}
+
+@import "./widgets/style.scss";
 @import "./desktop_clock/style.scss";
 @import "./bar/style.scss";
 @import "./sidebar/style.scss";

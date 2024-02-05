@@ -15,7 +15,7 @@
   )
 
   (box
-    :class "container"
+    :class "container box"
     :orientation "h"
 
     (box

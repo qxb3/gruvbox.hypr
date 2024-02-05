@@ -1,0 +1,95 @@
+(defwidget MusicPlayer [music]
+  (box
+    :class "music-player inner_box"
+    :orientation "h"
+    :space-evenly true
+    :spacing 16
+
+    (box
+      :class "thumbnail"
+      :style "background-image: url('${music.thumb}');"
+    )
+
+    (box
+      :class "player"
+      :orientation "v"
+      :space-evenly true
+
+      (overlay
+        (box)
+        (box
+          :class "meta"
+          :orientation "v"
+          :space-evenly false
+          :spacing 5
+
+          (label
+            :class "name"
+            :text {music.title}
+            :limit-width 10
+            :show-truncated false
+          )
+
+          (label
+            :class "album"
+            :text {music.album}
+            :limit-width 10
+            :show-truncated true
+          )
+
+          (label
+            :class "artist"
+            :text {music.artist}
+            :limit-width 10
+            :show-truncated true
+          )
+        )
+      )
+
+      (box
+        :class "controls"
+
+        (centerbox
+          :orientation "h"
+          :valign "end"
+
+          (eventbox :cursor "pointer" :halign "start"
+            (button
+              :onclick `~/.config/eww/sidebar/scripts/music.sh prev`
+              :class "prev"
+
+              (label
+                :class "icon"
+                :text "󰒮"
+              )
+            )
+          )
+
+          (eventbox :cursor "pointer" :halign "center"
+            (button
+              :onclick {music.status == "Stopped" ? "spotify &" : `~/.config/eww/sidebar/scripts/music.sh play`}
+              :class "play"
+
+              (label
+                :class "icon ${music.status == "Stopped" ? 'spotify' : ''}"
+                :text {music.status == "Stopped" ? "󰝛" : music.status == "Playing" ? "󰏤" : ""}
+              )
+            )
+          )
+
+          (eventbox :cursor "pointer" :halign "end"
+            (button
+              :onclick `~/.config/eww/sidebar/scripts/music.sh next`
+              :class "next"
+
+              (label
+                :class "icon"
+                :text "󰒭"
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+)

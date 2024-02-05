@@ -2,12 +2,10 @@
   font-family: "JetBrainsMono Nerd Font";
   font-size: 10px;
   font-weight: 900;
+  color: $fg;
 
   & .container {
-    background-color: $bg;
-    color: $fg;
     border: solid $bgh 3px;
-    border-radius: 8px;
     padding: 4px;
   }
 

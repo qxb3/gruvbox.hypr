@@ -10,17 +10,13 @@
     margin-right: 1.5rem;
   }
 
-  & .widget {
-    background-color: $bg;
-    padding-left: 8px;
-    padding-right: 8;
+  & .box {
+    padding: 0 8px 0 8px;
     border-radius: 8px;
-    border: solid $bgh 1px;
+    border-width: 1px;
   }
 
-  & .divider {
-    font-size: 14px;
-  }
+  & .divider { font-size: 14px; }
 
   & .menu {
     &.cava { font-size: 8px; }

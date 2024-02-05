@@ -5,7 +5,7 @@
 (defwindow bar
   :monitor 0
   :stacking "fg"
-  :namespace "widget"
+  :namespace "box"
   :exclusive true
   :geometry (geometry
     :x "0%"
@@ -72,7 +72,7 @@
 (defwidget Menu [music]
   (eventbox :cursor "pointer"
     (button
-      :class "widget menu ${music.status == 'Playing' ? 'cava' : 'arch'}"
+      :class "box menu ${music.status == 'Playing' ? 'cava' : 'arch'}"
       :onclick `~/.config/eww/shared/scripts/togglesidebar.sh`
 
       {music.status == "Playing" ? v_cava : "󰣇"}
@@ -81,7 +81,7 @@
 
 (defwidget Workspaces []
   (box
-    :class "widget workspaces"
+    :class "box workspaces"
     :orientation "h"
 
     (for workspace in v_workspaces
@@ -102,7 +102,7 @@
   ;;   :onclick "~/.config/ags/shared/scripts/toggle_applauncher.sh"
 
     (box
-      :class "widget activewindow"
+      :class "box activewindow"
       :space-evenly false
       :spacing 16
 
@@ -128,7 +128,7 @@
 
 (defwidget Controls []
   (box
-    :class "controls widget"
+    :class "controls box"
     :orientation "h"
     :space-evenly false
 
