@@ -2,6 +2,8 @@
 ;; ┃┗┫┃ ┃ ┃ ┃┣╸ ┃┃  ┣━┫ ┃ ┃┃ ┃┃┗┫
 ;; ╹ ╹┗━┛ ╹ ╹╹  ╹┗━╸╹ ╹ ╹ ╹┗━┛╹ ╹
 
+(defvar notif_removed "")
+
 (defwindow notification
   :monitor 0
   :stacking "overlay"
@@ -10,7 +12,7 @@
   :geometry (geometry
     :x "15px"
     :y "15px"
-    :width "30%"
+    :width "28%"
     :height "1%"
     :anchor "top right"
   )
@@ -182,67 +184,73 @@
 )
 
 (defwidget Notif [?thumb id title body]
-  (box
-    :class "notif card"
-    :orientation "h"
-    :space-evenly false
-    :spacing 10
-    :height 100
-    :vexpand false
-    :valign "start"
+  (revealer
+    :reveal {id != notif_removed}
+    :transition "slidebottom"
+    :duration "250ms"
 
     (box
+      :class "notif card"
+      :orientation "h"
+      :space-evenly false
+      :spacing 10
+      :height 100
+      :vexpand false
       :valign "start"
-      :width 50
-      :height 50
 
-      (image
-        :path thumb
-        :image-width 50
-        :image-height 50
-        :halign "start"
+      (box
         :valign "start"
-      )
-    )
+        :width 50
+        :height 50
 
-    (box
-      :class "meta"
-      :orientation "v"
-      :space-evenly false
-      :spacing 4
-      :valign "start"
-
-      (label
-        :class "title"
-        :text title
-        :wrap true
-        :xalign 0
-        :yalign 0
+        (image
+          :path thumb
+          :image-width 50
+          :image-height 50
+          :halign "start"
+          :valign "start"
+        )
       )
 
-      (label
-        :class "body"
-        :text body
-        :xalign 0
-        :yalign 0
-        :wrap true
-        :limit-width 100
+      (box
+        :class "meta"
+        :orientation "v"
+        :space-evenly false
+        :spacing 4
+        :valign "start"
+
+        (label
+          :class "title"
+          :text title
+          :wrap true
+          :xalign 0
+          :yalign 0
+        )
+
+        (label
+          :class "body"
+          :text body
+          :xalign 0
+          :yalign 0
+          :wrap true
+          :limit-width 100
+        )
       )
-    )
 
-    (box
-      :halign "end"
-      :hexpand true
-      :space-evenly false
-      :orientation "v"
-      :valign "start"
+      (box
+        :halign "end"
+        :hexpand true
+        :space-evenly false
+        :orientation "v"
+        :valign "start"
 
-      (eventbox :cursor "pointer"
-        (button
-          :class "x"
-          :onclick "dunstctl history-rm ${id}"
+        (eventbox :cursor "pointer"
+          (button
+            :class "x"
+            :onclick "eww update notif_removed=${id} && dunstctl history-rm ${id}"
 
-          ""
+            ""
+          )
         )
       )
     )
