@@ -93,6 +93,7 @@ cp -r .scripts ~/ # Optional
 | <kbd>Super</kbd> + <kbd>RightClick</kbd> | resize the window
 | <kbd>Super</kbd> + <kbd>LeftClick</kbd> | change the window position
 | <kbd>Alt</kbd> + <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>| switch the focus around active windows
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>| move/switch windows around active workspace
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd>| resize windows (hold)
 | <kbd>Super</kbd> + <kbd>J</kbd> | toggle dwindle
 
