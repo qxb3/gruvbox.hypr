@@ -190,7 +190,7 @@
         :space-evenly false
 
         (Me
-          :face "/home/qxb3/.face.icon"
+          :face {v_face}
           :message "I'm qxb3!"
         )
 

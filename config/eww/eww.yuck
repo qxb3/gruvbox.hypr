@@ -10,6 +10,9 @@
 (defvar reveal_notif false)
 (defvar reveal_network false)
 
+;; Global
+(deflisten v_face `~/.config/eww/shared/scripts/face.sh`)
+
 ;; Bar
 (deflisten v_workspaces `~/.config/eww/bar/scripts/workspaces.sh`)
 (deflisten v_cava :initial "▁▁▁▁" `~/.config/eww/bar/scripts/cava.sh`)
