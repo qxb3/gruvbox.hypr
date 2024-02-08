@@ -9,5 +9,6 @@ fi
 
 eww update reveal_sidebar=false
 eww update reveal_notif=false
+eww update reveal_network=false
 
 eww open --toggle logout
