@@ -31,7 +31,7 @@ export function state(key, value) {
   return variable
 }
 
-export function debounce({ called, fn }, delay = 400) {
+export function debounce({ called, fn }, delay = 250) {
   let id
 
   return function() {
