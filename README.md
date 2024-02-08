@@ -5,7 +5,6 @@
 &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
 &ensp;[<kbd> <br> Issues <br> </kbd>](#Issues)&ensp;
-&ensp;[<kbd> <br> Credits <br> </kbd>](#Credits)&ensp;
 <br><br></div>
 
 ## Screenshots
@@ -158,7 +157,3 @@ cp -r .scripts ~/ # Optional
 * Not really a problem but if you want to support multiple music players and not just spotify change the `PLAYER` variable in `config/eww/sidebar/scripts/music.sh`.
 
 <br>
-
-## Credits
-
-[hyprdots](https://github.com/prasanthrangan/hyprdots) - I used this as a base / starter. You can think of this as a strip down version of **hyprdots** but with widgets.
