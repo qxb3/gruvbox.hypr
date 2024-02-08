@@ -31,6 +31,9 @@
 ;; Notification
 (deflisten v_notifs `~/.config/eww/notification/scripts/listennotif.sh`)
 
+;; Logout
+(deflisten v_uptime `~/.config/eww/logout/scripts/uptime.sh`)
+
 ;; ╻ ╻╻┏┓╻╺┳┓┏━┓╻ ╻┏━┓
 ;; ┃╻┃┃┃┗┫ ┃┃┃ ┃┃╻┃┗━┓
 ;; ┗┻┛╹╹ ╹╺┻┛┗━┛┗┻┛┗━┛
