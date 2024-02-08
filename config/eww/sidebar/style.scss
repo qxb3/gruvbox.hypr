@@ -38,51 +38,8 @@
     }
   }
 
-  & .time {
-    & .current {
-      font-size: 24px;
-    }
-
-    & .day {
-      color: $blue;
-      font-size: 24px;
-      font-weight: 900;
-    }
-  }
-
   & .desktop-controls {
     padding: 1rem;
-
-    & .metric {
-
-      & trough {
-        border-radius: 6px;
-        background-color: $bg2;
-        min-width: 20px;
-
-        & highlight {
-          border-radius: 6px;
-        }
-      }
-    }
-
-    & .icon {
-      font-size: 28px; padding: 0 1rem 0 0;
-    }
-
-    & .cpu.icon { color: $orange; }
-    & .cpu_temp.icon { color: $blue; font-size: 30px; padding-left: 1rem; }
-    & .ram.icon { color: $purple; font-size: 28px; }
-    & .brightness.icon { color: $fg; }
-    & .music.icon { color: $green; }
-    & .volume.icon { color: $aqua; }
-
-    & .cpu trough highlight { background-color: $orange; }
-    & .cpu_temp trough highlight { background-color: $blue; }
-    & .ram trough highlight { background-color: $purple; }
-    & .brightness trough highlight { background-color: $fg; }
-    & .music trough highlight { background-color: $green; }
-    & .volume trough highlight { background-color: $aqua; }
   }
 
   & .system-controls {

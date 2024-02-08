@@ -20,7 +20,7 @@
 (deflisten v_battery `~/.config/eww/bar/scripts/battery.sh get`)
 
 ;; Sidebar
-;; (deflisten music_title `~/.config/eww/sidebar/scripts/music.sh title`)
+(deflisten v_music_title `~/.config/eww/sidebar/scripts/music.sh title`)
 (deflisten v_has_player `~/.config/eww/sidebar/scripts/music.sh check-player`)
 (deflisten v_music `~/.config/eww/sidebar/scripts/music.sh meta`)
 (deflisten v_date `~/.config/eww/shared/scripts/getdate.sh`)

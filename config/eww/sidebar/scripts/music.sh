@@ -38,8 +38,10 @@ case $1 in
         ARTIST='"artist": "Artist"'
         VOLUME='"volume": 0'
         THUMB='"thumb": ""'
+        POSITION='"position": 0'
+        LENGTH='"length": 0'
 
-        echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}" | \
+        echo "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${POSITION}, ${LENGTH}, ${THUMB}}" | \
           jq -c --arg home $HOME '.thumb |= $home + "/.config/eww/sidebar/assets/no-music.png"'
       else
         echo '{"yes": true}'
@@ -73,9 +75,12 @@ case $1 in
     ALBUM='"album": "{{ album }}"'
     ARTIST='"artist": "{{ artist }}"'
     VOLUME='"volume": {{ volume }}'
+    POSITION='"position": {{ position }}'
+    LENGTH='"length": {{ mpris:length }}'
     THUMB='"thumb": "{{ mpris:artUrl }}"'
 
-    playerctl -s -p "${PLAYER}" metadata --follow --format "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${THUMB}}" | handle
+    playerctl -s -p "${PLAYER}" metadata --follow \
+      --format "{${STATUS}, ${TITLE}, ${ALBUM}, ${ARTIST}, ${VOLUME}, ${POSITION}, ${LENGTH}, ${THUMB}}" | handle
   ;;
 
   prev)

@@ -35,7 +35,7 @@
           :hexpand true
 
           (Weather)
-          (Clock)
+          (Time)
         )
       )
 
@@ -114,30 +114,12 @@
   )
 )
 
-(defwidget Clock []
-  (box
-    :class "time inner_box"
-    :orientation "v"
-    :space-evenly true
-
-    (label
-      :class "current"
-      :text {v_date.time}
-    )
-
-    (label
-      :class "day"
-      :text {v_date.day}
-    )
-  )
-)
-
 (defwidget DesktopContols [music]
   (box
     :class "desktop-controls inner_box"
     :hexpand true
 
-    (metric
+    (Metric
       :class "cpu"
       :icon ""
       :min 0
@@ -147,7 +129,7 @@
       :active false
     )
 
-    (metric
+    (Metric
       :class "cpu_temp"
       :icon ""
       :min 0
@@ -157,7 +139,7 @@
       :active false
     )
 
-    (metric
+    (Metric
       :class "ram"
       :icon ""
       :min 0
@@ -167,7 +149,7 @@
       :active false
     )
 
-    (metric
+    (Metric
       :class "brightness"
       :icon "󰃠"
       :onchange "brightnessctl s {}%"
@@ -178,7 +160,7 @@
       :active true
     )
 
-    (metric
+    (Metric
       :class "music"
       :icon {music.status == "Stopped" ? "󰝛" : "󰝚"}
       :onchange "~/.config/eww/sidebar/scripts/music.sh vol-set {}"
@@ -189,7 +171,7 @@
       :active true
     )
 
-    (metric
+    (Metric
       :class "volume"
       :icon "󰕾"
       :onchange "pamixer --set-volume {}"
@@ -249,39 +231,6 @@
           :class "icon logout"
           :text "󰍃"
         )
-      )
-    )
-  )
-)
-
-(defwidget metric [class min max value tooltip active icon ?onchange]
-  (box
-    :orientation "v"
-    :space-evenly false
-    :spacing 12
-
-    (eventbox :cursor {active ? "pointer" : ""} :vexpand true
-      (scale
-        :class "${class} metric"
-        :orientation "v"
-        :min min
-        :max max
-        :value value
-        :onchange onchange
-        :tooltip tooltip
-        :flipped true
-        :active active
-      )
-    )
-
-    (box
-      :halign "center"
-
-      (label
-        :class "${class} icon"
-        :text icon
-        :halign "center"
-        :xalign 0.5
       )
     )
   )

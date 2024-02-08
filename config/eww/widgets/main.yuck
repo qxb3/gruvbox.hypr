@@ -1,53 +1,59 @@
-(defwidget MusicPlayer [music]
+(defwidget MusicPlayer [music ?orientation]
   (box
     :class "music-player inner_box"
-    :orientation "h"
-    :space-evenly true
-    :spacing 16
+    :orientation {orientation == "v" ? "v" : "h"}
+    :space-evenly {orientation == "v" ? false : true}
+    :spacing {orientation == "v" ? 0 : 12}
 
     (box
       :class "thumbnail"
       :style "background-image: url('${music.thumb}');"
+      :width {orientation == "v" ? 150 : 0}
+      :height {orientation == "v" ? 180 : 0}
     )
 
     (box
-      :class "player"
+      :class "player ${orientation == "v" ? 'vertical' : 'horizontal'}"
       :orientation "v"
-      :space-evenly true
+      :space-evenly false
+      :spacing 12
+      :vexpand true
 
-      (overlay
-        (box)
-        (box
-          :class "meta"
-          :orientation "v"
-          :space-evenly false
-          :spacing 5
+      (box
+        :class "meta"
+        :orientation "v"
+        :vexpand true
+        :space-evenly false
+        :spacing 5
 
-          (label
-            :class "name"
-            :text {music.title}
-            :limit-width 10
-            :show-truncated false
-          )
+        (label
+          :class "name"
+          :text {v_has_player.yes == true ? v_music_title : music.title}
+          :limit-width 10
+          :show-truncated false
+        )
 
-          (label
-            :class "album"
-            :text {music.album}
-            :limit-width 10
-            :show-truncated true
-          )
+        ;; (label
+        ;;   :class "album"
+        ;;   :text {music.album}
+        ;;   :limit-width 10
+        ;;   :show-truncated true
+        ;;   :visible {orientation == "v" ? false : true}
+        ;; )
 
-          (label
-            :class "artist"
-            :text {music.artist}
-            :limit-width 10
-            :show-truncated true
-          )
+        (label
+          :class "artist"
+          :text {music.artist}
+          :limit-width 10
+          :show-truncated true
+          :visible {orientation == "v" ? false : true}
         )
       )
 
       (box
         :class "controls"
+        :orientation "v"
+        :valign "end"
 
         (centerbox
           :orientation "h"
@@ -72,7 +78,7 @@
 
               (label
                 :class "icon ${music.status == "Stopped" ? 'spotify' : ''}"
-                :text {music.status == "Stopped" ? "󰝛" : music.status == "Playing" ? "󰏤" : ""}
+                :text {music.status == "Stopped" ? "󰓛" : music.status == "Playing" ? "󰏤" : "󰐊"}
               )
             )
           )
@@ -89,6 +95,69 @@
             )
           )
         )
+      )
+
+      (box
+        (scale
+          :class "position ${orientation == "v" ? 'vertical' : 'horizontal'}"
+          :orientation "h"
+          :min 0
+          :max {v_has_player.yes == true ? v_music.length : v_has_player.length}
+          :value {v_has_player.yes == true ? v_music.position : v_has_player.position}
+          :active false
+        )
+      )
+    )
+  )
+)
+
+(defwidget Time []
+  (box
+    :class "time inner_box"
+    :orientation "v"
+    :space-evenly true
+
+    (label
+      :class "current"
+      :text {v_date.time}
+    )
+
+    (label
+      :class "day"
+      :text {v_date.day}
+    )
+  )
+)
+
+(defwidget Metric [class min max value tooltip active icon ?onchange ?orientation]
+  (box
+    :class "metric"
+    :orientation "v"
+    :space-evenly false
+    :spacing 12
+
+    (eventbox :cursor {active ? "pointer" : ""} :vexpand true
+      (scale
+        :class "${class}"
+        :orientation {orientation == "h" ? "h" : "v"}
+        :min min
+        :max max
+        :value value
+        :onchange onchange
+        :tooltip tooltip
+        :flipped true
+        :active active
+      )
+    )
+
+    (box
+      :halign "center"
+
+      (label
+        :class "${class} icon"
+        :text icon
+        :halign "center"
+        :xalign 0.5
       )
     )
   )
