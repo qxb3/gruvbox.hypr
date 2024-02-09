@@ -1,6 +1,11 @@
 #!/bin/bash
 
 function window_state() {
+  if [[ ${1:0:11} == "closewindow" ]]; then
+    echo "tiling"
+    return
+  fi
+
   active_window=`hyprctl activewindow -j`
   is_floating=`echo "${active_window}" | jq '.floating'`
 
