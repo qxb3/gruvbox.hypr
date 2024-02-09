@@ -1,8 +1,11 @@
 #!/bin/bash
 
 function window_state() {
-  if [[ ${1:33:34} == "0" ]]; then echo "tiling"
-  elif [[ ${1:33:34} == "1" ]]; then echo "floating"
+  active_window=`hyprctl activewindow -j`
+  is_floating=`echo "${active_window}" | jq '.floating'`
+
+  if [[ "${is_floating}" == "true" ]]; then echo "floating"
+  elif [[ "${is_floating}" == "false" ]]; then echo "tiling"
   fi
 }
 
