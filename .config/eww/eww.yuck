@@ -14,7 +14,7 @@
 (deflisten v_face `~/.config/eww/shared/scripts/face.sh`)
 
 ;; Bar
-(deflisten v_windowstate `~/.config/eww/vim_bar/scripts/windowstate.sh`)
+(deflisten v_windowstate `~/.config/eww/bar/scripts/windowstate.sh`)
 (deflisten v_workspaces `~/.config/eww/bar/scripts/workspaces.sh`)
 (deflisten v_cava :initial "▁▁▁▁" `~/.config/eww/bar/scripts/cava.sh`)
 (deflisten v_activewindow `~/.config/eww/bar/scripts/activewindow.sh`)
