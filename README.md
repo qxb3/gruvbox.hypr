@@ -35,7 +35,7 @@
 git clone --depth=1 https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
 cp -r font/* ~/.local/share/fonts
-cp -r config/* ~/.config
+cp -r .config/* ~/.config
 cp -r .scripts ~/ # Optional
 # Restart your pc
 ```
