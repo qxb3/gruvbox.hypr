@@ -8,7 +8,7 @@
     :y "-1%"
     :width "0%"
     :height "1%"
-    :anchor "bottom right"
+    :anchor "bottom left"
   )
 
   (revealer

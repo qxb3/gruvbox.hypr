@@ -14,12 +14,12 @@
     :y "15px"
     :width "28%"
     :height "1%"
-    :anchor "top right"
+    :anchor "bottom right"
   )
 
   (revealer
     :reveal reveal_notif
-    :transition "slidedown"
+    :transition "slideup"
     :duration "250ms"
 
     (box

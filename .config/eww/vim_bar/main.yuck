@@ -70,6 +70,7 @@
       (eventbox :cursor "pointer"
         (button
           :class "network_btn"
+          :onclick "~/.config/eww/shared/scripts/togglenetwork.sh"
 
           {v_network_primary == "ethernet" ? "󰈀" : v_network_wifi.connected.icon}
         )
@@ -78,6 +79,7 @@
       (eventbox :cursor "pointer"
         (button
           :class "notif_btn"
+          :onclick "~/.config/eww/shared/scripts/togglenotif.sh"
 
           "󰂚"
         )

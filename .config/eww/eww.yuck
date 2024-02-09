@@ -3,7 +3,7 @@
 ;; ┗┛ ╹ ╹╹┗╸╹╹ ╹┗━┛┗━╸┗━╸┗━┛
 
 ;; Reveals
-(defvar reveal_desktop_clock false)
+(defvar reveal_desktop_clock true)
 (defvar reveal_bar true)
 (defvar reveal_sidebar false)
 (defvar reveal_applauncher false)
@@ -43,7 +43,8 @@
 
 (include "./widgets/main.yuck")
 (include "./desktop_clock/main.yuck")
-(include "./bar/main.yuck")
+;; (include "./bar/main.yuck")
+(include "./vim_bar/main.yuck")
 (include "./notification/main.yuck")
 (include "./network/main.yuck")
 (include "./sidebar/main.yuck")
