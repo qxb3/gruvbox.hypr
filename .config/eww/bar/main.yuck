@@ -61,14 +61,6 @@
       :class "menu"
       :space-evenly false
 
-      (label
-        :class "window_title"
-        :text "Hyprland"
-        :limit-width 32
-      )
-
-      (Divider)
-
       (eventbox :cursor "pointer"
         (button
           :class "network_btn"
@@ -78,6 +70,8 @@
         )
       )
 
+      (Divider)
+
       (eventbox :cursor "pointer"
         (button
           :class "notif_btn"
@@ -85,6 +79,14 @@
 
           "󰂚"
         )
+      )
+
+      (Divider)
+
+      (label
+        :class "window_title"
+        :text "Hyprland"
+        :limit-width 32
       )
     )
 

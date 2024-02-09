@@ -4,12 +4,6 @@
   font-weight: 900;
   color: $fg;
 
-  & .card {
-    background-color: $bg1;
-    border-radius: 8px;
-    border: solid $bgh 2px;
-  }
-
   & .header {
     & .notif-title {
       font-size: 14px;
@@ -26,14 +20,15 @@
   }
 
   & .notifs {
-    margin-top: 1rem;
-
     & .thumb {
       border-radius: 8px;
       background-size: cover;
     }
 
     & .notif {
+      background-color: $bg1;
+      border-radius: 8px;
+      border: solid $bgh 2px;
       padding: 1rem;
 
       & .meta {
@@ -68,21 +63,6 @@
 
     & .text {
       font-size: 16px;
-    }
-  }
-
-  & .apps {
-    & .app {
-      font-size: 24px;
-
-      &.terminal { color: $fgh; }
-      &.firefox { color: $orange; }
-      &.discord { color: $blue; }
-      &.spotify { color: $green; }
-      &.folder { color: $aqua; }
-      &.htop { color: $purple; }
-
-      &:hover { color: $fg; }
     }
   }
 }

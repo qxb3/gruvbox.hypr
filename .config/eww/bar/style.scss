@@ -7,9 +7,6 @@
 
   & .container {
     background-color: $bg;
-    // margin-bottom: 1rem;
-    // margin-left: 1.5rem;
-    // margin-right: 1.5rem;
   }
 
   & .highlight {
@@ -47,7 +44,7 @@
     & .menu {
       margin-right: 8px;
 
-      & .network_btn { padding-right: 4px; margin-right: 6px; }
+      & .network_btn { padding-right: 4px; }
       & .notif_btn { padding-right: 2px; }
     }
   }

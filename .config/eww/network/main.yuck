@@ -6,90 +6,92 @@
   :namespace "network"
   :exclusive false
   :geometry (geometry
-    :x "15px"
+    :x "90px"
     :y "15px"
     :width "18%"
-    :height "1%"
     :anchor "bottom right"
   )
 
-  (revealer
-    :reveal reveal_network
-    :transition "slideup"
-    :duration "250ms"
+  (box
+    :style "padding: 0.1px"
 
-    (box
-      :class "box"
-      :orientation "v"
-      :space-evenly false
-      :spacing 10
+    (revealer
+      :reveal reveal_network
+      :transition "slideup"
 
       (box
+        :class "container box"
         :orientation "v"
         :space-evenly false
-        :spacing 8
+        :spacing 10
 
         (box
-          :class "header"
-          :orientation "h"
-          :space-evenly false
-
-          (label
-            :text "Wifi Networks"
-            :xalign 0
-          )
-
-          (box
-            :halign "end"
-            :hexpand true
-
-            (label
-              :text {v_network_wifi_scanning == 'yes' ? '' : ''}
-              :halign "end"
-            )
-          )
-        )
-
-        (box :class "divider")
-      )
-
-      (box
-        :orientation "v"
-        :spacing 4
-        :style "min-height: 25rem;"
-
-        (box
-          :class "wifi_unavailable"
-          :visible {v_network_wifi.status == "unavailable"}
           :orientation "v"
           :space-evenly false
-
-          (label
-            :class "icon"
-            :text "󰤭"
-            :xalign 0.5
-          )
-
-          (label
-            :class "text"
-            :text "Wifi Unavailable"
-            :xalign 0.5
-          )
-        )
-
-        (scroll
-          :vscroll true
-          :vexpand true
-          :visible {v_network_wifi.status != "unavailable"}
+          :spacing 8
 
           (box
+            :class "header"
+            :orientation "h"
+            :space-evenly false
+
+            (label
+              :text "Wifi Networks"
+              :xalign 0
+            )
+
+            (box
+              :halign "end"
+              :hexpand true
+
+              (label
+                :text {v_network_wifi_scanning == 'yes' ? '' : ''}
+                :halign "end"
+              )
+            )
+          )
+
+          (box :class "divider")
+        )
+
+        (box
+          :orientation "v"
+          :spacing 4
+          :style "min-height: 25rem;"
+
+          (box
+            :class "wifi_unavailable"
+            :visible {v_network_wifi.status == "unavailable"}
             :orientation "v"
             :space-evenly false
-            :spacing 4
-            :vexpand true
 
-            (for wifi in {v_network_wifi.networks}
-              (WifiNetwork :wifi {wifi})
+            (label
+              :class "icon"
+              :text "󰤭"
+              :xalign 0.5
+            )
+
+            (label
+              :class "text"
+              :text "Wifi Unavailable"
+              :xalign 0.5
+            )
+          )
+
+          (scroll
+            :vscroll true
+            :vexpand true
+            :visible {v_network_wifi.status != "unavailable"}
+
+            (box
+              :orientation "v"
+              :space-evenly false
+              :spacing 4
+              :vexpand true
+
+              (for wifi in {v_network_wifi.networks}
+                (WifiNetwork :wifi {wifi})
+              )
             )
           )
         )

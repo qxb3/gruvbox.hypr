@@ -10,32 +10,34 @@
   :namespace "widget"
   :exclusive false
   :geometry (geometry
-    :x "15px"
+    :x "10px"
     :y "15px"
     :width "28%"
-    :height "1%"
     :anchor "bottom right"
   )
 
-  (revealer
-    :reveal reveal_notif
-    :transition "slideup"
-    :duration "250ms"
+  (box
+    :style "padding: 0.1px"
 
-    (box
-      :orientation "v"
-      :space-evenly false
-      :spacing 8
+    (revealer
+      :reveal reveal_notif
+      :transition "slideup"
+      :style "padding: 0.1px"
 
-      (Notification)
-      (Apps)
+      (box
+        :orientation "v"
+        :space-evenly false
+        :spacing 8
+
+        (Notification)
+      )
     )
   )
 )
 
 (defwidget Notification []
   (box
-    :class "box"
+    :class "container box"
     :orientation "v"
     :space-evenly false
     :height 350
@@ -115,74 +117,6 @@
   )
 )
 
-(defwidget Apps []
-  (box
-    :class "box apps"
-    :orientation "h"
-    :space-evenly true
-
-    (eventbox :cursor "pointer"
-      (button
-        :class "app terminal"
-        :onclick "eww update reveal_notif=false && kitty &"
-        :tooltip "Kitty"
-
-        ""
-      )
-    )
-
-    (eventbox :cursor "pointer"
-      (button
-        :class "app firefox"
-        :onclick "eww update reveal_notif=false && firefox &"
-        :tooltip "Firefox"
-
-        ""
-      )
-    )
-
-    (eventbox :cursor "pointer"
-      (button
-        :class "app discord"
-        :onclick "eww update reveal_notif=false && vencord-discord &"
-        :tooltip "Discord"
-
-        "󰙯"
-      )
-    )
-
-    (eventbox :cursor "pointer"
-      (button
-        :class "app spotify"
-        :onclick "eww update reveal_notif=false && spotify &"
-        :tooltip "Spotify"
-
-        ""
-      )
-    )
-
-    (eventbox :cursor "pointer"
-      (button
-        :class "app folder"
-        :onclick "eww update reveal_notif=false && dolphin &"
-        :tooltip "Dolphin"
-
-        ""
-      )
-    )
-
-    (eventbox :cursor "pointer"
-      (button
-        :class "app htop"
-        :onclick "eww update reveal_notif=false && kitty --hold htop &"
-        :tooltip "Htop"
-
-        ""
-      )
-    )
-  )
-)
-
 (defwidget Notif [?thumb id title body]
   (revealer
     :reveal {id != notif_removed}
@@ -190,7 +124,7 @@
     :duration "250ms"
 
     (box
-      :class "notif card"
+      :class "notif"
       :orientation "h"
       :space-evenly false
       :spacing 10
