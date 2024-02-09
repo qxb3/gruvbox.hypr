@@ -188,7 +188,7 @@ export default Widget.Window({
       Widget.Revealer({
         reveal_child: revealAppLauncher.bind(),
         transition: 'slide_up',
-        transition_duration: 250,
+        transition_duration: 500,
         child: AppLauncher(),
       })
     ]
