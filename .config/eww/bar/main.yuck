@@ -5,182 +5,104 @@
 (defwindow bar
   :monitor 0
   :stacking "fg"
-  :namespace "bar"
+  :namespace "vim_bar"
   :exclusive true
   :geometry (geometry
     :x "0%"
-    :y "-1%"
+    :y "0%"
     :width "100%"
-    :height "1%"
-    :anchor "top center"
+    ;; :height "0%"
+    :anchor "bottom center"
   )
 
-  (revealer
-    :reveal reveal_bar
-    :transition "slidedown"
-    :duration "250ms"
+  (box
+    :class "container"
 
-    (centerbox
-      :orientation "h"
-      :class "container"
-
-      (left)
-      (center)
-      (right)
-    )
+    (Left)
+    (Right)
   )
 )
 
-;; ┏━┓┏━╸┏━╸╺┳╸╻┏━┓┏┓╻┏━┓
-;; ┗━┓┣╸ ┃   ┃ ┃┃ ┃┃┗┫┗━┓
-;; ┗━┛┗━╸┗━╸ ╹ ╹┗━┛╹ ╹┗━┛
-
-(defwidget left []
+(defwidget Left []
   (box
-    :orientation "h"
+    :class "left"
     :halign "start"
     :space-evenly false
-    :spacing 6
+    :spacing 8
 
-    (Menu :music {v_has_player.yes == true ? v_music : v_has_player})
-    (Workspaces)
-  )
-)
+    (label
+      :class "window_state highlight ${v_windowstate}"
+      :text {v_windowstate == "floating" ? "FLOATING" : "TILING"}
+    )
 
-(defwidget center []
-  (box
-    :orientation "h"
-    :halign "center"
+    (label
+      :class "active_window"
+      :text {v_activewindow.class}
+    )
 
-    (ActiveWindow)
-  )
-)
-
-(defwidget right []
-  (box
-    :orientation "h"
-    :halign "end"
-
-    (Controls)
-  )
-)
-
-;; ╻ ╻╻╺┳┓┏━╸┏━╸╺┳╸┏━┓
-;; ┃╻┃┃ ┃┃┃╺┓┣╸  ┃ ┗━┓
-;; ┗┻┛╹╺┻┛┗━┛┗━╸ ╹ ┗━┛
-
-(defwidget Menu [music]
-  (eventbox :cursor "pointer"
-    (button
-      :class "box menu ${music.status == 'Playing' ? 'cava' : 'arch'}"
-      :onclick `~/.config/eww/shared/scripts/togglesidebar.sh`
-
-      {music.status == "Playing" ? v_cava : "󰣇"}
-  ))
-)
-
-(defwidget Workspaces []
-  (box
-    :class "box workspaces"
-    :orientation "h"
-
-    (for workspace in v_workspaces
-      (eventbox :cursor "pointer"
-        (button
-          :class {workspace.active ? "active" : ""}
-          :onclick "hyprctl dispatch workspace ${workspace.name}"
-          :valign "center"
-          :halign "center"
-      ))
+    (box
+      (label :text "[")
+      (label
+        :class "workspace_icon"
+        :text {v_activewindow.icon}
+      )
+      (label :text "]")
     )
   )
 )
 
-(defwidget ActiveWindow []
-  ;; (eventbox
-  ;;   :cursor "pointer"
-  ;;   :onclick "~/.config/ags/shared/scripts/toggle_applauncher.sh"
-
-    (box
-      :class "box activewindow"
-      :space-evenly false
-      :spacing 16
-
-      (label
-        :class "icon"
-        :text {v_activewindow.icon}
-        :wrap true
-      )
-
-      (label
-        :class "divider"
-        :text ""
-      )
-
-      (label
-        :class "window"
-        :text {v_activewindow.class}
-        :limit-width 32
-      )
-  ;;   )
-  )
-)
-
-(defwidget Controls []
+(defwidget Right []
   (box
-    :class "controls box"
-    :orientation "h"
+    :class "right"
+    :halign "end"
     :space-evenly false
 
+    (box
+      :class "menu"
+      :space-evenly false
+
+      (label
+        :class "window_title"
+        :text "Hyprland"
+        :limit-width 32
+      )
+
+      (Divider)
+
+      (eventbox :cursor "pointer"
+        (button
+          :class "network_btn"
+          :onclick "~/.config/eww/shared/scripts/togglenetwork.sh"
+
+          {v_network_primary == "ethernet" ? "󰈀" : v_network_wifi.connected.icon}
+        )
+      )
+
+      (eventbox :cursor "pointer"
+        (button
+          :class "notif_btn"
+          :onclick "~/.config/eww/shared/scripts/togglenotif.sh"
+
+          "󰂚"
+        )
+      )
+    )
+
     (label
-      :class "time"
+      :class "time highlight_low"
       :text {v_date.time}
     )
 
     (label
-      :class "divider"
-      :text ""
+      :class "workspace_monitor highlight"
+      :text `${replace(jq(v_workspaces, '.[] | select(.active == true) | .name'), '"', '')}:0`
     )
+  )
+)
 
-    (eventbox :cursor "pointer" :visible {v_network_primary != ""}
-      (button
-        :class "network ${reveal_network == true ? 'active' : ''}"
-        :onclick "~/.config/eww/shared/scripts/togglenetwork.sh"
-
-        {v_network_primary == "ethernet" ? "󰈀" : v_network_wifi.connected.icon}
-      )
-    )
-
-    (eventbox :cursor "pointer"
-      (button
-        :class "battery"
-        :tooltip {v_battery.status != "Removed" ? "Battery: ${v_battery.capacity}%" : "No Battery"}
-
-        {v_battery.icon}
-      )
-    )
-
-    (eventbox :cursor "pointer"
-      (button
-        :class "notif ${reveal_notif == true ? 'active' : ''}"
-        :onclick "~/.config/eww/shared/scripts/togglenotif.sh"
-
-        "󰂚"
-      )
-    )
-
-    (label
-      :class "divider"
-      :text ""
-    )
-
-    (eventbox :cursor "pointer"
-      (button
-        :class "shutdown"
-        :onclick "~/.config/eww/shared/scripts/togglelogout.sh"
-
-        "⏻"
-      )
-    )
+(defwidget Divider []
+  (label
+    :class "divider"
+    :text ""
   )
 )

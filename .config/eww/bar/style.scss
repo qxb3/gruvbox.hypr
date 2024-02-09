@@ -1,92 +1,54 @@
 .bar {
   font-family: "JetBrains Mono Nerd Font";
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 900;
-  color: $fg;
+  color: $fg2;
+  font-weight: 400;
 
   & .container {
-    margin-top: 1.5rem;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+    background-color: $bg;
+    // margin-bottom: 1rem;
+    // margin-left: 1.5rem;
+    // margin-right: 1.5rem;
   }
 
-  & .box {
-    padding: 0 8px 0 8px;
-    border-radius: 8px;
-    border-width: 1px;
+  & .highlight {
+    background-color: $fg2;
+    padding: 0 1rem;
+    color: $bgh;
   }
 
-  & .divider { font-size: 14px; }
+  & .divider {
+    color: $fg;
+    font-weight: 900;
+    margin: 0 4px;
+  }
 
-  & .menu {
-    &.cava { font-size: 8px; }
-    &.arch { font-size: 14px; padding: 0 16px 0 12px; }
+  & .highlight_low {
+    background-color: $bg1;
+    padding: 0 1rem;
+    color: $fgh;
+  }
 
-    &:hover {
-      color: $gray;
+  & .left {
+    & .window_state {
+      &.tiling { background-color: $fg2; }
+      &.floating { background-color: $orange; }
     }
-  }
 
-  & .workspaces {
-    & button {
-      background-color: $fg;
-      font-size: 10px;
-      border-radius: 99px;
-      padding: 5px;
-
-      &:hover {
-        background-color: $gray;
-      }
-
-      &.active {
-        background-color: $red;
-        padding: 5px 10px 5px 10px;
-        border-radius: 4px;
-      }
-    }
-  }
-
-  & .activewindow {
-    padding: 0 2rem;
-
-    & .icon {
+    & .workspace_icon {
+      padding-right: 4px;
       font-size: 12px;
+      font-weight: 900;
     }
   }
 
-  & .controls {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 12px;
-
-    & .time {
-      font-weight: 900;
-      margin-right: 4px;
-    }
-
+  & .right {
     & .menu {
-      background-color: $bg2;
-      border-radius: 8px;
-      padding-right: 2px;
-    }
+      margin-right: 8px;
 
-    & .network.active, & .notif.active {
-      color: $gray;
-    }
-
-    & .battery {
-      padding-left: 8px;
-    }
-
-    & button, .divider {
-      padding: 4px 7px;
-      font-size: 14px;
-    }
-
-    & .shutdown {
-      color: $red;
-      font-size: 14px;
-      padding-right: 1rem;
+      & .network_btn { padding-right: 4px; margin-right: 6px; }
+      & .notif_btn { padding-right: 2px; }
     }
   }
 }
