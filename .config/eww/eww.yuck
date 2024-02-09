@@ -44,7 +44,6 @@
 (include "./widgets/main.yuck")
 (include "./desktop_clock/main.yuck")
 (include "./bar/main.yuck")
-(include "./vim_bar/main.yuck")
 (include "./notification/main.yuck")
 (include "./network/main.yuck")
 (include "./sidebar/main.yuck")
