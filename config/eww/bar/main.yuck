@@ -5,7 +5,7 @@
 (defwindow bar
   :monitor 0
   :stacking "fg"
-  :namespace "box"
+  :namespace "bar"
   :exclusive true
   :geometry (geometry
     :x "0%"
@@ -119,7 +119,7 @@
 
       (label
         :class "window"
-        :text {v_activewindow.window}
+        :text {v_activewindow.class}
         :limit-width 32
       )
   ;;   )

@@ -3,7 +3,7 @@
 (defwindow network
   :monitor 0
   :stacking "overlay"
-  :namespace "widget"
+  :namespace "network"
   :exclusive false
   :geometry (geometry
     :x "15px"

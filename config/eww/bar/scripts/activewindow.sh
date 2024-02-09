@@ -1,7 +1,9 @@
 #!/bin/sh
 
 function active_window() {
-  window=`hyprctl activewindow -j | jq -r '.initialClass'`
+  active_window=`hyprctl activewindow -j`
+  class=`echo "${active_window}" | jq -r '.initialClass'`
+  title=`echo "${active_window}" | jq -r '.title'`
 
   active_workspace=`hyprctl monitors -j | jq '.[0].activeWorkspace.name'`
   icon=""
@@ -11,16 +13,18 @@ function active_window() {
   if [[ $active_workspace == '"4"' ]]; then icon=""; fi
   if [[ $active_workspace == '"5"' ]]; then icon=""; fi
 
-  if [[ $window != "null" ]]; then
+  if [[ $class != "null" ]]; then
     ICON='"icon": "%s"'
-    WINDOW='"window": "%s"'
+    CLASS='"class": "%s"'
+    TITLE='"title": "%s"'
 
-    printf "{${ICON}, ${WINDOW}}\n" "$icon" "$window"
+    printf "{${ICON}, ${CLASS}, ${TITLE}}\n" "$icon" "$class" "$title"
   else
     ICON='"icon": "%s"'
-    WINDOW='"window": "~"'
+    CLASS='"class": "~"'
+    TITLE='"title": "~"'
 
-    printf "{${ICON}, ${WINDOW}}\n" "$icon"
+    printf "{${ICON}, ${CLASS}, ${TITLE}}\n" "$icon"
   fi
 }
 
