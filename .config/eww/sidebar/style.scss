@@ -4,12 +4,6 @@
   color: $fg;
   font-weight: 700;
 
-  & .container {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding: 1rem 1rem 1rem 1rem;
-  }
-
   & .inner_box { border-width: 1px; }
 
   & .calendar {

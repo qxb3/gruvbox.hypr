@@ -18,6 +18,7 @@
     (revealer
       :reveal reveal_network
       :transition "slideup"
+      :duration "200ms"
 
       (box
         :class "container box"

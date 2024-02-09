@@ -22,6 +22,7 @@
     (revealer
       :reveal reveal_notif
       :transition "slideup"
+      :duration "200ms"
       :style "padding: 0.1px"
 
       (box
