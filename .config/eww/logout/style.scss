@@ -37,7 +37,11 @@
       font-weight: 900;
     }
 
-    & circular-progress { background-color: $bg2; }
+    & circular-progress {
+      border-radius: 0;
+      background-color: $bg2;
+    }
+
     & .cpu { color: $orange; }
     & .ram { color: $purple; }
     & .cpu_temp { color: $blue; }

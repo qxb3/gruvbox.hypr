@@ -3,7 +3,6 @@
 
   & .thumbnail {
     background-color: $bg;
-    border-radius: 8px;
     background-size: cover;
     margin: 1rem 0;
   }
@@ -22,7 +21,6 @@
       padding: 0 0.5rem;
 
       & .prev, & .play, & .next {
-        border-radius: 12px;
         padding: 0 12px;
         margin: 0 2px;
 
@@ -45,13 +43,11 @@
       &.vertical { margin: 0 10px; }
 
       & trough {
-        border-radius: 8px;
         background-color: $bg2;
         min-height: 10px;
 
         & highlight {
           background-color: $green;
-          border-radius: 8px;
         }
       }
     }
@@ -72,25 +68,21 @@
 
 .metric {
   & trough {
-    border-radius: 6px;
     background-color: $bg2;
-    min-width: 20px;
-
-    & highlight {
-      border-radius: 6px;
-    }
+    min-width: 15px;
   }
 
   & .icon {
-    font-size: 28px; padding: 0 1rem 0 0;
+    font-size: 21px;
+    padding: 0 1rem 0 0;
   }
 
   & .cpu.icon { color: $orange; }
-  & .cpu_temp.icon { color: $blue; font-size: 30px; padding-left: 1rem; }
-  & .ram.icon { color: $purple; font-size: 28px; }
-  & .brightness.icon { color: $fg; }
-  & .music.icon { color: $green; }
-  & .volume.icon { color: $aqua; }
+  & .cpu_temp.icon { color: $blue; padding-left: 1rem; }
+  & .ram.icon { color: $purple; padding-left: 4px; }
+  & .brightness.icon { color: $fg; padding-left: 4px; }
+  & .music.icon { color: $green; padding-left: 4px; }
+  & .volume.icon { color: $aqua; padding-left: 0.8rem; }
 
   & .cpu trough highlight { background-color: $orange; }
   & .cpu_temp trough highlight { background-color: $blue; }

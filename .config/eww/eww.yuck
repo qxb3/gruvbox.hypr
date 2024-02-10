@@ -33,7 +33,7 @@
 (deflisten v_volume `~/.config/eww/sidebar/scripts/getvol.sh`)
 
 ;; Notification
-(deflisten v_notifs `~/.config/eww/notification/scripts/listennotif.sh`)
+(deflisten v_notifs `~/.config/eww/notification/scripts/notification.sh listen`)
 
 ;; Logout
 (deflisten v_uptime `~/.config/eww/logout/scripts/uptime.sh`)
