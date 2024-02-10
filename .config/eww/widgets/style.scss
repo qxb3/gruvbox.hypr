@@ -86,11 +86,11 @@
   }
 
   & .cpu.icon { color: $orange; }
-  & .cpu_temp.icon { color: $blue; font-size: 30px; padding-left: 1rem; }
-  & .ram.icon { color: $purple; font-size: 28px; }
+  & .cpu_temp.icon { color: $blue; padding-left: 1rem; }
+  & .ram.icon { color: $purple; }
   & .brightness.icon { color: $fg; }
-  & .music.icon { color: $green; }
-  & .volume.icon { color: $aqua; }
+  & .music.icon { color: $green; padding-left: 4px; }
+  & .volume.icon { color: $aqua; padding-left: 8px; }
 
   & .cpu trough highlight { background-color: $orange; }
   & .cpu_temp trough highlight { background-color: $blue; }

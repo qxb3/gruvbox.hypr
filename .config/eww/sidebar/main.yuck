@@ -118,6 +118,7 @@
   (box
     :class "desktop-controls inner_box"
     :hexpand true
+    :spacing 8
 
     (Metric
       :class "cpu"
