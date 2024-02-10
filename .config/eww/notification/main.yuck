@@ -11,7 +11,7 @@
   :exclusive false
   :geometry (geometry
     :x "10px"
-    :y "15px"
+    :y "8px"
     :width "28%"
     :anchor "bottom right"
   )
