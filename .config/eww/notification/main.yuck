@@ -22,7 +22,7 @@
     (revealer
       :reveal reveal_notif
       :transition "slideup"
-      :duration "200ms"
+      :duration "150ms"
       :style "padding: 0.1px"
 
       (box
@@ -122,7 +122,7 @@
   (revealer
     :reveal {id != notif_removed}
     :transition "slidebottom"
-    :duration "200ms"
+    :duration "150ms"
 
     (box
       :class "notif"

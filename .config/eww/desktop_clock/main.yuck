@@ -14,7 +14,7 @@
   (revealer
     :reveal reveal_desktop_clock
     :transition "slideup"
-    :duration "250ms"
+    :duration "150ms"
 
     (box
       :class "container"

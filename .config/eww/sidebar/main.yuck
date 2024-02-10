@@ -17,7 +17,7 @@
   (revealer
     :reveal reveal_sidebar
     :transition "slideright"
-    :duration "200ms"
+    :duration "150ms"
 
     (box
       :class "container box"
