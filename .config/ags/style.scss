@@ -22,8 +22,7 @@ $gray:      #928374;
 .container {
   padding: 1rem;
   background-color: $bg;
-  border: solid $bgh 2px;
-  border-radius: 8px;
+  border: solid $bgh 1px;
 }
 
 @import "./app_launcher/style.scss";

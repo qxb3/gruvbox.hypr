@@ -180,7 +180,7 @@ export default Widget.Window({
   className: 'app_launcher',
   layer: 'overlay',
   anchor: ['bottom'],
-  margins: [15, 0, 0, 0],
+  margins: [0, 0, -1, 0],
   focusable: revealAppLauncher.bind(),
   child: Widget.Box({
     css: `padding: 0.01px;`,

@@ -15,7 +15,6 @@
   }
 
   & .application {
-    border-radius: 10px;
     padding: 8px;
 
     & .icon { font-size: 42px; }
@@ -25,8 +24,7 @@
   & .selected_app {
     font-size: 32px;
     padding: 5px 10px;
-    border: solid $bgh 2px;
-    border-radius: 8px;
+    border: solid $bgh 1px;
 
     &:hover { background-color: $bgh; }
   }
@@ -39,15 +37,13 @@
 
     & .input {
       padding: 10px;
-      border: solid $bgh 2px;
-      border-radius: 8px;
+      border: solid $bgh 1px;
     }
   }
 
   & .close {
     font-size: 32px;
-    border: solid $bgh 2px;
-    border-radius: 8px;
+    border: solid $bgh 1px;
     padding: 0 1rem;
 
     &:hover { background-color: $bgh; }

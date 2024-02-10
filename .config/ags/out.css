@@ -5,40 +5,7 @@
 .container {
   padding: 1rem;
   background-color: #282828;
-  border: solid #1d2021 2px;
-  border-radius: 8px;
-}
-
-.bar {
-  font-family: "JetBrainsMono Nerd Font";
-  color: #ebdbb2;
-}
-.bar .box {
-  background-color: #282828;
   border: solid #1d2021 1px;
-  border-radius: 8px;
-  padding: 5px 7px;
-}
-.bar .menu .arch {
-  font-size: 16px;
-  padding: 0 7px 0 5px;
-}
-.bar .menu:hover {
-  background-color: #1d2021;
-}
-.bar .workspaces {
-  padding: 12px 10px;
-}
-.bar .workspaces .workspace {
-  border-radius: 999px;
-  min-width: 10px;
-  min-height: 10px;
-  background-color: #ebdbb2;
-}
-.bar .workspaces .workspace.active {
-  background-color: #cc241d;
-  padding: 0 6px;
-  border-radius: 4px;
 }
 
 .app_launcher {
@@ -60,7 +27,6 @@
   min-height: 300px;
 }
 .app_launcher .application {
-  border-radius: 10px;
   padding: 8px;
 }
 .app_launcher .application .icon {
@@ -72,8 +38,7 @@
 .app_launcher .selected_app {
   font-size: 32px;
   padding: 5px 10px;
-  border: solid #1d2021 2px;
-  border-radius: 8px;
+  border: solid #1d2021 1px;
 }
 .app_launcher .selected_app:hover {
   background-color: #1d2021;
@@ -84,13 +49,11 @@
 }
 .app_launcher .input_container .input {
   padding: 10px;
-  border: solid #1d2021 2px;
-  border-radius: 8px;
+  border: solid #1d2021 1px;
 }
 .app_launcher .close {
   font-size: 32px;
-  border: solid #1d2021 2px;
-  border-radius: 8px;
+  border: solid #1d2021 1px;
   padding: 0 1rem;
 }
 .app_launcher .close:hover {
