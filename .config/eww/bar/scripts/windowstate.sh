@@ -10,7 +10,7 @@ function window_state() {
   is_floating=`echo "${active_window}" | jq '.floating'`
 
   if [[ "${is_floating}" == "true" ]]; then echo "floating"
-  elif [[ "${is_floating}" == "false" ]]; then echo "tiling"
+  else echo "tiling"
   fi
 }
 
