@@ -1,5 +1,7 @@
 #!/bin/bash
 
+dunstctl close-all
+
 reveal_bar=`eww state -a | grep -oP 'reveal_bar: \K\w+'`
 reveal_notif=`eww state -a | grep -oP 'reveal_notif: \K\w+'`
 
