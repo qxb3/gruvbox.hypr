@@ -62,8 +62,7 @@ cp -r .scripts ~/ # Optional
   <tr><td>dunst</td><td>notification daemon</td></tr>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
   <tr><td>swaylock</td><td>screen locker</td></tr>
-  <tr><td>ags</td><td>aylur's gtk widget</td>
-  <tr><td>eww</td><td>elkowars wacky widgets</td></tr></table>
+  <tr><td>ags</td><td>aylur's gtk widget</td></tr></table>
 </td></tr></table>
 
 <br>
@@ -76,6 +75,15 @@ cp -r .scripts ~/ # Optional
   <tr><td>cava</td><td>music visualizer</td></tr>
   <tr><td>cliphist</td><td>clipboard tool</td></tr>
   <tr><td>playerctl</td><td>control music player</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table><tr><td>
+  <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
+  <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
+  <tr><td>pipwire-pulse</td><td>audio</td></tr>
+  <tr><td>NetworkManager</td><td>manages network</td></tr></table>
 </td></tr></table>
 
 <br>
