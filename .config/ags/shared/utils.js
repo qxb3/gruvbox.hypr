@@ -26,7 +26,7 @@ export function state(key, value) {
     const states = JSON.parse(Utils.readFile(STATES_PATH))
     states[key] = value
 
-    Utils.writeFile(JSON.stringify(states, null, 2), STATES_PATH)
+    Utils.writeFile(JSON.stringify(states), STATES_PATH)
   })
 
   return variable
