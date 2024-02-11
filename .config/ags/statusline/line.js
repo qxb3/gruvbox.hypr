@@ -1,8 +1,10 @@
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js'
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js'
+import Battery from 'resource:///com/github/Aylur/ags/service/battery.js'
 import Widget from 'resource:///com/github/Aylur/ags/widget.js'
 import Utils from 'resource:///com/github/Aylur/ags/utils.js'
-import Gdk from 'gi://Gdk';
+import Variable from 'resource:///com/github/Aylur/ags/variable.js'
+import Gdk from 'gi://Gdk'
 
 import { BarDivider } from '../shared/widgets.js'
 
@@ -20,7 +22,8 @@ import {
   exitAppsSelect,
   appsSelectUp,
   appsSelectDown,
-  appLaunch
+  appLaunch,
+  assignBatteryIcon
 } from './fn.js'
 
 function LeftSection() {
@@ -99,13 +102,38 @@ function LeftSection() {
 function RightSection() {
   const NetworkButton = Widget.Button({
     className: 'network_button',
-    cursor: 'pointer',
     child: Widget.Label('󰈀')
+  })
+
+  const revealBatteryPercent = Variable(false)
+  const BatteryIndicator = Widget.EventBox({
+    className: 'battery',
+    visible: Battery.bind('available'),
+    onPrimaryClick: () => revealBatteryPercent.value = !revealBatteryPercent.value,
+    child: Widget.Box({
+      children: [
+        Widget.Label({
+          className: 'icon'
+        }).hook(Battery, (self) =>
+          self.label = assignBatteryIcon(Battery.charging, Battery.percent)
+        ),
+        Widget.Revealer({
+          revealChild: revealBatteryPercent.bind(),
+          transition: 'slide_right',
+          transitionDuration: 100,
+          sensitive: true,
+          child: Widget.Label({
+            className: 'percent',
+            label: Battery.bind('percent')
+              .transform(percent => `${percent}%`)
+          })
+        })
+      ]
+    })
   })
 
   const NotificationButton = Widget.Button({
     className: 'notification_button',
-    cursor: 'pointer',
     child: Widget.Label('󰂚')
   })
 
@@ -125,15 +153,21 @@ function RightSection() {
 
   return Widget.Box({
     className: 'right',
+    homogeneous: false,
     children: [
       NetworkButton,
       BarDivider(),
+      BatteryIndicator,
+      Widget.Box({
+        visible: Battery.bind('available'),
+        children: [ BarDivider('0 5px 0 0') ]
+      }),
       NotificationButton,
       BarDivider(),
       User,
 
       Widget.Box({
-        className: 'indicators',
+        className: 'sections',
         children: [
           TimeIndicator,
           WorkspaceIndicator

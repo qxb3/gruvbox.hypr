@@ -31,18 +31,26 @@
 .line .right .network_button {
   padding-right: 2px;
 }
+.line .right .battery .icon {
+  padding-right: 5px;
+}
+.line .right .battery .percent {
+  font-size: 12px;
+  color: #fbf1c7;
+  padding-left: 4px;
+}
 .line .right .notification_button {
   padding-right: 2px;
 }
-.line .right .indicators {
+.line .right .sections {
   margin-left: 8px;
 }
-.line .right .indicators .time_indicator {
+.line .right .sections .time_indicator {
   background-color: #3c3836;
   color: #ebdbb2;
   padding: 0 1rem;
 }
-.line .right .indicators .workspace_indicator {
+.line .right .sections .workspace_indicator {
   background-color: #d65d0e;
   color: #282828;
   padding: 0 1rem;
