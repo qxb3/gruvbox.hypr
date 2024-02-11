@@ -9,38 +9,66 @@
   border: solid #1d2021 1px;
 }
 
-.bar {
+.line {
   background-color: #282828;
   font-size: 14px;
   font-weight: 200;
   color: #bdae93;
 }
-.bar .divider {
+.line .divider {
   color: #ebdbb2;
 }
-.bar .left .window_state {
+.line .left .window_state {
   color: #282828;
   padding: 0 1rem;
 }
-.bar .left .window_state.tiling {
+.line .left .window_state.tiling {
   background-color: #98971a;
 }
-.bar .left .window_state.floating {
+.line .left .window_state.floating {
   background-color: #458588;
 }
-.bar .right .network_button {
+.line .right .network_button {
   padding-right: 2px;
 }
-.bar .right .indicators {
+.line .right .notification_button {
+  padding-right: 2px;
+}
+.line .right .indicators {
   margin-left: 8px;
 }
-.bar .right .indicators .time_indicator {
+.line .right .indicators .time_indicator {
   background-color: #3c3836;
   color: #ebdbb2;
   padding: 0 1rem;
 }
-.bar .right .indicators .workspace_indicator {
+.line .right .indicators .workspace_indicator {
   background-color: #d65d0e;
   color: #282828;
   padding: 0 1rem;
+}
+.line .app_launcher_input {
+  background-color: #282828;
+  font-size: 14px;
+  color: #bdae93;
+}
+.line .app_launcher_input .input {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.apps {
+  padding: 4px;
+  background-color: #3c3836;
+  color: #ebdbb2;
+  font-weight: 900;
+}
+.apps .app {
+  padding: 0 4px;
+}
+.apps .app.selected {
+  background-color: #458588;
+}
+.apps .app:hover {
+  background-color: #928374;
 }

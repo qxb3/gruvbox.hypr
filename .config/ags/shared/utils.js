@@ -61,5 +61,7 @@ export function getDate(prop) {
 
 export default {
   state,
-  debounce
+  debounce,
+  hyprSendMessage,
+  getDate
 }

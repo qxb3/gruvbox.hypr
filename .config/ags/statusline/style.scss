@@ -1,4 +1,4 @@
-.bar {
+.line {
   background-color: $bg;
   font-size: 14px;
   font-weight: 200;
@@ -23,6 +23,10 @@
       padding-right: 2px;
     }
 
+    & .notification_button {
+      padding-right: 2px;
+    }
+
     & .indicators {
       margin-left: 8px;
 
@@ -38,5 +42,30 @@
         padding: 0 1rem;
       }
     }
+  }
+
+  & .app_launcher_input {
+    background-color: $bg;
+    font-size: 14px;
+    color: $fg2;
+
+    & .input {
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+}
+
+.apps {
+  padding: 4px;
+  background-color: $bg1;
+  color: $fg;
+  font-weight: 900;
+
+  & .app {
+    padding: 0 4px;
+
+    &.selected { background-color: $blue; }
+    &:hover { background-color: $gray; }
   }
 }

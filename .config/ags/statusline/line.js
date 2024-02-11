@@ -2,21 +2,28 @@ import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js'
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js'
 import Widget from 'resource:///com/github/Aylur/ags/widget.js'
 import Utils from 'resource:///com/github/Aylur/ags/utils.js'
+import Gdk from 'gi://Gdk';
 
-import { hyprSendMessage, getDate } from '../shared/utils.js'
+import { BarDivider } from '../shared/widgets.js'
 
-function Divider(margin = '5px', divider = '') {
-  return Widget.Label({
-    className: 'divider',
-    label: divider,
-    css: `
-      font-weight: 900;
-      margin: 0 ${margin};
-    `
-  })
-}
+import {
+  hyprSendMessage,
+  getDate
+} from '../shared/utils.js'
 
-function Left() {
+import {
+  revealAppLauncher,
+  query
+} from './states.js'
+
+import {
+  exitAppsSelect,
+  appsSelectUp,
+  appsSelectDown,
+  appLaunch
+} from './fn.js'
+
+function LeftSection() {
   const WindowState = Widget.Label({
     className: 'window_state tiling',
     label: 'TILING',
@@ -56,6 +63,7 @@ function Left() {
   })
 
   const Music = Widget.Box({
+    className: 'music',
     spacing: 2,
     children: [
       Widget.Label({
@@ -82,13 +90,13 @@ function Left() {
       WindowState,
       ActiveWindow,
       WorkspaceIcon,
-      Divider('0'),
+      BarDivider('0'),
       Music
     ]
   })
 }
 
-function Right() {
+function RightSection() {
   const NetworkButton = Widget.Button({
     className: 'network_button',
     cursor: 'pointer',
@@ -119,9 +127,9 @@ function Right() {
     className: 'right',
     children: [
       NetworkButton,
-      Divider(),
+      BarDivider(),
       NotificationButton,
-      Divider(),
+      BarDivider(),
       User,
 
       Widget.Box({
@@ -135,22 +143,69 @@ function Right() {
   })
 }
 
-function Bar() {
-  return Widget.Box({
-    className: 'bar',
+function AppLauncherInput() {
+  const Input = Widget.Box({
     children: [
-      Left(),
-      Right()
+      Widget.Label(':'),
+      Widget.Entry({
+        className: 'input',
+        hexpand: true,
+        onChange: ({ text }) => query.value = text,
+        onAccept: () => appLaunch(),
+        setup: (self) => self.hook(revealAppLauncher, () => {
+          if (revealAppLauncher.value) self.grab_focus()
+          else self.text = ''
+        })
+      })
+    ]
+  })
+
+  return Widget.Box({
+    className: 'applauncher_input',
+    children: [
+      Input
     ]
   })
 }
 
+function Line() {
+  return Widget.Stack({
+    className: 'line',
+    visibleChildName: revealAppLauncher.bind()
+      .transform(reveal => reveal ? 'appLauncherInput' : 'line'),
+    children: {
+      line: Widget.Box({
+        children: [
+          LeftSection(),
+          RightSection()
+        ]
+      }),
+      appLauncherInput: AppLauncherInput()
+    }
+  })
+}
+
 export default Widget.Window({
-  name: 'bar',
+  name: 'line',
   layer: 'top',
-  focusable: false,
   exclusivity: 'exclusive',
+  keymode: revealAppLauncher.bind()
+    .transform(reveal => reveal ? 'exclusive' : 'none'),
   anchor: ['left', 'right', 'bottom'],
-  margins: [0],
-  child: Bar()
+  child: Line()
+    .on('key-press-event', (_, event) => {
+      const val = event.get_keyval()[1]
+      switch (val) {
+        case Gdk.KEY_Escape:
+          exitAppsSelect()
+          break
+        case Gdk.KEY_Up:
+          appsSelectUp()
+          break
+        case Gdk.KEY_Tab:
+        case Gdk.KEY_Down:
+          appsSelectDown()
+          break
+      }
+    })
 })
