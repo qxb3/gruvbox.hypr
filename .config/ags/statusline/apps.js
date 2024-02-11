@@ -34,7 +34,7 @@ function AppsList() {
               sensitive: true,
               className: 'app',
               child: Widget.Label({
-                label: app.name.toLowerCase().replace(' ', '-'),
+                label: app.name.toLowerCase().replace(/ /g, '-'),
                 xalign: 0
               }),
               setup: (self) => self.hook(selectedApp, () => {
