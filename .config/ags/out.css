@@ -65,18 +65,18 @@
   font-weight: 700;
 }
 
-.apps {
+.apps .list {
   padding: 4px;
   background-color: #3c3836;
   font-weight: 900;
   color: #ebdbb2;
 }
-.apps .app {
+.apps .list .app {
   padding: 0 4px;
 }
-.apps .app.selected {
+.apps .list .app.selected {
   background-color: #458588;
 }
-.apps .app:hover {
+.apps .list .app:hover {
   background-color: #928374;
 }

@@ -1,5 +1,6 @@
 import App from 'resource:///com/github/Aylur/ags/app.js'
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js'
+import Widget from 'resource:///com/github/Aylur/ags/widget.js'
 
 import {
   queriedApps,
@@ -9,11 +10,10 @@ import {
 } from './states.js'
 
 function AppsList() {
-  return Widget.Box({
-    className: 'apps',
-    vertical: true
-  })
-    .hook(query, (self) => {
+  const Apps = Widget.Box({
+    className: 'list',
+    vertical: true,
+    setup: (self) => self.hook(query, () => {
       if (query.value) {
         const apps = []
         const applications = Applications.query(query.value)
@@ -55,6 +55,15 @@ function AppsList() {
         App.closeWindow('apps')
       }
     })
+  })
+
+  return Widget.Box({
+    className: 'apps',
+    vertical: true,
+    children: [
+      Apps
+    ]
+  })
 }
 
 export default Widget.Window({
