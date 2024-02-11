@@ -1,11 +1,48 @@
 * {
   all: unset;
+  font-family: "JetBrainsMono Nerd Font";
 }
 
 .container {
   padding: 1rem;
   background-color: #282828;
   border: solid #1d2021 1px;
+}
+
+.bar {
+  background-color: #282828;
+  font-size: 14px;
+  font-weight: 200;
+  color: #bdae93;
+}
+.bar .divider {
+  color: #ebdbb2;
+}
+.bar .left .window_state {
+  color: #282828;
+  padding: 0 1rem;
+}
+.bar .left .window_state.tiling {
+  background-color: #98971a;
+}
+.bar .left .window_state.floating {
+  background-color: #458588;
+}
+.bar .right .network_button {
+  padding-right: 2px;
+}
+.bar .right .indicators {
+  margin-left: 8px;
+}
+.bar .right .indicators .time_indicator {
+  background-color: #3c3836;
+  color: #ebdbb2;
+  padding: 0 1rem;
+}
+.bar .right .indicators .workspace_indicator {
+  background-color: #d65d0e;
+  color: #282828;
+  padding: 0 1rem;
 }
 
 .app_launcher {

@@ -1,4 +1,5 @@
 import App from 'resource:///com/github/Aylur/ags/app.js';
+import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js'
 import Variable from 'resource:///com/github/Aylur/ags/variable.js'
 import Utils from 'resource:///com/github/Aylur/ags/utils.js'
 
@@ -48,6 +49,15 @@ export function debounce({ called, fn }, delay = 250) {
   }
 }
 
+export function hyprSendMessage(cmd) {
+  return JSON.parse(Hyprland.message(`j/${cmd}`))
+}
+
+export function getDate(prop) {
+  const date = JSON.parse(Utils.exec(`date +'{"date": "%d", "month": "%b", "year": "%Y", "time": "%I : %M %p", "day": "%A"}'`))
+
+  return !prop ? date : date[prop]
+}
 
 export default {
   state,

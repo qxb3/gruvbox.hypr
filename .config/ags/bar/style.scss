@@ -1,0 +1,42 @@
+.bar {
+  background-color: $bg;
+  font-size: 14px;
+  font-weight: 200;
+  color: $fg2;
+
+  & .divider {
+    color: $fg;
+  }
+
+  & .left {
+    & .window_state {
+      &.tiling { background-color: $green; }
+      &.floating { background-color: $blue; }
+
+      color: $bg;
+      padding: 0 1rem;
+    }
+  }
+
+  & .right {
+    & .network_button {
+      padding-right: 2px;
+    }
+
+    & .indicators {
+      margin-left: 8px;
+
+      & .time_indicator {
+        background-color: $bg1;
+        color: $fg;
+        padding: 0 1rem;
+      }
+
+      & .workspace_indicator {
+        background-color: $orange;
+        color: $bg;
+        padding: 0 1rem;
+      }
+    }
+  }
+}

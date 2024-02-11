@@ -17,7 +17,10 @@ $purple:    #b16286;
 $aqua:      #689d6a;
 $gray:      #928374;
 
-* { all: unset; }
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font";
+}
 
 .container {
   padding: 1rem;
@@ -25,4 +28,5 @@ $gray:      #928374;
   border: solid $bgh 1px;
 }
 
-@import "./app_launcher/style.scss";
+@import "./bar/style.scss";
+@import "./applauncher/style.scss";
