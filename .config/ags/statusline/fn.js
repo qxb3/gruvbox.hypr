@@ -62,4 +62,6 @@ export function assignBatteryIcon(charging, percent) {
     if (percent >= 90  && percent <= 99) return '󰂂'
     if (percent >= 99                  ) return '󰁹'
   }
+
+  return '󱉝'
 }
