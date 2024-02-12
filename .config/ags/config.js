@@ -1,10 +1,10 @@
-import Bar from './statusline/line.js'
-import AppsList from './statusline/apps.js'
+import StatusLine from './windows/statusline/Line.js'
+import AppsList from './windows/statusline/Apps.js'
 
 export default {
   style: App.configDir + '/out.css',
   windows: [
-    Bar,
+    StatusLine,
     AppsList
   ]
 }

@@ -3,7 +3,7 @@ import {
   query,
   selectedApp,
   selectedAppIndex
-} from './states.js'
+} from './vars.js'
 
 const Applications = await Service.import('applications')
 

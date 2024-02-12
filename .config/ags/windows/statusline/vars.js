@@ -1,4 +1,4 @@
-import { state } from '../shared/utils.js'
+import { state } from '../../shared/utils.js'
 
 export const revealAppLauncher = state('app_launcher', false)
 export const query = Variable('')

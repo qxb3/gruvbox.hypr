@@ -1,17 +1,15 @@
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js'
 import Gdk from 'gi://Gdk'
 
-import { BarDivider } from '../shared/widgets.js'
-
 import {
   hyprSendMessage,
   getDate
-} from '../shared/utils.js'
+} from '../../shared/utils.js'
 
 import {
   revealAppLauncher,
   query
-} from './states.js'
+} from './vars.js'
 
 const Hyprland = await Service.import('hyprland')
 // const Mpris = await Service.import('mpris')
@@ -23,7 +21,18 @@ import {
   appsSelectDown,
   appLaunch,
   assignBatteryIcon
-} from './fn.js'
+} from './fns.js'
+
+function BarDivider(margin = '0 5px', divider = '') {
+  return Widget.Label({
+    className: 'divider',
+    label: divider,
+    css: `
+      font-weight: 900;
+      margin: ${margin};
+    `
+  })
+}
 
 function LeftSection() {
   const WindowState = Widget.Label({

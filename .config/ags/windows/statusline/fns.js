@@ -5,7 +5,7 @@ import {
   queriedApps,
   selectedApp,
   selectedAppIndex
-} from './states.js'
+} from './vars.js'
 
 export function exitAppsSelect() {
   App.closeWindow('apps')
