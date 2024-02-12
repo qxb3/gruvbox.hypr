@@ -50,10 +50,15 @@
   color: #ebdbb2;
   padding: 0 1rem;
 }
-.line .right .sections .workspace_indicator {
-  background-color: #d65d0e;
+.line .right .sections .mode_indicator > label {
   color: #282828;
   padding: 0 1rem;
+}
+.line .right .sections .mode_indicator .workspace {
+  background-color: #d65d0e;
+}
+.line .right .sections .mode_indicator .applauncher {
+  background-color: #458588;
 }
 .line .app_launcher_input {
   background-color: #282828;

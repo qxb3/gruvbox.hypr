@@ -144,10 +144,19 @@ function RightSection() {
     setup: (self) => self.poll(1000, () => self.label = getDate('time'))
   })
 
-  const WorkspaceIndicator = Widget.Label({
-    className: 'workspace_indicator',
-    label: Hyprland.active.workspace.bind('id')
-      .transform(id => `${id}:0`)
+  const ModeIndicator = Widget.Stack({
+    className: 'mode_indicator',
+    shown: revealAppLauncher.bind().transform(r => r ? 'applauncher' : 'workspace'),
+    children: {
+      workspace: Widget.Label({
+        className: 'workspace',
+        label: Hyprland.active.workspace.bind('id').transform(id => `${id}:0`)
+      }),
+      applauncher: Widget.Label({
+        className: 'applauncher',
+        label: revealAppLauncher.bind().transform(r => r ? 'APP LAUNCHER' : '')
+      })
+    }
   })
 
   return Widget.Box({
@@ -169,7 +178,7 @@ function RightSection() {
         className: 'sections',
         children: [
           TimeIndicator,
-          WorkspaceIndicator
+          ModeIndicator
         ]
       })
     ]
@@ -202,19 +211,19 @@ function AppLauncherInput() {
 }
 
 function Line() {
-  return Widget.Stack({
+  return Widget.Box({
     className: 'line',
-    visibleChildName: revealAppLauncher.bind()
-      .transform(reveal => reveal ? 'appLauncherInput' : 'line'),
-    children: {
-      line: Widget.Box({
-        children: [
-          LeftSection(),
-          RightSection()
-        ]
+    children: [
+      Widget.Stack({
+        className: 'line',
+        shown: revealAppLauncher.bind().transform(r => r ? 'appLauncherInput' : 'line'),
+        children: {
+          line: LeftSection(),
+          appLauncherInput: AppLauncherInput()
+        }
       }),
-      appLauncherInput: AppLauncherInput()
-    }
+      RightSection()
+    ]
   })
 }
 
@@ -222,23 +231,21 @@ export default Widget.Window({
   name: 'line',
   layer: 'top',
   exclusivity: 'exclusive',
-  keymode: revealAppLauncher.bind()
-    .transform(reveal => reveal ? 'exclusive' : 'none'),
+  keymode: revealAppLauncher.bind().transform(reveal => reveal ? 'exclusive' : 'none'),
   anchor: ['left', 'right', 'bottom'],
-  child: Line()
-    .on('key-press-event', (_, event) => {
-      const val = event.get_keyval()[1]
-      switch (val) {
-        case Gdk.KEY_Escape:
-          exitAppsSelect()
-          break
-        case Gdk.KEY_Up:
-          appsSelectUp()
-          break
-        case Gdk.KEY_Tab:
-        case Gdk.KEY_Down:
-          appsSelectDown()
-          break
-      }
-    })
+  child: Line().on('key-press-event', (_, event) => {
+    const val = event.get_keyval()[1]
+    switch (val) {
+      case Gdk.KEY_Escape:
+        exitAppsSelect()
+        break
+      case Gdk.KEY_Up:
+        appsSelectUp()
+        break
+      case Gdk.KEY_Tab:
+      case Gdk.KEY_Down:
+        appsSelectDown()
+        break
+    }
+  })
 })

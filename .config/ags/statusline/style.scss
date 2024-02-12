@@ -4,6 +4,7 @@
   font-weight: 200;
   color: $fg2;
 
+
   & .divider {
     color: $fg;
   }
@@ -48,10 +49,14 @@
         padding: 0 1rem;
       }
 
-      & .workspace_indicator {
-        background-color: $orange;
-        color: $bg;
-        padding: 0 1rem;
+      & .mode_indicator {
+        & > label {
+          color: $bg;
+          padding: 0 1rem;
+        }
+
+        & .workspace { background-color: $orange; }
+        & .applauncher { background-color: $blue; }
       }
     }
   }
