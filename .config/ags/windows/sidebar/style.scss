@@ -1,0 +1,72 @@
+.sidebar {
+  background-color: $bg;
+  border-right: solid $gray 2px;
+  border-bottom: solid $gray 2px;
+  font-size: 14px;
+  color: $fg2;
+
+  & .header {
+    background-color: $bg2;
+    font-weight: 700;
+  }
+
+  & .path {
+    color: $purple;
+    font-weight: 700;
+  }
+
+  & .tree {
+    padding: 4px 2rem 0 1rem;
+
+    & .tree_item {
+      & .dir {
+        & .down {
+          color: $fgh;
+          font-weight: 900;
+          padding-right: 6px;
+        }
+
+        & .text { color: $blue; }
+      }
+
+      & .music_controls {
+        font-size: 20px;
+
+        & > button {
+          padding: 0 4px;
+        }
+      }
+
+      & .metric {
+        margin-bottom: 8px;
+
+        & trough {
+          & progress {
+            min-height: 12px;
+            background-color: $fg2;
+          }
+        }
+      }
+    }
+
+    & .tree {
+      padding: 8px 0 8px 1rem;
+    }
+  }
+
+  & .calendar {
+    margin: 1rem;
+
+    & .time {
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    & .day {
+      color: $gray;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 5px;
+    }
+  }
+}

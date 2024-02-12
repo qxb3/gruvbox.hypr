@@ -11,6 +11,11 @@ import {
   query
 } from './vars.js'
 
+import {
+  musicStatus,
+  musicTitle
+} from '../../shared/music.js'
+
 const Hyprland = await Service.import('hyprland')
 // const Mpris = await Service.import('mpris')
 const Battery = await Service.import('battery')
@@ -78,16 +83,8 @@ function LeftSection() {
     spacing: 2,
     children: [
       Widget.Label({
-        setup: (self) => self.hook(Mpris, () => {
-          const spotifyPlayer = Mpris.players.find(player => player.name === 'spotify')
-          if (!spotifyPlayer) {
-            return self.label = `󰝛 No Music - Title`
-          }
-
-          spotifyPlayer.connect('changed', () => {
-            self.label = `󰝚 Playing - ${spotifyPlayer.trackTitle}`
-          })
-        })
+        label: musicTitle.bind()
+          .transform(t => musicStatus === 'Stopped' ? '󰝛 No Music - Title' : `󰝚 Playing - ${t}`),
       })
     ]
   })

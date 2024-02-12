@@ -85,3 +85,59 @@
 .apps .list .app:hover {
   background-color: #928374;
 }
+
+.sidebar {
+  background-color: #282828;
+  border-right: solid #928374 2px;
+  border-bottom: solid #928374 2px;
+  font-size: 14px;
+  color: #bdae93;
+}
+.sidebar .header {
+  background-color: #504945;
+  font-weight: 700;
+}
+.sidebar .path {
+  color: #b16286;
+  font-weight: 700;
+}
+.sidebar .tree {
+  padding: 4px 2rem 0 1rem;
+}
+.sidebar .tree .tree_item .dir .down {
+  color: #fbf1c7;
+  font-weight: 900;
+  padding-right: 6px;
+}
+.sidebar .tree .tree_item .dir .text {
+  color: #458588;
+}
+.sidebar .tree .tree_item .music_controls {
+  font-size: 20px;
+}
+.sidebar .tree .tree_item .music_controls > button {
+  padding: 0 4px;
+}
+.sidebar .tree .tree_item .metric {
+  margin-bottom: 8px;
+}
+.sidebar .tree .tree_item .metric trough progress {
+  min-height: 12px;
+  background-color: #bdae93;
+}
+.sidebar .tree .tree {
+  padding: 8px 0 8px 1rem;
+}
+.sidebar .calendar {
+  margin: 1rem;
+}
+.sidebar .calendar .time {
+  font-size: 32px;
+  font-weight: 600;
+}
+.sidebar .calendar .day {
+  color: #928374;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 5px;
+}
