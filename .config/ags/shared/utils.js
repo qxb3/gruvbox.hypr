@@ -1,7 +1,4 @@
-import App from 'resource:///com/github/Aylur/ags/app.js';
-import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js'
-import Variable from 'resource:///com/github/Aylur/ags/variable.js'
-import Utils from 'resource:///com/github/Aylur/ags/utils.js'
+const Hyprland = await Service.import('hyprland')
 
 const STATES_PATH = `${App.configDir}/.states.json`
 

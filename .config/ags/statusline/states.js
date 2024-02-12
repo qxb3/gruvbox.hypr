@@ -1,4 +1,3 @@
-import Variable from 'resource:///com/github/Aylur/ags/variable.js'
 import { state } from '../shared/utils.js'
 
 export const revealAppLauncher = state('app_launcher', false)
