@@ -1,9 +1,4 @@
-import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js'
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js'
-import Battery from 'resource:///com/github/Aylur/ags/service/battery.js'
-import Widget from 'resource:///com/github/Aylur/ags/widget.js'
-import Utils from 'resource:///com/github/Aylur/ags/utils.js'
-import Variable from 'resource:///com/github/Aylur/ags/variable.js'
 import Gdk from 'gi://Gdk'
 
 import { BarDivider } from '../shared/widgets.js'
@@ -17,6 +12,10 @@ import {
   revealAppLauncher,
   query
 } from './states.js'
+
+const Hyprland = await Service.import('hyprland')
+// const Mpris = await Service.import('mpris')
+const Battery = await Service.import('battery')
 
 import {
   exitAppsSelect,

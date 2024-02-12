@@ -1,13 +1,11 @@
-import App from 'resource:///com/github/Aylur/ags/app.js'
-import Applications from 'resource:///com/github/Aylur/ags/service/applications.js'
-import Widget from 'resource:///com/github/Aylur/ags/widget.js'
-
 import {
   queriedApps,
   query,
   selectedApp,
   selectedAppIndex
 } from './states.js'
+
+const Applications = await Service.import('applications')
 
 function AppsList() {
   const Apps = Widget.Box({
@@ -49,10 +47,6 @@ function AppsList() {
 
         self.children = apps
         self.show_all()
-
-        App.openWindow('apps')
-      } else {
-        App.closeWindow('apps')
       }
     })
   })
@@ -70,5 +64,8 @@ export default Widget.Window({
   name: 'apps',
   layer: 'overlay',
   anchor: ['left', 'bottom'],
-  child: AppsList()
+  child: AppsList().hook(query, () => {
+    if (query.value) App.openWindow('apps')
+    else App.closeWindow('apps')
+  })
 })
