@@ -1,13 +1,19 @@
-import {
-  createTree
-} from './fns.js'
+import { state } from '../../shared/utils.js'
+import { createTree } from './fns.js'
 
 import {
   fetch,
   stats,
   musicPlayer,
-  desktopControls
+  desktopControls,
+  notifications
 } from './folders/imports.js'
+
+const revealSidebar = state('reveal_sidebar', false)
+
+Utils.monitorFile(App.configDir + '/services', () => {
+  console.log('changed')
+}, 'directory')
 
 function Sidebar() {
   const Header = Widget.Label({
@@ -36,28 +42,11 @@ function Sidebar() {
         type: 'dir',
         children: {
           music_player: musicPlayer,
-          desktop_controls: desktopControls
+          desktop_controls: desktopControls,
+          notifications
         }
       }
     })
-  })
-
-  const Calendar = Widget.Box({
-    className: 'calendar',
-    vexpand: true,
-    vertical: true,
-    vpack: 'end',
-    spacing: 8,
-    children: [
-      Widget.Label({
-        className: 'time',
-        label: '12 : 04 AM'
-      }),
-      Widget.Label({
-        className: 'day',
-        label: 'MONDAY'
-      })
-    ]
   })
 
   return Widget.Box({
@@ -66,8 +55,7 @@ function Sidebar() {
     children: [
       Header,
       Path,
-      Tree,
-      Calendar
+      Tree
     ]
   })
 }
@@ -75,7 +63,14 @@ function Sidebar() {
 export default Widget.Window({
   name: 'sidebar',
   layer: 'overlay',
-  exclusivity: 'exclusive',
   anchor: ['left', 'top', 'bottom'],
-  child: Sidebar()
+  margins: [0, 0, 0, -1],
+  child: Widget.Box({
+    css: `padding: 0.1px;`,
+    child: Widget.Revealer({
+      revealChild: revealSidebar.bind(),
+      transition: 'none',
+      child: Sidebar()
+    })
+  })
 })

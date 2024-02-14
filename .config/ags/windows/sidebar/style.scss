@@ -2,8 +2,8 @@
   background-color: $bg;
   border-right: solid $gray 2px;
   border-bottom: solid $gray 2px;
-  font-size: 14px;
   color: $fg2;
+  font-size: 14px;
 
   & .header {
     background-color: $bg2;
@@ -11,12 +11,13 @@
   }
 
   & .path {
+    padding-left: 8px;
     color: $purple;
     font-weight: 700;
   }
 
   & .tree {
-    padding: 4px 2rem 0 1rem;
+    padding: 0 1rem 0 1.5rem;
 
     & .tree_item {
       & .dir {
@@ -26,31 +27,42 @@
           padding-right: 6px;
         }
 
-        & .text { color: $blue; }
+        & .text {
+          color: $blue;
+        }
       }
 
       & .music_controls {
         font-size: 20px;
 
-        & > button {
-          padding: 0 4px;
+        & button {
+          padding: 0 2px;
         }
       }
 
-      & .metric {
+      & progressbar {
         margin-bottom: 8px;
 
         & trough {
           & progress {
+            min-width: 5px;
             min-height: 12px;
             background-color: $fg2;
           }
         }
       }
-    }
 
-    & .tree {
-      padding: 8px 0 8px 1rem;
+      & scale {
+        margin-bottom: 1px;
+
+        & trough {
+          min-height: 12px;
+        }
+
+        & highlight {
+          background-color: $fg2;
+        }
+      }
     }
   }
 

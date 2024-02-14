@@ -1,24 +1,12 @@
-import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js'
 import Gdk from 'gi://Gdk'
 
 import {
-  hyprSendMessage,
-  getDate
-} from '../../shared/utils.js'
-
-import {
+  mode,
   revealAppLauncher,
-  query
-} from './vars.js'
-
-import {
-  musicStatus,
-  musicTitle
-} from '../../shared/music.js'
-
-const Hyprland = await Service.import('hyprland')
-// const Mpris = await Service.import('mpris')
-const Battery = await Service.import('battery')
+  appLauncherQuery,
+  revealCommands,
+  commandsQuery
+} from './misc/vars.js'
 
 import {
   exitAppsSelect,
@@ -26,7 +14,20 @@ import {
   appsSelectDown,
   appLaunch,
   assignBatteryIcon
-} from './fns.js'
+} from './misc/fns.js'
+
+import {
+  hyprSendMessage,
+  getDate
+} from '../../shared/utils.js'
+
+import {
+  musicStatus,
+  musicTitle
+} from '../../shared/music.js'
+
+const Hyprland = await Service.import('hyprland')
+const Battery = await Service.import('battery')
 
 function BarDivider(margin = '0 5px', divider = '') {
   return Widget.Label({
@@ -84,7 +85,7 @@ function LeftSection() {
     children: [
       Widget.Label({
         label: musicTitle.bind()
-          .transform(t => musicStatus === 'Stopped' ? '󰝛 No Music - Title' : `󰝚 Playing - ${t}`),
+          .transform(t => musicStatus !== 'Stopped' ? '󰝛 No Music - Title' : `󰝚 Playing - ${t}`),
       })
     ]
   })
@@ -137,11 +138,6 @@ function RightSection() {
     })
   })
 
-  const NotificationButton = Widget.Button({
-    className: 'notification_button',
-    child: Widget.Label('󰂚')
-  })
-
   const User = Widget.Label(Utils.exec('whoami'))
 
   const TimeIndicator = Widget.Label({
@@ -152,7 +148,7 @@ function RightSection() {
 
   const ModeIndicator = Widget.Stack({
     className: 'mode_indicator',
-    shown: revealAppLauncher.bind().transform(r => r ? 'applauncher' : 'workspace'),
+    shown: mode.bind(),
     children: {
       workspace: Widget.Label({
         className: 'workspace',
@@ -160,7 +156,11 @@ function RightSection() {
       }),
       applauncher: Widget.Label({
         className: 'applauncher',
-        label: revealAppLauncher.bind().transform(r => r ? 'APP LAUNCHER' : '')
+        label: mode.bind().transform(m => m === 'applauncher' ? 'APP LAUNCHER' : '')
+      }),
+      commands: Widget.Label({
+        className: 'commands',
+        label: mode.bind().transform(m => m === 'commands' ? 'COMMANDS' : '')
       })
     }
   })
@@ -176,8 +176,6 @@ function RightSection() {
         visible: Battery.bind('available'),
         children: [ BarDivider('0 5px 0 0') ]
       }),
-      NotificationButton,
-      BarDivider(),
       User,
 
       Widget.Box({
@@ -198,7 +196,7 @@ function AppLauncherInput() {
       Widget.Entry({
         className: 'input',
         hexpand: true,
-        onChange: ({ text }) => query.value = text,
+        onChange: ({ text }) => appLauncherQuery.value = text,
         onAccept: () => appLaunch(),
         setup: (self) => self.hook(revealAppLauncher, () => {
           if (revealAppLauncher.value) self.grab_focus()
@@ -216,16 +214,42 @@ function AppLauncherInput() {
   })
 }
 
+function CommandInput() {
+  const Input = Widget.Box({
+    children: [
+      Widget.Label(':'),
+      Widget.Entry({
+        className: 'input',
+        hexpand: true,
+        onChange: ({ text }) => commandsQuery.value = text,
+        onAccept: () => appLaunch(),
+        setup: (self) => self.hook(revealCommands, () => {
+          if (revealCommands.value) self.grab_focus()
+          else self.text = ''
+        })
+      })
+    ]
+  })
+
+  return Widget.Box({
+    className: 'commands_input',
+    children: [
+      Input
+    ]
+  })
+}
+
 function Line() {
   return Widget.Box({
     className: 'line',
     children: [
       Widget.Stack({
         className: 'line',
-        shown: revealAppLauncher.bind().transform(r => r ? 'appLauncherInput' : 'line'),
+        shown: mode.bind().transform(v => v === 'workspace' ? 'line' : v),
         children: {
           line: LeftSection(),
-          appLauncherInput: AppLauncherInput()
+          applauncher: AppLauncherInput(),
+          commands: CommandInput()
         }
       }),
       RightSection()
@@ -237,7 +261,7 @@ export default Widget.Window({
   name: 'line',
   layer: 'top',
   exclusivity: 'exclusive',
-  keymode: revealAppLauncher.bind().transform(reveal => reveal ? 'exclusive' : 'none'),
+  keymode: mode.bind().transform(m => m !== 'workspace' ? 'exclusive' : 'none'),
   anchor: ['left', 'right', 'bottom'],
   child: Line().on('key-press-event', (_, event) => {
     const val = event.get_keyval()[1]

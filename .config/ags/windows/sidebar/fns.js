@@ -8,74 +8,67 @@ export function createTree(structure) {
       const key = keys[i]
       const child = parent[key]
 
-      if (child.type === 'dir') {
-        tree.push(
-          Widget.Box({
-            className: `tree_item`,
-            homogeneous: false,
-            children: [
-              Widget.Box({
-                className: `dir ${key}`,
-                children: [
-                  Widget.Label('  '.repeat(nested)),
-                  Widget.Label({
-                    className: 'down',
-                    label: ''
-                  }),
-                  Widget.Label({
-                    className: 'text',
-                    label: `${child.icon ?? ''} ${key}`,
-                    xalign: 0
-                  })
-                ]
-              })
-            ]
-          })
-        )
-      }
+      tree.push(
+        Widget.Box({
+          className: 'tree_item',
+          children: [
+            Widget.Box({
+              setup: (self) => {
+                const spaces = Widget.Label('  '.repeat(nested))
 
-      if (child.type === 'file') {
-        tree.push(
-          Widget.Box({
-            className: 'tree_item',
-            children: [
-              Widget.Box({
-                className: `file ${key}`,
-                children: [
-                  Widget.Label('  '.repeat(nested)),
-                  Widget.Label({
-                    className: 'text',
-                    label: `${child.icon ?? ''} ${key}${' '.repeat(child.spacing ?? 1)}-> ${child.value}`,
-                    xalign: 0
-                  })
-                ]
-              })
-            ]
-          })
-        )
-      }
+                if (child.type === 'dir') {
+                  self.className = `dir ${key}`
+                  self.children = [
+                    spaces,
+                    Widget.Label({
+                      className: 'down',
+                      label: ''
+                    }),
+                    Widget.Label({
+                      className: 'text',
+                      label: `${child.icon ?? ''} ${key} ${child.text ?? ''}`,
+                      xalign: 0
+                    })
+                  ]
+                }
 
-      if (child.type === 'widget') {
-        tree.push(
-          Widget.Box({
-            className: 'tree_item',
-            children: [
-              Widget.Box({
-                className: `widget ${key}`,
-                children: [
-                  Widget.Label('  '.repeat(nested)),
-                  Widget.Label({
-                    className: 'text',
-                    label: `${child.icon ?? ''} ${key}${' '.repeat(child.spacing ?? 1)}-> `,
-                    xalign: 0
-                  }),
-                  child.widget
-                ]
-              })
-            ]
-          })
-        )
-      }
+                if (child.type === 'file') {
+                  self.className = `file ${key}`
+                  self.children = [
+                    spaces,
+                    Widget.Label({
+                      className: 'text',
+                      label: `${child.icon ?? ''} ${key}${' '.repeat(child.spacing ?? 1)}-> ${child.value}`,
+                      xalign: 0
+                    })
+                  ]
+                }
+
+                if (child.type === 'widget') {
+                  self.className = `widget ${key}`
+                  self.children = [
+                    spaces,
+                    Widget.Label({
+                      className: 'text',
+                      label: `${child.icon ?? ''} ${key}${' '.repeat(child.spacing ?? 1)}-> `,
+                      xalign: 0
+                    }),
+                    child.widget
+                  ]
+                }
+
+                if (child.type === 'custom') {
+                  self.className = `custom ${key}`
+                  self.children = [
+                    spaces,
+                    child.child
+                  ]
+                }
+              }
+            })
+          ]
+        })
+      )
 
       if (child.type === 'dir' && child.children)
         traverse(child.children, nested + 1)

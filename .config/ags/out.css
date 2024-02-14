@@ -50,7 +50,7 @@
   color: #ebdbb2;
   padding: 0 1rem;
 }
-.line .right .sections .mode_indicator > label {
+.line .right .sections .mode_indicator label {
   color: #282828;
   padding: 0 1rem;
 }
@@ -59,6 +59,9 @@
 }
 .line .right .sections .mode_indicator .applauncher {
   background-color: #458588;
+}
+.line .right .sections .mode_indicator .commands {
+  background-color: #689d6a;
 }
 .line .app_launcher_input {
   background-color: #282828;
@@ -90,19 +93,20 @@
   background-color: #282828;
   border-right: solid #928374 2px;
   border-bottom: solid #928374 2px;
-  font-size: 14px;
   color: #bdae93;
+  font-size: 14px;
 }
 .sidebar .header {
   background-color: #504945;
   font-weight: 700;
 }
 .sidebar .path {
+  padding-left: 8px;
   color: #b16286;
   font-weight: 700;
 }
 .sidebar .tree {
-  padding: 4px 2rem 0 1rem;
+  padding: 0 1rem 0 1.5rem;
 }
 .sidebar .tree .tree_item .dir .down {
   color: #fbf1c7;
@@ -115,18 +119,25 @@
 .sidebar .tree .tree_item .music_controls {
   font-size: 20px;
 }
-.sidebar .tree .tree_item .music_controls > button {
-  padding: 0 4px;
+.sidebar .tree .tree_item .music_controls button {
+  padding: 0 2px;
 }
-.sidebar .tree .tree_item .metric {
+.sidebar .tree .tree_item progressbar {
   margin-bottom: 8px;
 }
-.sidebar .tree .tree_item .metric trough progress {
+.sidebar .tree .tree_item progressbar trough progress {
+  min-width: 5px;
   min-height: 12px;
   background-color: #bdae93;
 }
-.sidebar .tree .tree {
-  padding: 8px 0 8px 1rem;
+.sidebar .tree .tree_item scale {
+  margin-bottom: 1px;
+}
+.sidebar .tree .tree_item scale trough {
+  min-height: 12px;
+}
+.sidebar .tree .tree_item scale highlight {
+  background-color: #bdae93;
 }
 .sidebar .calendar {
   margin: 1rem;

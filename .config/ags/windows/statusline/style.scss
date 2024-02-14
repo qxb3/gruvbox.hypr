@@ -50,13 +50,14 @@
       }
 
       & .mode_indicator {
-        & > label {
+        & label {
           color: $bg;
           padding: 0 1rem;
         }
 
         & .workspace { background-color: $orange; }
         & .applauncher { background-color: $blue; }
+        & .commands { background-color: $aqua; }
       }
     }
   }

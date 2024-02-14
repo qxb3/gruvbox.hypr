@@ -1,9 +1,9 @@
 import {
+  appLauncherQuery,
   queriedApps,
-  query,
   selectedApp,
   selectedAppIndex
-} from './vars.js'
+} from './misc/vars.js'
 
 const Applications = await Service.import('applications')
 
@@ -11,10 +11,10 @@ function AppsList() {
   const Apps = Widget.Box({
     className: 'list',
     vertical: true,
-    setup: (self) => self.hook(query, () => {
-      if (query.value) {
+    setup: (self) => self.hook(appLauncherQuery, () => {
+      if (appLauncherQuery.value) {
         const apps = []
-        const applications = Applications.query(query.value)
+        const applications = Applications.query(appLauncherQuery.value)
           .sort((a, b) => b.frequency - a.frequency)
           .slice(0, 30)
 
@@ -64,8 +64,8 @@ export default Widget.Window({
   name: 'apps',
   layer: 'overlay',
   anchor: ['left', 'bottom'],
-  child: AppsList().hook(query, () => {
-    if (query.value) App.openWindow('apps')
+  child: AppsList().hook(appLauncherQuery, () => {
+    if (appLauncherQuery.value) App.openWindow('apps')
     else App.closeWindow('apps')
   })
 })
