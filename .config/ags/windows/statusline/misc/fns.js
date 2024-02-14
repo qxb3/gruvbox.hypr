@@ -2,7 +2,11 @@ import {
   revealAppLauncher,
   queriedApps,
   selectedApp,
-  selectedAppIndex
+  selectedAppIndex,
+  revealCommands,
+  queriedCommands,
+  selectedCommand,
+  selectedCommandIndex
 } from './vars.js'
 
 export function exitAppsSelect() {
@@ -31,7 +35,40 @@ export function appsSelectDown() {
 
 export function appLaunch() {
   exitAppsSelect()
+
+  if (!selectedApp.value) return
   selectedApp.value.launch()
+}
+
+export function exitCommandsSelect() {
+  App.closeWindow('commands')
+
+  revealCommands.value = false
+}
+
+export function commandsSelectUp() {
+  if (!queriedCommands.value) return
+
+  if (selectedCommandIndex.value > 0) {
+    selectedCommandIndex.value -= 1
+    selectedCommand.value = queriedCommands.value[selectedCommandIndex.value]
+  }
+}
+
+export function commandsSelectDown() {
+  if (!queriedCommands.value) return
+
+  if (selectedCommandIndex.value < queriedCommands.value.length - 1) {
+    selectedCommandIndex.value += 1
+    selectedCommand.value = queriedCommands.value[selectedCommandIndex.value]
+  }
+}
+
+export function runCommand() {
+  exitCommandsSelect()
+
+  if (!selectedCommand.value) return
+  selectedCommand.value.fn()
 }
 
 export function assignBatteryIcon(charging, percent) {

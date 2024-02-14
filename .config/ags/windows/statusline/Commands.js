@@ -1,50 +1,80 @@
+import Fuse from '../../node_modules/fuse.js/dist/fuse.mjs'
+
 import {
-  commandsQuery
+  commandsQuery,
+  selectedCommand,
+  queriedCommands,
+  selectedCommandIndex
 } from './misc/vars.js'
 
-const commands = {
-  'notif-clear': () => {},
-}
+const Notifications = await Service.import('notifications')
+
+const commands = [
+  {
+    name: 'shutdown',
+    fn: () => console.log('shutdown')
+  },
+  {
+    name: 'restart',
+    fn: () => console.log('restart')
+  },
+  {
+    name: 'suspend',
+    fn: () => console.log('suspend')
+  },
+  {
+    name: 'logout',
+    fn: () => console.log('logout')
+  },
+  {
+    name: 'notif-clear',
+    fn: () => Notifications.clear()
+  }
+]
 
 function CommandsList() {
+  const fuse = new Fuse(commands, {
+    useExtendedSearch: true,
+    keys: ['name']
+  })
+
   const Commands = Widget.Box({
     className: 'list',
     vertical: true,
     setup: (self) => self.hook(commandsQuery, () => {
       if (commandsQuery.value) {
-        // const apps = []
-        // const applications = Applications.query(appLauncherQuery.value)
-        //   .sort((a, b) => b.frequency - a.frequency)
-        //   .slice(0, 30)
-        //
-        // queriedApps.value = applications
-        // selectedApp.value = applications[0]
-        // selectedAppIndex.value = 0
-        //
-        // for (let i = 0; i < applications.length; i++) {
-        //   const app = applications[i]
-        //
-        //   apps.push(
-        //     Widget.Button({
-        //       attribute: { app },
-        //       cursor: 'pointer',
-        //       sensitive: true,
-        //       className: 'app',
-        //       child: Widget.Label({
-        //         label: app.name.toLowerCase().replace(/ /g, '-'),
-        //         xalign: 0
-        //       }),
-        //       setup: (self) => self.hook(selectedApp, () => {
-        //         if (!selectedApp.value) return
-        //
-        //         if (selectedApp.value.name === self.attribute.app.name) self.className = 'app selected'
-        //         else self.className = 'app'
-        //       })
-        //     })
-        //   )
+        const result = fuse.search(commandsQuery.value)
+        const cmds = []
 
-        // self.children = apps
-        // self.show_all()
+        queriedCommands.value = result.map(r => r.item)
+        selectedCommand.value = result[0].item
+        selectedCommandIndex.value = 0
+
+        for (let i = 0; i < result.length; i++) {
+          const cmd = result[i].item
+
+          cmds.push(
+            Widget.Button({
+              attribute: { cmd },
+              cursor: 'pointer',
+              sensitive: true,
+              className: 'command',
+              child: Widget.Label({
+                label: cmd.name,
+                xalign: 0
+              }),
+              setup: (self) => self.hook(selectedCommand, () => {
+                if (!selectedCommand.value) return
+
+                if (selectedCommand.value.name === self.attribute.cmd.name) self.className = 'command selected'
+                else self.className = 'command'
+              })
+            })
+          )
+        }
+
+        self.children = cmds
+        self.show_all()
       }
     })
   })
@@ -59,11 +89,11 @@ function CommandsList() {
 }
 
 export default Widget.Window({
-  name: 'apps',
+  name: 'commands',
   layer: 'overlay',
   anchor: ['left', 'bottom'],
   child: CommandsList().hook(commandsQuery, () => {
-    if (commandsQuery.value) App.openWindow('apps')
-    else App.closeWindow('apps')
+    if (commandsQuery.value) App.openWindow('commands')
+    else App.closeWindow('commands')
   })
 })

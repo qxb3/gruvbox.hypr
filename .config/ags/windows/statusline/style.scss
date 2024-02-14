@@ -57,7 +57,7 @@
 
         & .workspace { background-color: $orange; }
         & .applauncher { background-color: $blue; }
-        & .commands { background-color: $aqua; }
+        & .commands { background-color: $yellow; }
       }
     }
   }
@@ -74,14 +74,14 @@
   }
 }
 
-.apps {
-  .list {
+.apps, .commands {
+  & .list {
     padding: 4px;
     background-color: $bg1;
     font-weight: 900;
     color: $fg;
 
-    & .app {
+    & .app, & .command {
       padding: 0 4px;
 
       &.selected { background-color: $blue; }

@@ -13,6 +13,10 @@ import {
   appsSelectUp,
   appsSelectDown,
   appLaunch,
+  exitCommandsSelect,
+  commandsSelectUp,
+  commandsSelectDown,
+  runCommand,
   assignBatteryIcon
 } from './misc/fns.js'
 
@@ -222,7 +226,7 @@ function CommandInput() {
         className: 'input',
         hexpand: true,
         onChange: ({ text }) => commandsQuery.value = text,
-        onAccept: () => appLaunch(),
+        onAccept: () => runCommand(),
         setup: (self) => self.hook(revealCommands, () => {
           if (revealCommands.value) self.grab_focus()
           else self.text = ''
@@ -264,18 +268,36 @@ export default Widget.Window({
   keymode: mode.bind().transform(m => m !== 'workspace' ? 'exclusive' : 'none'),
   anchor: ['left', 'right', 'bottom'],
   child: Line().on('key-press-event', (_, event) => {
-    const val = event.get_keyval()[1]
-    switch (val) {
-      case Gdk.KEY_Escape:
-        exitAppsSelect()
-        break
-      case Gdk.KEY_Up:
-        appsSelectUp()
-        break
-      case Gdk.KEY_Tab:
-      case Gdk.KEY_Down:
-        appsSelectDown()
-        break
+    const key = event.get_keyval()[1]
+
+    if (mode.value === 'applauncher') {
+      switch (key) {
+        case Gdk.KEY_Escape:
+          exitAppsSelect()
+          break
+        case Gdk.KEY_Up:
+          appsSelectUp()
+          break
+        case Gdk.KEY_Tab:
+        case Gdk.KEY_Down:
+          appsSelectDown()
+          break
+      }
+    }
+
+    if (mode.value === 'commands') {
+      switch (key) {
+        case Gdk.KEY_Escape:
+          exitCommandsSelect()
+          break
+        case Gdk.KEY_Up:
+          commandsSelectUp()
+          break
+        case Gdk.KEY_Tab:
+        case Gdk.KEY_Down:
+          commandsSelectDown()
+          break
+      }
     }
   })
 })

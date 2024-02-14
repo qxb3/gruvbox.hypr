@@ -10,6 +10,9 @@ export const selectedAppIndex = Variable(0)
 
 export const revealCommands = state('reveal_commands', false)
 export const commandsQuery = Variable('')
+export const queriedCommands = Variable([])
+export const selectedCommand = Variable()
+export const selectedCommandIndex = Variable(0)
 
 revealAppLauncher.connect('changed', () => {
   if (revealAppLauncher.value) mode.value = 'applauncher'

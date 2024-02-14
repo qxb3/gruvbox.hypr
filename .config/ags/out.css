@@ -61,7 +61,7 @@
   background-color: #458588;
 }
 .line .right .sections .mode_indicator .commands {
-  background-color: #689d6a;
+  background-color: #d79921;
 }
 .line .app_launcher_input {
   background-color: #282828;
@@ -73,19 +73,19 @@
   font-weight: 700;
 }
 
-.apps .list {
+.apps .list, .commands .list {
   padding: 4px;
   background-color: #3c3836;
   font-weight: 900;
   color: #ebdbb2;
 }
-.apps .list .app {
+.apps .list .app, .apps .list .command, .commands .list .app, .commands .list .command {
   padding: 0 4px;
 }
-.apps .list .app.selected {
+.apps .list .app.selected, .apps .list .command.selected, .commands .list .app.selected, .commands .list .command.selected {
   background-color: #458588;
 }
-.apps .list .app:hover {
+.apps .list .app:hover, .apps .list .command:hover, .commands .list .app:hover, .commands .list .command:hover {
   background-color: #928374;
 }
 

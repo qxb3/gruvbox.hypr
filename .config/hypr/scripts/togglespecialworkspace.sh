@@ -9,4 +9,5 @@ else
 
   bash ~/.config/ags/shared/scripts/sidebar.sh close
   bash ~/.config/ags/shared/scripts/applauncher.sh close
+  bash ~/.config/ags/shared/scripts/commands.sh close
 fi
