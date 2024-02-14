@@ -6,5 +6,7 @@ if [ ! -z $special_open ]; then
 else
   # Close
   hyprctl dispatch togglespecialworkspace
+
+  bash ~/.config/ags/shared/scripts/sidebar.sh close
   bash ~/.config/ags/shared/scripts/applauncher.sh close
 fi

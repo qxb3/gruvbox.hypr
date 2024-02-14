@@ -18,6 +18,9 @@ function handle() {
   width=$1
   height=$2
 
+  bash ~/.config/ags/shared/scripts/sidebar.sh close
+  bash ~/.config/ags/shared/scripts/applauncher.sh close
+
   if [ $floating == "false" ]; then
     toggle $width $height
   else
