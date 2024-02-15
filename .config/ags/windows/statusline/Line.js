@@ -3,29 +3,7 @@ import Gdk from 'gi://Gdk'
 import { hyprSendMessage, getDate } from '../../shared/utils.js'
 import { musicStatus, musicTitle } from '../../shared/music.js'
 
-import {
-  mode,
-  revealAppLauncher,
-  appLauncherQuery,
-  revealCommands,
-  commandsQuery
-} from './misc/vars.js'
-
 import { assignBatteryIcon } from './misc/fns.js'
-
-import {
-  appLaunch,
-  appsSelectUp,
-  appsSelectDown,
-  exitAppsSelect
-} from './misc/apps.fns.js'
-
-import {
-  runCommand,
-  commandsSelectUp,
-  commandsSelectDown,
-  exitCommandsSelect
-} from './misc/commands.fns.js'
 
 const Hyprland = await Service.import('hyprland')
 const Battery = await Service.import('battery')
@@ -109,8 +87,23 @@ function LeftSection() {
 }
 
 function RightSection() {
+  const m = Widget.Menu({
+    children: [
+      Widget.MenuItem({
+        child: Widget.Label('hi')
+      }),
+      Widget.MenuItem({
+        child: Widget.Label('hi')
+      }),
+      Widget.MenuItem({
+        child: Widget.Label('hi')
+      })
+    ]
+  })
+
   const RandomButton = Widget.Button({
     className: 'random_button',
+    onClicked: (self) => m.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
     child: Widget.Label('')
   })
 
@@ -149,23 +142,14 @@ function RightSection() {
     setup: (self) => self.poll(1000, () => self.label = getDate('time'))
   })
 
-  const ModeIndicator = Widget.Stack({
+  const ModeIndicator = Widget.Box({
     className: 'mode_indicator',
-    shown: mode.bind(),
-    children: {
-      normal: Widget.Label({
+    children: [
+      Widget.Label({
         className: 'workspace',
         label: Hyprland.active.workspace.bind('id').transform(id => `${id}:0`)
-      }),
-      applauncher: Widget.Label({
-        className: 'applauncher',
-        label: mode.bind().transform(m => m === 'applauncher' ? 'APP LAUNCHER' : '')
-      }),
-      commands: Widget.Label({
-        className: 'commands',
-        label: mode.bind().transform(m => m === 'commands' ? 'COMMANDS' : '')
       })
-    }
+    ]
   })
 
   return Widget.Box({
@@ -192,69 +176,11 @@ function RightSection() {
   })
 }
 
-function AppLauncherInput() {
-  const Input = Widget.Box({
-    children: [
-      Widget.Label(':'),
-      Widget.Entry({
-        className: 'input',
-        hexpand: true,
-        onChange: ({ text }) => appLauncherQuery.value = text,
-        onAccept: () => appLaunch(),
-        setup: (self) => self.hook(revealAppLauncher, () => {
-          if (revealAppLauncher.value) self.grab_focus()
-          else self.text = ''
-        })
-      })
-    ]
-  })
-
-  return Widget.Box({
-    className: 'applauncher_input',
-    children: [
-      Input
-    ]
-  })
-}
-
-function CommandInput() {
-  const Input = Widget.Box({
-    children: [
-      Widget.Label(':'),
-      Widget.Entry({
-        className: 'input',
-        hexpand: true,
-        onChange: ({ text }) => commandsQuery.value = text,
-        onAccept: () => runCommand(),
-        setup: (self) => self.hook(revealCommands, () => {
-          if (revealCommands.value) self.grab_focus()
-          else self.text = ''
-        })
-      })
-    ]
-  })
-
-  return Widget.Box({
-    className: 'commands_input',
-    children: [
-      Input
-    ]
-  })
-}
-
 function Line() {
   return Widget.Box({
     className: 'line',
     children: [
-      Widget.Stack({
-        className: 'line',
-        shown: mode.bind().transform(v => v === 'normal' ? 'line' : v),
-        children: {
-          line: LeftSection(),
-          applauncher: AppLauncherInput(),
-          commands: CommandInput()
-        }
-      }),
+      LeftSection(),
       RightSection()
     ]
   })
@@ -264,39 +190,6 @@ export default Widget.Window({
   name: 'line',
   layer: 'top',
   exclusivity: 'exclusive',
-  keymode: mode.bind().transform(m => m !== 'normal' ? 'exclusive' : 'none'),
   anchor: ['left', 'right', 'bottom'],
-  child: Line().on('key-press-event', (_, event) => {
-    const key = event.get_keyval()[1]
-
-    if (mode.value === 'applauncher') {
-      switch (key) {
-        case Gdk.KEY_Escape:
-          exitAppsSelect()
-          break
-        case Gdk.KEY_Up:
-          appsSelectUp()
-          break
-        case Gdk.KEY_Tab:
-        case Gdk.KEY_Down:
-          appsSelectDown()
-          break
-      }
-    }
-
-    if (mode.value === 'commands') {
-      switch (key) {
-        case Gdk.KEY_Escape:
-          exitCommandsSelect()
-          break
-        case Gdk.KEY_Up:
-          commandsSelectUp()
-          break
-        case Gdk.KEY_Tab:
-        case Gdk.KEY_Down:
-          commandsSelectDown()
-          break
-      }
-    }
-  })
+  child: Line()
 })
