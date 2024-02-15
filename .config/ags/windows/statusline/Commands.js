@@ -12,19 +12,19 @@ const Notifications = await Service.import('notifications')
 const commands = [
   {
     name: 'shutdown',
-    fn: () => console.log('shutdown')
+    fn: () => Utils.exec(`systemctl poweroff`)
   },
   {
     name: 'restart',
-    fn: () => console.log('restart')
+    fn: () => Utils.exec(`systemctl reboot`)
   },
   {
     name: 'suspend',
-    fn: () => console.log('suspend')
+    fn: () => Utils.exec(`systemctl suspend && swaylock`)
   },
   {
     name: 'logout',
-    fn: () => console.log('logout')
+    fn: () => Utils.exec(`hyprctl dispatch exit 0`)
   },
   {
     name: 'notif-clear',
