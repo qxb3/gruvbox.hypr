@@ -1,5 +1,8 @@
 import Gdk from 'gi://Gdk'
 
+import { hyprSendMessage, getDate } from '../../shared/utils.js'
+import { musicStatus, musicTitle } from '../../shared/music.js'
+
 import {
   mode,
   revealAppLauncher,
@@ -8,27 +11,21 @@ import {
   commandsQuery
 } from './misc/vars.js'
 
+import { assignBatteryIcon } from './misc/fns.js'
+
 import {
-  exitAppsSelect,
+  appLaunch,
   appsSelectUp,
   appsSelectDown,
-  appLaunch,
-  exitCommandsSelect,
+  exitAppsSelect
+} from './misc/apps.fns.js'
+
+import {
+  runCommand,
   commandsSelectUp,
   commandsSelectDown,
-  runCommand,
-  assignBatteryIcon
-} from './misc/fns.js'
-
-import {
-  hyprSendMessage,
-  getDate
-} from '../../shared/utils.js'
-
-import {
-  musicStatus,
-  musicTitle
-} from '../../shared/music.js'
+  exitCommandsSelect
+} from './misc/commands.fns.js'
 
 const Hyprland = await Service.import('hyprland')
 const Battery = await Service.import('battery')
@@ -154,7 +151,7 @@ function RightSection() {
     className: 'mode_indicator',
     shown: mode.bind(),
     children: {
-      workspace: Widget.Label({
+      normal: Widget.Label({
         className: 'workspace',
         label: Hyprland.active.workspace.bind('id').transform(id => `${id}:0`)
       }),
@@ -249,7 +246,7 @@ function Line() {
     children: [
       Widget.Stack({
         className: 'line',
-        shown: mode.bind().transform(v => v === 'workspace' ? 'line' : v),
+        shown: mode.bind().transform(v => v === 'normal' ? 'line' : v),
         children: {
           line: LeftSection(),
           applauncher: AppLauncherInput(),
@@ -265,7 +262,7 @@ export default Widget.Window({
   name: 'line',
   layer: 'top',
   exclusivity: 'exclusive',
-  keymode: mode.bind().transform(m => m !== 'workspace' ? 'exclusive' : 'none'),
+  keymode: mode.bind().transform(m => m !== 'normal' ? 'exclusive' : 'none'),
   anchor: ['left', 'right', 'bottom'],
   child: Line().on('key-press-event', (_, event) => {
     const key = event.get_keyval()[1]
