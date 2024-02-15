@@ -28,7 +28,7 @@
 .line .left .window_state.floating {
   background-color: #458588;
 }
-.line .right .network_button {
+.line .right .random_button {
   padding-right: 2px;
 }
 .line .right .battery .icon {
@@ -38,9 +38,6 @@
   font-size: 12px;
   color: #fbf1c7;
   padding-left: 4px;
-}
-.line .right .notification_button {
-  padding-right: 2px;
 }
 .line .right .sections {
   margin-left: 8px;

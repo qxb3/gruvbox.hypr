@@ -86,7 +86,9 @@ function LeftSection() {
     children: [
       Widget.Label({
         label: musicTitle.bind()
-          .transform(t => musicStatus !== 'Stopped' ? '󰝛 No Music - Title' : `󰝚 Playing - ${t}`),
+          .transform(t => musicStatus.value === 'Stopped' ? '󰝛 No Music - Title' : `󰝚 Playing - ${t}`),
+        maxWidthChars: 35,
+        truncate: 'end'
       })
     ]
   })
@@ -107,9 +109,9 @@ function LeftSection() {
 }
 
 function RightSection() {
-  const NetworkButton = Widget.Button({
-    className: 'network_button',
-    child: Widget.Label('󰈀')
+  const RandomButton = Widget.Button({
+    className: 'random_button',
+    child: Widget.Label('')
   })
 
   const revealBatteryPercent = Variable(false)
@@ -170,7 +172,7 @@ function RightSection() {
     className: 'right',
     homogeneous: false,
     children: [
-      NetworkButton,
+      RandomButton,
       BarDivider(),
       BatteryIndicator,
       Widget.Box({

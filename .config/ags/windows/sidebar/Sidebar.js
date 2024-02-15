@@ -11,10 +11,6 @@ import {
 
 const revealSidebar = state('reveal_sidebar', false)
 
-Utils.monitorFile(App.configDir + '/services', () => {
-  console.log('changed')
-}, 'directory')
-
 function Sidebar() {
   const Header = Widget.Label({
     className: 'header',
