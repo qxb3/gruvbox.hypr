@@ -3,7 +3,7 @@ const Mpris = await Service.import('mpris')
 export const PLAYERS = ['spotify']
 
 export const player = Variable()
-export const musicStatus = Variable('')
+export const musicStatus = Variable('Stopped')
 export const musicTitle = Variable('No Music')
 export const musicArtist = Variable('Artist')
 export const musicAlbum = Variable('Album')
