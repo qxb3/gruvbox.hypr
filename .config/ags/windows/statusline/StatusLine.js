@@ -31,42 +31,29 @@ function Divider(margin = '0 5px', divider = '') {
 }
 
 function LeftSection() {
-  // const W = Widget.Stack({
-  //   className: 'window_state',
-  //   children: {
-  //     tiling: Widget.Label({
-  //       className: 'floating',
-  //       label: 'TILING'
-  //     }),
-  //     floating: Widget.Label({
-  //       className: 'floating',
-  //       label: 'FLOATING'
-  //     })
-  //   },
-  //   setup: (self) => self.hook(Hyprland, () => {
-  //     const isFloating = hyprSendMessage('activewindow').floating
-  //     console.log(isFloating)
-  //
-  //     if (isFloating) self.shown = 'floating'
-  //     else self.shown = 'tiling'
-  //
-  //     console.log(self.shown)
-  //   }, 'event')
-  // })
-
-  const WindowState = Widget.Label({
-    className: 'window_state tiling',
-    label: 'TILING',
+  const WindowState = Widget.Stack({
+    className: 'window_state',
+    transition: 'over_right_left',
+    transitionDuration: 100,
+    shown: 'tiling',
+    children: {
+      tiling: Widget.Label({
+        className: 'tiling',
+        label: 'TILING'
+      }),
+      floating: Widget.Label({
+        className: 'floating',
+        label: 'FLOATING'
+      })
+    },
     setup: (self) => self.hook(Hyprland, () => {
       const isFloating = hyprSendMessage('activewindow').floating
+      console.log(isFloating)
 
-      if (isFloating) {
-        self.label = 'FLOATING'
-        self.className = 'window_state floating'
-      } else {
-        self.label = 'TILING'
-        self.className = 'window_state tiling'
-      }
+      if (isFloating) self.shown = 'floating'
+      else self.shown = 'tiling'
+
+      console.log(self.shown)
     }, 'event')
   })
 
@@ -164,6 +151,7 @@ function RightSection() {
   const ModeIndicator = Widget.Stack({
     className: 'mode_indicator',
     transition: 'over_right_left',
+    transitionDuration: 100,
     shown: mode.bind(),
     children: {
       normal: Widget.Label({

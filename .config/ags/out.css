@@ -20,12 +20,14 @@
 }
 .line .left .window_state {
   color: #282828;
+}
+.line .left .window_state label {
   padding: 0 1rem;
 }
-.line .left .window_state.tiling {
+.line .left .window_state .tiling {
   background-color: #98971a;
 }
-.line .left .window_state.floating {
+.line .left .window_state .floating {
   background-color: #458588;
 }
 .line .right .random_button {
@@ -58,6 +60,7 @@
 }
 .line .right .sections .mode_indicator .workspace {
   background-color: #d65d0e;
+  padding: 0 2rem;
 }
 .line .right .sections .mode_indicator .applauncher {
   background-color: #458588;
