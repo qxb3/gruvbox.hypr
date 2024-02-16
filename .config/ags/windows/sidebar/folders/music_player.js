@@ -16,7 +16,7 @@ export default {
       icon: '󰲹',
       spacing: 4,
       widget: Widget.Label({
-        maxWidthChars: 18,
+        maxWidthChars: 15,
         truncate: 'end',
         label: musicTitle.bind()
       })
@@ -26,7 +26,7 @@ export default {
       icon: '󰠃',
       spacing: 3,
       widget: Widget.Label({
-        maxWidthChars: 18,
+        maxWidthChars: 15,
         truncate: 'end',
         label: musicArtist.bind()
       })
@@ -36,7 +36,7 @@ export default {
       icon: '󰀥',
       spacing: 4,
       widget: Widget.Label({
-        maxWidthChars: 18,
+        maxWidthChars: 15,
         truncate: 'end',
         label: musicAlbum.bind()
       })

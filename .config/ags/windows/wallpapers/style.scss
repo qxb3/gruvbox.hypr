@@ -7,6 +7,10 @@
     border: solid $fg 1.5px;
     min-width: 300px;
     padding: 1rem;
+
+    & .file {
+      &.selected { color: $orange; }
+    }
   }
 
   & .input_container {

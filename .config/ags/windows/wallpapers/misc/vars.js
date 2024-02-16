@@ -6,4 +6,4 @@ export const wallpaperFiles = Variable(getWallpapers())
 
 Utils.monitorFile(`/home/${Utils.exec('whoami')}/.config/swww`, () => {
   wallpaperFiles.value = getWallpapers()
-}, 'directory')
+})

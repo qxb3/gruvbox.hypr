@@ -13,7 +13,7 @@ const selectedIndex = Variable(0)
 const availableCommands = [
   { name: 'shutdown', fn: () => Utils.exec(`systemctl poweroff`) },
   { name: 'restart', fn: () => Utils.exec(`systemctl reboot`) },
-  { name: 'suspend', fn: () => Utils.exec(`systemctl suspend && swaylock`) },
+  { name: 'suspend', fn: () => Utils.exec(`bash -c 'systemctl suspend && swaylock'`) },
   { name: 'logout', fn: () => Utils.exec(`hyprctl dispatch exit 0`) },
   { name: 'notif-clear', fn: () => Notifications.clear() }
 ]

@@ -23,7 +23,7 @@ export default {
         type: 'custom',
         child: Widget.Label({
           label: appName === 'Spotify' ? `󰝚 Playing - ${notif.summary}` : notif.summary,
-          maxWidthChars: 28,
+          maxWidthChars: 24,
           truncate: 'end'
         })
       }

@@ -4,14 +4,30 @@ import Fuse from '../../node_modules/fuse.js/dist/fuse.mjs'
 import { revealWallpapers } from './misc/vars.js'
 import { wallpaperFiles } from './misc/vars.js'
 
+const query = Variable('')
 const queriedWallpapers = Variable([])
+const selectedWallpaper = Variable()
 
 function WallpaperFile(wallpaper) {
   return Widget.Label({
+    attribute: { wallpaper },
     className: 'file',
     label: `󰋩 ~/.config/swww/${wallpaper}`,
     xalign: 0,
-    vpack: 'end'
+    vpack: 'end',
+    setup: (self) => self.hook(selectedWallpaper, () => {
+      if (!selectedWallpaper.value) return
+
+      if (selectedWallpaper.value === self.attribute.wallpaper) {
+        self.className = 'file selected'
+        self.label = `> 󰋩 ~/.config/swww/${wallpaper}`
+      } else {
+        self.className = 'file'
+        self.label = `󰋩 ~/.config/swww/${wallpaper}`
+      }
+
+      console.log(self.className)
+    })
   })
 }
 
@@ -26,8 +42,8 @@ function List() {
         vertical: true,
         vexpand: true,
         className: 'files',
-        // children: queriedWallpapers.bind(queried => queried ? queried : wallpaperFiles.value.map(WallpaperFile))
-        children: queriedWallpapers.bind().transform(() => queriedWallpapers.value ? queriedWallpapers.value.map(WallpaperFile) : wallpaperFiles.value.map(WallpaperFile))
+        children: wallpaperFiles.bind().transform(wallpapers => wallpapers.map(WallpaperFile))
+        // children: queriedWallpapers.bind().transform((queried) => queried.length > 0 ? queried.map(WallpaperFile) : wallpaperFiles.value.map(WallpaperFile))
       })
     ]
   })
@@ -51,15 +67,16 @@ function Input() {
       Widget.Entry({
         className: 'input',
         hexpand: true,
-        onChange: (self) => {
-          queriedWallpapers.value = fuse.search(self.text).map(r => r.item).reverse()
-          // wallpaperFiles.value = fuse.search(self.text).map(r => r.item).reverse()
-          // const result = fuse.search(text).map(r => r.item)
-          // console.log(result)
+        onChange: ({ text }) => {
+          queriedWallpapers.value = fuse.search(text).map(r => r.item).reverse()
+          selectedWallpaper.value = queriedWallpapers.value[queriedWallpapers.length - 1]
         }
       }).hook(revealWallpapers, (self) => {
-        if (revealWallpapers.value) self.grab_focus()
-        else self.text = ''
+        if (!revealWallpapers.value) return self.text = ''
+
+        console.log(queriedWallpapers.value)
+        selectedWallpaper.value = wallpaperFiles.value[wallpaperFiles.value.length - 1]
+        self.grab_focus()
       })
     ]
   })

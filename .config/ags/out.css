@@ -85,8 +85,8 @@
 
 .sidebar {
   background-color: #282828;
-  border-right: solid #928374 2px;
-  border-bottom: solid #928374 2px;
+  border-right: solid #1d2021 2px;
+  border-bottom: solid #1d2021 2px;
   color: #bdae93;
   font-size: 14px;
 }
@@ -95,12 +95,12 @@
   font-weight: 700;
 }
 .sidebar .path {
-  padding-left: 8px;
+  padding-left: 5px;
   color: #b16286;
   font-weight: 700;
 }
 .sidebar .tree {
-  padding: 0 1rem 0 1.5rem;
+  padding: 0 2.5rem 0 1rem;
 }
 .sidebar .tree .tree_item .dir .down {
   color: #fbf1c7;
@@ -145,4 +145,34 @@
   font-size: 24px;
   font-weight: 900;
   letter-spacing: 5px;
+}
+
+.wallpapers {
+  background-color: #282828;
+  font-size: 14px;
+  color: #ebdbb2;
+}
+.wallpapers .list {
+  border: solid #ebdbb2 1.5px;
+  min-width: 300px;
+  padding: 1rem;
+}
+.wallpapers .list .file.selected {
+  color: #d65d0e;
+}
+.wallpapers .input_container {
+  border: solid #ebdbb2 1.5px;
+  padding: 2px;
+}
+.wallpapers .input_container .indicator {
+  color: #928374;
+  font-weight: 900;
+}
+.wallpapers .preview {
+  border: solid #ebdbb2 1.5px;
+  min-width: 400px;
+  min-height: 300px;
+}
+.wallpapers .preview .image {
+  background-size: cover;
 }

@@ -65,7 +65,8 @@ export default Widget.Window({
     css: `padding: 0.1px;`,
     child: Widget.Revealer({
       revealChild: revealSidebar.bind(),
-      transition: 'none',
+      transition: 'slide_right',
+      transitionDuration: 100,
       child: Sidebar()
     })
   })

@@ -1,7 +1,7 @@
 .sidebar {
   background-color: $bg;
-  border-right: solid $gray 2px;
-  border-bottom: solid $gray 2px;
+  border-right: solid $bgh 2px;
+  border-bottom: solid $bgh 2px;
   color: $fg2;
   font-size: 14px;
 
@@ -11,13 +11,13 @@
   }
 
   & .path {
-    padding-left: 8px;
+    padding-left: 5px;
     color: $purple;
     font-weight: 700;
   }
 
   & .tree {
-    padding: 0 1rem 0 1.5rem;
+    padding: 0 2.5rem 0 1rem;
 
     & .tree_item {
       & .dir {

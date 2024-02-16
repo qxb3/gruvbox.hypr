@@ -11,7 +11,7 @@ export default {
           Widget.Label('['),
           Widget.ProgressBar({
             className: 'metric',
-            setup: (self) => self.poll(2000, () => {
+            setup: (self) => self.poll(2500, () => {
               const cpu = Utils.exec(`top -b -n 1`)
                 .split('\n')
                 .find(line => line.includes('Cpu(s)'))
@@ -35,7 +35,7 @@ export default {
           Widget.Label('['),
           Widget.ProgressBar({
             className: 'metric',
-            setup: (self) => self.poll(2000, () => {
+            setup: (self) => self.poll(2500, () => {
               const [total, used] = Utils.exec(`free`)
                 .split('\n')
                 .find(line => line.includes('Mem:'))

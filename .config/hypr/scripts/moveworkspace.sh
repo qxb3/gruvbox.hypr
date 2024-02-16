@@ -10,8 +10,4 @@ hyprctl dispatch workspace $1
 
 bash ~/.config/ags/shared/scripts/applauncher.sh close
 bash ~/.config/ags/shared/scripts/changemode.sh normal
-
-eww update reveal_sidebar=false # Close sidebar
-eww update reveal_notif=false # Close notification
-eww update reveal_network=false # Close network
-eww close yesno
+bash ~/.config/ags/shared/scripts/wallpapers.sh close
