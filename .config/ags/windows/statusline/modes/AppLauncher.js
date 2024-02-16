@@ -48,7 +48,7 @@ export function appLauncherInput(key) {
   }
 }
 
-export const AppLauncherMenu = Widget.Window({
+const AppLauncherMenu = Widget.Window({
   name: 'appLauncherMenu',
   layer: 'top',
   anchor: ['left', 'bottom'],
@@ -93,6 +93,8 @@ export const AppLauncherMenu = Widget.Window({
 })
 
 export function AppLauncherInput() {
+  App.addWindow(AppLauncherMenu)
+
   return Widget.Box({
     children: [
       Widget.Label(':'),

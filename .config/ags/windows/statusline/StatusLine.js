@@ -4,17 +4,8 @@ import { musicStatus, musicTitle } from '../../shared/music.js'
 import { mode } from './misc/vars.js'
 import { assignBatteryIcon } from './misc/fns.js'
 
-import {
-  AppLauncherMenu,
-  AppLauncherInput,
-  appLauncherInput
-} from './modes/AppLauncher.js'
-
-import {
-  CommandLauncherMenu,
-  CommandLauncherInput,
-  commandLauncherInput
-} from './modes/CommandLauncher.js'
+import { AppLauncherInput, appLauncherInput } from './modes/AppLauncher.js'
+import { CommandLauncherInput, commandLauncherInput } from './modes/CommandLauncher.js'
 
 const Hyprland = await Service.import('hyprland')
 const Battery = await Service.import('battery')
@@ -48,12 +39,9 @@ function LeftSection() {
     },
     setup: (self) => self.hook(Hyprland, () => {
       const isFloating = hyprSendMessage('activewindow').floating
-      console.log(isFloating)
 
       if (isFloating) self.shown = 'floating'
       else self.shown = 'tiling'
-
-      console.log(self.shown)
     }, 'event')
   })
 
@@ -194,10 +182,6 @@ function RightSection() {
 }
 
 function StatusLine() {
-  // Add mode windows
-  App.addWindow(AppLauncherMenu)
-  App.addWindow(CommandLauncherMenu)
-
   return Widget.Box({
     className: 'line',
     children: [

@@ -64,7 +64,7 @@ export function commandLauncherInput(key) {
   }
 }
 
-export const CommandLauncherMenu = Widget.Window({
+const CommandLauncherMenu = Widget.Window({
   name: 'commandLauncherMenu',
   layer: 'top',
   anchor: ['left', 'bottom'],
@@ -110,6 +110,8 @@ export const CommandLauncherMenu = Widget.Window({
 })
 
 export function CommandLauncherInput() {
+  App.addWindow(CommandLauncherMenu)
+
   return Widget.Box({
     children: [
       Widget.Label(':'),
