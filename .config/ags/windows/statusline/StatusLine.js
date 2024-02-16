@@ -26,7 +26,6 @@ function LeftSection() {
     className: 'window_state',
     transition: 'over_right_left',
     transitionDuration: 100,
-    shown: 'tiling',
     children: {
       tiling: Widget.Label({
         className: 'tiling',
