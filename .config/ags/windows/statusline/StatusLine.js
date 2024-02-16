@@ -1,14 +1,25 @@
-import Gdk from 'gi://Gdk'
-
 import { hyprSendMessage, getDate } from '../../shared/utils.js'
 import { musicStatus, musicTitle } from '../../shared/music.js'
 
+import { mode } from './misc/vars.js'
 import { assignBatteryIcon } from './misc/fns.js'
+
+import {
+  AppLauncherMenu,
+  AppLauncherInput,
+  appLauncherInput
+} from './modes/AppLauncher.js'
+
+import {
+  CommandLauncherMenu,
+  CommandLauncherInput,
+  commandLauncherInput
+} from './modes/CommandLauncher.js'
 
 const Hyprland = await Service.import('hyprland')
 const Battery = await Service.import('battery')
 
-function BarDivider(margin = '0 5px', divider = '') {
+function Divider(margin = '0 5px', divider = '') {
   return Widget.Label({
     className: 'divider',
     label: divider,
@@ -80,30 +91,15 @@ function LeftSection() {
       WindowState,
       ActiveWindow,
       WorkspaceIcon,
-      BarDivider('0'),
+      Divider('0'),
       Music
     ]
   })
 }
 
 function RightSection() {
-  const m = Widget.Menu({
-    children: [
-      Widget.MenuItem({
-        child: Widget.Label('hi')
-      }),
-      Widget.MenuItem({
-        child: Widget.Label('hi')
-      }),
-      Widget.MenuItem({
-        child: Widget.Label('hi')
-      })
-    ]
-  })
-
   const RandomButton = Widget.Button({
     className: 'random_button',
-    onClicked: (self) => m.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
     child: Widget.Label('')
   })
 
@@ -142,14 +138,23 @@ function RightSection() {
     setup: (self) => self.poll(1000, () => self.label = getDate('time'))
   })
 
-  const ModeIndicator = Widget.Box({
+  const ModeIndicator = Widget.Stack({
     className: 'mode_indicator',
-    children: [
-      Widget.Label({
+    shown: mode.bind(),
+    children: {
+      normal: Widget.Label({
         className: 'workspace',
         label: Hyprland.active.workspace.bind('id').transform(id => `${id}:0`)
+      }),
+      appLauncher: Widget.Label({
+        className: 'applauncher',
+        label: mode.bind().transform(m => m === 'appLauncher' ? 'APP LAUNCHER' : '')
+      }),
+      commandLauncher: Widget.Label({
+        className: 'commandlauncher',
+        label: mode.bind().transform(m => m === 'commandLauncher' ? 'COMMANDS' : '')
       })
-    ]
+    }
   })
 
   return Widget.Box({
@@ -157,11 +162,11 @@ function RightSection() {
     homogeneous: false,
     children: [
       RandomButton,
-      BarDivider(),
+      Divider(),
       BatteryIndicator,
       Widget.Box({
         visible: Battery.bind('available'),
-        children: [ BarDivider('0 5px 0 0') ]
+        children: [ Divider('0 5px 0 0') ]
       }),
       User,
 
@@ -176,11 +181,22 @@ function RightSection() {
   })
 }
 
-function Line() {
+function StatusLine() {
+  // Add mode windows
+  App.addWindow(AppLauncherMenu)
+  App.addWindow(CommandLauncherMenu)
+
   return Widget.Box({
     className: 'line',
     children: [
-      LeftSection(),
+      Widget.Stack({
+        shown: mode.bind(),
+        children: {
+          normal: LeftSection(),
+          appLauncher: AppLauncherInput(),
+          commandLauncher: CommandLauncherInput()
+        }
+      }),
       RightSection()
     ]
   })
@@ -191,5 +207,11 @@ export default Widget.Window({
   layer: 'top',
   exclusivity: 'exclusive',
   anchor: ['left', 'right', 'bottom'],
-  child: Line()
+  keymode: mode.bind().transform(m => m === 'normal' ? 'none' : 'exclusive'),
+  child: StatusLine().on('key-press-event', (_, event) => {
+    const key = event.get_keyval()[1]
+
+    if (mode.value === 'appLauncher') appLauncherInput(key)
+    if (mode.value === 'commandLauncher') commandLauncherInput(key)
+  })
 })

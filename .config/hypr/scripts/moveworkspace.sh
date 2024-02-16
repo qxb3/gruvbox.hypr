@@ -8,9 +8,8 @@ fi
 
 hyprctl dispatch workspace $1
 
-bash ~/.config/ags/shared/scripts/sidebar.sh close
 bash ~/.config/ags/shared/scripts/applauncher.sh close
-bash ~/.config/ags/shared/scripts/commands.sh close
+bash ~/.config/ags/shared/scripts/changemode.sh normal
 
 eww update reveal_sidebar=false # Close sidebar
 eww update reveal_notif=false # Close notification

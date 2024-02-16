@@ -34,6 +34,12 @@
         color: $fgh;
         padding-left: 4px;
       }
+
+      & .applauncher_input {
+        background-color: $bg;
+        font-size: 14px;
+        color: $fg2;
+      }
     }
 
     & .sections {
@@ -53,35 +59,25 @@
 
         & .workspace { background-color: $orange; }
         & .applauncher { background-color: $blue; }
-        & .commands { background-color: $yellow; }
+        & .commandlauncher {
+          background-color: $red;
+          color: $fg2;
+        }
       }
-    }
-  }
-
-  & .app_launcher_input {
-    background-color: $bg;
-    font-size: 14px;
-    color: $fg2;
-
-    & .input {
-      font-size: 12px;
-      font-weight: 700;
     }
   }
 }
 
 .apps, .commands {
-  & .list {
-    padding: 4px;
-    background-color: $bg1;
-    font-weight: 900;
-    color: $fg;
+  padding: 4px;
+  background-color: $bg1;
+  font-weight: 900;
+  color: $fg;
 
-    & .app, & .command {
-      padding: 0 4px;
+  & .app, & .command {
+    padding: 0 4px;
 
-      &.selected { background-color: $blue; }
-      &:hover { background-color: $gray; }
-    }
+    &.selected { background-color: $blue; }
+    &:hover { background-color: $gray; }
   }
 }

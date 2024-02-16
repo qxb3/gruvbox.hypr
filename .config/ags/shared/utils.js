@@ -36,7 +36,7 @@ export function debounce({ called, fn }, delay = 30) {
     const context = this
     const args = arguments
 
-    // called.apply(context, args)
+    called.apply(context, args)
 
     clearTimeout(id)
 

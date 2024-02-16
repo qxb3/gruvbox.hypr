@@ -1,0 +1,31 @@
+.wallpapers {
+  background-color: $bg;
+  font-size: 14px;
+  color: $fg;
+
+  & .list {
+    border: solid $fg 1.5px;
+    min-width: 300px;
+    padding: 1rem;
+  }
+
+  & .input_container {
+    border: solid $fg 1.5px;
+    padding: 2px;
+
+    & .indicator {
+      color: $gray;
+      font-weight: 900;
+    }
+  }
+
+  & .preview {
+    border: solid $fg 1.5px;
+    min-width: 400px;
+    min-height: 300px;
+
+    & .image {
+      background-size: cover;
+    }
+  }
+}
