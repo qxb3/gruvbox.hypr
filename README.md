@@ -1,24 +1,24 @@
-<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/logo.png"><br><br>
+<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/logo.png"><br><br>
 
 &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
 &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
-&ensp;[<kbd> <br> Issues <br> </kbd>](#Issues)&ensp;
+<!-- &ensp;[<kbd> <br> Issues <br> </kbd>](#Issues)&ensp; -->
 <br><br></div>
 
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/1.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/2.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/3.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/4.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/5.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/6.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/7.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/8.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/9.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/1.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/2.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/3.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/5.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/6.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/7.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/8.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/9.png" />
 </p>
 
 <br>
@@ -32,7 +32,7 @@
 > Please see [Dependecies](#Dependecies)
 
 ```bash
-git clone --depth=1 https://github.com/qxb3/gruvbox.hypr
+git clone --depth=1 --single-branch --branch vim_styled https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
 cp -r font/* ~/.local/share/fonts
 cp -r .config/* ~/.config
@@ -50,7 +50,7 @@ cp -r .scripts ~/ # Optional
   <tr><td>dolphin</td><td>file explorer</td></tr>
   <tr><td>spotify</td><td>music player</td></tr>
   <tr><td>grimblast</td><td>screenshot tool</td></tr>
-  <tr><td>swappy</td><td>screenshot editor</td></tr>
+  <tr><td>swappy</td><td>screenshot editor & image viewer</td></tr>
   <tr><td>firefox</td><td>browser</td></tr></table>
 </td></tr></table>
 
@@ -58,8 +58,6 @@ cp -r .scripts ~/ # Optional
 
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
-  <tr><td>rofi</td><td>dmenu replacement</td></tr>
-  <tr><td>dunst</td><td>notification daemon</td></tr>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
   <tr><td>swaylock</td><td>screen locker</td></tr>
   <tr><td>ags</td><td>aylur's gtk widget</td></tr></table>
@@ -73,8 +71,7 @@ cp -r .scripts ~/ # Optional
   <tr><td>neovim</td><td>text editor</td></tr>
   <tr><td>neofetch</td><td>beautiful sys info</td></tr>
   <tr><td>cava</td><td>music visualizer</td></tr>
-  <tr><td>cliphist</td><td>clipboard tool</td></tr>
-  <tr><td>playerctl</td><td>control music player</td></tr></table>
+  <tr><td>brightnessctl</td><td>control brightness</td></tr></table>
 </td></tr></table>
 
 <br>
@@ -118,12 +115,9 @@ cp -r .scripts ~/ # Optional
 
 | Keys | Action |
 | :--  | :-- |
-| <kbd>Super</kbd> + <kbd>C</kbd> | toggle desktop clock
-| <kbd>Super</kbd> + <kbd>B</kbd> | toggle top bar
 | <kbd>Super</kbd> + <kbd>Tab</kbd> | toggle sidebar
-| <kbd>Super</kbd> + <kbd>A</kbd> | toggle app launcher
-| <kbd>Super</kbd> + <kbd>O</kbd> | toggle notification center
-| <kbd>Super</kbd> + <kbd>N</kbd> | toggle network bar
+| <kbd>Super</kbd> + <kbd>A</kbd> | toggle app launcher mode
+| <kbd>Super</kbd> + <kbd>C</kbd> | toggle command launcher mode
 
 #### Print Screen
 
@@ -153,15 +147,22 @@ cp -r .scripts ~/ # Optional
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>L</kbd> | lock screen
-| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>W</kbd> | wallpaper select
 
-<br>
 
-## Issues
+### Command Mode Commands
+| Command | Description |
+| :--  | :-- |
+| <kbd>shutdown</kbd>| shudown pc
+| <kbd>restart</kbd>| restart pc
+| <kbd>suspend</kbd>| suspend & lock pc
+| <kbd>logout</kbd>| logout out hyprland session
+| <kbd>notif-clear</kbd>| clear notifications
+| <kbd>change-wallpaper</kbd>| open wallpapers menu
 
-* This is built for a laptop with a resolution of 1366x768 so the widgets/wallpaper or the overall look might be messed up for you.
-* I have only one monitor (which is from the laptop) so multiple monitor support is not really in mind, so you might need to tweak the config for it to work properly.
-* The AppLauncher widget has a problem with focus where if your cursor is inside of it and you close the AppLauncher the focus will not be transferred back to the active window. Solutions: Move the cursor or Move the cursor outside the AppLauncher when you open it. (idk why this is happening but i think its a gtk problem)
-* Not really a problem but if you want to support multiple music players and not just spotify change the `PLAYER` variable in `config/eww/sidebar/scripts/music.sh`.
-
-<br>
+<!-- ## Issues -->
+<!-- * This is built for a laptop with a resolution of 1366x768 so the widgets/wallpaper or the overall look might be messed up for you. -->
+<!-- * I have only one monitor (which is from the laptop) so multiple monitor support is not really in mind, so you might need to tweak the config for it to work properly. -->
+<!-- * The AppLauncher widget has a problem with focus where if your cursor is inside of it and you close the AppLauncher the focus will not be transferred back to the active window. Solutions: Move the cursor or Move the cursor outside the AppLauncher when you open it. (idk why this is happening but i think its a gtk problem) -->
+<!-- * Not really a problem but if you want to support multiple music players and not just spotify change the `PLAYER` variable in `config/eww/sidebar/scripts/music.sh`. -->
+<!---->
+<!-- <br> -->
