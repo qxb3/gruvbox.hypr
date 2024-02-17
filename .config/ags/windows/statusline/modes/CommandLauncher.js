@@ -1,6 +1,7 @@
 import Gdk from 'gi://Gdk'
 import Fuse from '../../../node_modules/fuse.js/dist/fuse.mjs'
 
+import { revealWallpapers } from '../../wallpapers/misc/vars.js'
 import { mode } from '../misc/vars.js'
 
 const Notifications = await Service.import('notifications')
@@ -15,7 +16,8 @@ const availableCommands = [
   { name: 'restart', fn: () => Utils.exec(`systemctl reboot`) },
   { name: 'suspend', fn: () => Utils.exec(`bash -c 'systemctl suspend && swaylock'`) },
   { name: 'logout', fn: () => Utils.exec(`hyprctl dispatch exit 0`) },
-  { name: 'notif-clear', fn: () => Notifications.clear() }
+  { name: 'notif-clear', fn: () => Notifications.clear() },
+  { name: 'change-wallpaper', fn: () => revealWallpapers.value = true }
 ]
 
 const fuse = new Fuse(availableCommands, {
