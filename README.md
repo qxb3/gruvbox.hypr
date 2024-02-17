@@ -1,4 +1,4 @@
-<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/logo.png"><br><br>
+<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/logo.png"><br><br>
 
 &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
@@ -10,15 +10,15 @@
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/1.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/2.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/3.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/4.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/5.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/6.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/7.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/8.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/9.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/1.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/2.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/3.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/4.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/5.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/6.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/7.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/8.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/9.png" />
 </p>
 
 <br>
@@ -32,7 +32,7 @@
 > Please see [Dependecies](#Dependecies)
 
 ```bash
-git clone --depth=1 https://github.com/qxb3/gruvbox.hypr
+git clone --depth=1 --single-branch --branch groove https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
 cp -r font/* ~/.local/share/fonts
 cp -r .config/* ~/.config
