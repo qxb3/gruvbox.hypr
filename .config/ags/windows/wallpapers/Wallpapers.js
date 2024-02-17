@@ -13,7 +13,7 @@ const selectedWallpaper = Variable()
 const selectedIndex = Variable()
 
 function prev() {
-  if (selectedIndex.value >= 0) {
+  if (selectedIndex.value > 0) {
     selectedIndex.value -= 1
     selectedWallpaper.value = resultWallpapers.value[selectedIndex.value]
   }
