@@ -161,14 +161,14 @@
   padding: 1rem;
 }
 .wallpapers .list .file.selected {
-  color: #d65d0e;
+  color: #98971a;
 }
 .wallpapers .input_container {
   border: solid #ebdbb2 1.5px;
-  padding: 2px;
+  padding: 2px 4px;
 }
 .wallpapers .input_container .indicator {
-  color: #928374;
+  color: #fbf1c7;
   font-weight: 900;
 }
 .wallpapers .preview {

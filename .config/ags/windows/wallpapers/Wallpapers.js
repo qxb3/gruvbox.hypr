@@ -4,29 +4,40 @@ import Fuse from '../../node_modules/fuse.js/dist/fuse.mjs'
 import { revealWallpapers } from './misc/vars.js'
 import { wallpaperFiles } from './misc/vars.js'
 
-const query = Variable('')
+const resultWallpapers = Variable(wallpaperFiles.value)
 const queriedWallpapers = Variable([])
 const selectedWallpaper = Variable()
+const selectedIndex = Variable()
+
+function prev() {
+  if (selectedIndex.value >= 0) {
+    selectedIndex.value -= 1
+    selectedWallpaper.value = resultWallpapers.value[selectedIndex.value]
+  }
+}
+
+function next() {
+  if (selectedIndex.value < resultWallpapers.value.length - 1) {
+    selectedIndex.value += 1
+    selectedWallpaper.value = resultWallpapers.value[selectedIndex.value]
+  }
+}
 
 function WallpaperFile(wallpaper) {
   return Widget.Label({
-    attribute: { wallpaper },
     className: 'file',
-    label: `󰋩 ~/.config/swww/${wallpaper}`,
     xalign: 0,
     vpack: 'end',
     setup: (self) => self.hook(selectedWallpaper, () => {
       if (!selectedWallpaper.value) return
 
-      if (selectedWallpaper.value === self.attribute.wallpaper) {
+      if (selectedWallpaper.value === wallpaper) {
         self.className = 'file selected'
         self.label = `> 󰋩 ~/.config/swww/${wallpaper}`
       } else {
         self.className = 'file'
-        self.label = `󰋩 ~/.config/swww/${wallpaper}`
+        self.label = `  󰋩 ~/.config/swww/${wallpaper}`
       }
-
-      console.log(self.className)
     })
   })
 }
@@ -42,8 +53,16 @@ function List() {
         vertical: true,
         vexpand: true,
         className: 'files',
-        children: wallpaperFiles.bind().transform(wallpapers => wallpapers.map(WallpaperFile))
-        // children: queriedWallpapers.bind().transform((queried) => queried.length > 0 ? queried.map(WallpaperFile) : wallpaperFiles.value.map(WallpaperFile))
+        children: resultWallpapers.bind().transform((wallpapers) => wallpapers.map(WallpaperFile)),
+        setup: (self) => self.hook(queriedWallpapers, () => {
+          resultWallpapers.value = queriedWallpapers.value.length > 0
+            ? queriedWallpapers.value
+            : wallpaperFiles.value
+
+          selectedWallpaper.value = queriedWallpapers.value.length > 0
+            ? queriedWallpapers.value[queriedWallpapers.value.length - 1]
+            : wallpaperFiles.value[wallpaperFiles.value.length - 1]
+        })
       })
     ]
   })
@@ -69,13 +88,16 @@ function Input() {
         hexpand: true,
         onChange: ({ text }) => {
           queriedWallpapers.value = fuse.search(text).map(r => r.item).reverse()
-          selectedWallpaper.value = queriedWallpapers.value[queriedWallpapers.length - 1]
+
+          selectedIndex.value = resultWallpapers.value.length - 1
+          selectedWallpaper.value = resultWallpapers.value[selectedIndex.value]
         }
       }).hook(revealWallpapers, (self) => {
-        if (!revealWallpapers.value) return self.text = ''
+        selectedIndex.value = resultWallpapers.value.length - 1
+        selectedWallpaper.value = resultWallpapers.value[selectedIndex.value]
 
-        console.log(queriedWallpapers.value)
-        selectedWallpaper.value = wallpaperFiles.value[wallpaperFiles.value.length - 1]
+        if (!resultWallpapers.value) return self.text = ''
+
         self.grab_focus()
       })
     ]
@@ -89,7 +111,9 @@ function Wallpapers() {
       Widget.Box({
         className: 'image',
         hexpand: true,
-        css: `background-image: url('/home/qxb3/.config/swww/town.jpg')`
+        setup: (self) => self.hook(selectedWallpaper, () => {
+          self.css = `background-image: url('/home/${Utils.exec("whoami")}/.config/swww/${selectedWallpaper.value}')`
+        })
       })
     ]
   })
@@ -128,6 +152,13 @@ export default Widget.Window({
     switch (key) {
       case Gdk.KEY_Escape:
         revealWallpapers.value = false
+        break
+      case Gdk.KEY_Up:
+        prev()
+        break
+      case Gdk.KEY_Tab:
+      case Gdk.KEY_Down:
+        next()
         break
     }
   })

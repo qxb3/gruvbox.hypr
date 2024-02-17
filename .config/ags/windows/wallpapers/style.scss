@@ -9,16 +9,16 @@
     padding: 1rem;
 
     & .file {
-      &.selected { color: $orange; }
+      &.selected { color: $green; }
     }
   }
 
   & .input_container {
     border: solid $fg 1.5px;
-    padding: 2px;
+    padding: 2px 4px;
 
     & .indicator {
-      color: $gray;
+      color: $fgh;
       font-weight: 900;
     }
   }
