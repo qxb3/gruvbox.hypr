@@ -14,7 +14,7 @@ const revealSidebar = state('reveal_sidebar', false)
 function Sidebar() {
   const Header = Widget.Label({
     className: 'header',
-    label: 'Sidebar'
+    label: 'File Explorer'
   })
 
   const Path = Widget.Label({

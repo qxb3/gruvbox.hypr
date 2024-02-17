@@ -90,17 +90,17 @@
   background-color: #282828;
   border-right: solid #1d2021 2px;
   border-bottom: solid #1d2021 2px;
-  color: #bdae93;
+  font-weight: 400;
   font-size: 14px;
+  color: #bdae93;
 }
 .sidebar .header {
   background-color: #504945;
-  font-weight: 700;
+  color: #fbf1c7;
 }
 .sidebar .path {
   padding-left: 5px;
   color: #b16286;
-  font-weight: 700;
 }
 .sidebar .tree {
   padding: 0 2.5rem 0 1rem;

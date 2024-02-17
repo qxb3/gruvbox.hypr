@@ -2,18 +2,18 @@
   background-color: $bg;
   border-right: solid $bgh 2px;
   border-bottom: solid $bgh 2px;
-  color: $fg2;
+  font-weight: 400;
   font-size: 14px;
+  color: $fg2;
 
   & .header {
     background-color: $bg2;
-    font-weight: 700;
+    color: $fgh;
   }
 
   & .path {
     padding-left: 5px;
     color: $purple;
-    font-weight: 700;
   }
 
   & .tree {
