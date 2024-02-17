@@ -1,8 +1,11 @@
 import Gdk from 'gi://Gdk'
 import Fuse from '../../node_modules/fuse.js/dist/fuse.mjs'
 
-import { revealWallpapers } from './misc/vars.js'
-import { wallpaperFiles } from './misc/vars.js'
+import {
+  WALLPAPER_PATH,
+  revealWallpapers,
+  wallpaperFiles
+} from './misc/vars.js'
 
 const resultWallpapers = Variable(wallpaperFiles.value)
 const queriedWallpapers = Variable([])
@@ -29,8 +32,6 @@ function WallpaperFile(wallpaper) {
     xalign: 0,
     vpack: 'end',
     setup: (self) => self.hook(selectedWallpaper, () => {
-      if (!selectedWallpaper.value) return
-
       if (selectedWallpaper.value === wallpaper) {
         self.className = 'file selected'
         self.label = `> 󰋩 ~/.config/swww/${wallpaper}`
@@ -58,10 +59,6 @@ function List() {
           resultWallpapers.value = queriedWallpapers.value.length > 0
             ? queriedWallpapers.value
             : wallpaperFiles.value
-
-          selectedWallpaper.value = queriedWallpapers.value.length > 0
-            ? queriedWallpapers.value[queriedWallpapers.value.length - 1]
-            : wallpaperFiles.value[wallpaperFiles.value.length - 1]
         })
       })
     ]
@@ -91,12 +88,25 @@ function Input() {
 
           selectedIndex.value = resultWallpapers.value.length - 1
           selectedWallpaper.value = resultWallpapers.value[selectedIndex.value]
+        },
+        onAccept: () => {
+          const selected = `${WALLPAPER_PATH}/${selectedWallpaper.value}`
+
+          Utils.exec(`rm ${WALLPAPER_PATH}/current.set`)
+          Utils.exec(`rm /usr/share/sddm/themes/corners/backgrounds/background.png`)
+
+          Utils.exec(`ln -s ${selected} ${WALLPAPER_PATH}/current.set`)
+          Utils.exec(`ln -s ${selected} /usr/share/sddm/themes/corners/backgrounds/background.png`)
+
+          Utils.exec(`swww img ${selected} --transition-type "wipe" --transition-duration 1`)
+
+          revealWallpapers.value = false
         }
       }).hook(revealWallpapers, (self) => {
         selectedIndex.value = resultWallpapers.value.length - 1
         selectedWallpaper.value = resultWallpapers.value[selectedIndex.value]
 
-        if (!resultWallpapers.value) return self.text = ''
+        if (!revealWallpapers.value) return self.text = ''
 
         self.grab_focus()
       })
@@ -112,7 +122,7 @@ function Wallpapers() {
         className: 'image',
         hexpand: true,
         setup: (self) => self.hook(selectedWallpaper, () => {
-          self.css = `background-image: url('/home/${Utils.exec("whoami")}/.config/swww/${selectedWallpaper.value}')`
+          self.css = `background-image: url('${WALLPAPER_PATH}/${selectedWallpaper.value}')`
         })
       })
     ]
