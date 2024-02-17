@@ -4,6 +4,7 @@
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
 &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
+&ensp;[<kbd> <br> Commands <br> </kbd>](#Command-Mode-Commands)&ensp;
 <!-- &ensp;[<kbd> <br> Issues <br> </kbd>](#Issues)&ensp; -->
 <br><br></div>
 
@@ -14,11 +15,6 @@
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/2.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/3.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/5.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/6.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/7.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/8.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/9.png" />
 </p>
 
 <br>
@@ -148,8 +144,9 @@ cp -r .scripts ~/ # Optional
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>L</kbd> | lock screen
 
+<br>
 
-### Command Mode Commands
+## Command Mode Commands
 | Command | Description |
 | :--  | :-- |
 | <kbd>shutdown</kbd>| shudown pc
