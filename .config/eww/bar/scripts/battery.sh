@@ -24,7 +24,7 @@ case $command in
       icon=""
 
       case $status in
-        Charging)
+        Charging|Full)
           if   (( $capacity >= 0  && $capacity <= 9   )); then icon="󰢟"
           elif (( $capacity >= 10 && $capacity <= 20  )); then icon="󰢜"
           elif (( $capacity >= 21 && $capacity <= 30  )); then icon="󰂆"
