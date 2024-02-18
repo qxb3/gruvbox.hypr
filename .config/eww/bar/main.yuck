@@ -142,7 +142,7 @@
       :text ""
     )
 
-    (eventbox :cursor "pointer" :visible {v_network_primary != ""}
+    (eventbox :cursor "pointer" :visible {v_network_primary != "None"}
       (button
         :class "network ${reveal_network == true ? 'active' : ''}"
         :onclick "~/.config/eww/shared/scripts/togglenetwork.sh"
