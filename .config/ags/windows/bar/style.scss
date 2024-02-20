@@ -1,0 +1,85 @@
+.bar {
+  background-color: $bg;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 8px 4px;
+
+  & .sections {
+    & .start {
+      & .sidebar_button {
+        & box {
+          background-size: cover;
+          border-radius: 999px;
+          min-width: 32px;
+          min-height: 32px;
+        }
+      }
+
+      & .divider {
+        background-color: $bg1;
+        min-height: 2px;
+        margin: 2px 0;
+      }
+
+      & .search_button {
+        background-color: $bg1;
+        border-radius: 8px;
+        padding: 4px 8px;
+
+        & label {
+          font-size: 20px;
+          padding-right: 4px;
+        }
+      }
+    }
+
+    & .center {
+      & .workspace_indicator {
+        background-color: $bg1;
+        border-radius: 8px;
+        padding: 1rem 0;
+
+        & .workspace {
+          background-color: $fg;
+          border-radius: 8px;
+          min-width: 10px;
+          min-height: 32px;
+
+          &.active {
+            background-color: $yellow;
+          }
+        }
+      }
+    }
+
+    & .end {
+      & .controls {
+        background-color: $bg1;
+        border-radius: 8px;
+        padding: 4px 8px;
+
+        & .audio_control_button {
+          font-size: 20px;
+          padding-right: 2px;
+        }
+
+        & .system_control_button {
+          font-size: 26px;
+        }
+
+        & .screenshot_button {
+          font-size: 20px;
+          padding-right: 6px;
+        }
+      }
+
+      & .time_indicator {
+        background-color: $bg1;
+        border-radius: 8px;
+        padding: 4px 8px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+  }
+}
