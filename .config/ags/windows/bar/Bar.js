@@ -76,7 +76,9 @@ function EndSection() {
   const TimeIndicator = Widget.Box({
     className: 'time_indicator',
     hpack: 'center',
-    child: Widget.Label('01\n23')
+    child: Widget.Label().poll(1000, (self) =>
+      self.label = Utils.exec(`date +'%H\n%M'`)
+    )
   })
 
   return Widget.Box({
