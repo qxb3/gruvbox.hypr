@@ -33,8 +33,17 @@
   padding: 4px 8px;
 }
 .bar .sections .start .search_button label {
-  font-size: 20px;
+  font-size: 18px;
   padding-right: 4px;
+}
+.bar .sections .start .wallpaper_button {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+.bar .sections .start .wallpaper_button label {
+  font-size: 20px;
+  padding-right: 6px;
 }
 .bar .sections .center .workspace_indicator {
   background-color: #3c3836;
