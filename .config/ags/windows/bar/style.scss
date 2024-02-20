@@ -27,8 +27,19 @@
         padding: 4px 8px;
 
         & label {
-          font-size: 20px;
+          font-size: 18px;
           padding-right: 4px;
+        }
+      }
+
+      & .wallpaper_button {
+        background-color: $bg1;
+        border-radius: 8px;
+        padding: 4px 8px;
+
+        & label {
+          font-size: 20px;
+          padding-right: 6px;
         }
       }
     }

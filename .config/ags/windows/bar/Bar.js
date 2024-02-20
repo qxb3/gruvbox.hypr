@@ -15,6 +15,12 @@ function StartSection() {
     child: Widget.Label('')
   })
 
+  const WallpaperButton = Widget.Button({
+    className: 'wallpaper_button',
+    cursor: 'pointer',
+    child: Widget.Label('󰸉')
+  })
+
   return Widget.Box({
     className: 'start',
     vpack: 'start',
@@ -26,6 +32,7 @@ function StartSection() {
         className: 'divider'
       }),
       SearchButton,
+      WallpaperButton
     ]
   })
 }
