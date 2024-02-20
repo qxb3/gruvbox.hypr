@@ -16,6 +16,7 @@ function control() {
     # Changes workspace
     if [ ${line:0:9} == "workspace" ]; then
       close_special_workspace
+      close_sidebar
     fi
 
     if [ ${line:0:18} == "changefloatingmode" ] && [ ${line:33:34} == "1" ]; then
