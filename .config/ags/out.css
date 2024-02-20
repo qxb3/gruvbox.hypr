@@ -4,6 +4,12 @@
   color: #ebdbb2;
 }
 
+.sidebar {
+  background-color: #282828;
+  min-width: 300px;
+  border-right: solid #504945 1px;
+}
+
 .bar {
   background-color: #282828;
   border-top-right-radius: 8px;

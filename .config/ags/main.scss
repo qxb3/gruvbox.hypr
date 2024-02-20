@@ -23,4 +23,5 @@ $gray:      #928374;
   color: $fg;
 }
 
+@import "./windows/sidebar/style.scss";
 @import "./windows/bar/style.scss";
