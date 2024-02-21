@@ -1,5 +1,11 @@
 const Hyprland = await Service.import('hyprland')
 
+function Divider() {
+  return Widget.Box({
+    className: 'divider'
+  })
+}
+
 function StartSection() {
   const SideBarButton = Widget.Button({
     className: 'sidebar_button',
@@ -28,9 +34,7 @@ function StartSection() {
     spacing: 4,
     children: [
       SideBarButton,
-      Widget.Box({
-        className: 'divider'
-      }),
+      Divider(),
       SearchButton,
       WallpaperButton
     ]
@@ -80,7 +84,7 @@ function EndSection() {
     child: Widget.Label('󰄄')
   })
 
-  const TimeIndicator = Widget.Box({
+  const TimeIndicator = Widget.Button({
     className: 'time_indicator',
     hpack: 'center',
     child: Widget.Label().poll(1000, (self) =>

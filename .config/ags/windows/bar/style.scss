@@ -1,8 +1,32 @@
+@mixin section {
+  background-color: $bg1;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+@mixin button {
+  &:hover {
+    background-color: $bg2;
+  }
+}
+
+@mixin control_button {
+  &:hover label {
+    color: $fg2;
+  }
+}
+
 .bar {
   background-color: $bg;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   padding: 8px 4px;
+
+  & .divider {
+    background-color: $bg1;
+    min-height: 2px;
+    margin: 2px 0;
+  }
 
   & .sections {
     & .start {
@@ -15,16 +39,9 @@
         }
       }
 
-      & .divider {
-        background-color: $bg1;
-        min-height: 2px;
-        margin: 2px 0;
-      }
-
       & .search_button {
-        background-color: $bg1;
-        border-radius: 8px;
-        padding: 4px 8px;
+        @include section;
+        @include button;
 
         & label {
           font-size: 18px;
@@ -33,9 +50,8 @@
       }
 
       & .wallpaper_button {
-        background-color: $bg1;
-        border-radius: 8px;
-        padding: 4px 8px;
+        @include section;
+        @include button;
 
         & label {
           font-size: 20px;
@@ -46,8 +62,7 @@
 
     & .center {
       & .workspace_indicator {
-        background-color: $bg1;
-        border-radius: 8px;
+        @include section;
         padding: 1rem 0;
 
         & .workspace {
@@ -59,35 +74,43 @@
           &.active {
             background-color: $yellow;
           }
+
+          &:hover {
+            background-color: $fg2;
+          }
         }
       }
     }
 
     & .end {
       & .controls {
-        background-color: $bg1;
-        border-radius: 8px;
-        padding: 4px 8px;
+        @include section;
 
         & .audio_control_button {
+          @include control_button;
+
           font-size: 20px;
           padding-right: 2px;
         }
 
         & .system_control_button {
+          @include control_button;
+
           font-size: 26px;
         }
 
         & .screenshot_button {
+          @include control_button;
+
           font-size: 20px;
           padding-right: 6px;
         }
       }
 
       & .time_indicator {
-        background-color: $bg1;
-        border-radius: 8px;
-        padding: 4px 8px;
+        @include section;
+        @include button;
+
         font-size: 14px;
         font-weight: 500;
       }
