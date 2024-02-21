@@ -11,6 +11,7 @@
 
     & .face {
       background-size: cover;
+      border: solid $bgh 0.5px;
       border-radius: 999px;
       min-width: 54px;
       min-height: 54px;
@@ -18,14 +19,15 @@
 
     & .details {
       & .username {
-        font-weight: 600;
+        font-weight: 900;
         font-size: 16px;
         color: $fgh;
       }
 
       & .wm {
-        font-weight: 800;
-        font-size: 9px;
+        font-weight: 900;
+        font-size: 10px;
+        letter-spacing: 2px;
         color: $yellow;
       }
     }
@@ -34,10 +36,11 @@
       background-color: $bgh;
       border-radius: 999px;
       font-size: 24px;
-      padding: 4px 12px;
+      padding: 4px 13px;
 
       & label {
         color: $red;
+        padding-right: 1px;
       }
     }
   }

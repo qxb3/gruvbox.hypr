@@ -96,7 +96,8 @@
         & .system_control_button {
           @include control_button;
 
-          font-size: 26px;
+          font-size: 20px;
+          padding-right: 4px;
         }
 
         & .screenshot_button {

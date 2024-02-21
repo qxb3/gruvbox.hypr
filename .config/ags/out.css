@@ -1,6 +1,6 @@
 * {
   all: unset;
-  font-family: "Iosevka Nerd Font";
+  font-family: "JetBrainsMono Nerd Font";
   color: #ebdbb2;
 }
 
@@ -17,28 +17,31 @@
 }
 .sidebar .user_box .face {
   background-size: cover;
+  border: solid #1d2021 0.5px;
   border-radius: 999px;
   min-width: 54px;
   min-height: 54px;
 }
 .sidebar .user_box .details .username {
-  font-weight: 600;
+  font-weight: 900;
   font-size: 16px;
   color: #fbf1c7;
 }
 .sidebar .user_box .details .wm {
-  font-weight: 800;
-  font-size: 9px;
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 2px;
   color: #d79921;
 }
 .sidebar .user_box .shutdown_button {
   background-color: #1d2021;
   border-radius: 999px;
   font-size: 24px;
-  padding: 4px 12px;
+  padding: 4px 13px;
 }
 .sidebar .user_box .shutdown_button label {
   color: #cc241d;
+  padding-right: 1px;
 }
 .sidebar .desktop_controls {
   border-radius: 8px;
@@ -131,7 +134,8 @@
   color: #bdae93;
 }
 .bar .sections .end .controls .system_control_button {
-  font-size: 26px;
+  font-size: 20px;
+  padding-right: 4px;
 }
 .bar .sections .end .controls .system_control_button:hover label {
   color: #bdae93;

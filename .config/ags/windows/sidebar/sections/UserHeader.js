@@ -23,7 +23,7 @@ export default function() {
     hpack: 'end',
     vpack: 'center',
     hexpand: true,
-    child: Widget.Label('')
+    child: Widget.Label('󰐥')
   })
 
   return Widget.Box({
