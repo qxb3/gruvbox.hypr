@@ -6,8 +6,57 @@
 
 .sidebar {
   background-color: #282828;
-  min-width: 300px;
   border-right: solid #504945 1px;
+  padding: 8px;
+  min-width: 300px;
+}
+.sidebar .user_box {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 8px;
+}
+.sidebar .user_box .face {
+  background-size: cover;
+  border-radius: 999px;
+  min-width: 54px;
+  min-height: 54px;
+}
+.sidebar .user_box .details .username {
+  font-weight: 600;
+  font-size: 16px;
+  color: #fbf1c7;
+}
+.sidebar .user_box .details .wm {
+  font-weight: 800;
+  font-size: 9px;
+  color: #d79921;
+}
+.sidebar .user_box .shutdown_button {
+  background-color: #1d2021;
+  border-radius: 999px;
+  font-size: 24px;
+  padding: 4px 12px;
+}
+.sidebar .user_box .shutdown_button label {
+  color: #cc241d;
+}
+.sidebar .desktop_controls {
+  border-radius: 8px;
+  padding: 8px;
+}
+.sidebar .desktop_controls .icon {
+  background-color: #ebdbb2;
+  border-radius: 999px;
+  padding: 10px;
+  color: #ebdbb2;
+}
+.sidebar .desktop_controls .icon.inactive {
+  background-color: #928374;
+}
+.sidebar .desktop_controls .name {
+  color: #928374;
+  font-weight: 700;
+  font-size: 9px;
 }
 
 .bar {

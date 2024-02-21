@@ -1,11 +1,19 @@
 import { state } from '../../shared/utils.js'
 
-const revealSideBar = state('reveal_sidebar', false)
+import UserHeader from './sections/UserHeader.js'
+import DesktopControls from './sections/DesktopControls.js'
+
+const revealSideBar = state('reveal_sidebar', true)
 
 function SideBar() {
   return Widget.Box({
     className: 'sidebar',
-    child: Widget.Label('bruh')
+    vertical: true,
+    spacing: 8,
+    children: [
+      UserHeader(),
+      DesktopControls()
+    ]
   })
 }
 

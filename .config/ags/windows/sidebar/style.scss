@@ -1,5 +1,66 @@
 .sidebar {
   background-color: $bg;
-  min-width: 300px;
   border-right: solid $bg2 1px;
+  padding: 8px;
+  min-width: 300px;
+
+  & .user_box {
+    background-color: $bg1;
+    border-radius: 8px;
+    padding: 8px;
+
+    & .face {
+      background-size: cover;
+      border-radius: 999px;
+      min-width: 54px;
+      min-height: 54px;
+    }
+
+    & .details {
+      & .username {
+        font-weight: 600;
+        font-size: 16px;
+        color: $fgh;
+      }
+
+      & .wm {
+        font-weight: 800;
+        font-size: 9px;
+        color: $yellow;
+      }
+    }
+
+    & .shutdown_button {
+      background-color: $bgh;
+      border-radius: 999px;
+      font-size: 24px;
+      padding: 4px 12px;
+
+      & label {
+        color: $red;
+      }
+    }
+  }
+
+  & .desktop_controls {
+    border-radius: 8px;
+    padding: 8px;
+
+    & .icon {
+      background-color: $fg;
+      border-radius: 999px;
+      padding: 10px;
+      color: $fg;
+
+      &.inactive {
+        background-color: $gray;
+      }
+    }
+
+    & .name {
+      color: $gray;
+      font-weight: 700;
+      font-size: 9px;
+    }
+  }
 }
