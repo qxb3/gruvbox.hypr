@@ -1,3 +1,6 @@
+import Gdk from 'gi://Gdk'
+import { SystemControlsMenu } from './controls/SystemControls.js'
+
 const Hyprland = await Service.import('hyprland')
 
 function Divider() {
@@ -76,6 +79,7 @@ function EndSection() {
 
   const SystemControlButton = Widget.Button({
     className: 'system_control_button',
+    onPrimaryClick: (self) => SystemControlsMenu.popup_at_widget(self, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null),
     child: Widget.Label('')
   })
 
