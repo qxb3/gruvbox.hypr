@@ -48,7 +48,7 @@
   padding: 8px;
 }
 .sidebar .desktop_controls .icon {
-  background-color: #ebdbb2;
+  background-color: #458588;
   border-radius: 999px;
   padding: 10px;
   color: #ebdbb2;
@@ -59,7 +59,7 @@
 .sidebar .desktop_controls .name {
   color: #928374;
   font-weight: 700;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .bar {
