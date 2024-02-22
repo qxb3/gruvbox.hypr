@@ -3,7 +3,7 @@ import { state } from '../../shared/utils.js'
 import UserHeader from './sections/UserHeader.js'
 import DesktopControls from './sections/DesktopControls.js'
 
-const revealSideBar = state('reveal_sidebar', true)
+const revealSideBar = state('reveal_sidebar', false)
 
 function SideBar() {
   return Widget.Box({

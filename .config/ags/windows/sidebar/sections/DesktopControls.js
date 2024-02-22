@@ -8,7 +8,7 @@ function Button(className, svgIcon, name, active = false) {
         Widget.Icon({
           className: `icon ${!active ? 'inactive' : ''}`,
           icon: svgIcon,
-          size: 34
+          size: 32
         }),
         Widget.Label({
           className: 'name',
