@@ -2,8 +2,9 @@ import { state } from '../../shared/utils.js'
 
 import UserHeader from './sections/UserHeader.js'
 import DesktopControls from './sections/DesktopControls.js'
+import MusicPlayer from './music-player/MusicPlayer.js'
 
-const revealSideBar = state('reveal_sidebar', false)
+const revealSideBar = state('reveal_sidebar', true)
 
 function SideBar() {
   return Widget.Box({
@@ -12,7 +13,8 @@ function SideBar() {
     spacing: 8,
     children: [
       UserHeader(),
-      DesktopControls()
+      DesktopControls(),
+      MusicPlayer()
     ]
   })
 }

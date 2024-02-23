@@ -47,19 +47,57 @@
   border-radius: 8px;
   padding: 8px;
 }
-.sidebar .desktop_controls .icon {
+.sidebar .desktop_controls .buttons .icon {
   background-color: #d79921;
   border-radius: 999px;
   padding: 10px;
   color: #ebdbb2;
 }
-.sidebar .desktop_controls .icon.inactive {
+.sidebar .desktop_controls .buttons .icon.inactive {
   background-color: #928374;
 }
-.sidebar .desktop_controls .name {
+.sidebar .desktop_controls .buttons .name {
   color: #928374;
   font-weight: 700;
   font-size: 11px;
+}
+.sidebar .desktop_controls .sliders scale slider {
+  background-color: #fbf1c7;
+  border-radius: 999px;
+  min-width: 16px;
+  min-height: 16px;
+}
+.sidebar .desktop_controls .sliders scale highlight {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background-color: #ebdbb2;
+  min-height: 4px;
+}
+.sidebar .music_player {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 8px;
+}
+.sidebar .music_player .thumbnail {
+  background-size: cover;
+  border-radius: 8px;
+  min-width: 130px;
+  min-height: 130px;
+}
+.sidebar .music_player .right {
+  padding: 0.8rem 0;
+}
+.sidebar .music_player .right .meta .title {
+  font-size: 24px;
+  font-weight: 900;
+}
+.sidebar .music_player .right .meta .artist {
+  color: #d79921;
+  font-weight: 900;
+}
+.sidebar .music_player .right .controls .control {
+  font-size: 28px;
+  padding: 0 8px;
 }
 
 .bar {

@@ -35,15 +35,51 @@ export default function() {
   const VolumeButton = Button('volume_button', 'custom-svg-volume-mute', 'SILENT')
   const DNDButton = Button('dnd_button', 'custom-svg-bell-unavailable', 'DND')
 
+  const vval = Variable(100)
+  const VolumeSlider = Widget.Slider({
+    className: 'volume_slider',
+    min: 0,
+    max: 100,
+    value: vval.bind(),
+    drawValue: false,
+    hexpand: true
+  })
+
+  const mval = Variable(80)
+  const MusicSlider = Widget.Slider({
+    className: 'volume_slider',
+    min: 0,
+    max: 100,
+    value: mval.bind(),
+    drawValue: false,
+    hexpand: true
+  })
+
   return Widget.Box({
     className: 'desktop_controls',
-    vpack: 'center',
-    spacing: 24,
+    vertical: true,
+    spacing: 12,
     children: [
-      NetworkButton,
-      BluetoothButton,
-      VolumeButton,
-      DNDButton
+      Widget.Box({
+        className: 'buttons',
+        vpack: 'center',
+        spacing: 24,
+        children: [
+          NetworkButton,
+          BluetoothButton,
+          VolumeButton,
+          DNDButton
+        ]
+      }),
+      Widget.Box({
+        className: 'sliders',
+        vertical: true,
+        spacing: 8,
+        children: [
+          VolumeSlider,
+          MusicSlider
+        ]
+      })
     ]
   })
 }

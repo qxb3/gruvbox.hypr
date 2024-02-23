@@ -49,21 +49,77 @@
     border-radius: 8px;
     padding: 8px;
 
-    & .icon {
-      background-color: $yellow;
-      border-radius: 999px;
-      padding: 10px;
-      color: $fg;
+    & .buttons {
+      & .icon {
+        background-color: $yellow;
+        border-radius: 999px;
+        padding: 10px;
+        color: $fg;
 
-      &.inactive {
-        background-color: $gray;
+        &.inactive {
+          background-color: $gray;
+        }
+      }
+
+      & .name {
+        color: $gray;
+        font-weight: 700;
+        font-size: 11px;
       }
     }
 
-    & .name {
-      color: $gray;
-      font-weight: 700;
-      font-size: 11px;
+    & .sliders {
+      & scale {
+        & slider {
+          background-color: $fgh;
+          border-radius: 999px;
+          min-width: 16px;
+          min-height: 16px;
+        }
+
+        & highlight {
+          border-top-left-radius: 8px;
+          border-bottom-left-radius: 8px;
+          background-color: $fg;
+          min-height: 4px;
+        }
+      }
+    }
+  }
+
+  & .music_player {
+    background-color: $bg1;
+    border-radius: 8px;
+    padding: 8px;
+
+    & .thumbnail {
+      background-size: cover;
+      border-radius: 8px;
+      min-width: 130px;
+      min-height: 130px;
+    }
+
+    & .right {
+      padding: 0.8rem 0;
+
+      & .meta {
+        & .title {
+          font-size: 24px;
+          font-weight: 900;
+        }
+
+        & .artist {
+          color: $yellow;
+          font-weight: 900;
+        }
+      }
+
+      & .controls {
+        & .control {
+          font-size: 28px;
+          padding: 0 8px;
+        }
+      }
     }
   }
 }
