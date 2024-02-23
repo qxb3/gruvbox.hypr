@@ -3,6 +3,8 @@ import {
   musicThumbnailUrl,
   musicArtist,
   musicTitle,
+  musicPosition,
+  musicLength,
   prev,
   toggle,
   next
@@ -67,10 +69,25 @@ function Controls() {
     className: 'controls',
     vpack: 'end',
     vexpand: true,
-    spacing: 20,
+    spacing: 10,
     startWidget: PrevButton,
     centerWidget: PlayButton,
     endWidget: NextButton
+  })
+}
+
+function Position() {
+  const Progress = Widget.ProgressBar({
+    className: 'progress',
+    value: musicPosition.bind().transform(pos => musicPosition.value / musicLength.value)
+  })
+
+  return Widget.Box({
+    className: 'position',
+    vertical: true,
+    children: [
+      Progress
+    ]
   })
 }
 
@@ -83,7 +100,7 @@ export default function() {
   return Widget.Box({
     className: 'music_player',
     vexpand: false,
-    spacing: 8,
+    spacing: 10,
     children: [
       Thumbnail,
       Widget.Box({
@@ -91,7 +108,8 @@ export default function() {
         vertical: true,
         children: [
           MusicMeta(),
-          Controls()
+          Controls(),
+          Position()
         ]
       })
     ]

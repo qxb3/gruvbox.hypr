@@ -88,7 +88,7 @@
   padding: 0.8rem 0;
 }
 .sidebar .music_player .right .meta .title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 900;
 }
 .sidebar .music_player .right .meta .artist {
@@ -98,6 +98,17 @@
 .sidebar .music_player .right .controls .control {
   font-size: 28px;
   padding: 0 8px;
+}
+.sidebar .music_player .right .position {
+  margin-top: 4px;
+}
+.sidebar .music_player .right .position .progress trough {
+  background-color: #504945;
+  border-radius: 8px;
+}
+.sidebar .music_player .right .position .progress trough progress {
+  background-color: #ebdbb2;
+  border-radius: 8px;
 }
 
 .bar {

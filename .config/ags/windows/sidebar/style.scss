@@ -104,7 +104,7 @@
 
       & .meta {
         & .title {
-          font-size: 24px;
+          font-size: 20px;
           font-weight: 900;
         }
 
@@ -118,6 +118,22 @@
         & .control {
           font-size: 28px;
           padding: 0 8px;
+        }
+      }
+
+      & .position {
+        margin-top: 4px;
+
+        & .progress {
+          & trough {
+            background-color: $bg2;
+            border-radius: 8px;
+
+            & progress {
+              background-color: $fg;
+              border-radius: 8px;
+            }
+          }
         }
       }
     }

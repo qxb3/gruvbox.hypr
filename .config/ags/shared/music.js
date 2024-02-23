@@ -11,9 +11,13 @@ export const musicTitle = Variable('No Music')
 export const musicArtist = Variable('Artist')
 export const musicAlbum = Variable('Album')
 export const musicVolume = Variable(0)
+export const musicPosition = Variable(0)
+export const musicLength = Variable(0)
 
 Mpris.connect('changed', () => {
   const spotifyPlayer = Mpris.players.find(player => PLAYERS.includes(player.name))
+
+  let posInterval = null
 
   if (!spotifyPlayer) {
     musicStatus.value = 'Stopped'
@@ -23,6 +27,11 @@ Mpris.connect('changed', () => {
     musicArtist.value = 'Artist'
     musicAlbum.value = 'Album'
     musicVolume.value = 0
+    musicPosition.value = 0
+    musicLength.value = 0
+
+    clearInterval(posInterval)
+    posInterval = null
   }
 
   spotifyPlayer?.connect('changed', () => {
@@ -35,6 +44,12 @@ Mpris.connect('changed', () => {
     musicArtist.value = spotifyPlayer.trackArtists.join(', ') || 'Album'
     musicAlbum.value = spotifyPlayer.trackAlbum
     musicVolume.value = parseFloat(spotifyPlayer.volume)
+    musicLength.value = spotifyPlayer.length
+
+    clearInterval(posInterval)
+    posInterval = setInterval(() => {
+      musicPosition.value = spotifyPlayer.position
+    }, 1000)
   })
 })
 
