@@ -1,10 +1,12 @@
 const Mpris = await Service.import('mpris')
 
 export const PLAYERS = ['spotify']
+export const NO_MUSIC = `${App.configDir}/assets/no-music.png`
 
 export const player = Variable()
 export const musicStatus = Variable('Stopped')
-export const musicThumbnail = Variable('')
+export const musicThumbnail = Variable(NO_MUSIC)
+export const musicThumbnailUrl = Variable(NO_MUSIC)
 export const musicTitle = Variable('No Music')
 export const musicArtist = Variable('Artist')
 export const musicAlbum = Variable('Album')
@@ -15,6 +17,8 @@ Mpris.connect('changed', () => {
 
   if (!spotifyPlayer) {
     musicStatus.value = 'Stopped'
+    musicThumbnail.value = NO_MUSIC
+    musicThumbnailUrl.value = NO_MUSIC
     musicTitle.value = 'No Music'
     musicArtist.value = 'Artist'
     musicAlbum.value = 'Album'
@@ -26,6 +30,7 @@ Mpris.connect('changed', () => {
 
     musicStatus.value = spotifyPlayer.playBackStatus
     musicThumbnail.value = spotifyPlayer.coverPath
+    musicThumbnailUrl.value = spotifyPlayer.trackCoverUrl
     musicTitle.value = spotifyPlayer.trackTitle
     musicArtist.value = spotifyPlayer.trackArtists.join(', ') || 'Album'
     musicAlbum.value = spotifyPlayer.trackAlbum

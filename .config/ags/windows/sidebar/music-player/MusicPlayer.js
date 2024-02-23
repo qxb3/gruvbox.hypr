@@ -1,5 +1,6 @@
 import {
-  musicThumbnail,
+  musicStatus,
+  musicThumbnailUrl,
   musicArtist,
   musicTitle,
   prev,
@@ -48,7 +49,11 @@ function Controls() {
     className: 'play_button control',
     hpack: 'center',
     onPrimaryClick: () => toggle(),
-    child: Widget.Label('󰐊')
+    child: Widget.Label().hook(musicStatus, (self) => {
+      if (musicStatus.value === 'Stopped') self.label = '󰓛'
+      if (musicStatus.value === 'Playing') self.label = '󰏤'
+      if (musicStatus.value === 'Paused') self.label = '󰐊'
+    })
   })
 
   const NextButton = Widget.Button({
@@ -72,7 +77,7 @@ function Controls() {
 export default function() {
   const Thumbnail = Widget.Box({
     className: 'thumbnail',
-    css: musicThumbnail.bind().transform(thumb => `background-image: url("${thumb}")`)
+    css: musicThumbnailUrl.bind().transform(thumb => `background-image: url("${thumb}")`)
   })
 
   return Widget.Box({
