@@ -61,17 +61,14 @@
   font-weight: 700;
   font-size: 11px;
 }
-.sidebar .desktop_controls .sliders scale slider {
-  background-color: #fbf1c7;
-  border-radius: 999px;
-  min-width: 16px;
-  min-height: 16px;
+.sidebar .desktop_controls .sliders scale trough {
+  background-color: #504945;
+  border-radius: 8px;
 }
 .sidebar .desktop_controls .sliders scale highlight {
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  background-color: #ebdbb2;
-  min-height: 4px;
+  background-color: #689d6a;
+  border-radius: 8px;
+  min-height: 16px;
 }
 .sidebar .music_player {
   background-color: #3c3836;
@@ -96,6 +93,7 @@
   font-weight: 900;
 }
 .sidebar .music_player .right .controls .control {
+  border-radius: 8px;
   font-size: 28px;
   padding: 0 8px;
 }

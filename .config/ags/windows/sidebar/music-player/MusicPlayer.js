@@ -42,14 +42,12 @@ function MusicMeta() {
 function Controls() {
   const PrevButton = Widget.Button({
     className: 'prev_button control',
-    hpack: 'end',
     onPrimaryClick: () => prev(),
     child: Widget.Label('󰒮')
   })
 
   const PlayButton = Widget.Button({
     className: 'play_button control',
-    hpack: 'center',
     onPrimaryClick: () => toggle(),
     child: Widget.Label().hook(musicStatus, (self) => {
       if (musicStatus.value === 'Stopped') self.label = '󰓛'
@@ -60,19 +58,21 @@ function Controls() {
 
   const NextButton = Widget.Button({
     className: 'next_button control',
-    hpack: 'start',
     onPrimaryClick: () => next(),
     child: Widget.Label('󰒭')
   })
 
-  return Widget.CenterBox({
+  return Widget.Box({
     className: 'controls',
+    hpack: 'center',
     vpack: 'end',
     vexpand: true,
-    spacing: 10,
-    startWidget: PrevButton,
-    centerWidget: PlayButton,
-    endWidget: NextButton
+    spacing: 16,
+    children: [
+      PrevButton,
+      PlayButton,
+      NextButton
+    ]
   })
 }
 

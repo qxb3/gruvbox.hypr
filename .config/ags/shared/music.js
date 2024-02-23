@@ -84,6 +84,8 @@ export function prev() {
 }
 
 export function setVolume(volume) {
+  if (volume === undefined) throw new Error('"volume" is undefined')
+
   Utils.exec(`playerctl volume ${volume}`)
 }
 

@@ -1,3 +1,5 @@
+import { musicVolume, setVolume } from '../../../shared/music.js'
+
 function Button(className, svgIcon, name, active = false) {
   return Widget.Button({
     className: className,
@@ -45,12 +47,12 @@ export default function() {
     hexpand: true
   })
 
-  const mval = Variable(80)
   const MusicSlider = Widget.Slider({
-    className: 'volume_slider',
+    className: 'music_slider',
     min: 0,
-    max: 100,
-    value: mval.bind(),
+    max: 1,
+    value: musicVolume.bind(),
+    onChange: ({ value }) => setVolume(value),
     drawValue: false,
     hexpand: true
   })
