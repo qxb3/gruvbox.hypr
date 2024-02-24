@@ -78,8 +78,8 @@
 .sidebar .music_player .thumbnail {
   background-size: cover;
   border-radius: 8px;
-  min-width: 130px;
-  min-height: 130px;
+  min-width: 150px;
+  min-height: 150px;
 }
 .sidebar .music_player .right {
   padding: 0.8rem 0;
@@ -100,6 +100,9 @@
 .sidebar .music_player .right .position {
   margin-top: 4px;
 }
+.sidebar .music_player .right .position .progress {
+  min-width: 20px;
+}
 .sidebar .music_player .right .position .progress trough {
   background-color: #504945;
   border-radius: 8px;
@@ -107,6 +110,12 @@
 .sidebar .music_player .right .position .progress trough progress {
   background-color: #ebdbb2;
   border-radius: 8px;
+}
+.sidebar .music_player .right .position .meta {
+  font-size: 10px;
+}
+.sidebar .music_player .right .position .meta .current_progress, .sidebar .music_player .right .position .meta .length {
+  color: #928374;
 }
 
 .bar {

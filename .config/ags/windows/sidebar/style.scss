@@ -101,8 +101,8 @@
     & .thumbnail {
       background-size: cover;
       border-radius: 8px;
-      min-width: 130px;
-      min-height: 130px;
+      min-width: 150px;
+      min-height: 150px;
     }
 
     & .right {
@@ -132,6 +132,8 @@
         margin-top: 4px;
 
         & .progress {
+          min-width: 20px;
+
           & trough {
             background-color: $bg2;
             border-radius: 8px;
@@ -140,6 +142,14 @@
               background-color: $fg;
               border-radius: 8px;
             }
+          }
+        }
+
+        & .meta {
+          font-size: 10px;
+
+          & .current_progress, & .length {
+            color: $gray;
           }
         }
       }
