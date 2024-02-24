@@ -79,7 +79,7 @@ function Controls() {
 function Position() {
   const Progress = Widget.ProgressBar({
     className: 'progress',
-    value: musicPosition.bind().transform(pos => musicPosition.value / musicLength.value)
+    value: musicPosition.bind().transform(pos => pos / musicLength.value)
   })
 
   return Widget.Box({

@@ -4,7 +4,7 @@ import UserHeader from './sections/UserHeader.js'
 import DesktopControls from './sections/DesktopControls.js'
 import MusicPlayer from './music-player/MusicPlayer.js'
 
-const revealSideBar = state('reveal_sidebar', true)
+const revealSideBar = state('reveal_sidebar', false)
 
 function SideBar() {
   return Widget.Box({
