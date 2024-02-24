@@ -50,7 +50,7 @@
 .sidebar .desktop_controls .buttons .icon {
   background-color: #d79921;
   border-radius: 999px;
-  padding: 10px;
+  padding: 14px;
   color: #ebdbb2;
 }
 .sidebar .desktop_controls .buttons .icon.inactive {
@@ -60,6 +60,9 @@
   color: #928374;
   font-weight: 700;
   font-size: 11px;
+}
+.sidebar .desktop_controls .sliders .icon {
+  font-size: 20px;
 }
 .sidebar .desktop_controls .sliders scale trough {
   background-color: #504945;

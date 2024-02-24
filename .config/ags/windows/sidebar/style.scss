@@ -53,7 +53,7 @@
       & .icon {
         background-color: $yellow;
         border-radius: 999px;
-        padding: 10px;
+        padding: 14px;
         color: $fg;
 
         &.inactive {
@@ -69,14 +69,11 @@
     }
 
     & .sliders {
-      & scale {
-        // & slider {
-        //   background-color: $fg;
-        //   border-radius: 999px;
-        //   min-width: 16px;
-        //   min-height: 16px;
-        // }
+      & .icon {
+        font-size: 20px;
+      }
 
+      & scale {
         & trough {
           background-color: $bg2;
           border-radius: 8px;
@@ -84,8 +81,6 @@
 
         & highlight {
           background-color: $aqua;
-          // border-top-left-radius: 8px;
-          // border-bottom-left-radius: 8px;
           border-radius: 8px;
           min-height: 16px;
         }

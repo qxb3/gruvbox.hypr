@@ -1,5 +1,9 @@
 import { musicVolume, setVolume } from '../../../shared/music.js'
 
+const volume = Variable(0, {
+  poll: [1000, `pamixer --get-volume`, vol => parseInt(vol)]
+})
+
 function Button(className, svgIcon, name, active = false) {
   return Widget.Button({
     className: className,
@@ -37,24 +41,44 @@ export default function() {
   const VolumeButton = Button('volume_button', 'custom-svg-volume-mute', 'SILENT')
   const DNDButton = Button('dnd_button', 'custom-svg-bell-unavailable', 'DND')
 
-  const vval = Variable(100)
-  const VolumeSlider = Widget.Slider({
+  const VolumeSlider = Widget.Box({
     className: 'volume_slider',
-    min: 0,
-    max: 100,
-    value: vval.bind(),
-    drawValue: false,
-    hexpand: true
+    spacing: 12,
+    children: [
+      Widget.Label({
+        className: 'icon',
+        label: '󰕾'
+      }),
+      Widget.Slider({
+        className: 'slider',
+        min: 0,
+        max: 100,
+        value: volume.bind(),
+        onChange: ({ value }) => Utils.exec(`pamixer --set-volume ${parseInt(value)}`),
+        drawValue: false,
+        hexpand: true
+      })
+    ]
   })
 
-  const MusicSlider = Widget.Slider({
+  const MusicSlider = Widget.Box({
     className: 'music_slider',
-    min: 0,
-    max: 1,
-    value: musicVolume.bind(),
-    onChange: ({ value }) => setVolume(value),
-    drawValue: false,
-    hexpand: true
+    spacing: 12,
+    children: [
+      Widget.Label({
+        className: 'icon',
+        label: '󰎌'
+      }),
+      Widget.Slider({
+        className: 'slider',
+        min: 0,
+        max: 1,
+        value: musicVolume.bind(),
+        onChange: ({ value }) => setVolume(value),
+        drawValue: false,
+        hexpand: true
+      })
+    ]
   })
 
   return Widget.Box({
