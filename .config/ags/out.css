@@ -4,6 +4,110 @@
   color: #ebdbb2;
 }
 
+.bar {
+  background-color: #282828;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 8px 4px;
+}
+.bar .divider {
+  background-color: #3c3836;
+  min-height: 2px;
+  margin: 2px 0;
+}
+.bar .sections .start .sidebar_button box {
+  background-size: cover;
+  border-radius: 999px;
+  min-width: 32px;
+  min-height: 32px;
+}
+.bar .sections .start .search_button {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+.bar .sections .start .search_button:hover {
+  background-color: #504945;
+}
+.bar .sections .start .search_button label {
+  font-size: 18px;
+  padding-right: 4px;
+}
+.bar .sections .start .wallpaper_button {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+.bar .sections .start .wallpaper_button:hover {
+  background-color: #504945;
+}
+.bar .sections .start .wallpaper_button label {
+  font-size: 20px;
+  padding-right: 6px;
+}
+.bar .sections .center .workspace_indicator {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 4px 8px;
+  padding: 1rem 0;
+}
+.bar .sections .center .workspace_indicator .workspace {
+  background-color: #ebdbb2;
+  border-radius: 8px;
+  min-width: 10px;
+  min-height: 32px;
+}
+.bar .sections .center .workspace_indicator .workspace.active {
+  background-color: #d79921;
+}
+.bar .sections .center .workspace_indicator .workspace:hover {
+  background-color: #bdae93;
+}
+.bar .sections .end .controls {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+.bar .sections .end .controls .audio_control_button {
+  font-size: 20px;
+  padding-right: 2px;
+}
+.bar .sections .end .controls .audio_control_button:hover label {
+  color: #bdae93;
+}
+.bar .sections .end .controls .system_control_button {
+  font-size: 20px;
+  padding-right: 4px;
+}
+.bar .sections .end .controls .system_control_button:hover label {
+  color: #bdae93;
+}
+.bar .sections .end .controls .screenshot_button {
+  font-size: 20px;
+  padding-right: 6px;
+}
+.bar .sections .end .controls .screenshot_button:hover label {
+  color: #bdae93;
+}
+.bar .sections .end .time_indicator {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.bar .sections .end .time_indicator:hover {
+  background-color: #504945;
+}
+
+.system_controls {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0 0 1rem 1.5rem;
+  min-height: 300px;
+}
+
 .home {
   background-color: #282828;
   border-right: solid #504945 1px;
@@ -209,108 +313,4 @@
   font-size: 16px;
   color: #928374;
   padding-left: 8px;
-}
-
-.bar {
-  background-color: #282828;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  padding: 8px 4px;
-}
-.bar .divider {
-  background-color: #3c3836;
-  min-height: 2px;
-  margin: 2px 0;
-}
-.bar .sections .start .sidebar_button box {
-  background-size: cover;
-  border-radius: 999px;
-  min-width: 32px;
-  min-height: 32px;
-}
-.bar .sections .start .search_button {
-  background-color: #3c3836;
-  border-radius: 8px;
-  padding: 4px 8px;
-}
-.bar .sections .start .search_button:hover {
-  background-color: #504945;
-}
-.bar .sections .start .search_button label {
-  font-size: 18px;
-  padding-right: 4px;
-}
-.bar .sections .start .wallpaper_button {
-  background-color: #3c3836;
-  border-radius: 8px;
-  padding: 4px 8px;
-}
-.bar .sections .start .wallpaper_button:hover {
-  background-color: #504945;
-}
-.bar .sections .start .wallpaper_button label {
-  font-size: 20px;
-  padding-right: 6px;
-}
-.bar .sections .center .workspace_indicator {
-  background-color: #3c3836;
-  border-radius: 8px;
-  padding: 4px 8px;
-  padding: 1rem 0;
-}
-.bar .sections .center .workspace_indicator .workspace {
-  background-color: #ebdbb2;
-  border-radius: 8px;
-  min-width: 10px;
-  min-height: 32px;
-}
-.bar .sections .center .workspace_indicator .workspace.active {
-  background-color: #d79921;
-}
-.bar .sections .center .workspace_indicator .workspace:hover {
-  background-color: #bdae93;
-}
-.bar .sections .end .controls {
-  background-color: #3c3836;
-  border-radius: 8px;
-  padding: 4px 8px;
-}
-.bar .sections .end .controls .audio_control_button {
-  font-size: 20px;
-  padding-right: 2px;
-}
-.bar .sections .end .controls .audio_control_button:hover label {
-  color: #bdae93;
-}
-.bar .sections .end .controls .system_control_button {
-  font-size: 20px;
-  padding-right: 4px;
-}
-.bar .sections .end .controls .system_control_button:hover label {
-  color: #bdae93;
-}
-.bar .sections .end .controls .screenshot_button {
-  font-size: 20px;
-  padding-right: 6px;
-}
-.bar .sections .end .controls .screenshot_button:hover label {
-  color: #bdae93;
-}
-.bar .sections .end .time_indicator {
-  background-color: #3c3836;
-  border-radius: 8px;
-  padding: 4px 8px;
-  font-size: 14px;
-  font-weight: 500;
-}
-.bar .sections .end .time_indicator:hover {
-  background-color: #504945;
-}
-
-.system_controls {
-  background-color: #3c3836;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 0 0 1rem 1.5rem;
-  min-height: 300px;
 }

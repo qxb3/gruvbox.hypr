@@ -8,7 +8,7 @@ import {
   prev,
   toggle,
   next
-} from '../../../../shared/music.js'
+} from '../../../../../shared/music.js'
 
 function MusicMeta() {
   const Title = Widget.Label({

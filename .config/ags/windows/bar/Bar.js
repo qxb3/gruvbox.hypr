@@ -1,4 +1,6 @@
 import Gdk from 'gi://Gdk'
+
+import SideBar from './sidebar/SideBar.js'
 import { SystemControlsMenu } from './controls/SystemControls.js'
 
 const Hyprland = await Service.import('hyprland')
@@ -121,14 +123,19 @@ function EndSection() {
 
 function Bar() {
   return Widget.Box({
-    className: 'bar',
-    child: Widget.CenterBox({
-      className: 'sections',
-      vertical: true,
-      startWidget: StartSection(),
-      centerWidget: CenterSection(),
-      endWidget: EndSection()
-    })
+    children: [
+      SideBar(),
+      Widget.Box({
+        className: 'bar',
+        child: Widget.CenterBox({
+          className: 'sections',
+          vertical: true,
+          startWidget: StartSection(),
+          centerWidget: CenterSection(),
+          endWidget: EndSection()
+        })
+      })
+    ]
   })
 }
 

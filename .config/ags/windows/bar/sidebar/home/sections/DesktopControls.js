@@ -1,4 +1,4 @@
-import { musicVolume, setVolume } from '../../../../shared/music.js'
+import { musicVolume, setVolume } from '../../../../../shared/music.js'
 
 const volume = Variable(0, {
   poll: [1000, `pamixer --get-volume`, vol => parseInt(vol)]
