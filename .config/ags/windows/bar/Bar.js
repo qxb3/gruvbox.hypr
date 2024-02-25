@@ -70,7 +70,11 @@ function StartSection() {
         child: Widget.Label({
           label: revealSystray.bind().transform(v => v ? '󰅃' : '󰅀')
         }),
-        onPrimaryClick: () => revealSystray.value = !revealSystray.value
+        onPrimaryClick: () => revealSystray.value = !revealSystray.value,
+        setup: (self) => self.hook(revealSystray, () => {
+          if (revealSystray.value)
+            setTimeout(() => revealSystray.value = false, 5000)
+        })
       })
     ]
   })
