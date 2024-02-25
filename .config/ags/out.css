@@ -45,6 +45,7 @@
 }
 .sidebar .desktop_controls {
   border-radius: 8px;
+  margin-top: 10px;
   padding: 8px;
 }
 .sidebar .desktop_controls .buttons .icon {
@@ -69,7 +70,7 @@
   border-radius: 8px;
 }
 .sidebar .desktop_controls .sliders scale highlight {
-  background-color: #98971a;
+  background-color: #458588;
   border-radius: 8px;
   min-height: 16px;
 }
@@ -123,6 +124,7 @@
 .sidebar .notification_center {
   background-color: #3c3836;
   border-radius: 8px;
+  margin-top: 1rem;
   padding: 8px;
 }
 .sidebar .notification_center .header .title {

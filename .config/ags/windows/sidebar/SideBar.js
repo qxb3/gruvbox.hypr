@@ -11,7 +11,6 @@ function SideBar() {
   return Widget.Box({
     className: 'sidebar',
     vertical: true,
-    spacing: 8,
     children: [
       UserHeader(),
       DesktopControls(),

@@ -100,7 +100,6 @@ export default function() {
       Widget.Box({
         className: 'sliders',
         vertical: true,
-        spacing: 8,
         children: [
           VolumeSlider,
           MusicSlider
