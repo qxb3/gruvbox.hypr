@@ -1,3 +1,5 @@
+import Gio from 'gi://Gio'
+
 const STATES_PATH = `${App.configDir}/.states.json`
 
 /**
@@ -14,7 +16,7 @@ export function state(key, value) {
   const variable = Variable(value)
 
   Utils.monitorFile(STATES_PATH, (file, event) => {
-    if (event === 0) {
+    if (event === Gio.FileMonitorEvent.CHANGED) {
       const states = JSON.parse(Utils.readFile(file))
       variable.value = states[key]
     }
