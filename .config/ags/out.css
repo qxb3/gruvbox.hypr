@@ -173,6 +173,28 @@
   font-size: 16px;
 }
 
+.app_launcher {
+  background-color: #282828;
+  border-right: solid #504945 1px;
+  padding: 8px;
+  min-width: 300px;
+}
+.app_launcher .header .title {
+  font-size: 20px;
+  font-weight: 900;
+}
+.app_launcher .input_container .input {
+  border: solid #504945 1px;
+  border-radius: 8px;
+  font-size: 18px;
+  padding: 0 8px;
+}
+.app_launcher .input_container label {
+  font-size: 18px;
+  color: #928374;
+  padding-left: 8px;
+}
+
 .bar {
   background-color: #282828;
   border-top-right-radius: 8px;

@@ -15,13 +15,15 @@ function StartSection() {
     cursor: 'pointer',
     child: Widget.Box({
       css: `background-image: url("/home/${Utils.exec('whoami')}/.face.icon")`
-    })
+    }),
+    onPrimaryClick: () => Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh toggle"`)
   })
 
   const SearchButton = Widget.Button({
     className: 'search_button',
     cursor: 'pointer',
-    child: Widget.Label('')
+    child: Widget.Label(''),
+    onPrimaryClick: () => Utils.exec(`bash -c "${App.configDir}/shared/scripts/shown_sidebar.sh applauncher"`)
   })
 
   const WallpaperButton = Widget.Button({

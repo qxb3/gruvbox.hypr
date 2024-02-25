@@ -16,8 +16,10 @@ function Notification(notification) {
   const Summary = Widget.Label({
     className: 'summary',
     label: notification.summary,
-    truncate: 'end',
-    xalign: 0
+    maxWidthChars: 20,
+    xalign: 0,
+    wrap: true,
+    useMarkup: true
   })
 
   const RemoveNotifButton = Widget.Button({
