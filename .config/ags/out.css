@@ -143,8 +143,12 @@
 .home .notification_center .notifications .no_notification {
   margin-top: 3rem;
 }
+.home .notification_center .notifications .no_notification .icon {
+  font-size: 64px;
+  color: #928374;
+}
 .home .notification_center .notifications .no_notification .text {
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 1rem;
   color: #928374;
 }

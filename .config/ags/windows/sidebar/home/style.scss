@@ -182,8 +182,13 @@
       & .no_notification {
         margin-top: 3rem;
 
+        & .icon {
+          font-size: 64px;
+          color: $gray;
+        }
+
         & .text {
-          font-size: 24px;
+          font-size: 20px;
           margin-top: 1rem;
           color: $gray;
         }

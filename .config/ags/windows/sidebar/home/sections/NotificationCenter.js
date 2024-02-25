@@ -1,7 +1,6 @@
 const NotificationService = await Service.import('notifications')
 
 function Notification(notification) {
-  console.log(notification)
   const Image = Widget.Box({
     className: 'image',
     css: `background-image: url("${notification.image ?? App.configDir + '/assets/svg/custom-svg-bell.svg'}")`
@@ -81,10 +80,9 @@ function Header() {
 }
 
 function NoNotification() {
-  const Icon = Widget.Icon({
+  const Icon = Widget.Label({
     className: 'icon',
-    icon: 'custom-svg-bell-unavailable',
-    size: 80
+    label: '󰂛'
   })
 
   const Text = Widget.Label({
