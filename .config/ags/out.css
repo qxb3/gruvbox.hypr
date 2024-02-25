@@ -120,6 +120,56 @@
 .sidebar .music_player .right .position .meta .current_progress, .sidebar .music_player .right .position .meta .length {
   color: #928374;
 }
+.sidebar .notification_center {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 8px;
+}
+.sidebar .notification_center .header .title {
+  font-size: 16px;
+  font-weight: 900;
+}
+.sidebar .notification_center .header .clear_notif_button {
+  font-size: 20px;
+  padding-right: 8px;
+}
+.sidebar .notification_center .header .clear_notif_button label {
+  color: #928374;
+}
+.sidebar .notification_center .divider {
+  background-color: #928374;
+  min-height: 1px;
+}
+.sidebar .notification_center .notifications .notification {
+  background-color: #504945;
+  border-radius: 8px;
+  padding: 8px;
+}
+.sidebar .notification_center .notifications .notification .image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  min-width: 80px;
+  min-height: 80px;
+}
+.sidebar .notification_center .notifications .notification .meta {
+  padding: 8px 0;
+}
+.sidebar .notification_center .notifications .notification .meta .appname {
+  letter-spacing: 2px;
+  font-weight: 900;
+  color: #d79921;
+}
+.sidebar .notification_center .notifications .notification .meta .summary {
+  font-size: 11px;
+  font-weight: 700;
+}
+.sidebar .notification_center .remove_notif_button {
+  padding-right: 4px;
+}
+.sidebar .notification_center .remove_notif_button label {
+  font-size: 16px;
+}
 
 .bar {
   background-color: #282828;

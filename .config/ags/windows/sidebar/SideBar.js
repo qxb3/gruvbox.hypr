@@ -3,6 +3,7 @@ import { state } from '../../shared/utils.js'
 import UserHeader from './sections/UserHeader.js'
 import DesktopControls from './sections/DesktopControls.js'
 import MusicPlayer from './music-player/MusicPlayer.js'
+import NotificationCenter from './sections/NotificationCenter.js'
 
 const revealSideBar = state('reveal_sidebar', false)
 
@@ -14,7 +15,8 @@ function SideBar() {
     children: [
       UserHeader(),
       DesktopControls(),
-      MusicPlayer()
+      MusicPlayer(),
+      NotificationCenter()
     ]
   })
 }
