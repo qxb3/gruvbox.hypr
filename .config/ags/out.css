@@ -185,18 +185,24 @@
   padding: 8px;
   min-width: 300px;
 }
+.app_launcher .header {
+  background-color: #504945;
+  border-radius: 8px;
+  padding: 8px;
+}
 .app_launcher .header .title {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 900;
 }
-.app_launcher .input_container .input {
-  border: solid #504945 1px;
+.app_launcher .header .input_container .input {
+  border: solid #928374 1px;
   border-radius: 8px;
-  font-size: 18px;
-  padding: 0 8px;
+  font-size: 16px;
+  padding: 4px 8px;
 }
-.app_launcher .input_container label {
-  font-size: 18px;
+.app_launcher .header .input_container .placeholder {
+  font-weight: 900;
+  font-size: 16px;
   color: #928374;
   padding-left: 8px;
 }

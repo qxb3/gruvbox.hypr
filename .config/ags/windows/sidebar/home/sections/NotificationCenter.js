@@ -18,7 +18,9 @@ function Notification(notification) {
   const Summary = Widget.Label({
     className: 'summary',
     label: `- ${notification.summary}`,
+    truncate: 'end',
     maxWidthChars: 28,
+    lines: 3,
     xalign: 0,
     wrap: true,
     useMarkup: true
