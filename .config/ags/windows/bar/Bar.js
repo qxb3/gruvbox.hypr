@@ -3,7 +3,8 @@ import Gdk from 'gi://Gdk'
 import SideBar from './sidebar/SideBar.js'
 import { SystemControlsMenu } from './controls/SystemControls.js'
 
-const Hyprland = await Service.import('hyprland')
+const HyprlandService = await Service.import('hyprland')
+const SystemTrayService = await Service.import('systemtray')
 
 function Divider() {
   return Widget.Box({
@@ -34,6 +35,46 @@ function StartSection() {
     child: Widget.Label('󰸉')
   })
 
+  const revealSystray = Variable(false)
+  const SysTray = Widget.Box({
+    className: 'systray',
+    hpack: 'center',
+    vertical: true,
+    children: [
+      Widget.Revealer({
+        revealChild: revealSystray.bind(),
+        transition: 'slide_down',
+        transitionDuration: 300,
+        child: Widget.Box({
+          vertical: true,
+          spacing: 8,
+          className: 'apps',
+          children: SystemTrayService.bind('items').transform(apps => apps.map(app =>
+            Widget.Button({
+              className: 'app',
+              child: Widget.Icon({
+                icon: app.icon,
+                size: 24
+              }),
+              onPrimaryClick: (_, event) => app.activate(event),
+              onSecondaryClick: (self) => {
+                app.menu.class_name = 'systray_menu'
+                app.menu.popup_at_widget(self, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null)
+              }
+            })
+          ))
+        })
+      }),
+      Widget.Button({
+        className: 'systray_button',
+        child: Widget.Label({
+          label: revealSystray.bind().transform(v => v ? '󰅃' : '󰅀')
+        }),
+        onPrimaryClick: () => revealSystray.value = !revealSystray.value
+      })
+    ]
+  })
+
   return Widget.Box({
     className: 'start',
     vpack: 'start',
@@ -43,7 +84,8 @@ function StartSection() {
       SideBarButton,
       Divider(),
       SearchButton,
-      WallpaperButton
+      WallpaperButton,
+      SysTray
     ]
   })
 }
@@ -58,9 +100,9 @@ function CenterSection() {
         className: 'workspace',
         hpack: 'center',
         cursor: 'pointer',
-        onPrimaryClick: () => Hyprland.message(`dispatch workspace ${i + 1}`)
-      }).hook(Hyprland.active.workspace, (self) =>
-        self.toggleClassName('active', Hyprland.active.workspace.id === i + 1)
+        onPrimaryClick: () => HyprlandService.message(`dispatch workspace ${i + 1}`)
+      }).hook(HyprlandService.active.workspace, (self) =>
+        self.toggleClassName('active', HyprlandService.active.workspace.id === i + 1)
       )
     )
   })

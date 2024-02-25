@@ -45,6 +45,12 @@
   font-size: 20px;
   padding-right: 6px;
 }
+.bar .sections .start .systray .apps {
+  margin-top: 8px;
+}
+.bar .sections .start .systray .systray_button {
+  font-size: 21px;
+}
 .bar .sections .center .workspace_indicator {
   background-color: #3c3836;
   border-radius: 8px;
@@ -97,6 +103,19 @@
   font-weight: 500;
 }
 .bar .sections .end .time_indicator:hover {
+  background-color: #504945;
+}
+
+.systray_menu {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 1rem;
+}
+.systray_menu menuitem {
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+.systray_menu menuitem:hover {
   background-color: #504945;
 }
 

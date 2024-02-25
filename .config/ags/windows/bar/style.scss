@@ -58,6 +58,16 @@
           padding-right: 6px;
         }
       }
+
+      & .systray {
+        & .apps {
+          margin-top: 8px;
+        }
+
+        & .systray_button {
+          font-size: 21px;
+        }
+      }
     }
 
     & .center {
@@ -115,6 +125,21 @@
         font-size: 14px;
         font-weight: 500;
       }
+    }
+  }
+}
+
+.systray_menu {
+  background-color: $bg1;
+  border-radius: 8px;
+  padding: 1rem;
+
+  & menuitem {
+    border-radius: 4px;
+    padding: 4px 8px;
+
+    &:hover {
+      background-color: $bg2;
     }
   }
 }
