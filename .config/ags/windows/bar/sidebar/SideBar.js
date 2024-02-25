@@ -19,16 +19,10 @@ function SideBar() {
 }
 
 export default function() {
-  return Widget.Box({
-    css: `
-      background-color: #282828;
-      padding: 0.01px;
-    `,
-    child: Widget.Revealer({
-      revealChild: revealSideBar.bind(),
-      transition: 'slide_right',
-      transitionDuration: 300,
-      child: SideBar()
-    })
+  return Widget.Revealer({
+    revealChild: revealSideBar.bind(),
+    transition: 'slide_right',
+    transitionDuration: 300,
+    child: SideBar()
   })
 }
