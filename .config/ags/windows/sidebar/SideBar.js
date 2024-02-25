@@ -1,22 +1,15 @@
+import Home from './home/Home.js'
 import { state } from '../../shared/utils.js'
-
-import UserHeader from './sections/UserHeader.js'
-import DesktopControls from './sections/DesktopControls.js'
-import MusicPlayer from './music-player/MusicPlayer.js'
-import NotificationCenter from './sections/NotificationCenter.js'
 
 const revealSideBar = state('reveal_sidebar', false)
 
 function SideBar() {
-  return Widget.Box({
-    className: 'sidebar',
-    vertical: true,
-    children: [
-      UserHeader(),
-      DesktopControls(),
-      MusicPlayer(),
-      NotificationCenter()
-    ]
+  return Widget.Stack({
+    transition: 'slide_left_right',
+    transitionDuration: 300,
+    children: {
+      home: Home()
+    }
   })
 }
 
