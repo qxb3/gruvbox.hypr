@@ -51,7 +51,7 @@
 .home .desktop_controls .buttons .icon {
   background-color: #d79921;
   border-radius: 999px;
-  padding: 14px;
+  padding: 10px;
   color: #ebdbb2;
 }
 .home .desktop_controls .buttons .icon.inactive {
@@ -128,19 +128,26 @@
   padding: 8px;
 }
 .home .notification_center .header .title {
+  color: #d79921;
   font-size: 16px;
   font-weight: 900;
 }
 .home .notification_center .header .clear_notif_button {
-  font-size: 20px;
-  padding-right: 8px;
+  border-radius: 999px;
+  font-size: 24px;
+  font-weight: 900;
+  padding: 3px 11px 3px 9px;
 }
-.home .notification_center .header .clear_notif_button label {
+.home .notification_center .header .clear_notif_button:hover label {
   color: #928374;
 }
-.home .notification_center .divider {
-  background-color: #928374;
-  min-height: 1px;
+.home .notification_center .notifications .no_notification {
+  margin-top: 3rem;
+}
+.home .notification_center .notifications .no_notification .text {
+  font-size: 24px;
+  margin-top: 1rem;
+  color: #928374;
 }
 .home .notification_center .notifications .notification {
   background-color: #504945;

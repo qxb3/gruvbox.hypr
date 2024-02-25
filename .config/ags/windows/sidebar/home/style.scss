@@ -54,7 +54,7 @@
       & .icon {
         background-color: $yellow;
         border-radius: 999px;
-        padding: 14px;
+        padding: 10px;
         color: $fg;
 
         &.inactive {
@@ -160,26 +160,36 @@
 
     & .header {
       & .title {
+        color: $yellow;
         font-size: 16px;
         font-weight: 900;
       }
 
       & .clear_notif_button {
-        font-size: 20px;
-        padding-right: 8px;
+        border-radius: 999px;
+        font-size: 24px;
+        font-weight: 900;
+        padding: 3px 11px 3px 9px;
 
-        & label {
-          color: $gray;
+        &:hover {
+          & label {
+            color: $gray;
+          }
         }
       }
     }
 
-    & .divider {
-      background-color: $gray;
-      min-height: 1px;
-    }
-
     & .notifications {
+      & .no_notification {
+        margin-top: 3rem;
+
+        & .text {
+          font-size: 24px;
+          margin-top: 1rem;
+          color: $gray;
+        }
+      }
+
       & .notification {
         background-color: $bg2;
         border-radius: 8px;

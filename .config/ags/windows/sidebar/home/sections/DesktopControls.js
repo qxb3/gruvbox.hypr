@@ -5,22 +5,24 @@ const volume = Variable(0, {
 })
 
 function Button(className, svgIcon, name, active = false) {
-  return Widget.Button({
-    className: className,
-    child: Widget.Box({
-      vertical: true,
-      spacing: 6,
-      children: [
-        Widget.Icon({
-          className: `icon ${!active ? 'inactive' : ''}`,
-          icon: svgIcon,
-          size: 32
-        }),
-        Widget.Label({
-          className: 'name',
-          label: name
-        })
-      ]
+  return Widget.Box({
+    child: Widget.Button({
+      className: className,
+      child: Widget.Box({
+        vertical: true,
+        spacing: 6,
+        children: [
+          Widget.Icon({
+            className: `icon ${!active ? 'inactive' : ''}`,
+            icon: svgIcon,
+            size: 32
+          }),
+          Widget.Label({
+            className: 'name',
+            label: name
+          })
+        ]
+      })
     })
   })
 }
@@ -89,6 +91,7 @@ export default function() {
       Widget.Box({
         className: 'buttons',
         vpack: 'center',
+        homogeneous: true,
         spacing: 24,
         children: [
           NetworkButton,

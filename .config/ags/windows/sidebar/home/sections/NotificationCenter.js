@@ -1,6 +1,7 @@
 const NotificationService = await Service.import('notifications')
 
 function Notification(notification) {
+  console.log(notification)
   const Image = Widget.Box({
     className: 'image',
     css: `background-image: url("${notification.image ?? App.configDir + '/assets/svg/custom-svg-bell.svg'}")`
@@ -10,13 +11,14 @@ function Notification(notification) {
     className: 'appname',
     label: notification.appName.toUpperCase(),
     truncate: 'end',
-    xalign: 0
+    xalign: 0,
+    hexpand: true
   })
 
   const Summary = Widget.Label({
     className: 'summary',
-    label: notification.summary,
-    maxWidthChars: 20,
+    label: `- ${notification.summary}`,
+    maxWidthChars: 28,
     xalign: 0,
     wrap: true,
     useMarkup: true
@@ -55,14 +57,14 @@ function Header() {
     className: 'title',
     hpack: 'start',
     hexpand: true,
-    label: 'Notification Center'
+    label: 'Notifications'
   })
 
   const ClearNotifButton = Widget.Button({
     className: 'clear_notif_button',
     hpack: 'end',
     hexpand: true,
-    child: Widget.Label('󰁮'),
+    child: Widget.Label('󰎟'),
     onPrimaryClick: () => NotificationService.clear()
   })
 
@@ -76,6 +78,29 @@ function Header() {
   })
 }
 
+function NoNotification() {
+  const Icon = Widget.Icon({
+    className: 'icon',
+    icon: 'custom-svg-bell-unavailable',
+    size: 80
+  })
+
+  const Text = Widget.Label({
+    className: 'text',
+    label: 'notifs.length = 0;'
+  })
+
+  return Widget.Box({
+    className: 'no_notification',
+    hpack: 'center',
+    vertical: true,
+    children: [
+      Icon,
+      Text
+    ]
+  })
+}
+
 function Notifications() {
   return Widget.Scrollable({
     vexpand: true,
@@ -83,7 +108,12 @@ function Notifications() {
       className: 'notifications',
       spacing: 8,
       vertical: true,
-      children: NotificationService.bind('notifications').transform(notifications => notifications.map(Notification))
+      children: NotificationService.bind('notifications')
+        .transform(notifications =>
+          notifications.length > 0
+            ? notifications.map(Notification)
+            : [ NoNotification() ]
+        )
     })
   })
 }
@@ -96,7 +126,6 @@ export default function() {
     vexpand: true,
     children: [
       Header(),
-      Widget.Box({ className: 'divider' }),
       Notifications()
     ]
   })
