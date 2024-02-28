@@ -15,6 +15,10 @@ custom_paths=(
   "$HOME/.config/kitty"
   "$HOME/.config/neofetch"
   "$HOME/.config/cava"
+  "$HOME/Downloads"
+  "$HOME/Documents"
+  "$HOME/Pictures"
+  "$HOME/Videos"
 )
 
 paths="$project_paths\n"
