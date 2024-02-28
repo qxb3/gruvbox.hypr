@@ -32,7 +32,6 @@ function Header() {
         } else {
           self.text = ''
 
-          selectedIndex.value = 0
           selectedApp.value = queriedApps.value[0]
         }
       })
