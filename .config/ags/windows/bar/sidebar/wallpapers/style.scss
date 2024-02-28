@@ -1,0 +1,15 @@
+.wallpapers {
+  background-color: $bg;
+  border-right: solid $bg2 1px;
+  padding: 8px;
+  min-width: 300px;
+
+  & .list {
+    & .wallpaper {
+      & .img {
+        border-radius: 8px;
+        min-height: 120px;
+      }
+    }
+  }
+}

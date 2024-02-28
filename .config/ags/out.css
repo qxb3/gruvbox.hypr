@@ -347,3 +347,14 @@
 .app_launcher .apps .app:focus {
   background-color: #458588;
 }
+
+.wallpapers {
+  background-color: #282828;
+  border-right: solid #504945 1px;
+  padding: 8px;
+  min-width: 300px;
+}
+.wallpapers .list .wallpaper .img {
+  border-radius: 8px;
+  min-height: 120px;
+}

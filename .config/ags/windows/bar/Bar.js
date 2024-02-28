@@ -33,7 +33,8 @@ function StartSection() {
   const WallpaperButton = Widget.Button({
     className: 'wallpaper_button',
     cursor: 'pointer',
-    child: Widget.Label('󰸉')
+    child: Widget.Label('󰸉'),
+    onPrimaryClick: () => Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh toggle-wallpapers"`)
   })
 
   const revealSystray = Variable(false)
@@ -190,7 +191,7 @@ export default Widget.Window({
   name: 'bar',
   layer: 'top',
   exclusivity: 'exclusive',
-  keymode: sidebarShown.bind().transform(shown => shown !== 'home' ? 'exclusive' : 'none'),
+  keymode: sidebarShown.bind().transform(shown => shown === 'applauncher' ? 'exclusive' : 'none'),
   anchor: ['left', 'top', 'bottom'],
   child: Bar()
 })
