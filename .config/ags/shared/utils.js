@@ -18,6 +18,8 @@ export function state(key, value) {
   Utils.monitorFile(STATES_PATH, (file, event) => {
     if (event === Gio.FileMonitorEvent.CHANGED) {
       const states = JSON.parse(Utils.readFile(file))
+      Utils.writeFile(JSON.stringify(states, null, 2), STATES_PATH)
+
       variable.value = states[key]
     }
   })
