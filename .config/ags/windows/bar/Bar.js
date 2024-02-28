@@ -2,6 +2,7 @@ import Gdk from 'gi://Gdk'
 
 import SideBar from './sidebar/SideBar.js'
 import { SystemControlsMenu } from './controls/SystemControls.js'
+import { sidebarShown } from '../../shared/vars.js'
 
 const HyprlandService = await Service.import('hyprland')
 const SystemTrayService = await Service.import('systemtray')
@@ -26,7 +27,7 @@ function StartSection() {
     className: 'search_button',
     cursor: 'pointer',
     child: Widget.Label(''),
-    onPrimaryClick: () => Utils.exec(`bash -c "${App.configDir}/shared/scripts/shown_sidebar.sh applauncher"`)
+    onPrimaryClick: () => Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh toggle-applauncher"`)
   })
 
   const WallpaperButton = Widget.Button({
@@ -189,6 +190,7 @@ export default Widget.Window({
   name: 'bar',
   layer: 'top',
   exclusivity: 'exclusive',
+  keymode: sidebarShown.bind().transform(shown => shown !== 'home' ? 'exclusive' : 'none'),
   anchor: ['left', 'top', 'bottom'],
   child: Bar()
 })

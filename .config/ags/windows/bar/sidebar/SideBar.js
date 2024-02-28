@@ -1,16 +1,13 @@
 import Home from './home/Home.js'
 import AppLauncher from './app-launcher/AppLauncher.js'
 
-import { state } from '../../../shared/utils.js'
-
-const revealSideBar = state('reveal_sidebar', false)
-const shown = state('sidebar_shown', 'home')
+import { revealSideBar, sidebarShown } from '../../../shared/vars.js'
 
 function SideBar() {
   return Widget.Stack({
     transition: 'slide_right',
     transitionDuration: 300,
-    shown: shown.bind(),
+    shown: sidebarShown.bind(),
     children: {
       home: Home(),
       applauncher: AppLauncher()

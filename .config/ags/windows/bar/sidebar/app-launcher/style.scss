@@ -9,9 +9,9 @@
     border-radius: 8px;
     padding: 8px;
 
-    & .title {
-      font-size: 16px;
-      font-weight: 900;
+    & .icon {
+      font-size: 20px;
+      font-weight: 200;
     }
 
     & .input_container {
@@ -27,6 +27,26 @@
         font-size: 16px;
         color: $gray;
         padding-left: 8px;
+      }
+    }
+  }
+
+  & .apps {
+    & .app {
+      background-color: $bg1;
+      border-radius: 8px;
+      padding: 8px;
+
+      &:hover {
+        background-color: $bg2;
+      }
+
+      &.selected {
+        background-color: $blue;
+      }
+
+      &:focus {
+        background-color: $blue;
       }
     }
   }

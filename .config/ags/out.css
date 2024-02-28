@@ -317,9 +317,9 @@
   border-radius: 8px;
   padding: 8px;
 }
-.app_launcher .header .title {
-  font-size: 16px;
-  font-weight: 900;
+.app_launcher .header .icon {
+  font-size: 20px;
+  font-weight: 200;
 }
 .app_launcher .header .input_container .input {
   border: solid #928374 1px;
@@ -332,4 +332,18 @@
   font-size: 16px;
   color: #928374;
   padding-left: 8px;
+}
+.app_launcher .apps .app {
+  background-color: #3c3836;
+  border-radius: 8px;
+  padding: 8px;
+}
+.app_launcher .apps .app:hover {
+  background-color: #504945;
+}
+.app_launcher .apps .app.selected {
+  background-color: #458588;
+}
+.app_launcher .apps .app:focus {
+  background-color: #458588;
 }

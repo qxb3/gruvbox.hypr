@@ -4,7 +4,7 @@ STATES_PATH=$HOME/.config/ags/.states.json
 
 case $1 in
   toggle)
-    echo `cat $STATES_PATH | jq '.reveal_sidebar |= not'` > $STATES_PATH
+    echo `cat $STATES_PATH | jq '.reveal_sidebar |= not | .sidebar_shown = "home"'` > $STATES_PATH
   ;;
 
   open)
@@ -24,6 +24,17 @@ case $1 in
 
     echo `cat $STATES_PATH | jq '.reveal_sidebar = false'` > $STATES_PATH
   ;;
+
+  toggle-applauncher)
+    if [[ `cat $STATES_PATH | jq -r '.sidebar_shown'` == "applauncher" ]]; then
+      echo `cat $STATES_PATH | jq '.sidebar_shown = "home"'` > $STATES_PATH
+
+      exit 0
+    fi
+
+    echo `cat $STATES_PATH | jq '.sidebar_shown = "applauncher" | .reveal_sidebar = true'` > $STATES_PATH
+  ;;
+
 
   *)
     echo "Unknown action."
