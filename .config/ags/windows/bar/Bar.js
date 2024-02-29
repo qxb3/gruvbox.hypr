@@ -137,7 +137,11 @@ function EndSection() {
 
   const ScreenShotButton = Widget.Button({
     className: 'screenshot_button',
-    child: Widget.Label('󰄄')
+    child: Widget.Label('󰄄'),
+    onPrimaryClick: () => Utils.subprocess(
+      ['bash', '-c', '/home/qxb3/.config/hypr/scripts/screenshot.sh p'],
+      (output) => print(output)
+    )
   })
 
   const TimeIndicator = Widget.Button({
