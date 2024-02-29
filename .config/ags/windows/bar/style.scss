@@ -79,10 +79,12 @@
           background-color: $fg;
           border-radius: 8px;
           min-width: 10px;
-          min-height: 32px;
+          min-height: 24px;
+          transition: min-height 100ms cubic-bezier(1, 0, 0, 1);
 
           &.active {
             background-color: $yellow;
+            min-height: 42px;
           }
 
           &:hover {

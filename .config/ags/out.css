@@ -61,10 +61,12 @@
   background-color: #ebdbb2;
   border-radius: 8px;
   min-width: 10px;
-  min-height: 32px;
+  min-height: 24px;
+  transition: min-height 100ms cubic-bezier(1, 0, 0, 1);
 }
 .bar .sections .center .workspace_indicator .workspace.active {
   background-color: #d79921;
+  min-height: 42px;
 }
 .bar .sections .center .workspace_indicator .workspace:hover {
   background-color: #bdae93;
