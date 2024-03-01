@@ -1,8 +1,6 @@
 import { musicVolume, setVolume } from '../../../../../shared/music.js'
 
-const volume = Variable(0, {
-  poll: [1000, `pamixer --get-volume`, vol => parseInt(vol)]
-})
+const AudioService = await Service.import('audio')
 
 function Button(className, svgIcon, name, active = false) {
   return Widget.Box({
@@ -53,10 +51,8 @@ export default function() {
       }),
       Widget.Slider({
         className: 'slider',
-        min: 0,
-        max: 100,
-        value: volume.bind(),
-        onChange: ({ value }) => Utils.exec(`pamixer --set-volume ${parseInt(value)}`),
+        value: AudioService.speaker.bind('volume'),
+        onChange: ({ value }) => AudioService.speaker.volume = value,
         drawValue: false,
         hexpand: true
       })
