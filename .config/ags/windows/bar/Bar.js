@@ -1,7 +1,7 @@
 import Gdk from 'gi://Gdk'
 
 import SideBar from './sidebar/SideBar.js'
-import ControlMenu from './controls/ControlMenu.js'
+import ControlMenu from './menu/ControlMenu.js'
 
 import { sidebarShown } from '../../shared/vars.js'
 
