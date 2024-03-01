@@ -9,6 +9,8 @@ require('bufferline').setup({
         text_align = 'center',
         separator = true
       }
-    }
+    },
+    buffer_close_icon = '',
+    modified_icon = ''
   }
 })

@@ -16,7 +16,7 @@ map('i', 'QQ', '<Esc>')
 map('v', 'QQ', '<Esc>')
 
 -- Map :source to mm
-map('n', 'mm', ':source<CR>')
+map('n', '<leader>s', ':source<CR>')
 
 -- Buffer management
 map('n', '<C-o>', ':bprev<CR>')
@@ -43,12 +43,19 @@ map('n', 'q', '<leader>r')
 ------------------------------------------------------------
 
 -- Mappings for renamer.nvim
-map('i', '<F2>', '<cmd>lua require("renamer").rename()<cr>')
-map('n', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>')
-map('v', '<leader>rn', '<cmd>lua require("renamer").rename()<cr>')
+map('i', '<F2>', '<cmd>lua require("renamer").rename()<CR>')
+map('n', '<leader>rn', '<cmd>lua require("renamer").rename()<CR>')
+map('v', '<leader>rn', '<cmd>lua require("renamer").rename()<CR>')
 
 -- Mappings for nvim-tree
 map('n', '<C-s>', ':NvimTreeFindFileToggle<CR>')
+
+-- Mappings for bufferline.nvim
+map('n', '<A-1>', ':BufferLineGoToBuffer 1<CR>')
+map('n', '<A-2>', ':BufferLineGoToBuffer 2<CR>')
+map('n', '<A-3>', ':BufferLineGoToBuffer 3<CR>')
+map('n', '<A-4>', ':BufferLineGoToBuffer 4<CR>')
+map('n', '<A-5>', ':BufferLineGoToBuffer 5<CR>')
 
 -- Mappings for floaterm
 vim.g.floaterm_keymap_new    = '<leader>tn'
