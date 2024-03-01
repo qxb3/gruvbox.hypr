@@ -30,13 +30,9 @@ function WallpaperList() {
       className: 'list',
       vertical: true,
       spacing: 12,
-      setup: (self) => {
-        const wallpapers = Utils.exec(`find ${WALLPAPERS_PATH}/ -iname '*.png' -or -iname '*.jpg'`)
-          .split('\n')
-          .map(Wallpaper)
-
-        self.children = wallpapers
-      }
+      children: Utils.exec(`find ${WALLPAPERS_PATH}/ -iname '*.png' -or -iname '*.jpg'`)
+        .split('\n')
+        .map(Wallpaper)
     })
   })
 }

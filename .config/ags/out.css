@@ -121,12 +121,40 @@
   background-color: #504945;
 }
 
-.system_controls {
+.control_menu {
   background-color: #3c3836;
   border-radius: 8px;
   padding: 1rem;
-  margin: 0 0 1rem 1.5rem;
-  min-height: 300px;
+  margin: 0 0 8px 8px;
+  min-height: 200px;
+}
+.control_menu.audio_controls .slider_container .slider trough {
+  background-color: #504945;
+  border-radius: 8px;
+}
+.control_menu.audio_controls .slider_container .slider highlight {
+  background-color: #458588;
+  border-radius: 8px;
+  min-width: 10px;
+}
+.control_menu.audio_controls .slider_container.global_volume {
+  padding-right: 2px;
+}
+.control_menu.audio_controls .slider_container.global_volume .icon {
+  font-size: 15px;
+  padding-right: 4px;
+}
+.control_menu.audio_controls .slider_container.music_volume {
+  padding-right: 4px;
+}
+.control_menu.audio_controls .slider_container.music_volume .icon {
+  font-size: 16px;
+}
+.control_menu.audio_controls .slider_container.input_volume {
+  padding-right: 4px;
+}
+.control_menu.audio_controls .slider_container.input_volume .icon {
+  font-size: 16px;
 }
 
 .home {

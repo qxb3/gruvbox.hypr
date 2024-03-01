@@ -1,0 +1,49 @@
+.control_menu {
+  background-color: $bg1;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0 0 8px 8px;
+  min-height: 200px;
+
+  &.audio_controls {
+    & .slider_container {
+      & .slider {
+        & trough {
+          background-color: $bg2;
+          border-radius: 8px;
+        }
+
+        & highlight {
+          background-color: $blue;
+          border-radius: 8px;
+          min-width: 10px;
+        }
+      }
+
+      &.global_volume {
+        padding-right: 2px;
+
+        & .icon {
+          font-size: 15px;
+          padding-right: 4px;
+        }
+      }
+
+      &.music_volume {
+        padding-right: 4px;
+
+        & .icon {
+          font-size: 16px;
+        }
+      }
+
+      &.input_volume {
+        padding-right: 4px;
+
+        & .icon {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import Gdk from 'gi://Gdk'
 
 import SideBar from './sidebar/SideBar.js'
-import { SystemControlsMenu } from './controls/SystemControls.js'
+import ControlMenu from './controls/ControlMenu.js'
+
 import { sidebarShown } from '../../shared/vars.js'
 
 const HyprlandService = await Service.import('hyprland')
@@ -125,14 +126,17 @@ function CenterSection() {
 
 function EndSection() {
   const AudioControlButton = Widget.Button({
+    attribute: { menu: ControlMenu('audio') },
     className: 'audio_control_button',
-    child: Widget.Label('󰋎')
+    child: Widget.Label('󰋎'),
+    onClicked: (self) => self.attribute.menu.toggle()
   })
 
   const SystemControlButton = Widget.Button({
+    attribute: { menu: ControlMenu('system') },
     className: 'system_control_button',
-    onPrimaryClick: (self) => SystemControlsMenu.popup_at_widget(self, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null),
-    child: Widget.Label('')
+    child: Widget.Label(''),
+    onClicked: (self) => self.attribute.menu.toggle()
   })
 
   const ScreenShotButton = Widget.Button({

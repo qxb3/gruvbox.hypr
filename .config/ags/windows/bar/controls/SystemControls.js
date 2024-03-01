@@ -1,16 +1,8 @@
-function SystemControls() {
+export default function() {
   return Widget.Box({
-    className: 'system_controls',
+    className: 'system_controls control_menu',
     children: [
       Widget.Label('System Controls!')
     ]
   })
 }
-
-export const SystemControlsMenu = Widget.Menu({
-  children: [
-    Widget.MenuItem({
-      child: SystemControls()
-    })
-  ]
-})

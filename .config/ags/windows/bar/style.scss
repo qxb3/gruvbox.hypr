@@ -146,12 +146,5 @@
   }
 }
 
-.system_controls {
-  background-color: $bg1;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 0 0 1rem 1.5rem;
-  min-height: 300px;
-}
-
+@import "./controls/style.scss";
 @import "./sidebar/style.scss";
