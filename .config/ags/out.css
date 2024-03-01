@@ -133,12 +133,14 @@
   border-radius: 8px;
 }
 .control_menu.audio_controls .slider_container .slider highlight {
-  background-color: #458588;
   border-radius: 8px;
   min-width: 10px;
 }
 .control_menu.audio_controls .slider_container.global_volume {
   padding-right: 2px;
+}
+.control_menu.audio_controls .slider_container.global_volume .slider highlight {
+  background-color: #458588;
 }
 .control_menu.audio_controls .slider_container.global_volume .icon {
   font-size: 15px;
@@ -147,14 +149,35 @@
 .control_menu.audio_controls .slider_container.music_volume {
   padding-right: 4px;
 }
+.control_menu.audio_controls .slider_container.music_volume .slider highlight {
+  background-color: #689d6a;
+}
 .control_menu.audio_controls .slider_container.music_volume .icon {
   font-size: 16px;
 }
 .control_menu.audio_controls .slider_container.input_volume {
   padding-right: 4px;
 }
+.control_menu.audio_controls .slider_container.input_volume .slider highlight {
+  background-color: #98971a;
+}
 .control_menu.audio_controls .slider_container.input_volume .icon {
   font-size: 16px;
+}
+.control_menu.system_controls .slider_container .slider trough {
+  background-color: #504945;
+  border-radius: 8px;
+}
+.control_menu.system_controls .slider_container .slider highlight {
+  border-radius: 8px;
+  min-width: 10px;
+}
+.control_menu.system_controls .slider_container.brightness .slider highlight {
+  background-color: #ebdbb2;
+}
+.control_menu.system_controls .slider_container.brightness .icon {
+  font-size: 15px;
+  padding-right: 4px;
 }
 
 .home {
