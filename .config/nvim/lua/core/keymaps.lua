@@ -16,7 +16,7 @@ map('i', 'QQ', '<Esc>')
 map('v', 'QQ', '<Esc>')
 
 -- Map :source to mm
-map('n', '<leader>s', ':source<CR>')
+map('n', 'ss', ':source<CR>')
 
 -- Buffer management
 map('n', '<C-o>', ':bprev<CR>')
