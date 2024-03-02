@@ -1,7 +1,7 @@
 import Gdk from 'gi://Gdk'
 
 import SideBar from './sidebar/SideBar.js'
-import ControlMenu from './menu/ControlMenu.js'
+import Menu from './menu/Menu.js'
 
 import { sidebarShown } from '../../shared/vars.js'
 
@@ -126,14 +126,14 @@ function CenterSection() {
 
 function EndSection() {
   const AudioControlButton = Widget.Button({
-    attribute: { menu: ControlMenu('audio') },
+    attribute: { menu: Menu('audio') },
     className: 'audio_control_button',
     child: Widget.Label('󰋎'),
     onClicked: (self) => self.attribute.menu.toggle()
   })
 
   const SystemControlButton = Widget.Button({
-    attribute: { menu: ControlMenu('system') },
+    attribute: { menu: Menu('system') },
     className: 'system_control_button',
     child: Widget.Label(''),
     onClicked: (self) => self.attribute.menu.toggle()
@@ -149,11 +149,13 @@ function EndSection() {
   })
 
   const TimeIndicator = Widget.Button({
+    attribute: { menu: Menu('calendar') },
     className: 'time_indicator',
     hpack: 'center',
     child: Widget.Label().poll(1000, (self) =>
       self.label = Utils.exec(`date +'%H\n%M'`)
-    )
+    ),
+    onClicked: (self) => self.attribute.menu.toggle()
   })
 
   return Widget.Box({

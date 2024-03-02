@@ -23,7 +23,7 @@ export default function() {
   })
 
   return Widget.Box({
-    className: 'system_controls control_menu',
+    className: 'system_controls menu',
     children: [
       Brightness
     ]

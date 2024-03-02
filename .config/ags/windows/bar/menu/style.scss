@@ -1,11 +1,12 @@
-.control_menu {
+.menu {
   background-color: $bg1;
   border-radius: 8px;
-  padding: 1rem;
   margin: 0 0 8px 8px;
-  min-height: 200px;
 
   &.audio_controls {
+    min-height: 200px;
+    padding: 1rem;
+
     & .slider_container {
       & .slider {
         & trough {
@@ -59,6 +60,9 @@
   }
 
   &.system_controls {
+    min-height: 200px;
+    padding: 1rem;
+
     & .slider_container {
       & .slider {
         & trough {
@@ -81,6 +85,16 @@
           font-size: 15px;
           padding-right: 4px;
         }
+      }
+    }
+  }
+
+  &.calendar {
+    & .widget {
+      padding: 0.3rem 0.5rem;
+
+      & button {
+        color: $orange;
       }
     }
   }

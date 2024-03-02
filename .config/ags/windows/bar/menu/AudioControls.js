@@ -67,7 +67,7 @@ export default function() {
   })
 
   return Widget.Box({
-    className: 'audio_controls control_menu',
+    className: 'audio_controls menu',
     spacing: 8,
     children: [
       GlobalVolume,
