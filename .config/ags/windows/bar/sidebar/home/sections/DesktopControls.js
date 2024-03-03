@@ -68,7 +68,7 @@ export default function() {
         inactive: Button('inactive', 'custom-svg-volume-mute', 'SILENT', false)
       }
     }),
-    onPrimaryClick: () => {
+    onClicked: () => {
       AudioService.speakers.forEach(speaker => speaker.isMuted = !speaker.isMuted)
       isMuted.value = !isMuted.value
     }
