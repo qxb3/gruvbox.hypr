@@ -40,7 +40,7 @@ export default function() {
         wired: Button('wired', 'custom-svg-ethernet', 'WIRED', true)
       }
     }),
-    onPrimaryClick: () => NetworkService.toggleWifi()
+    // onPrimaryClick: () => NetworkService.toggleWifi()
   })
 
   const BluetoothButton = Widget.Button({
@@ -53,7 +53,8 @@ export default function() {
         active: Button('active', 'custom-svg-bluetooth', 'BLUE', true),
         inactive: Button('inactive', 'custom-svg-bluetooth-unavailable', 'BLUE', false)
       }
-    })
+    }),
+    onClicked: () => BluetoothService.toggle()
   })
 
   const isMuted = Variable(AudioService.speakers.every(speaker => !speaker.isMuted))
@@ -85,7 +86,7 @@ export default function() {
         inactive: Button('inactive', 'custom-svg-bell-unavailable', 'DND', false)
       }
     }),
-    onPrimaryClick: () => NotificationsService.dnd = !NotificationsService.dnd
+    onClicked: () => NotificationsService.dnd = !NotificationsService.dnd
   })
 
   const VolumeSlider = Widget.Box({
