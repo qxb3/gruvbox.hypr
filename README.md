@@ -4,7 +4,7 @@
 &ensp;[<kbd> <br> ~/vim_styled <br> </kbd>](#vim_styled--a-minimal-vim-styled-rice)&ensp;
 <br><br><br></div>
   
-# [~/groove](https://github.com/qxb3/gruvbox.hypr/tree/groove) ~ Also a minimal rice.
+# [~/groove](https://github.com/qxb3/gruvbox.hypr/tree/groove) ~ A widgety rice.
 
 <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/1.png" />
 <br>
