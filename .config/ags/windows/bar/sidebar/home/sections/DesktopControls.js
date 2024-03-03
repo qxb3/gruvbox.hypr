@@ -1,6 +1,9 @@
 import { musicVolume, setVolume } from '../../../../../shared/music.js'
 
 const AudioService = await Service.import('audio')
+const NetworkService = await Service.import('network')
+const BluetoothService = await Service.import('bluetooth')
+const NotificationsService = await Service.import('notifications')
 
 function Button(className, svgIcon, name, active = false) {
   return Widget.Box({
@@ -28,18 +31,62 @@ function Button(className, svgIcon, name, active = false) {
 export default function() {
   const NetworkButton = Widget.Button({
     className: 'network_button',
+    cursor: 'pointer',
     vpack: 'center',
     child: Widget.Stack({
+      shown: NetworkService.bind('primary'),
       children: {
         wifi: Button('wifi', 'custom-svg-wifi', 'WIFI', true),
         wired: Button('wired', 'custom-svg-ethernet', 'WIRED', true)
       }
+    }),
+    onPrimaryClick: () => NetworkService.toggleWifi()
+  })
+
+  const BluetoothButton = Widget.Button({
+    className: 'bluetooth_button',
+    cursor: 'pointer',
+    vpack: 'center',
+    child: Widget.Stack({
+      shown: BluetoothService.bind('enabled').as(on => on ? 'active' : 'inactive'),
+      children: {
+        active: Button('active', 'custom-svg-bluetooth', 'BLUE', true),
+        inactive: Button('inactive', 'custom-svg-bluetooth-unavailable', 'BLUE', false)
+      }
     })
   })
 
-  const BluetoothButton = Button('bluetooth_button inactive', 'custom-svg-bluetooth-unavailable', 'BLUE')
-  const VolumeButton = Button('volume_button', 'custom-svg-volume-mute', 'SILENT')
-  const DNDButton = Button('dnd_button', 'custom-svg-bell-unavailable', 'DND')
+  const isMuted = Variable(AudioService.speakers.every(speaker => !speaker.isMuted))
+  const VolumeButton = Widget.Button({
+    className: 'volume_button',
+    cursor: 'pointer',
+    vpack: 'center',
+    child: Widget.Stack({
+      shown: isMuted.bind().transform(muted => muted ? 'active' : 'inactive'),
+      children: {
+        active: Button('active', 'custom-svg-volume', 'SILENT', true),
+        inactive: Button('inactive', 'custom-svg-volume-mute', 'SILENT', false)
+      }
+    }),
+    onPrimaryClick: () => {
+      AudioService.speakers.forEach(speaker => speaker.isMuted = !speaker.isMuted)
+      isMuted.value = !isMuted.value
+    }
+  })
+
+  const DNDButton = Widget.Button({
+    className: 'dnd_button',
+    cursor: 'pointer',
+    vpack: 'center',
+    child: Widget.Stack({
+      shown: NotificationsService.bind('dnd').as(dnd => !dnd ? 'active' : 'inactive'),
+      children: {
+        active: Button('active', 'custom-svg-bell', 'DND', true),
+        inactive: Button('inactive', 'custom-svg-bell-unavailable', 'DND', false)
+      }
+    }),
+    onPrimaryClick: () => NotificationsService.dnd = !NotificationsService.dnd
+  })
 
   const VolumeSlider = Widget.Box({
     className: 'volume_slider',
