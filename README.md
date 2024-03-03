@@ -1,6 +1,6 @@
 <div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/main/repo/logo.png"><br><br>
   
-&ensp;[<kbd> <br> ~/groove <br> </kbd>](#groove--also-a-minimal-rice)&ensp;
+&ensp;[<kbd> <br> ~/groove <br> </kbd>](#groove--a-widgety-rice)&ensp;
 &ensp;[<kbd> <br> ~/vim_styled <br> </kbd>](#vim_styled--a-minimal-vim-styled-rice)&ensp;
 <br><br><br></div>
   
