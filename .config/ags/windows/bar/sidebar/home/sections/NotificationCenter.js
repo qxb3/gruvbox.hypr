@@ -87,7 +87,7 @@ function NoNotification() {
 
   const Text = Widget.Label({
     className: 'text',
-    label: 'notifs.length = 0;'
+    label: 'No Notification'
   })
 
   return Widget.Box({
