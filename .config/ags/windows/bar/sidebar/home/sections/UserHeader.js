@@ -1,4 +1,73 @@
+import Gtk from 'gi://Gtk'
+
 const username = Utils.exec(`whoami`)
+
+function ShutdownButton() {
+  const PowerMenu = Widget.subclass(Gtk.Popover)({
+    child: Widget.Box({
+      className: 'power_menu',
+      spacing: 8,
+      children: [
+        Widget.Button({
+          child: Widget.Icon({
+            icon: 'system-shutdown-symbolic',
+            size: 18
+          }),
+          onPrimaryClick: () => Utils.subprocess(
+            [`systemctl`, `poweroff`],
+            () => {}
+          )
+        }),
+        Widget.Button({
+          child: Widget.Icon({
+            icon: 'view-refresh-symbolic',
+            size: 18
+          }),
+          onPrimaryClick: () => Utils.subprocess(
+            [`systemctl`, `reboot`],
+            () => {}
+          )
+        }),
+        Widget.Button({
+          child: Widget.Icon({
+            icon: 'weather-clear-night-symbolic',
+            size: 18
+          }),
+          onPrimaryClick: () => {
+            PowerMenu.popdown()
+            Utils.subprocess(
+              [`bash`, `-c`, `systemctl suspend && swaylock`],
+              () => {}
+            )
+          }
+        }),
+        Widget.Button({
+          child: Widget.Icon({
+            icon: 'application-exit-symbolic',
+            size: 18
+          }),
+          onPrimaryClick: () => Utils.subprocess(
+            [`hyprctl`, `dispatch`, `exit`, `0`],
+            () => {}
+          )
+        })
+      ]
+    })
+  })
+
+  return Widget.Button({
+    className: 'shutdown_button',
+    hpack: 'end',
+    vpack: 'center',
+    hexpand: true,
+    child: Widget.Label('󰐥'),
+    onClicked: () => PowerMenu.popup(),
+    setup: (self) => {
+      PowerMenu.set_relative_to(self)
+      PowerMenu.set_position(Gtk.PositionType.LEFT)
+    }
+  })
+}
 
 export default function() {
   const Face = Widget.Box({
@@ -18,14 +87,6 @@ export default function() {
     xalign: 0
   })
 
-  const ShutdownButton = Widget.Button({
-    className: 'shutdown_button',
-    hpack: 'end',
-    vpack: 'center',
-    hexpand: true,
-    child: Widget.Label('󰐥')
-  })
-
   return Widget.Box({
     className: 'user_box',
     spacing: 12,
@@ -41,7 +102,7 @@ export default function() {
           WM
         ]
       }),
-      ShutdownButton
+      ShutdownButton()
     ]
   })
 }

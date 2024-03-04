@@ -371,6 +371,12 @@
   font-size: 16px;
 }
 
+.power_menu {
+  background-color: #504945;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
 .app_launcher {
   background-color: #282828;
   border-right: solid #504945 1px;
