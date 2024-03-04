@@ -353,16 +353,16 @@
   min-height: 80px;
 }
 .home .notification_center .notifications .notification .meta {
-  padding: 8px 0;
+  padding: 4px 0;
 }
 .home .notification_center .notifications .notification .meta .appname {
   letter-spacing: 2px;
   font-weight: 900;
+  font-size: 9px;
   color: #d79921;
 }
 .home .notification_center .notifications .notification .meta .summary {
-  font-size: 11px;
-  font-weight: 700;
+  color: #928374;
 }
 .home .notification_center .remove_notif_button {
   padding-right: 4px;
@@ -451,6 +451,6 @@
   font-size: 9px;
   color: #d79921;
 }
-.notification_popups .meta .title {
+.notification_popups .meta .summary {
   color: #928374;
 }

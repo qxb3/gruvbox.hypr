@@ -16,13 +16,23 @@ function Notification(notification) {
 
   const Summary = Widget.Label({
     className: 'summary',
-    label: `- ${notification.summary}`,
+    label: notification.summary,
+    justification: 'left',
     truncate: 'end',
-    maxWidthChars: 28,
-    lines: 3,
+    xalign: 0,
+    useMarkup: true
+  })
+
+  const Body = Widget.Label({
+    className: 'body',
+    label: `- ${notification.body}`,
+    justification: 'left',
+    truncate: 'end',
+    lines: 2,
     xalign: 0,
     wrap: true,
-    useMarkup: true
+    useMarkup: true,
+    hexpand: true
   })
 
   const RemoveNotifButton = Widget.Button({
@@ -42,10 +52,16 @@ function Notification(notification) {
       Widget.Box({
         className: 'meta',
         vertical: true,
-        spacing: 2,
+        spacing: 4,
         children: [
           AppName,
-          Summary
+          Widget.Box({
+            vertical: true,
+            children: [
+              Summary,
+              Body
+            ]
+          })
         ]
       }),
       RemoveNotifButton

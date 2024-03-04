@@ -17,23 +17,23 @@ function NotificationIcon({ image, appIcon, appEntry }) {
 }
 
 function Notification(notification) {
-  const icon = Widget.Box({
+  const Icon = Widget.Box({
     className: 'icon',
     vpack: 'start',
     child: NotificationIcon(notification)
   })
 
-  const appName = Widget.Label({
+  const AppName = Widget.Label({
     className: 'appname',
     label: notification.appName.toUpperCase(),
     truncate: 'end',
     justification: 'left',
     maxWidthChars: 16,
-    xalign: 0,
+    xalign: 0
   })
 
-  const title = Widget.Label({
-    className: 'title',
+  const Summary = Widget.Label({
+    className: 'summary',
     label: notification.summary,
     justification: 'left',
     truncate: 'end',
@@ -41,7 +41,7 @@ function Notification(notification) {
     useMarkup: true
   })
 
-  const body = Widget.Label({
+  const Body = Widget.Label({
     className: 'body',
     label: `- ${notification.body}`,
     justification: 'left',
@@ -54,22 +54,23 @@ function Notification(notification) {
   })
 
   return Widget.EventBox({
+    onPrimaryClick: () => notification.dismiss(),
     child: Widget.Box({
       className: `notification ${notification.urgency}`,
       spacing: 8,
       children: [
-        icon,
+        Icon,
         Widget.Box({
           className: 'meta',
           vertical: true,
           spacing: 4,
           children: [
-            appName,
+            AppName,
             Widget.Box({
               vertical: true,
               children: [
-                title,
-                body
+                Summary,
+                Body
               ]
             })
           ]
