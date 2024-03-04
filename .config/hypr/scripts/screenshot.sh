@@ -41,6 +41,6 @@ esac
 rm "$temp_screenshot"
 
 if [ -f "$save_dir/$save_file" ] ; then
-  notify-send -a "Screenshot" -i "${save_dir}/${save_file}" -t 2200 "Screenshot saved at ${save_dir}/${save_file}"
+  notify-send -a "Screenshot" -i "${save_dir}/${save_file}" -t 2200 "Screenshot saved" "saved at ${save_dir}/${save_file}"
 fi
 
