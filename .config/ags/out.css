@@ -423,3 +423,34 @@
   border-radius: 8px;
   min-height: 120px;
 }
+
+.notification_popups .notification {
+  background-color: #3c3836;
+  border-radius: 8px;
+  min-width: 300px;
+  padding: 12px;
+}
+.notification_popups .notification .icon {
+  min-width: 80px;
+  min-height: 80px;
+}
+.notification_popups .notification .icon .image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 8px;
+  min-width: 80px;
+  min-height: 80px;
+}
+.notification_popups .meta {
+  padding: 8px 0;
+}
+.notification_popups .meta .appname {
+  letter-spacing: 2px;
+  font-weight: 900;
+  font-size: 9px;
+  color: #d79921;
+}
+.notification_popups .meta .title {
+  color: #928374;
+}

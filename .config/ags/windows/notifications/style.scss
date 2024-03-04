@@ -1,0 +1,37 @@
+.notification_popups {
+  & .notification {
+    background-color: $bg1;
+    border-radius: 8px;
+    min-width: 300px;
+    padding: 12px;
+
+    & .icon {
+      min-width: 80px;
+      min-height: 80px;
+
+      & .image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 8px;
+        min-width: 80px;
+        min-height: 80px;
+      }
+    }
+  }
+
+  & .meta {
+    padding: 8px 0;
+
+    & .appname {
+      letter-spacing: 2px;
+      font-weight: 900;
+      font-size: 9px;
+      color: $yellow;
+    }
+
+    & .title {
+      color: $gray;
+    }
+  }
+}
