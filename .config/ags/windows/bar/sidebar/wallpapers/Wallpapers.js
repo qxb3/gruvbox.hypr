@@ -6,10 +6,7 @@ function Wallpaper(wallpaper) {
     cursor: 'pointer',
     onPrimaryClick: () => {
       Utils.exec(`rm ${WALLPAPERS_PATH}/current.set`)
-      Utils.exec(`rm /usr/share/sddm/themes/corners/backgrounds/background.png`)
-
       Utils.exec(`ln -s ${wallpaper} ${WALLPAPERS_PATH}/current.set`)
-      Utils.exec(`ln -s ${wallpaper} /usr/share/sddm/themes/corners/backgrounds/background.png`)
 
       Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh close"`)
       Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh toggle-wallpapers"`)
