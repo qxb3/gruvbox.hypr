@@ -66,9 +66,7 @@ cp -r .scripts ~/ # Optional
   <code>s</code><br><code>h</code><br><code>e</code><br><code>l</code><br><code>l</code></td><td><table>
   <tr><td>zsh</td><td>main shell</td></tr>
   <tr><td>neovim</td><td>text editor</td></tr>
-  <tr><td>neofetch</td><td>beautiful sys info</td></tr>
-  <tr><td>cava</td><td>music visualizer</td></tr>
-  <tr><td>brightnessctl</td><td>control brightness</td></tr></table>
+  <tr><td>neofetch</td><td>beautiful sys info</td></tr></table>
 </td></tr></table>
 
 <br>
@@ -76,6 +74,7 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
   <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
+  <tr><td>gnome-bluetooth-3.0</td><td>for bluetooth</td></tr>
   <tr><td>pipwire-pulse</td><td>audio</td></tr>
   <tr><td>NetworkManager</td><td>manages network</td></tr></table>
 </td></tr></table>
