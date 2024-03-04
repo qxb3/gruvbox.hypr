@@ -4,17 +4,15 @@
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
 &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
-&ensp;[<kbd> <br> Commands <br> </kbd>](#Command-Mode-Commands)&ensp;
-<!-- &ensp;[<kbd> <br> Issues <br> </kbd>](#Issues)&ensp; -->
 <br><br></div>
 
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/1.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/2.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/3.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/1.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/2.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/3.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/4.png" />
 </p>
 
 <br>
@@ -106,13 +104,13 @@ cp -r .scripts ~/ # Optional
 | <kbd>Super</kbd> + <kbd>F</kbd> | launch firefox
 | <kbd>Super</kbd> + <kbd>D</kbd> | launch vencord (replace it with normal discord if u want)
 
-#### Widgets
+#### Sidebar
 
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>Tab</kbd> | toggle sidebar
-| <kbd>Super</kbd> + <kbd>A</kbd> | toggle app launcher mode
-| <kbd>Super</kbd> + <kbd>C</kbd> | toggle command launcher mode
+| <kbd>Super</kbd> + <kbd>A</kbd> | toggle app launcher
+| <kbd>Super</kbd> + <kbd>C</kbd> | toggle wallpaper select
 
 #### Print Screen
 
@@ -144,21 +142,3 @@ cp -r .scripts ~/ # Optional
 | <kbd>Super</kbd> + <kbd>L</kbd> | lock screen
 
 <br>
-
-## Command Mode Commands
-| Command | Description |
-| :--  | :-- |
-| <kbd>shutdown</kbd>| shudown pc
-| <kbd>restart</kbd>| restart pc
-| <kbd>suspend</kbd>| suspend & lock pc
-| <kbd>logout</kbd>| logout out hyprland session
-| <kbd>notif-clear</kbd>| clear notifications
-| <kbd>change-wallpaper</kbd>| open wallpapers menu
-
-<!-- ## Issues -->
-<!-- * This is built for a laptop with a resolution of 1366x768 so the widgets/wallpaper or the overall look might be messed up for you. -->
-<!-- * I have only one monitor (which is from the laptop) so multiple monitor support is not really in mind, so you might need to tweak the config for it to work properly. -->
-<!-- * The AppLauncher widget has a problem with focus where if your cursor is inside of it and you close the AppLauncher the focus will not be transferred back to the active window. Solutions: Move the cursor or Move the cursor outside the AppLauncher when you open it. (idk why this is happening but i think its a gtk problem) -->
-<!-- * Not really a problem but if you want to support multiple music players and not just spotify change the `PLAYER` variable in `config/eww/sidebar/scripts/music.sh`. -->
-<!---->
-<!-- <br> -->
