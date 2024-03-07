@@ -1,4 +1,6 @@
 .notification_popups {
+  padding: 8px;
+
   & .notification {
     background-color: $bg1;
     border-radius: 8px;
@@ -6,17 +8,12 @@
     padding: 12px;
 
     & .icon {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 8px;
       min-width: 80px;
       min-height: 80px;
-
-      & .image {
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        border-radius: 8px;
-        min-width: 80px;
-        min-height: 80px;
-      }
     }
   }
 

@@ -430,6 +430,9 @@
   min-height: 120px;
 }
 
+.notification_popups {
+  padding: 8px;
+}
 .notification_popups .notification {
   background-color: #3c3836;
   border-radius: 8px;
@@ -437,10 +440,6 @@
   padding: 12px;
 }
 .notification_popups .notification .icon {
-  min-width: 80px;
-  min-height: 80px;
-}
-.notification_popups .notification .icon .image {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

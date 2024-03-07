@@ -1,26 +1,10 @@
 const NotificationsService = await Service.import('notifications')
 NotificationsService.popupTimeout = 5000
 
-function NotificationIcon({ image, appIcon, appEntry }) {
-  if (image) {
-    return Widget.Box({
-      className: 'image',
-      css: `background-image: url('${image}')`
-    })
-  }
-
-  let icon = 'dialog-information-symbolic'
-  if (Utils.lookUpIcon(appIcon)) icon = appIcon
-  if (appEntry && Utils.lookUpIcon(appEntry)) icon = appEntry
-
-  return Widget.Icon(icon)
-}
-
 function Notification(notification) {
   const Icon = Widget.Box({
     className: 'icon',
-    vpack: 'start',
-    child: NotificationIcon(notification)
+    css: `background-image: url("${notification.image ?? App.configDir + '/assets/svg/custom-svg-bell.svg'}")`
   })
 
   const AppName = Widget.Label({
