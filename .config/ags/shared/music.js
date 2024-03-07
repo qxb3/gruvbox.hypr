@@ -1,9 +1,9 @@
-const Mpris = await Service.import('mpris')
+const MprisService = await Service.import('mpris')
 
-export const PLAYERS = ['spotify']
+export const PLAYERS = ['spotify'/*, 'firefox'*/]
 export const NO_MUSIC = `${App.configDir}/assets/no-music.png`
 
-export const player = Variable()
+export const musicPlayer = Variable()
 export const musicStatus = Variable('Stopped')
 export const musicThumbnail = Variable(NO_MUSIC)
 export const musicThumbnailUrl = Variable(NO_MUSIC)
@@ -14,12 +14,12 @@ export const musicVolume = Variable(0)
 export const musicPosition = Variable(0)
 export const musicLength = Variable(0)
 
-Mpris.connect('changed', () => {
-  const spotifyPlayer = Mpris.players.find(player => PLAYERS.includes(player.name))
+MprisService.connect('player-changed', () => {
+  const player = MprisService.players.sort((a, b) => PLAYERS.indexOf(a.name) - PLAYERS.indexOf(b.name))[0]
 
   let posInterval = null
 
-  if (!spotifyPlayer) {
+  if (!player) {
     musicStatus.value = 'Stopped'
     musicThumbnail.value = NO_MUSIC
     musicThumbnailUrl.value = NO_MUSIC
@@ -34,53 +34,62 @@ Mpris.connect('changed', () => {
     posInterval = null
   }
 
-  spotifyPlayer?.connect('changed', () => {
-    player.value = spotifyPlayer
+  player?.connect('changed', () => {
+    musicPlayer.value = player
 
-    musicStatus.value = spotifyPlayer.playBackStatus
-    musicThumbnail.value = spotifyPlayer.coverPath
-    musicThumbnailUrl.value = spotifyPlayer.trackCoverUrl
-    musicTitle.value = spotifyPlayer.trackTitle
-    musicArtist.value = spotifyPlayer.trackArtists.join(', ') || 'Album'
-    musicAlbum.value = spotifyPlayer.trackAlbum
-    musicVolume.value = parseFloat(spotifyPlayer.volume)
-    musicLength.value = spotifyPlayer.length
+    if (player.name === 'spotify') {
+      musicStatus.value = player.playBackStatus
+      musicThumbnail.value = player.coverPath
+      musicThumbnailUrl.value = player.trackCoverUrl
+      musicTitle.value = player.trackTitle
+      musicArtist.value = player.trackArtists.join(', ') || 'Album'
+      musicAlbum.value = player.trackAlbum
+      musicVolume.value = parseFloat(player.volume)
+      musicLength.value = player.length
 
-    clearInterval(posInterval)
-    posInterval = setInterval(() => {
-      musicPosition.value = spotifyPlayer.position
-    }, 1000)
+      clearInterval(posInterval)
+      posInterval = setInterval(() => {
+        musicPosition.value = player.position
+      }, 1000)
+    }
+
+    // if (player.name === 'firefox') {
+    //   musicTitle.value = player.trackTitle
+    //   musicArtist.value = player.trackArtists.join(', ') || 'Album'
+    //   musicPosition.value = 0
+    //   musicLength.value = player.length
+    // }
   })
 })
 
 export function toggle() {
-  if (musicStatus.value === 'Stopped') return
+  if (!musicPlayer.value) return
 
-  player.value.playPause()
+  musicPlayer.value.playPause()
 }
 
 export function play() {
   if (musicStatus.value === 'Stopped') return
 
-  player.value.play()
+  musicPlayer.value.play()
 }
 
 export function pause() {
   if (musicStatus.value === 'Stopped') return
 
-  player.value.stop()
+  musicPlayer.value.stop()
 }
 
 export function next() {
   if (musicStatus.value === 'Stopped') return
 
-  player.value.next()
+  musicPlayer.value.next()
 }
 
 export function prev() {
   if (musicStatus.value === 'Stopped') return
 
-  player.value.previous()
+  musicPlayer.value.previous()
 }
 
 export function setVolume(volume) {
@@ -90,7 +99,7 @@ export function setVolume(volume) {
 }
 
 export default {
-  player,
+  player: musicPlayer,
   musicStatus,
   musicTitle,
   musicArtist,
