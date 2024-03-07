@@ -15,7 +15,9 @@ export const musicPosition = Variable(0)
 export const musicLength = Variable(0)
 
 MprisService.connect('player-changed', () => {
-  const player = MprisService.players.sort((a, b) => PLAYERS.indexOf(a.name) - PLAYERS.indexOf(b.name))[0]
+  const player = MprisService.players
+    .filter(p => PLAYERS.includes(p.name))
+    .sort((a, b) => PLAYERS.indexOf(a.name) - PLAYERS.indexOf(b.name))[0]
 
   let posInterval = null
 
