@@ -1,3 +1,5 @@
+App.addIcons(`${App.configDir}/assets/svg`)
+
 import { musicVolume, setVolume } from '../../../../../shared/music.js'
 
 const AudioService = await Service.import('audio')
