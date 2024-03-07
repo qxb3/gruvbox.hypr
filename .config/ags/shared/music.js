@@ -39,13 +39,13 @@ MprisService.connect('player-changed', () => {
 
     if (player.name === 'spotify') {
       musicStatus.value = player.playBackStatus
-      musicThumbnail.value = player.coverPath
-      musicThumbnailUrl.value = player.trackCoverUrl
-      musicTitle.value = player.trackTitle
-      musicArtist.value = player.trackArtists.join(', ') || 'Album'
-      musicAlbum.value = player.trackAlbum
-      musicVolume.value = parseFloat(player.volume)
-      musicLength.value = player.length
+      musicThumbnail.value = player.coverPath || NO_MUSIC
+      musicThumbnailUrl.value = player.trackCoverUrl || NO_MUSIC
+      musicTitle.value = player.trackTitle || 'No Music'
+      musicArtist.value = player.trackArtists.join(', ') || 'Artist'
+      musicAlbum.value = player.trackAlbum || 'Album'
+      musicVolume.value = parseFloat(player.volume) || 0
+      musicLength.value = player.length || 0
 
       clearInterval(posInterval)
       posInterval = setInterval(() => {
