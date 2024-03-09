@@ -11,7 +11,14 @@ cmp.setup({
   },
   mapping = {
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-Space>'] = cmp.mapping.complete()
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-g>'] = function()
+      if cmp.visible_docs() then
+        cmp.close_docs()
+      else
+        cmp.open_docs()
+      end
+    end
   },
   sources = cmp.config.sources({
     { name = 'buffer' },
@@ -21,10 +28,11 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help' },
   }),
   formatting = {
-    fields = { 'abbr', 'kind', 'menu' },
+    fields = { 'abbr', 'kind' },
     format = require('lspkind').cmp_format({
       mode = 'symbol_text',
       ellipsis_char = '...',
+      menu = {}
     })
   },
   window = {
