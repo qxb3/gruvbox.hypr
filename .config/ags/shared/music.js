@@ -14,7 +14,7 @@ export const musicVolume = Variable(0)
 export const musicPosition = Variable(0)
 export const musicLength = Variable(0)
 
-MprisService.connect('player-changed', () => {
+function updateMetadata() {
   const player = MprisService.players
     .filter(p => PLAYERS.includes(p.name))
     .sort((a, b) => PLAYERS.indexOf(a.name) - PLAYERS.indexOf(b.name))[0]
@@ -62,7 +62,10 @@ MprisService.connect('player-changed', () => {
     //   musicLength.value = player.length
     // }
   })
-})
+}
+
+MprisService.connect('player-changed', updateMetadata)
+MprisService.connect('player-closed', updateMetadata)
 
 export function toggle() {
   if (!musicPlayer.value) return
