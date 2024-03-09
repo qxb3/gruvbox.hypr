@@ -47,7 +47,7 @@ function ShutdownButton() {
             size: 18
           }),
           onPrimaryClick: () => Utils.subprocess(
-            [`hyprctl`, `dispatch`, `exit`, `0`],
+            [`pkill`, 'Hyprland'],
             () => {}
           )
         })
