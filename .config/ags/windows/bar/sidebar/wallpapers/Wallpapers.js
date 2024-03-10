@@ -11,7 +11,7 @@ function Wallpaper(wallpaper) {
       Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh close"`)
       Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh toggle-wallpapers"`)
 
-      Utils.exec(`swww img ${wallpaper} --transition-type "wipe" --transition-duration 2`)
+      Utils.exec(`swww img ${wallpaper} --transition-type "wipe" --transition-duration 0`)
     },
     child: Widget.Box({
       className: 'img',
