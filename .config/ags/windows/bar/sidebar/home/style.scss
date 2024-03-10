@@ -6,13 +6,11 @@
 
   & .user_box {
     background-color: $bg1;
-    border-radius: 8px;
     padding: 8px;
 
     & .face {
       background-size: cover;
       border: solid $bgh 0.5px;
-      border-radius: 999px;
       min-width: 54px;
       min-height: 54px;
     }
@@ -34,7 +32,7 @@
 
     & .shutdown_button {
       background-color: $bgh;
-      border-radius: 999px;
+      border-radius: 4px;
       font-size: 24px;
       padding: 4px 13px;
 
@@ -53,7 +51,7 @@
     & .buttons {
       & .icon {
         background-color: $yellow;
-        border-radius: 999px;
+        border-radius: 4px;
         padding: 10px;
         color: $fg;
 
@@ -77,12 +75,10 @@
       & scale {
         & trough {
           background-color: $bg2;
-          border-radius: 8px;
         }
 
         & highlight {
           background-color: $blue;
-          border-radius: 8px;
           min-height: 16px;
         }
       }
@@ -91,12 +87,10 @@
 
   & .music_player {
     background-color: $bg1;
-    border-radius: 8px;
     padding: 8px;
 
     & .thumbnail {
       background-size: cover;
-      border-radius: 8px;
       min-width: 150px;
       min-height: 150px;
     }
@@ -154,7 +148,6 @@
 
   & .notification_center {
     background-color: $bg1;
-    border-radius: 8px;
     margin-top: 1rem;
     padding: 8px;
 
@@ -196,13 +189,11 @@
 
       & .notification {
         background-color: $bg2;
-        border-radius: 8px;
         padding: 8px;
 
         & .image {
           background-size: cover;
           background-repeat: no-repeat;
-          border-radius: 8px;
           min-width: 80px;
           min-height: 80px;
         }

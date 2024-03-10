@@ -1,6 +1,5 @@
 .menu {
   background-color: $bg1;
-  border-radius: 8px;
   margin: 0 0 8px 8px;
 
   &.audio_controls {
@@ -11,11 +10,9 @@
       & .slider {
         & trough {
           background-color: $bg2;
-          border-radius: 8px;
         }
 
         & highlight {
-          border-radius: 8px;
           min-width: 10px;
         }
       }
@@ -67,11 +64,9 @@
       & .slider {
         & trough {
           background-color: $bg2;
-          border-radius: 8px;
         }
 
         & highlight {
-          border-radius: 8px;
           min-width: 10px;
         }
       }

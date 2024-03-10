@@ -6,8 +6,7 @@
 
 .bar {
   background-color: #282828;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-right: solid #504945 1px;
   padding: 8px 4px;
 }
 .bar .divider {
@@ -17,13 +16,11 @@
 }
 .bar .sections .start .sidebar_button box {
   background-size: cover;
-  border-radius: 999px;
   min-width: 32px;
   min-height: 32px;
 }
 .bar .sections .start .search_button {
   background-color: #3c3836;
-  border-radius: 8px;
   padding: 4px 8px;
 }
 .bar .sections .start .search_button:hover {
@@ -35,7 +32,6 @@
 }
 .bar .sections .start .wallpaper_button {
   background-color: #3c3836;
-  border-radius: 8px;
   padding: 4px 8px;
 }
 .bar .sections .start .wallpaper_button:hover {
@@ -53,16 +49,13 @@
 }
 .bar .sections .center .workspace_indicator {
   background-color: #3c3836;
-  border-radius: 8px;
   padding: 4px 8px;
   padding: 1rem 0;
 }
 .bar .sections .center .workspace_indicator .workspace {
   background-color: #ebdbb2;
-  border-radius: 8px;
   min-width: 10px;
   min-height: 24px;
-  transition: min-height 100ms cubic-bezier(1, 0, 0, 1);
 }
 .bar .sections .center .workspace_indicator .workspace.active {
   background-color: #d79921;
@@ -73,7 +66,6 @@
 }
 .bar .sections .end .controls {
   background-color: #3c3836;
-  border-radius: 8px;
   padding: 4px 8px;
 }
 .bar .sections .end .controls .audio_control_button {
@@ -99,7 +91,6 @@
 }
 .bar .sections .end .time_indicator {
   background-color: #3c3836;
-  border-radius: 8px;
   padding: 4px 8px;
   font-size: 14px;
   font-weight: 500;
@@ -123,7 +114,6 @@
 
 .menu {
   background-color: #3c3836;
-  border-radius: 8px;
   margin: 0 0 8px 8px;
 }
 .menu.audio_controls {
@@ -132,10 +122,8 @@
 }
 .menu.audio_controls .slider_container .slider trough {
   background-color: #504945;
-  border-radius: 8px;
 }
 .menu.audio_controls .slider_container .slider highlight {
-  border-radius: 8px;
   min-width: 10px;
 }
 .menu.audio_controls .slider_container.global_volume {
@@ -172,10 +160,8 @@
 }
 .menu.system_controls .slider_container .slider trough {
   background-color: #504945;
-  border-radius: 8px;
 }
 .menu.system_controls .slider_container .slider highlight {
-  border-radius: 8px;
   min-width: 10px;
 }
 .menu.system_controls .slider_container.brightness .slider highlight {
@@ -200,13 +186,11 @@
 }
 .home .user_box {
   background-color: #3c3836;
-  border-radius: 8px;
   padding: 8px;
 }
 .home .user_box .face {
   background-size: cover;
   border: solid #1d2021 0.5px;
-  border-radius: 999px;
   min-width: 54px;
   min-height: 54px;
 }
@@ -223,7 +207,7 @@
 }
 .home .user_box .shutdown_button {
   background-color: #1d2021;
-  border-radius: 999px;
+  border-radius: 4px;
   font-size: 24px;
   padding: 4px 13px;
 }
@@ -238,7 +222,7 @@
 }
 .home .desktop_controls .buttons .icon {
   background-color: #d79921;
-  border-radius: 999px;
+  border-radius: 4px;
   padding: 10px;
   color: #ebdbb2;
 }
@@ -255,21 +239,17 @@
 }
 .home .desktop_controls .sliders scale trough {
   background-color: #504945;
-  border-radius: 8px;
 }
 .home .desktop_controls .sliders scale highlight {
   background-color: #458588;
-  border-radius: 8px;
   min-height: 16px;
 }
 .home .music_player {
   background-color: #3c3836;
-  border-radius: 8px;
   padding: 8px;
 }
 .home .music_player .thumbnail {
   background-size: cover;
-  border-radius: 8px;
   min-width: 150px;
   min-height: 150px;
 }
@@ -311,7 +291,6 @@
 }
 .home .notification_center {
   background-color: #3c3836;
-  border-radius: 8px;
   margin-top: 1rem;
   padding: 8px;
 }
@@ -342,13 +321,11 @@
 }
 .home .notification_center .notifications .notification {
   background-color: #504945;
-  border-radius: 8px;
   padding: 8px;
 }
 .home .notification_center .notifications .notification .image {
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 8px;
   min-width: 80px;
   min-height: 80px;
 }

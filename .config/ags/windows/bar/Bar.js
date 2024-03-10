@@ -47,7 +47,7 @@ function StartSection() {
       Widget.Revealer({
         revealChild: revealSystray.bind(),
         transition: 'slide_down',
-        transitionDuration: 300,
+        transitionDuration: 0,
         child: Widget.Box({
           vertical: true,
           spacing: 8,

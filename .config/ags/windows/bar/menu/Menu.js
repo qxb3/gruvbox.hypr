@@ -19,7 +19,7 @@ export default function(control) {
         child: Widget.Revealer({
           revealChild: audioRevealer.bind(),
           transition: 'slide_right',
-          transitionDuration: 300,
+          transitionDuration: 0,
           child: AudioControls()
         })
       })
@@ -50,7 +50,7 @@ export default function(control) {
         child: Widget.Revealer({
           revealChild: systemRevealer.bind(),
           transition: 'slide_right',
-          transitionDuration: 300,
+          transitionDuration: 0,
           child: SystemControls()
         })
       })
@@ -81,7 +81,7 @@ export default function(control) {
         child: Widget.Revealer({
           revealChild: calendarRevealer.bind(),
           transition: 'slide_right',
-          transitionDuration: 300,
+          transitionDuration: 0,
           child: Calendar()
         })
       })

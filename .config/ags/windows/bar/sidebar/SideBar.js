@@ -7,7 +7,7 @@ import { revealSideBar, sidebarShown } from '../../../shared/vars.js'
 function SideBar() {
   return Widget.Stack({
     transition: 'slide_right',
-    transitionDuration: 300,
+    transitionDuration: 0,
     shown: sidebarShown.bind(),
     children: {
       home: Home(),
@@ -21,7 +21,7 @@ export default function() {
   return Widget.Revealer({
     revealChild: revealSideBar.bind(),
     transition: 'slide_right',
-    transitionDuration: 300,
+    transitionDuration: 0,
     child: SideBar()
   })
 }

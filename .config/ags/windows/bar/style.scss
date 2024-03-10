@@ -1,6 +1,6 @@
 @mixin section {
   background-color: $bg1;
-  border-radius: 8px;
+  // border-radius: 8px;
   padding: 4px 8px;
 }
 
@@ -18,8 +18,10 @@
 
 .bar {
   background-color: $bg;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-right: solid $bg2 1px;
+  // border-top-right-radius: 8px;
+  // border-bottom-right-radius: 8px;
+
   padding: 8px 4px;
 
   & .divider {
@@ -33,7 +35,7 @@
       & .sidebar_button {
         & box {
           background-size: cover;
-          border-radius: 999px;
+          // border-radius: 999px;
           min-width: 32px;
           min-height: 32px;
         }
@@ -77,10 +79,8 @@
 
         & .workspace {
           background-color: $fg;
-          border-radius: 8px;
           min-width: 10px;
           min-height: 24px;
-          transition: min-height 100ms cubic-bezier(1, 0, 0, 1);
 
           &.active {
             background-color: $yellow;
