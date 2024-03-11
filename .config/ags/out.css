@@ -277,11 +277,9 @@
 }
 .home .music_player .right .position .progress trough {
   background-color: #504945;
-  border-radius: 8px;
 }
 .home .music_player .right .position .progress trough progress {
   background-color: #ebdbb2;
-  border-radius: 8px;
 }
 .home .music_player .right .position .meta {
   font-size: 10px;
