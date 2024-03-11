@@ -3,28 +3,24 @@
 
   & .notification {
     background-color: $bg1;
-    border-radius: 8px;
-    min-width: 300px;
+    min-width: 400px;
     padding: 12px;
 
     & .icon {
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      border-radius: 8px;
-      min-width: 80px;
-      min-height: 80px;
+      min-width: 60px;
+      min-height: 60px;
     }
   }
 
   & .meta {
-    padding: 8px 0;
-
     & .appname {
       letter-spacing: 2px;
       font-weight: 900;
       font-size: 9px;
-      color: $yellow;
+      color: $main;
     }
 
     & .summary {
