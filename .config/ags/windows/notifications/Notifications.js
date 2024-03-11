@@ -76,6 +76,7 @@ function Notifications() {
 export default Widget.Window({
   name: 'notifications',
   anchor: ['top'],
+  exclusivity: 'ignore',
   child: Widget.Box({
     css: `padding: 0.1px`,
     child: Notifications()
