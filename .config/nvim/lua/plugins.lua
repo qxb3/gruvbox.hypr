@@ -91,7 +91,6 @@ require('packer').startup(function(use)
   use 'numToStr/Comment.nvim'               -- For fast commenting
   use 'djoshea/vim-autoread'                -- Updates the buffer if the file updates externally
   -- use 'airblade/vim-rooter'                 -- Updates the root to the root of the project
-  use 'christoomey/vim-tmux-navigator'      -- Tmux Navigator
   use 'tpope/vim-surround'                  -- Surround changer
 
   ------------------------------------------------------------
