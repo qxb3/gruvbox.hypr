@@ -85,7 +85,6 @@ require('packer').startup(function(use)
   ------------------------------------------------------------
   -- Useful Plugins
   ------------------------------------------------------------
-  use 'uga-rosa/ccc.nvim'                   -- Color picker
   use 'ntpeters/vim-better-whitespace'      -- Removes whitespaces
   use 'mattn/emmet-vim'                     -- Emmet
   use 'windwp/nvim-autopairs'               -- AutoPairs
