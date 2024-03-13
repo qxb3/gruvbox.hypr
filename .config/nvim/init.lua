@@ -20,7 +20,6 @@ require('plugins/nvim-tree')
 require('plugins/autopairs')
 require('plugins/toggleterm')
 require('plugins/whitespace')
-require('plugins/ccc')
 
 -- UI
 require('plugins/colorscheme')
