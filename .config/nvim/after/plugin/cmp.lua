@@ -9,6 +9,7 @@ cmp.setup({
       require('luasnip').lsp_expand(args.body)
     end
   },
+
   mapping = {
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<C-Space>'] = cmp.mapping.complete()
@@ -25,7 +26,13 @@ cmp.setup({
     format = require('lspkind').cmp_format({
       mode = 'symbol_text',
       ellipsis_char = '...',
+<<<<<<< HEAD:.config/nvim/lua/plugins/cmp.lua
     })
+=======
+      menu = {}
+    }),
+    expandable_indicator = true
+>>>>>>> 9ad6b71 (config(nvim): ultimate organizing and cleanup):.config/nvim/after/plugin/cmp.lua
   },
   window = {
     completion = cmp.config.window.bordered(),
