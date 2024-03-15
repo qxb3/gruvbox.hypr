@@ -2,15 +2,16 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   ------------------------------------------------------------
-  -- General Plugins
-  ------------------------------------------------------------ LSP
+  -- General Plugins                                        --
+  ------------------------------------------------------------
+  --LSP
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
     requires = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },             -- Lsp Config
-      { 'williamboman/mason.nvim' },           -- Lsp Package Manegr
+      { 'williamboman/mason.nvim' },           -- Lsp Package Manager
       { 'williamboman/mason-lspconfig.nvim' }, -- Mason lsp config
 
       -- Autocompletion
@@ -25,7 +26,8 @@ require('packer').startup(function(use)
       { 'onsails/lspkind.nvim' },                -- VSCode-Like Pictograms
       { 'hrsh7th/cmp-nvim-lsp-signature-help' }, -- Functions signature
       { 'hrsh7th/cmp-path' },                    -- Path
-      -- { 'MunifTanjim/prettier.nvim' }            -- Prettier
+      { 'j-hui/fidget.nvim' },                   -- LSP Notification
+      { 'folke/neodev.nvim' },                   -- LSP Support for neovim lua api
     }
   }
 
@@ -69,7 +71,7 @@ require('packer').startup(function(use)
   }
 
   ------------------------------------------------------------
-  -- UI Plugins
+  -- UI Plugins                                             --
   ------------------------------------------------------------
   use 'akinsho/bufferline.nvim'             -- BufferLine
   use 'nvim-lualine/lualine.nvim'           -- LuaLine
@@ -83,7 +85,7 @@ require('packer').startup(function(use)
   use 'ellisonleao/gruvbox.nvim'            -- Gruvbox Colorscheme
 
   ------------------------------------------------------------
-  -- Useful Plugins
+  -- Useful Plugins                                         --
   ------------------------------------------------------------
   use 'ntpeters/vim-better-whitespace'      -- Removes whitespaces
   use 'mattn/emmet-vim'                     -- Emmet
@@ -94,30 +96,14 @@ require('packer').startup(function(use)
   use 'tpope/vim-surround'                  -- Surround changer
 
   ------------------------------------------------------------
-  -- Other Plugins
+  -- Other Plugins                                          --
   ------------------------------------------------------------
   use 'leafOfTree/vim-svelte-plugin'        -- Svelte specific plugin
-  -- use 'elkowar/yuck.vim'                    -- A plugin for eww.yuck
   use 'andweeb/presence.nvim'               -- Discord Rich Presence
   use 'akinsho/toggleterm.nvim'             -- Floaterm
-  use 'norcalli/nvim-colorizer.lua'         -- Adds color to hex, rbg etc... values
   use 'ThePrimeagen/vim-be-good'            -- A game to practice vim-motion
 end)
 
--- setups
-require('Comment').setup()
-require('colorizer').setup()
+-- Setups
 require('renamer').setup()
 require('presence').setup()
-
--- vim-svelte-plugin
-vim.g.svelte_indent_script = 2
-vim.g.svelte_indent_style = 2
-
--- vim-changesPlugin
-vim.g.changes_add_sign = '█'
-vim.g.changes_delete_sign = '█'
-vim.g.changes_modified_sign = '█'
-
--- vim-closetag
-vim.g.closetag_filenames = '*.html,*.svelte,*.ejs'

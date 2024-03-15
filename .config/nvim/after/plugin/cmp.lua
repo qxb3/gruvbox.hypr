@@ -9,16 +9,10 @@ cmp.setup({
       require('luasnip').lsp_expand(args.body)
     end
   },
+
   mapping = {
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-g>'] = function()
-      if cmp.visible_docs() then
-        cmp.close_docs()
-      else
-        cmp.open_docs()
-      end
-    end
+    ['<C-Space>'] = cmp.mapping.complete()
   },
   sources = cmp.config.sources({
     { name = 'buffer' },
@@ -33,7 +27,8 @@ cmp.setup({
       mode = 'symbol_text',
       ellipsis_char = '...',
       menu = {}
-    })
+    }),
+    expandable_indicator = true
   },
   window = {
     completion = cmp.config.window.bordered(),
