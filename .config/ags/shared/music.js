@@ -62,6 +62,21 @@ function updateMetadata() {
     //   musicLength.value = player.length
     // }
   })
+
+  musicStatus.connect('changed', () => {
+    if (musicStatus.value !== 'Playing' || !player) {
+      if (posInterval) {
+        GLib.source_remove(posInterval)
+        posInterval = null
+      }
+
+      return
+    }
+
+    posInterval = Utils.interval(1000, () => {
+      musicPosition.value = player.position
+    })
+  })
 }
 
 MprisService.connect('player-changed', updateMetadata)
