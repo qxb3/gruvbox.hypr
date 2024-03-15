@@ -1,3 +1,5 @@
+import GLib from 'gi://GLib'
+
 const MprisService = await Service.import('mpris')
 
 export const PLAYERS = ['spotify'/*, 'firefox'*/]
@@ -48,11 +50,6 @@ function updateMetadata() {
       musicAlbum.value = player.trackAlbum || 'Album'
       musicVolume.value = parseFloat(player.volume) || 0
       musicLength.value = player.length || 0
-
-      clearInterval(posInterval)
-      posInterval = setInterval(() => {
-        musicPosition.value = player.position
-      }, 1000)
     }
 
     // if (player.name === 'firefox') {
@@ -74,12 +71,13 @@ function updateMetadata() {
     }
 
     posInterval = Utils.interval(1000, () => {
+      console.log('hi')
       musicPosition.value = player.position
     })
   })
 }
 
-MprisService.connect('player-changed', updateMetadata)
+MprisService.connect('player-added', updateMetadata)
 MprisService.connect('player-closed', updateMetadata)
 
 export function toggle() {
