@@ -79,14 +79,14 @@ function Controls() {
 function Position() {
   const ProgressBar = Widget.ProgressBar({
     className: 'progress',
-    value: musicPosition.bind().transform(pos => pos === 0 ? 0 : pos / musicLength.value),
+    value: musicPosition.bind().transform(pos => pos <= 0 ? 0 : pos / musicLength.value),
     hexpand: false,
     hpack: 'center'
   })
 
   const CurrentProgress = Widget.Label({
     className: 'current_progress',
-    label: musicPosition.bind().transform(pos => pos === 0 ? '0:00' : `${Math.floor(pos / 60)}:${String(Math.round(pos) % 60).padStart(2, '0')}`)
+    label: musicPosition.bind().transform(pos => pos <= 0 ? '0:00' : `${Math.floor(pos / 60)}:${String(Math.round(pos) % 60).padStart(2, '0')}`)
   })
 
   const Seperator = Widget.Box({
