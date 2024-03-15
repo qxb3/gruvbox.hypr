@@ -98,7 +98,7 @@ function Position() {
 
   const Length = Widget.Label({
     className: 'length',
-    label: musicLength.bind().transform(length => length === 0 ? '0:00' : `${Math.floor(length / 60)}:${String(Math.round(length) % 60).padStart(2, '0')}`)
+    label: musicLength.bind().transform(length => length <= 0 ? '0:00' : `${Math.floor(length / 60)}:${String(Math.round(length) % 60).padStart(2, '0')}`)
   })
 
   return Widget.Box({

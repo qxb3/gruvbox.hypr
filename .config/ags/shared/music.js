@@ -63,7 +63,7 @@ function updateMetadata() {
   })
 
   musicStatus.connect('changed', () => {
-    if (musicStatus.value !== 'Playing') {
+    if (musicStatus.value !== 'Playing' || !player) {
       if (posInterval) {
         GLib.source_remove(posInterval)
         posInterval = null
