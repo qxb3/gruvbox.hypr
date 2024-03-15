@@ -9,6 +9,7 @@ cmp.setup({
       require('luasnip').lsp_expand(args.body)
     end
   },
+
   mapping = {
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<C-Space>'] = cmp.mapping.complete()
@@ -25,7 +26,9 @@ cmp.setup({
     format = require('lspkind').cmp_format({
       mode = 'symbol_text',
       ellipsis_char = '...',
-    })
+      menu = {}
+    }),
+    expandable_indicator = true
   },
   window = {
     completion = cmp.config.window.bordered(),
