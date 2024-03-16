@@ -15,6 +15,10 @@ require('bufferline').setup({
   }
 })
 
+vim.keymap.set('n', '<C-o>', ':bprev<CR>')
+vim.keymap.set('n', '<C-p>', ':bnext<CR>')
+vim.keymap.set('n', '<C-x>', ':bd<CR>')
+
 vim.keymap.set('n', '<A-1>', ':BufferLineGoToBuffer 1<CR>')
 vim.keymap.set('n', '<A-2>', ':BufferLineGoToBuffer 2<CR>')
 vim.keymap.set('n', '<A-3>', ':BufferLineGoToBuffer 3<CR>')

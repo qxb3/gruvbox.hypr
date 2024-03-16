@@ -8,6 +8,8 @@ local zero = require('lsp-zero').preset({
 zero.on_attach(function(_client, bufnr)
   zero.default_keymaps({ buffer = bufnr })
 
+  vim.keymap.set('n', '<leader>sd', '<cmd>lua vim.lsp.buf.hover()<cr>', { silent = true })
+
   zero.format_on_save({
   format_opts = {
     async = false,
