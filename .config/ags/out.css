@@ -425,9 +425,9 @@
   padding: 8px;
   min-width: 300px;
 }
-.wallpapers .list .wallpaper .img {
+.wallpapers .list .wallpaper .overlay box {
   border-radius: 8px;
-  min-height: 120px;
+  min-height: 150px;
 }
 
 .notification_popups {
