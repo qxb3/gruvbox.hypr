@@ -71,7 +71,6 @@ function updateMetadata() {
     }
 
     posInterval = Utils.interval(1000, () => {
-      console.log('hi')
       musicPosition.value = player.position
     })
   })
