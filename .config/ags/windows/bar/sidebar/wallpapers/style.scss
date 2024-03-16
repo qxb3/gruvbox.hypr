@@ -6,9 +6,11 @@
 
   & .list {
     & .wallpaper {
-      & .img {
-        border-radius: 8px;
-        min-height: 120px;
+      & .overlay {
+        & box {
+          border-radius: 8px;
+          min-height: 150px;
+        }
       }
     }
   }
