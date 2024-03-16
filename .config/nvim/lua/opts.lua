@@ -1,7 +1,7 @@
 local option = vim.opt
 
 -- Changes default leader
-vim.g.mapleader = 'z'
+vim.g.mapleader = ' '
 
 ------------------------------------------------------------
 -- General                                                --
@@ -54,16 +54,14 @@ vim.cmd("colorscheme gruvbox")
 ------------------------------------------------------------
 
 -- Map Esc to qq
-vim.keymap.set('i', 'qq', '<Esc>')
-vim.keymap.set('v', 'qq', '<Esc>')
-vim.keymap.set('i', 'QQ', '<Esc>')
-vim.keymap.set('v', 'QQ', '<Esc>')
+vim.keymap.set('i', 'qq', '<Esc>', { silent = true })
+vim.keymap.set('v', 'qq', '<Esc>', { silent = true })
+vim.keymap.set('i', 'qq', '<Esc>', { silent = true })
+vim.keymap.set('v', 'qq', '<Esc>', { silent = true })
 
--- Buffer management
-vim.keymap.set('n', '<C-o>', ':bprev<CR>')
-vim.keymap.set('n', '<C-p>', ':bnext<CR>')
-vim.keymap.set('n', '<C-x>', ':bd<CR>')
+vim.keymap.set('n', '<leader>so', ':source %<CR>')
+vim.keymap.set('n', '<leader>nh', ':nohl<CR>')
 
-vim.keymap.set('n', 'ss', ':source %<CR>')       -- Map :source to mm
-vim.keymap.set('n', '<leader>nh', ':nohl<CR>') --  Remove search highlights
-vim.keymap.set('n', 'q', '<leader>re')         -- Map record macro to <leader>Q
+vim.keymap.set('n', 'q', '<Nop>', { silent = true })
+vim.keymap.set('n', 'Q', '<Nop>', { silent = true })
+vim.keymap.set('n', '@', '<Nop>', { silent = true })
