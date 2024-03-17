@@ -1,4 +1,4 @@
-const WALLPAPERS_PATH = `/home/${Utils.exec("whoami")}/.config/swww/small`
+const WALLPAPERS_PATH = `/home/${Utils.exec("whoami")}/.config/swww`
 
 function Wallpaper(wallpaper) {
   console.log(wallpaper)
