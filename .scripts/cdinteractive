@@ -6,7 +6,6 @@ custom_paths=(
   "$HOME/.config/hypr"
   "$HOME/.config/eww"
   "$HOME/.config/ags"
-  "$HOME/.config/waybar"
   "$HOME/.config/swww"
   "$HOME/.config/dunst"
   "$HOME/.config/swaylock"
