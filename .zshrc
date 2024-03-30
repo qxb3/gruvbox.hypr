@@ -83,3 +83,10 @@ export PATH=$HOME/.scripts:$PATH
 
 # Created by `pipx` on 2024-01-05 01:07:43
 export PATH="$PATH:/home/qxb3/.local/bin"
+
+# bun completions
+[ -s "/home/qxb3/.bun/_bun" ] && source "/home/qxb3/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
