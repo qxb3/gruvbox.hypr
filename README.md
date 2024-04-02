@@ -42,6 +42,7 @@ cp -r .scripts ~/ # Optional
   <code>a</code><br><code>p</code><br><code>p</code><br><code>s</code><br></td><td><table>
   <tr><td>kitty</td><td>terminal emulator</td></tr>
   <tr><td>dolphin</td><td>file explorer</td></tr>
+  <tr><td>thunar</td><td>another file explorer</td></tr>
   <tr><td>spotify</td><td>music player</td></tr>
   <tr><td>grimblast</td><td>screenshot tool</td></tr>
   <tr><td>swappy</td><td>screenshot editor & image viewer</td></tr>
