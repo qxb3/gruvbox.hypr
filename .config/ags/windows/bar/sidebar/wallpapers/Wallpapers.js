@@ -1,7 +1,6 @@
 const WALLPAPERS_PATH = `/home/${Utils.exec("whoami")}/.config/swww`
 
 function Wallpaper(wallpaper) {
-  console.log(wallpaper)
   return Widget.Button({
     className: 'wallpaper',
     cursor: 'pointer',
