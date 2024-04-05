@@ -1,0 +1,45 @@
+.bar {
+  background-color: $bg;
+  border-bottom: solid 0.1px $fg;
+
+  .workspaces {
+    .workspace {
+      min-width: 30px;
+      background-color: $bgh;
+
+      &.active {
+        background-color: $bg2;
+      }
+    }
+  }
+
+  .systray {
+    padding: 0 5px;
+  }
+
+  .power_menu {
+    background-color: $bgh;
+    font-size: 18px;
+    padding-right: 3px;
+    font-weight: 900;
+    padding: 0 10px;
+
+    label { color: $red; }
+  }
+}
+
+// Systray Menu
+menu {
+  background-color: $bg;
+  border: solid 0.1px $fg;
+  padding: 8px;
+
+  menuitem {
+    padding: 4px;
+
+    &:hover {
+      background-color: $bg2;
+      color: $bg;
+    }
+  }
+}

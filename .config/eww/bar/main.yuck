@@ -1,0 +1,105 @@
+(deflisten _workspaces :inital "[]" `~/.config/eww/bar/scripts/workspaces.sh`)
+(deflisten _active_window :inital "~" `~/.config/eww/bar/scripts/activewindow.sh`)
+
+(defwindow bar
+  :monitor 0
+  :stacking "fg"
+  :namespace "bar"
+  :exclusive true
+  :geometry (geometry
+    :x 0
+    :y 0
+    :width "100%"
+    :height "25px"
+    :anchor "top center"
+  )
+
+  (centerbox
+    :orientation "h"
+    :class "container"
+
+    (Left)
+    (Center)
+    (Right)
+  )
+)
+
+;; Sections
+
+(defwidget Left []
+  (box
+    :halign "start"
+
+    (Workspaces)
+  )
+)
+
+(defwidget Center []
+  (box
+    :halign "center"
+
+    (WindowTitle)
+  )
+)
+
+(defwidget Right []
+  (box
+    :halign "end"
+    :space-evenly false
+
+    (systray
+      :class "systray"
+      :orientation "h"
+      :icon-size 16
+      :space-evenly true
+      :spacing 8
+    )
+
+    (box
+      (eventbox :cursor "pointer"
+        (button
+          :class "power_menu"
+          :onclick "~/.config/rofi/applets/bin/powermenu.sh"
+
+          "󰐥"
+        )
+      )
+    )
+  )
+)
+
+;; Widgets
+
+(defwidget Workspaces []
+  (box
+    :class "workspaces"
+    :space-evenly true
+
+    (for workspace in _workspaces
+      (box
+        :class "workspace ${workspace.active == true ? 'active' : 'inactive'}"
+
+        (eventbox :cursor "pointer"
+          (button
+            :onclick "hyprctl dispatch workspace ${workspace.name}"
+            :valign "center"
+            :halign "center"
+
+            {workspace.name}
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget WindowTitle []
+  (box
+    :class "window_title"
+
+    (label
+      :text {_active_window.title}
+      :limit-width 48
+    )
+  )
+)
