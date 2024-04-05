@@ -12,6 +12,8 @@
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/focused/repo/1.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/focused/repo/2.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/focused/repo/3.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/focused/repo/4.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/focused/repo/5.png" />
 </p>
 
 <br>
@@ -53,6 +55,7 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
+  <tr><td>rofi</td><td>A dmenu replacement</td></tr>
   <tr><td>eww</td><td>elkowars wacky widgets</td></tr>
   <tr><td>swaylock</td><td>screen locker</td></tr>
 </td></tr></table>
