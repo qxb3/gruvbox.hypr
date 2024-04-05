@@ -25,7 +25,7 @@
 > Please see [Dependecies](#Dependecies)
 
 ```bash
-git clone --depth=1 --single-branch --branch vim_styled https://github.com/qxb3/gruvbox.hypr
+git clone --depth=1 --single-branch --branch focused https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
 cp -r font/* ~/.local/share/fonts
 cp -r .config/* ~/.config
