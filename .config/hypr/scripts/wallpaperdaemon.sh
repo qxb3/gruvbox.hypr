@@ -5,6 +5,6 @@ if [ $? -eq 1 ]; then
   swww-daemon --format xrgb &
 
   swww img ~/.config/swww/current.set \
-    --transition-type "wipe" \
-    --transition-duration 2
+    --transition-type "none" \
+    --transition-duration 0
 fi
