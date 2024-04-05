@@ -28,6 +28,8 @@
 <br>
 <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" />
 
+<br><br><br>
+
 # [~/focused.](https://github.com/qxb3/gruvbox.hypr/tree/focused) ~ A minimal, no distraction rice.
 
 <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/focused/repo/1.png" />
