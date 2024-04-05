@@ -54,8 +54,8 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
+  <tr><td>eww</td><td>elkowars wacky widgets</td></tr>
   <tr><td>swaylock</td><td>screen locker</td></tr>
-  <tr><td>ags</td><td>aylur's gtk widget</td></tr></table>
 </td></tr></table>
 
 <br>
@@ -71,8 +71,6 @@ cp -r .scripts ~/ # Optional
 
 <table><tr><td>
   <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
-  <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
-  <tr><td>gnome-bluetooth-3.0</td><td>for bluetooth</td></tr>
   <tr><td>pipwire-pulse</td><td>audio</td></tr>
   <tr><td>NetworkManager</td><td>manages network</td></tr></table>
 </td></tr></table>
