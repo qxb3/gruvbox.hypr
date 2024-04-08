@@ -19,13 +19,7 @@ function get_brightness_info(){
 
 case $1 in
   i) brightnessctl set +5% ;;
-  d)
-    if [[ $(get_brightness) -lt 5 ]] ; then
-      brightnessctl set 1%
-    else
-      brightnessctl set 5%-
-    fi
-  ;;
+  d) brightnessctl set 5%- ;;
   *) print_error ;;
 esac
 
