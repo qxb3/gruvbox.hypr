@@ -10,6 +10,7 @@ option.mouse = 'a'
 option.backupcopy = 'yes'
 option.swapfile = false
 option.sidescrolloff = 12
+option.scrolloff = 12
 option.scrolloff = 5
 option.completeopt = 'menuone,noinsert,noselect'
 option.shell = '/bin/zsh'
