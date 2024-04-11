@@ -15,6 +15,8 @@ commits=${@}
 
 for rice in ${rices[@]}; do
   for commit in ${commits[@]}; do
+    git checkout $rice
     git cherry-pick $commit
+    git push
   done
 done
