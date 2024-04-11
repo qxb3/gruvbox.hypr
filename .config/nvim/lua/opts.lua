@@ -57,17 +57,17 @@ vim.cmd("colorscheme gruvbox")
 vim.keymap.set('i', 'qq', '<Esc>', { silent = true })
 vim.keymap.set('v', 'qq', '<Esc>', { silent = true })
 vim.keymap.set('i', 'qq', '<Esc>', { silent = true })
-vim.keymap.set('v', 'qq', '<Esc>', { silent = true })
 
 vim.keymap.set('n', '<leader>so', ':source %<CR>')
 vim.keymap.set('n', '<leader>nh', ':nohl<CR>')
+vim.keymap.set('v', '<leader>y', '"+y')
 
 vim.keymap.set('n', 'q', '<Nop>', { silent = true })
 vim.keymap.set('n', 'Q', '<Nop>', { silent = true })
 vim.keymap.set('n', '@', '<Nop>', { silent = true })
 
 ------------------------------------------------------------
--- Autocmds                                             --
+-- Autocmds                                               --
 ------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("TextYankPost", {
