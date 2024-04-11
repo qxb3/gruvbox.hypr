@@ -59,7 +59,8 @@
       (eventbox :cursor "pointer"
         (button
           :class "power_menu"
-          :onclick "~/.config/rofi/applets/bin/powermenu.sh"
+          :onclick `~/.config/rofi/applets/bin/powermenu.sh`
+          :timeout "30s"
 
           "󰐥"
         )
