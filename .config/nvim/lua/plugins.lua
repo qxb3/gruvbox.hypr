@@ -83,6 +83,7 @@ require('packer').startup(function(use)
   use 'rcarriga/nvim-notify'                -- Fancy notification ui
   use 'xiyaowong/transparent.nvim'          -- Remove Background
   use 'ellisonleao/gruvbox.nvim'            -- Gruvbox Colorscheme
+  use 'nyoom-engineering/oxocarbon.nvim'    -- Oxocarbon Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins                                         --
