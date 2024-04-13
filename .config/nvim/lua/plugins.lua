@@ -94,6 +94,7 @@ require('packer').startup(function(use)
   use 'djoshea/vim-autoread'                -- Updates the buffer if the file updates externally
   -- use 'airblade/vim-rooter'                 -- Updates the root to the root of the project
   use 'tpope/vim-surround'                  -- Surround changer
+  use 'tjdevries/cyclist.vim'               -- Cycle + Listchars
 
   ------------------------------------------------------------
   -- Other Plugins                                          --
