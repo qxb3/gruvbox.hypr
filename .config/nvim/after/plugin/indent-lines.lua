@@ -1,5 +1,5 @@
 require('ibl').setup({
-  indent = { char = '│' },
+  indent = { char = '|' },
   scope = {
     show_start = false,
     show_end = false,
@@ -10,5 +10,5 @@ require('ibl').setup({
 })
 
 require('mini.indentscope').setup({
-  symbol = '│'
+  symbol = '|'
 })
