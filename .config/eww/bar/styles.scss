@@ -8,7 +8,9 @@
       background-color: $bgh;
 
       &.active {
-        background-color: $bg2;
+        background-color: $blue;
+
+        & label { color: $bg; }
       }
     }
   }
