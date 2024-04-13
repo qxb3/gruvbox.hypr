@@ -87,7 +87,7 @@ require('packer').startup(function(use)
   ------------------------------------------------------------
   -- Useful Plugins                                         --
   ------------------------------------------------------------
-  use 'ntpeters/vim-better-whitespace'      -- Removes whitespaces
+  -- use 'ntpeters/vim-better-whitespace'      -- Removes whitespaces
   use 'mattn/emmet-vim'                     -- Emmet
   use 'windwp/nvim-autopairs'               -- AutoPairs
   use 'numToStr/Comment.nvim'               -- For fast commenting
