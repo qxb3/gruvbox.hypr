@@ -1,7 +1,27 @@
 ZSH=/usr/share/oh-my-zsh/
 ZSH_THEME='robbyrussell'
 
-plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting)
+# https://github.com/jeffreytse/zsh-vi-mode/issues/248
+# zvm_config() {
+#   local ncur=$(zvm_cursor_style $ZVM_NORMAL_MODE_CURSOR)
+#   local icur=$(zvm_cursor_style $ZVM_INSERT_MODE_CURSOR)
+#
+#   ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]122;#FFFFFF\a'
+#   ZVM_INSERT_MODE_CURSOR=$icur'\e\e]122;#78A9FF\a'
+# }
+
+ZVM_VI_ESCAPE_BINDKEY=qq
+ZVM_VI_HIGHLIGHT_BACKGROUND=#262626
+ZVM_VI_HIGHLIGHT_FOREGROUND=#FFFFFF
+
+plugins=(
+  git
+  sudo
+  zsh-256color
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-vi-mode
+)
 source $ZSH/oh-my-zsh.sh
 
 if pacman -Qi yay &>/dev/null ; then
