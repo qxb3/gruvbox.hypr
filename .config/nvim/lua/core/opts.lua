@@ -67,14 +67,3 @@ vim.keymap.set('v', '<leader>y', '"+y')
 vim.keymap.set('n', 'q', '<Nop>', { silent = true })
 vim.keymap.set('n', 'Q', '<Nop>', { silent = true })
 vim.keymap.set('n', '@', '<Nop>', { silent = true })
-
-------------------------------------------------------------
--- Autocmds                                               --
-------------------------------------------------------------
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking",
-  callback = function ()
-    vim.highlight.on_yank()
-  end
-})
