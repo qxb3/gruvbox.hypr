@@ -24,6 +24,8 @@ option.cursorline = true
 option.guicursor = ''
 option.wrap = false
 option.cmdheight = 1
+option.list = true
+option.listchars = { eol = '↲', tab = '» ', nbsp = '␣' }
 
 ------------------------------------------------------------
 -- Tabs, Indenting                                        --
