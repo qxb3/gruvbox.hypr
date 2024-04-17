@@ -22,7 +22,7 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help' },
   }),
   formatting = {
-    fields = { 'abbr', 'kind', 'menu' },
+    fields = { 'abbr', 'kind' },
     format = require('lspkind').cmp_format({
       mode = 'symbol_text',
       ellipsis_char = '...',
