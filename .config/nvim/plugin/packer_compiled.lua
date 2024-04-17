@@ -84,11 +84,6 @@ _G.packer_plugins = {
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["bufferline.nvim"] = {
-    loaded = true,
-    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
-    url = "https://github.com/akinsho/bufferline.nvim"
-  },
   changesPlugin = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/changesPlugin",
@@ -174,10 +169,20 @@ _G.packer_plugins = {
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/mini.indentscope",
     url = "https://github.com/echasnovski/mini.indentscope"
   },
+  ["neo-tree.nvim"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
+    url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
+  },
   ["neodev.nvim"] = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/neodev.nvim",
     url = "https://github.com/folke/neodev.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -194,11 +199,6 @@ _G.packer_plugins = {
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
-  ["nvim-notify"] = {
-    loaded = true,
-    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/nvim-notify",
-    url = "https://github.com/rcarriga/nvim-notify"
-  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
@@ -213,6 +213,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
+  ["oxocarbon.nvim"] = {
+    loaded = true,
+    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim",
+    url = "https://github.com/nyoom-engineering/oxocarbon.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -258,11 +263,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/vim-be-good",
     url = "https://github.com/ThePrimeagen/vim-be-good"
-  },
-  ["vim-better-whitespace"] = {
-    loaded = true,
-    path = "/home/qxb3/.local/share/nvim/site/pack/packer/start/vim-better-whitespace",
-    url = "https://github.com/ntpeters/vim-better-whitespace"
   },
   ["vim-devicons"] = {
     loaded = true,
