@@ -60,8 +60,9 @@ vim.keymap.set('i', 'qq', '<Esc>', { silent = true })
 vim.keymap.set('v', 'qq', '<Esc>', { silent = true })
 vim.keymap.set('i', 'qq', '<Esc>', { silent = true })
 
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { silent = true })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { silent = true })
+-- Split focus
+vim.keymap.set('n', '<C-o>', '<C-w><C-h>', { silent = true })
+vim.keymap.set('n', '<C-p>', '<C-w><C-l>', { silent = true })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { silent = true })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { silent = true })
 

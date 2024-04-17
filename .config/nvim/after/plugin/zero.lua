@@ -1,3 +1,9 @@
+-- Diagnostic Indicators
+vim.fn.sign_define("DiagnosticSignError", {text = " ", texthl = "DiagnosticSignError"})
+vim.fn.sign_define("DiagnosticSignWarn", {text = " ", texthl = "DiagnosticSignWarn"})
+vim.fn.sign_define("DiagnosticSignInfo", {text = " ", texthl = "DiagnosticSignInfo"})
+vim.fn.sign_define("DiagnosticSignHint", {text = "󰌵", texthl = "DiagnosticSignHint"})
+
 local zero = require('lsp-zero').preset({
   name = 'minimal',
   set_lsp_keymaps = true,
@@ -5,7 +11,7 @@ local zero = require('lsp-zero').preset({
   suggest_lsp_servers = true
 })
 
-zero.on_attach(function(_client, bufnr)
+zero.on_attach(function(_, bufnr)
   zero.default_keymaps({ buffer = bufnr })
 
   vim.keymap.set('n', '<leader>sd', '<cmd>lua vim.lsp.buf.hover()<cr>', { silent = true })
@@ -22,8 +28,5 @@ zero.on_attach(function(_client, bufnr)
   }
 })
 end)
-
--- require('lspconfig').rust_anaylzer.setup({
--- })
 
 zero.setup()
