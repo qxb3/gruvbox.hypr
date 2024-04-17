@@ -22,17 +22,13 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help' },
   }),
   formatting = {
-    fields = { 'abbr', 'kind', 'menu' },
+    fields = { 'abbr', 'kind' },
     format = require('lspkind').cmp_format({
       mode = 'symbol_text',
       ellipsis_char = '...',
-<<<<<<< HEAD:.config/nvim/lua/plugins/cmp.lua
-    })
-=======
       menu = {}
     }),
     expandable_indicator = true
->>>>>>> 9ad6b71 (config(nvim): ultimate organizing and cleanup):.config/nvim/after/plugin/cmp.lua
   },
   window = {
     completion = cmp.config.window.bordered(),

@@ -2,16 +2,17 @@ require('toggleterm').setup({
   open_mapping = [[<C-t>]],
   direction = 'float',
   shade_terminals = false,
-  size = function(term)
-    if term.direction == 'horizontal' then
-      return 5
-    elseif term.direction == 'vertical' then
-      return 20
-    end
-  end,
   float_opts = {
     border = 'single',
-    width = 100,
-    height = 30,
-  },
+    width = function()
+      local winwidth = vim.fn.winwidth(0)
+
+      return math.floor(winwidth - (winwidth / 6))
+    end,
+    height = function()
+      local winheight = vim.fn.winheight(0)
+
+      return math.floor(winheight - (winheight / 5))
+    end
+  }
 })
