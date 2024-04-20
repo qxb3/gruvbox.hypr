@@ -1,14 +1,13 @@
 .bar {
-  background-color: $bg;
-  border-bottom: solid 0.1px $fg;
+  background-color: rgba($bg, 0.8);
 
   .workspaces {
     .workspace {
       min-width: 30px;
-      background-color: $bgh;
+      background-color: rgba($bgh, 0.5);
 
       &.active {
-        background-color: $blue;
+        background-color: rgba($blue, 0.8);
 
         & label { color: $bg; }
       }
@@ -20,7 +19,7 @@
   }
 
   .power_menu {
-    background-color: $bgh;
+    background-color: rgba($bgh, 0.8);
     font-size: 18px;
     padding-right: 3px;
     font-weight: 900;
