@@ -52,7 +52,10 @@ require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } }
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'AckslD/nvim-neoclip.lua'
+    }
   }
 
   -- Fuzzy finder using fzf
@@ -75,7 +78,8 @@ require('packer').startup(function(use)
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
     requires = {
-      'MunifTanjim/nui.nvim'
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim'
     }
   }
 

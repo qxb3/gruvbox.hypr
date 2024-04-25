@@ -1,22 +1,3 @@
--- local action_state = require("telescope.actions.state")
--- if actions ~= nil then
---   actions.master_stack = function(prompt_bufnr)
---     local picker = action_state.get_current_picker(prompt_bufnr)
---     actions.close(prompt_bufnr)
---     vim.cmd([[tabnew]])
---     for index, entry in ipairs(picker:get_multi_selection()) do
---       if index == 1 then
---         vim.cmd("edit " .. entry.filename)
---       elseif index == 2 then
---         vim.cmd("vsplit " .. entry.filename)
---       else
---         vim.cmd("split " .. entry.filename)
---       end
---     end
---     vim.cmd([[wincmd =]])
---   end
--- end
-
 local builtin = require('telescope.builtin')
 local actions = require("telescope.actions")
 
@@ -29,12 +10,17 @@ require('telescope').setup({
     },
     mappings = {
       n = {
-        ['<CR>'] = actions.select_vertical
+        ['<CR>'] = actions.select_vertical,
+        ['<C-s>'] = actions.select_default
       },
       i = {
-        ['<CR>'] = actions.select_vertical
+        ['<CR>'] = actions.select_vertical,
+        ['<C-s>'] = actions.select_default
       }
     }
+  },
+  extensions = {
+    'neoclip'
   }
 })
 
@@ -46,3 +32,19 @@ vim.keymap.set('n', '<C-b>', builtin.buffers, {})
 
 vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
 vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
+vim.keymap.set('n', '<C-f>', builtin.find_files, {}) -- Fuzzy find a file
+vim.keymap.set('n', '<C-g>', builtin.live_grep, {})  -- Live grep file contents
+vim.keymap.set('n', '<C-b>', builtin.buffers, {})    -- See buffers
+
+vim.keymap.set('n', '<leader>dn', builtin.diagnostics, {})   -- Project scoped lsp diagnostics
+vim.keymap.set('n', '<leader>mp', builtin.man_pages, {})     -- See Man pages
+vim.keymap.set('n', '<leader>ht', builtin.help_tags, {})     -- Vim Help tags
+vim.keymap.set('n', '<leader>sg', builtin.spell_suggest, {}) -- Spell Suggest under the cursor
+vim.keymap.set('n', '<leader>hl', builtin.highlights, {})    -- See highlights
+
+vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})   -- Git commits
+vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})  -- Git branches
+
+-- Telescope plugins keymaps
+
+vim.keymap.set('n', '<leader>c', ':Telescope neoclip<CR>', { silent = true }) -- See clipboards
