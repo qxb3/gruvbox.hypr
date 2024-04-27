@@ -24,6 +24,8 @@ require('telescope').setup({
   }
 })
 
+require('neoclip').setup()
+
 vim.keymap.set('n', '<C-x>', ':bd<CR>', { silent = true })
 
 vim.keymap.set('n', '<C-f>', builtin.find_files, {}) -- Fuzzy find a file
