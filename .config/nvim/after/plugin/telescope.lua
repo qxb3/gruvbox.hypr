@@ -24,14 +24,10 @@ require('telescope').setup({
   }
 })
 
+require('neoclip').setup()
+
 vim.keymap.set('n', '<C-x>', ':bd<CR>', { silent = true })
 
-vim.keymap.set('n', '<C-f>', builtin.find_files, {})
-vim.keymap.set('n', '<C-g>', builtin.live_grep, {})
-vim.keymap.set('n', '<C-b>', builtin.buffers, {})
-
-vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
-vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
 vim.keymap.set('n', '<C-f>', builtin.find_files, {}) -- Fuzzy find a file
 vim.keymap.set('n', '<C-g>', builtin.live_grep, {})  -- Live grep file contents
 vim.keymap.set('n', '<C-b>', builtin.buffers, {})    -- See buffers
