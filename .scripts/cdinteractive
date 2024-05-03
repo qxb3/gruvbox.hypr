@@ -4,10 +4,9 @@ project_paths=$(find "$HOME/Dev" -maxdepth 2 -type d | awk -v home="$HOME" '{ gs
 custom_paths=(
   "$HOME/.config"
   "$HOME/.config/hypr"
+  "$HOME/.config/rofi"
   "$HOME/.config/eww"
-  "$HOME/.config/ags"
   "$HOME/.config/swww"
-  "$HOME/.config/dunst"
   "$HOME/.config/swaylock"
   "$HOME/.config/swappy"
   "$HOME/.config/nvim"
@@ -29,14 +28,11 @@ done
 result=$( \
   echo -e "$paths" | \
   fzf \
-  --reverse \
-  --border=rounded \
-  --margin 5% \
-  --preview="cat {}" \
-  --preview-window hidden \
-  --prompt="❯ " \
-  --pointer="❯" \
-  --color="spinner:yellow,border:bright-white"
+  --border=sharp \
+  --margin 10% \
+  --preview="eza --tree --level=4 --color=always {} | head -200" \
+  --prompt="~ " \
+  --pointer="*"
 )
 
 echo "$result"
