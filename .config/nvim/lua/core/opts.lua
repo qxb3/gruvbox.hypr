@@ -25,7 +25,7 @@ option.guicursor = ''
 option.wrap = false
 option.cmdheight = 1
 option.list = true
-option.listchars = { eol = '↲', tab = '» ', nbsp = '␣' }
+option.listchars = { eol = '↲', --[[ tab = '» ', ]] nbsp = '␣' }
 
 ------------------------------------------------------------
 -- Tabs, Indenting                                        --
@@ -49,7 +49,7 @@ option.updatetime = 4000
 ------------------------------------------------------------
 
 vim.o.background = "dark"
-vim.cmd("colorscheme oxocarbon")
+vim.cmd("colorscheme gruvbox")
 
 ------------------------------------------------------------
 -- Vim Remaps                                             --
@@ -61,8 +61,8 @@ vim.keymap.set('v', 'qq', '<Esc>', { silent = true })
 vim.keymap.set('i', 'qq', '<Esc>', { silent = true })
 
 -- Split focus
-vim.keymap.set('n', '<C-o>', '<C-w><C-h>', { silent = true })
-vim.keymap.set('n', '<C-p>', '<C-w><C-l>', { silent = true })
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { silent = true })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { silent = true })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { silent = true })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { silent = true })
 
