@@ -86,7 +86,7 @@
             :valign "center"
             :halign "center"
 
-            {workspace.name}
+            {workspace.text}
           )
         )
       )

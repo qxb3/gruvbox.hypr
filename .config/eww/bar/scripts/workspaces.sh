@@ -24,11 +24,11 @@ function check_workspaces() {
     active_workspace=`hyprctl activeworkspace -j | jq -r '.name'`
     persistent_workspaces='
       [
-        {"name": "1", "active": false},
-        {"name": "2", "active": false},
-        {"name": "3", "active": false},
-        {"name": "4", "active": false},
-        {"name": "5", "active": false}
+        {"name": "1", "text": "󰞷", "active": false},
+        {"name": "2", "text": "󰈹", "active": false},
+        {"name": "3", "text": "󰙯", "active": false},
+        {"name": "4", "text": "󰓇", "active": false},
+        {"name": "5", "text": "󰠱", "active": false}
       ]
     '
 
