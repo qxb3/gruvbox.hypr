@@ -1,5 +1,9 @@
+(defvar _current_date_visible false)
+(defvar _last_current_date_visible "0")
+
 (deflisten _workspaces :inital "[]" `~/.config/eww/bar/scripts/workspaces.sh`)
 (deflisten _active_window :inital "~" `~/.config/eww/bar/scripts/activewindow.sh`)
+(defpoll   _current_date :interval "1s" `~/.config/eww/bar/scripts/current_date.sh`)
 
 (defwindow bar
   :monitor 0
@@ -35,10 +39,15 @@
 )
 
 (defwidget Center []
-  (box
+  (eventbox
     :halign "center"
+    :cursor "pointer"
+    :onclick "~/.config/eww/bar/scripts/toggle_current_date.sh"
 
-    (WindowTitle)
+    (box
+      (WindowTitle)
+      (CurrentDate)
+    )
   )
 )
 
@@ -97,10 +106,27 @@
 (defwidget WindowTitle []
   (box
     :class "window_title"
+    :visible {_current_date_visible == false}
 
     (label
       :text {_active_window.title}
       :limit-width 48
+    )
+  )
+)
+
+(defwidget CurrentDate []
+  (box
+    :class "current_date"
+    :visible {_current_date_visible == true}
+
+    (label
+      :text {_last_current_date_visible}
+      :visible false
+    )
+
+    (label
+      :text {_current_date}
     )
   )
 )
