@@ -127,7 +127,7 @@ function Notifications() {
       children: NotificationService.bind('notifications')
         .transform(notifications =>
           notifications.length > 0
-            ? notifications.map(Notification)
+            ? notifications.map(Notification).reverse()
             : [ NoNotification() ]
         )
     })
