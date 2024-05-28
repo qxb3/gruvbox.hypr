@@ -1,0 +1,11 @@
+{
+  "name": "kami",
+  "description": "Paper Rice",
+  "version": "0.0.1",
+  "author": "qxb3",
+  "main": "config.js",
+  "scripts": {
+    "dev": "nodemon -e js,scss --exec 'sass --no-source-map main.scss dist/out.css && ags'"
+  },
+  "license": "MIT"
+}
