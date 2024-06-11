@@ -63,3 +63,4 @@ export PATH=$HOME/.scripts:$PATH
 
 # Created by `pipx` on 2024-01-05 01:07:43
 export PATH="$PATH:/home/qxb3/.local/bin"
+source /usr/share/nvm/init-nvm.sh
