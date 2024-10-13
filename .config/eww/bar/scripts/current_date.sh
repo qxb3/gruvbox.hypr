@@ -5,4 +5,4 @@ if [ $(( $curr_time - $last_time )) -gt 5 ]; then
   eww update _current_date_visible=false
 fi
 
-date
+date +"%A %I:%M %p - %m/%d/%Y"

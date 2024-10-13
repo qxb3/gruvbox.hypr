@@ -1,8 +1,8 @@
-ZSH=/usr/share/oh-my-zsh/
+ZSH=~/.oh-my-zsh
 ZSH_THEME='robbyrussell'
 
-if [ -f /usr/bin/neofetch ]; then
-  neofetch
+if [ -f /usr/bin/fastfetch ]; then
+  fastfetch
 fi
 
 ZVM_VI_ESCAPE_BINDKEY=qq
@@ -60,7 +60,3 @@ export PATH=./node_modules/.bin:./vendor/bin:$PATH
 export PATH=$HOME/.scripts:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Created by `pipx` on 2024-01-05 01:07:43
-export PATH="$PATH:/home/qxb3/.local/bin"
-source /usr/share/nvm/init-nvm.sh
