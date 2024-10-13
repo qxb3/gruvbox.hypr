@@ -1,4 +1,4 @@
-ZSH=/usr/share/oh-my-zsh/
+ZSH=~/.oh-my-zsh
 ZSH_THEME='robbyrussell'
 
 ZVM_VI_ESCAPE_BINDKEY=qq
