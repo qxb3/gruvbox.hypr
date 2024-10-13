@@ -36,7 +36,7 @@ function ShutdownButton() {
           onPrimaryClick: () => {
             PowerMenu.popdown()
             Utils.subprocess(
-              [`bash`, `-c`, `systemctl suspend && swaylock`],
+              [`bash`, `-c`, `systemctl suspend && hyprlock`],
               () => {}
             )
           }
