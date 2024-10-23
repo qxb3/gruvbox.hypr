@@ -87,7 +87,7 @@
     (for workspace in v_workspaces
       (eventbox :cursor "pointer"
         (button
-          :class {workspace.active ? "active" : ""}
+          :class {workspace.active == true ? "active" : ""}
           :onclick "hyprctl dispatch workspace ${workspace.name}"
           :valign "center"
           :halign "center"

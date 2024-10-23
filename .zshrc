@@ -1,7 +1,23 @@
-ZSH=/usr/share/oh-my-zsh/
+ZSH=~/.oh-my-zsh
 ZSH_THEME='robbyrussell'
 
-plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting)
+ZVM_VI_ESCAPE_BINDKEY=qq
+ZVM_VI_HIGHLIGHT_BACKGROUND=#262626
+ZVM_VI_HIGHLIGHT_FOREGROUND=#FFFFFF
+
+if [ -f /usr/bin/fastfetch ]; then
+  fastfetch
+fi
+
+plugins=(
+  git
+  sudo
+  zsh-256color
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-vi-mode
+)
+
 source $ZSH/oh-my-zsh.sh
 
 if pacman -Qi yay &>/dev/null ; then
@@ -40,10 +56,9 @@ alias cp='cp -r'
 alias x='exit'
 
 # Exports
-export PATH=./node_modules/.bin:./vendor/bin:$PATH
 export PATH=$HOME/.scripts:$PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=./node_modules/.bin:./vendor/bin:$PATH
+export PATH=$PATH:/opt/android-sdk/platform-tools
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Created by `pipx` on 2024-01-05 01:07:43
-export PATH="$PATH:/home/qxb3/.local/bin"
