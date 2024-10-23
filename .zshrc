@@ -56,8 +56,9 @@ alias cp='cp -r'
 alias x='exit'
 
 # Exports
-export PATH=./node_modules/.bin:./vendor/bin:$PATH
 export PATH=$HOME/.scripts:$PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=./node_modules/.bin:./vendor/bin:$PATH
 export PATH=$PATH:/opt/android-sdk/platform-tools
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
