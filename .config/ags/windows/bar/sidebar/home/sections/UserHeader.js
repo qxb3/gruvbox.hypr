@@ -13,20 +13,26 @@ function ShutdownButton() {
             icon: 'system-shutdown-symbolic',
             size: 18
           }),
-          onPrimaryClick: () => Utils.subprocess(
-            [`systemctl`, `poweroff`],
-            () => {}
-          )
+          onPrimaryClick: () => {
+            Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh close"`)
+            Utils.subprocess(
+              [`systemctl`, `poweroff`],
+              () => {}
+            )
+          }
         }),
         Widget.Button({
           child: Widget.Icon({
             icon: 'view-refresh-symbolic',
             size: 18
           }),
-          onPrimaryClick: () => Utils.subprocess(
-            [`systemctl`, `reboot`],
-            () => {}
-          )
+          onPrimaryClick: () => {
+            Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh close"`)
+            Utils.subprocess(
+              [`systemctl`, `reboot`],
+              () => {}
+            )
+          }
         }),
         Widget.Button({
           child: Widget.Icon({
@@ -35,6 +41,8 @@ function ShutdownButton() {
           }),
           onPrimaryClick: () => {
             PowerMenu.popdown()
+
+            Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh close"`)
             Utils.subprocess(
               [`bash`, `-c`, `systemctl suspend && hyprlock`],
               () => {}
@@ -46,10 +54,13 @@ function ShutdownButton() {
             icon: 'application-exit-symbolic',
             size: 18
           }),
-          onPrimaryClick: () => Utils.subprocess(
-            [`pkill`, 'Hyprland'],
-            () => {}
-          )
+          onPrimaryClick: () => {
+            Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh close"`)
+            Utils.subprocess(
+              [`pkill`, 'Hyprland'],
+              () => {}
+            )
+          }
         })
       ]
     })
