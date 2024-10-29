@@ -143,7 +143,7 @@ function EndSection() {
     className: 'screenshot_button',
     child: Widget.Label('󰄄'),
     onPrimaryClick: () => Utils.subprocess(
-      ['bash', '-c', '/home/qxb3/.config/hypr/scripts/screenshot.sh p'],
+      ['bash', '-c', '~/.config/hypr/scripts/screenshot.sh p'],
       (output) => print(output)
     )
   })
