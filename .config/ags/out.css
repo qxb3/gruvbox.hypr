@@ -1,17 +1,17 @@
 * {
   all: unset;
   font-family: "JetBrainsMono Nerd Font";
-  color: #ebdbb2;
+  color: #E5E9F0;
 }
 
 .bar {
-  background-color: #282828;
+  background-color: #3B4252;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   padding: 8px 4px;
 }
 .bar .divider {
-  background-color: #3c3836;
+  background-color: #434C5E;
   min-height: 2px;
   margin: 2px 0;
 }
@@ -22,24 +22,24 @@
   min-height: 32px;
 }
 .bar .sections .start .search_button {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   padding: 4px 8px;
 }
 .bar .sections .start .search_button:hover {
-  background-color: #504945;
+  background-color: #4C566A;
 }
 .bar .sections .start .search_button label {
   font-size: 18px;
   padding-right: 4px;
 }
 .bar .sections .start .wallpaper_button {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   padding: 4px 8px;
 }
 .bar .sections .start .wallpaper_button:hover {
-  background-color: #504945;
+  background-color: #4C566A;
 }
 .bar .sections .start .wallpaper_button label {
   font-size: 20px;
@@ -52,27 +52,27 @@
   font-size: 21px;
 }
 .bar .sections .center .workspace_indicator {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   padding: 4px 8px;
   padding: 1rem 0;
 }
 .bar .sections .center .workspace_indicator .workspace {
-  background-color: #ebdbb2;
+  background-color: #E5E9F0;
   border-radius: 8px;
   min-width: 10px;
   min-height: 24px;
   transition: min-height 100ms cubic-bezier(1, 0, 0, 1);
 }
 .bar .sections .center .workspace_indicator .workspace.active {
-  background-color: #d79921;
+  background-color: #A3BE8C;
   min-height: 42px;
 }
 .bar .sections .center .workspace_indicator .workspace:hover {
-  background-color: #bdae93;
+  background-color: #BFC6D1;
 }
 .bar .sections .end .controls {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   padding: 4px 8px;
 }
@@ -81,35 +81,35 @@
   padding-right: 2px;
 }
 .bar .sections .end .controls .audio_control_button:hover label {
-  color: #bdae93;
+  color: #BFC6D1;
 }
 .bar .sections .end .controls .system_control_button {
   font-size: 20px;
   padding-right: 4px;
 }
 .bar .sections .end .controls .system_control_button:hover label {
-  color: #bdae93;
+  color: #BFC6D1;
 }
 .bar .sections .end .controls .screenshot_button {
   font-size: 20px;
   padding-right: 6px;
 }
 .bar .sections .end .controls .screenshot_button:hover label {
-  color: #bdae93;
+  color: #BFC6D1;
 }
 .bar .sections .end .time_indicator {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   padding: 4px 8px;
   font-size: 14px;
   font-weight: 500;
 }
 .bar .sections .end .time_indicator:hover {
-  background-color: #504945;
+  background-color: #4C566A;
 }
 
 .systray_menu {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   padding: 1rem;
 }
@@ -118,11 +118,11 @@
   padding: 4px 8px;
 }
 .systray_menu menuitem:hover {
-  background-color: #504945;
+  background-color: #4C566A;
 }
 
 .menu {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   margin: 0 0 8px 8px;
 }
@@ -131,7 +131,7 @@
   padding: 1rem;
 }
 .menu.audio_controls .slider_container .slider trough {
-  background-color: #504945;
+  background-color: #4C566A;
   border-radius: 8px;
 }
 .menu.audio_controls .slider_container .slider highlight {
@@ -142,7 +142,7 @@
   padding-right: 2px;
 }
 .menu.audio_controls .slider_container.global_volume .slider highlight {
-  background-color: #458588;
+  background-color: #81A1C1;
 }
 .menu.audio_controls .slider_container.global_volume .icon {
   font-size: 15px;
@@ -152,7 +152,7 @@
   padding-right: 4px;
 }
 .menu.audio_controls .slider_container.music_volume .slider highlight {
-  background-color: #689d6a;
+  background-color: #88C0D0;
 }
 .menu.audio_controls .slider_container.music_volume .icon {
   font-size: 16px;
@@ -161,7 +161,7 @@
   padding-right: 4px;
 }
 .menu.audio_controls .slider_container.input_volume .slider highlight {
-  background-color: #98971a;
+  background-color: #A3BE8C;
 }
 .menu.audio_controls .slider_container.input_volume .icon {
   font-size: 16px;
@@ -171,7 +171,7 @@
   padding: 1rem;
 }
 .menu.system_controls .slider_container .slider trough {
-  background-color: #504945;
+  background-color: #4C566A;
   border-radius: 8px;
 }
 .menu.system_controls .slider_container .slider highlight {
@@ -179,7 +179,7 @@
   min-width: 10px;
 }
 .menu.system_controls .slider_container.brightness .slider highlight {
-  background-color: #ebdbb2;
+  background-color: #E5E9F0;
 }
 .menu.system_controls .slider_container.brightness .icon {
   font-size: 15px;
@@ -189,23 +189,23 @@
   padding: 0.3rem 0.5rem;
 }
 .menu.calendar .widget button {
-  color: #d65d0e;
+  color: #D08770;
 }
 
 .home {
-  background-color: #282828;
-  border-right: solid #504945 1px;
+  background-color: #3B4252;
+  border-right: solid #4C566A 1px;
   padding: 8px;
   min-width: 300px;
 }
 .home .user_box {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   padding: 8px;
 }
 .home .user_box .face {
   background-size: cover;
-  border: solid #1d2021 0.5px;
+  border: solid #2E3440 0.5px;
   border-radius: 999px;
   min-width: 54px;
   min-height: 54px;
@@ -213,22 +213,22 @@
 .home .user_box .details .username {
   font-weight: 900;
   font-size: 16px;
-  color: #fbf1c7;
+  color: #ECEFF4;
 }
 .home .user_box .details .wm {
   font-weight: 900;
   font-size: 10px;
   letter-spacing: 2px;
-  color: #d79921;
+  color: #EBCB8B;
 }
 .home .user_box .shutdown_button {
-  background-color: #1d2021;
+  background-color: #2E3440;
   border-radius: 999px;
   font-size: 24px;
   padding: 4px 13px;
 }
 .home .user_box .shutdown_button label {
-  color: #cc241d;
+  color: #BF616A;
   padding-right: 1px;
 }
 .home .desktop_controls {
@@ -237,16 +237,16 @@
   padding: 8px;
 }
 .home .desktop_controls .buttons .icon {
-  background-color: #d79921;
+  background-color: #616E88;
   border-radius: 999px;
   padding: 10px;
-  color: #ebdbb2;
+  color: #A3BE8C;
 }
 .home .desktop_controls .buttons .icon.inactive {
-  background-color: #928374;
+  background-color: #616E88;
 }
 .home .desktop_controls .buttons .name {
-  color: #928374;
+  color: #616E88;
   font-weight: 700;
   font-size: 11px;
 }
@@ -254,16 +254,16 @@
   font-size: 20px;
 }
 .home .desktop_controls .sliders scale trough {
-  background-color: #504945;
+  background-color: #4C566A;
   border-radius: 8px;
 }
 .home .desktop_controls .sliders scale highlight {
-  background-color: #458588;
+  background-color: #81A1C1;
   border-radius: 8px;
   min-height: 16px;
 }
 .home .music_player {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   padding: 8px;
 }
@@ -281,7 +281,7 @@
   font-weight: 900;
 }
 .home .music_player .right .meta .artist {
-  color: #d79921;
+  color: #EBCB8B;
   font-weight: 900;
 }
 .home .music_player .right .controls .control {
@@ -296,21 +296,21 @@
   min-width: 20px;
 }
 .home .music_player .right .position .progress trough {
-  background-color: #504945;
+  background-color: #4C566A;
   border-radius: 8px;
 }
 .home .music_player .right .position .progress trough progress {
-  background-color: #ebdbb2;
+  background-color: #E5E9F0;
   border-radius: 8px;
 }
 .home .music_player .right .position .meta {
   font-size: 10px;
 }
 .home .music_player .right .position .meta .current_progress, .home .music_player .right .position .meta .length {
-  color: #928374;
+  color: #616E88;
 }
 .home .notification_center {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   margin-top: 1rem;
   padding: 8px;
@@ -326,22 +326,22 @@
   padding: 3px 11px 3px 9px;
 }
 .home .notification_center .header .clear_notif_button:hover label {
-  color: #928374;
+  color: #616E88;
 }
 .home .notification_center .notifications .no_notification {
   margin-top: 3rem;
 }
 .home .notification_center .notifications .no_notification .icon {
   font-size: 64px;
-  color: #928374;
+  color: #616E88;
 }
 .home .notification_center .notifications .no_notification .text {
   font-size: 20px;
   margin-top: 1rem;
-  color: #928374;
+  color: #616E88;
 }
 .home .notification_center .notifications .notification {
-  background-color: #504945;
+  background-color: #4C566A;
   border-radius: 8px;
   padding: 8px;
 }
@@ -359,10 +359,10 @@
   letter-spacing: 2px;
   font-weight: 900;
   font-size: 9px;
-  color: #d79921;
+  color: #EBCB8B;
 }
 .home .notification_center .notifications .notification .meta .summary {
-  color: #928374;
+  color: #616E88;
 }
 .home .notification_center .remove_notif_button {
   padding-right: 4px;
@@ -372,19 +372,19 @@
 }
 
 .power_menu {
-  background-color: #504945;
+  background-color: #4C566A;
   border-radius: 8px;
   padding: 1rem;
 }
 
 .app_launcher {
-  background-color: #282828;
-  border-right: solid #504945 1px;
+  background-color: #3B4252;
+  border-right: solid #4C566A 1px;
   padding: 8px;
   min-width: 300px;
 }
 .app_launcher .header {
-  background-color: #504945;
+  background-color: #4C566A;
   border-radius: 8px;
   padding: 8px;
 }
@@ -393,7 +393,7 @@
   font-weight: 200;
 }
 .app_launcher .header .input_container .input {
-  border: solid #928374 1px;
+  border: solid #616E88 1px;
   border-radius: 8px;
   font-size: 16px;
   padding: 4px 8px;
@@ -401,27 +401,27 @@
 .app_launcher .header .input_container .placeholder {
   font-weight: 900;
   font-size: 16px;
-  color: #928374;
+  color: #616E88;
   padding-left: 8px;
 }
 .app_launcher .apps .app {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   padding: 8px;
 }
 .app_launcher .apps .app:hover {
-  background-color: #504945;
+  background-color: #4C566A;
 }
 .app_launcher .apps .app.selected {
-  background-color: #458588;
+  background-color: #81A1C1;
 }
 .app_launcher .apps .app:focus {
-  background-color: #458588;
+  background-color: #81A1C1;
 }
 
 .wallpapers {
-  background-color: #282828;
-  border-right: solid #504945 1px;
+  background-color: #3B4252;
+  border-right: solid #4C566A 1px;
   padding: 8px;
   min-width: 300px;
 }
@@ -434,7 +434,7 @@
   padding: 8px;
 }
 .notification_popups .notification {
-  background-color: #3c3836;
+  background-color: #434C5E;
   border-radius: 8px;
   min-width: 300px;
   padding: 12px;
@@ -454,8 +454,8 @@
   letter-spacing: 2px;
   font-weight: 900;
   font-size: 9px;
-  color: #d79921;
+  color: #EBCB8B;
 }
 .notification_popups .meta .summary {
-  color: #928374;
+  color: #616E88;
 }

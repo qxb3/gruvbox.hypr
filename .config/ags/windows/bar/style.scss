@@ -83,7 +83,7 @@
           transition: min-height 100ms cubic-bezier(1, 0, 0, 1);
 
           &.active {
-            background-color: $yellow;
+            background-color: $green;
             min-height: 42px;
           }
 
