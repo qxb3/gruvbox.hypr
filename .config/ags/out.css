@@ -77,6 +77,13 @@
   border-radius: 8px;
   padding: 4px 8px;
 }
+.bar .sections .end .controls .music_player_button {
+  font-size: 20px;
+  padding-right: 2px;
+}
+.bar .sections .end .controls .music_player_button:hover label {
+  color: #BFC6D1;
+}
 .bar .sections .end .controls .audio_control_button {
   font-size: 20px;
   padding-right: 2px;
@@ -125,7 +132,51 @@
 .menu {
   background-color: #434C5E;
   border-radius: 8px;
+  border: solid #81A1C1 1px;
   margin: 0 0 8px 8px;
+}
+.menu.music_player {
+  margin-bottom: 5.5rem;
+  min-width: 300px;
+}
+.menu.music_player .top {
+  min-height: 90px;
+  padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+}
+.menu.music_player .top .thumbnail {
+  background-size: cover;
+  border-radius: 8px;
+  min-width: 50px;
+  min-width: 50px;
+}
+.menu.music_player .top .meta .player {
+  font-size: 10px;
+  font-weight: 900;
+  color: #616E88;
+}
+.menu.music_player .top .meta .title {
+  font-size: 20px;
+  font-weight: 900;
+  margin-top: 8px;
+}
+.menu.music_player .top .meta .artist {
+  color: #EBCB8B;
+  font-size: 14px;
+  font-weight: 900;
+}
+.menu.music_player .position .progress trough {
+  background-color: #4C566A;
+}
+.menu.music_player .position .progress trough progress {
+  background-color: #E5E9F0;
+}
+.menu.music_player .controls {
+  padding: 0.5rem;
+  background-color: #434C5E;
+}
+.menu.music_player .controls .control {
+  border-radius: 8px;
+  font-size: 25px;
 }
 .menu.audio_controls {
   min-height: 200px;

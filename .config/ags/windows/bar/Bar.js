@@ -4,6 +4,7 @@ import SideBar from './sidebar/SideBar.js'
 import Menu from './menu/Menu.js'
 
 import { sidebarShown } from '../../shared/vars.js'
+import { musicPlayerName } from '../../shared/music.js'
 
 const HyprlandService = await Service.import('hyprland')
 const SystemTrayService = await Service.import('systemtray')
@@ -125,6 +126,13 @@ function CenterSection() {
 }
 
 function EndSection() {
+  const MusicPlayer = Widget.Button({
+    attribute: { menu: Menu('musicPlayer') },
+    className: 'music_player_button',
+    child: Widget.Label('󰓇'),
+    onClicked: (self) => self.attribute.menu.toggle()
+  })
+
   const AudioControlButton = Widget.Button({
     attribute: { menu: Menu('audio') },
     className: 'audio_control_button',
@@ -169,6 +177,11 @@ function EndSection() {
         hpack: 'center',
         vertical: true,
         children: [
+          Widget.Revealer({
+            revealChild: musicPlayerName.bind().as(name => name === 'spotify' ? true : false),
+            transition: 'slide_up',
+            child: MusicPlayer
+          }),
           AudioControlButton,
           SystemControlButton,
           ScreenShotButton

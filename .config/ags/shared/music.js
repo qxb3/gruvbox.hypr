@@ -6,6 +6,7 @@ export const PLAYERS = ['spotify'/*, 'firefox'*/]
 export const NO_MUSIC = `${App.configDir}/assets/no-music.png`
 
 export const musicPlayer = Variable()
+export const musicPlayerName = Variable('')
 export const musicStatus = Variable('Stopped')
 export const musicThumbnail = Variable(NO_MUSIC)
 export const musicThumbnailUrl = Variable(NO_MUSIC)
@@ -40,8 +41,9 @@ function updateMetadata() {
 
   player?.connect('changed', () => {
     musicPlayer.value = player
+    musicPlayerName.value = player.name
 
-    if (player.name === 'spotify') {
+    if (musicPlayerName.value === 'spotify') {
       musicStatus.value = player.playBackStatus
       musicThumbnail.value = player.coverPath || NO_MUSIC
       musicThumbnailUrl.value = player.trackCoverUrl || NO_MUSIC
@@ -117,6 +119,7 @@ export function setVolume(volume) {
 
 export default {
   player: musicPlayer,
+  musicPlayerName,
   musicStatus,
   musicTitle,
   musicArtist,
