@@ -6,7 +6,7 @@ ZVM_VI_HIGHLIGHT_BACKGROUND=#262626
 ZVM_VI_HIGHLIGHT_FOREGROUND=#FFFFFF
 
 if [ -f /usr/bin/fastfetch ]; then
-  fastfetch
+  fastfetch --logo ~/.config/fastfetch/logo.txt --logo-width 30
 fi
 
 plugins=(
