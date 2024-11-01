@@ -8,6 +8,7 @@
   background-color: #3B4252;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+  border-right: solid #81A1C1 1px;
   padding: 8px 4px;
 }
 .bar .divider {
@@ -194,7 +195,7 @@
 
 .home {
   background-color: #3B4252;
-  border-right: solid #4C566A 1px;
+  border-right: solid #616E88 1px;
   padding: 8px;
   min-width: 300px;
 }
@@ -379,7 +380,7 @@
 
 .app_launcher {
   background-color: #3B4252;
-  border-right: solid #4C566A 1px;
+  border-right: solid #616E88 1px;
   padding: 8px;
   min-width: 300px;
 }
@@ -421,7 +422,7 @@
 
 .wallpapers {
   background-color: #3B4252;
-  border-right: solid #4C566A 1px;
+  border-right: solid #616E88 1px;
   padding: 8px;
   min-width: 300px;
 }
@@ -436,6 +437,7 @@
 .notification_popups .notification {
   background-color: #434C5E;
   border-radius: 8px;
+  border: solid #81A1C1 0.5px;
   min-width: 300px;
   padding: 12px;
 }
