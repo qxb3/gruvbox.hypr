@@ -26,6 +26,7 @@ function updateMetadata() {
 
   if (!player) {
     musicStatus.value = 'Stopped'
+    musicPlayerName.value = 'None'
     musicThumbnail.value = NO_MUSIC
     musicThumbnailUrl.value = NO_MUSIC
     musicTitle.value = 'No Music'
