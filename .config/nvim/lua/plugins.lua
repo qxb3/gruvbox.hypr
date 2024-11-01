@@ -93,7 +93,7 @@ require('packer').startup(function(use)
   use 'echasnovski/mini.indentscope'        -- Highlight indent scope
   use 'kyazdani42/nvim-web-devicons'        -- Dev icons with color
   use 'xiyaowong/transparent.nvim'          -- Remove Background
-  use 'ellisonleao/gruvbox.nvim'            -- Gruvbox Colorscheme
+  use 'shaunsingh/nord.nvim'                -- Nord Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins                                         --

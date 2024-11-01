@@ -48,8 +48,8 @@ option.updatetime = 4000
 -- Colorscheme                                            --
 ------------------------------------------------------------
 
-vim.o.background = "dark"
-vim.cmd("colorscheme gruvbox")
+vim.o.background = 'dark'
+vim.cmd('colorscheme nord')
 
 ------------------------------------------------------------
 -- Vim Remaps                                             --
