@@ -11,11 +11,15 @@ require('telescope').setup({
     mappings = {
       n = {
         ['<CR>'] = actions.select_vertical,
-        ['<C-s>'] = actions.select_default
+        ['<C-h>'] = actions.select_horizontal,
+        ['<C-s>'] = false,
+        ['<C-t>'] = false
       },
       i = {
         ['<CR>'] = actions.select_vertical,
-        ['<C-s>'] = actions.select_default
+        ['<C-h>'] = actions.select_horizontal,
+        ['<C-s>'] = false,
+        ['<C-t>'] = false
       }
     }
   },
