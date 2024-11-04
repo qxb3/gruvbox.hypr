@@ -1,8 +1,8 @@
-ZSH=/usr/share/oh-my-zsh/
+ZSH=~/.oh-my-zsh
 ZSH_THEME='robbyrussell'
 
-if [ -f /usr/bin/neofetch ]; then
-  neofetch
+if [ -f /usr/bin/fastfetch ]; then
+  fastfetch --logo ~/.config/fastfetch/logo.txt --logo-width 30
 fi
 
 ZVM_VI_ESCAPE_BINDKEY=qq
@@ -56,10 +56,9 @@ alias cp='cp -r'
 alias x='exit'
 
 # Exports
-export PATH=./node_modules/.bin:./vendor/bin:$PATH
 export PATH=$HOME/.scripts:$PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=./node_modules/.bin:./vendor/bin:$PATH
+export PATH=$PATH:/opt/android-sdk/platform-tools
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Created by `pipx` on 2024-01-05 01:07:43
-export PATH="$PATH:/home/qxb3/.local/bin"

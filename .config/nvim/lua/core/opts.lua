@@ -48,8 +48,8 @@ option.updatetime = 4000
 -- Colorscheme                                            --
 ------------------------------------------------------------
 
-vim.o.background = "light"
-vim.cmd("colorscheme vim-material")
+vim.o.background = 'light'
+vim.cmd('colorscheme vim-material')
 
 ------------------------------------------------------------
 -- Vim Remaps                                             --
