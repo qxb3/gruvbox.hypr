@@ -1,3 +1,8 @@
+import Bar from './windows/bar/Bar.js'
+
 App.config({
-  style: `${App.configDir}/dist/out.css`
+  style: App.configDir + '/out.css',
+  windows: [
+    Bar
+  ]
 })

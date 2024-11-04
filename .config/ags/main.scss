@@ -1,0 +1,27 @@
+$blackh:    #333333;
+$black:     #616161;
+$black1:    #808080;
+$black2:    #999999;
+
+$whiteh:    #ECEFF4;
+$white:     #ECECEC;
+$white1:    #D8DEE9;
+$white2:    #BFC6D1;
+
+$red:       #BF616A;
+$green:     #A3BE8C;
+$yellow:    #EBCB8B;
+$orange:    #D08770;
+$blue:      #81A1C1;
+$purple:    #B48EAD;
+$aqua:      #88C0D0;
+$gray:      #616E88;
+
+* {
+  all: unset;
+  font-family: 'CaskaydiaCove Nerd Font Mono';
+  font-weight: 900;
+  color: $blackh;
+}
+
+@import "./windows/bar/style.scss";

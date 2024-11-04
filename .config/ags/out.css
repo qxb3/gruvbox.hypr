@@ -1,0 +1,15 @@
+* {
+  all: unset;
+  font-family: "CaskaydiaCove Nerd Font Mono";
+  font-weight: 900;
+  color: #333333;
+}
+
+.bar {
+  background-color: #ECEFF4;
+  border-top: solid #333333 3px;
+  border-left: solid #333333 3px;
+  border-right: solid #333333 3px;
+  padding: 8px;
+  margin: 0 4rem;
+}
