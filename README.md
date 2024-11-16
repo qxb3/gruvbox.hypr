@@ -9,7 +9,7 @@
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/kami/repo/1.png" />
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/kami/repo/1.png" />
 </p>
 
 <br>
