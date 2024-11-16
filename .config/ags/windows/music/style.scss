@@ -1,0 +1,24 @@
+.music {
+  background-color: #ECECEC;
+  padding: 1rem;
+
+  & .thumbnail {
+    background-size: cover;
+    min-width: 150px;
+    min-height: 150px;
+  }
+
+  & .meta {
+    & .name {
+      font-size: 14px;
+    }
+  }
+
+  & .controls {
+    & .control {
+      border-radius: 8px;
+      font-size: 16px;
+      padding: 0 8px;
+    }
+  }
+}

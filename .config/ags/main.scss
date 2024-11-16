@@ -1,21 +1,21 @@
-$blackh:    #333333;
-$black:     #616161;
-$black1:    #808080;
-$black2:    #999999;
+$blackh:    #212121;
+$black:     #424242;
+$black1:    #616161;
+$black2:    #757575;
 
-$whiteh:    #ECEFF4;
-$white:     #ECECEC;
-$white1:    #D8DEE9;
-$white2:    #BFC6D1;
+$whiteh:    #FAFAFA;
+$white:     #F5F5F5;
+$white1:    #E0E0E0;
+$white2:    #BDBDBD;
 
-$red:       #BF616A;
-$green:     #A3BE8C;
-$yellow:    #EBCB8B;
-$orange:    #D08770;
-$blue:      #81A1C1;
-$purple:    #B48EAD;
-$aqua:      #88C0D0;
-$gray:      #616E88;
+$red:       #E57373;
+$green:     #81C784;
+$yellow:    #FFD54F;
+$orange:    #FFB74D;
+$blue:      #64B5F6;
+$purple:    #BA68C8;
+$aqua:      #4DD0E1;
+$gray:      #78909C;
 
 * {
   all: unset;
@@ -24,4 +24,4 @@ $gray:      #616E88;
   color: $blackh;
 }
 
-@import "./windows/bar/style.scss";
+@import "./windows/music/style.scss";

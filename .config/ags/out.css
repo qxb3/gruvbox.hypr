@@ -2,14 +2,23 @@
   all: unset;
   font-family: "CaskaydiaCove Nerd Font Mono";
   font-weight: 900;
-  color: #333333;
+  color: #212121;
 }
 
-.bar {
-  background-color: #ECEFF4;
-  border-top: solid #333333 3px;
-  border-left: solid #333333 3px;
-  border-right: solid #333333 3px;
-  padding: 8px;
-  margin: 0 4rem;
+.music {
+  background-color: #ECECEC;
+  padding: 1rem;
+}
+.music .thumbnail {
+  background-size: cover;
+  min-width: 150px;
+  min-height: 150px;
+}
+.music .meta .name {
+  font-size: 14px;
+}
+.music .controls .control {
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 0 8px;
 }
