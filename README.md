@@ -35,3 +35,36 @@
 <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/focused/repo/1.png" />
 <br>
 <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/focused/repo/3.png" />
+
+<br>
+
+<details>
+<summary>
+  <h1>
+    Unoffical Rices
+  </h1>
+</summary>
+  <p></p>
+
+  # [~/yume[nord].](https://github.com/qxb3/gruvbox.hypr/tree/yume-nord) ~ Yume but in nord theme.
+
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/1.png" />
+  <p></p>
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/2.png" />
+  <p></p>
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/3.png" />
+  <p></p>
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/4.png" />
+
+  <p></p>
+  <p></p>
+
+  # [~/kami[light].](https://github.com/qxb3/gruvbox.hypr/tree/kami) ~ A paper styled rice.
+
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/kami/repo/1.png" />
+
+</details>
+
+# Contribution
+
+Feel free to fork and make a pr :D
