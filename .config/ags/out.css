@@ -2,11 +2,11 @@
   all: unset;
   font-family: "CaskaydiaCove Nerd Font Mono";
   font-weight: 900;
-  color: #212121;
+  color: #FAFAFA;
 }
 
 .music {
-  background-color: #ECECEC;
+  background-color: #1C1C1C;
   padding: 1rem;
 }
 .music .thumbnail {
@@ -22,3 +22,5 @@
   font-size: 16px;
   padding: 0 8px;
 }
+
+/*# sourceMappingURL=out.css.map */
