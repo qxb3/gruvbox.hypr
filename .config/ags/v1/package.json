@@ -1,0 +1,25 @@
+{
+  "name": "gruvbox.hypr",
+  "version": "0.0.1",
+  "description": "Gruvbox in Hyprland",
+  "author": "qxb3",
+  "license": "MIT",
+  "main": "config.js",
+  "scripts": {
+    "dev": "nodemon -e js,scss --exec 'sass --no-source-map main.scss out.css && ags'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qxb3/gruvbox.hypr.git"
+  },
+  "keywords": [
+    "dotfiles",
+    "gruvbox",
+    "rice",
+    "unixporn"
+  ],
+  "bugs": {
+    "url": "https://github.com/qxb3/gruvbox.hypr/issues"
+  },
+  "homepage": "https://github.com/qxb3/gruvbox.hypr#readme"
+}
