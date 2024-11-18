@@ -48,7 +48,7 @@ option.updatetime = 4000
 -- Colorscheme                                            --
 ------------------------------------------------------------
 
-vim.o.background = 'light'
+vim.o.background = 'dark'
 vim.cmd('colorscheme vim-material')
 
 ------------------------------------------------------------
