@@ -1,10 +1,26 @@
+@mixin section {
+  background-color: $bg1;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+@mixin button {
+  &:hover {
+    background-color: $bg2;
+  }
+}
+
+@mixin control_button {
+  &:hover label {
+    color: $fg2;
+  }
+}
+
 .bar {
-<<<<<<< Updated upstream
   background-color: $bg;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   border-right: solid $blue 1px;
-  padding: 8px 4px;
 
   & .divider {
     background-color: $bg1;
@@ -13,6 +29,8 @@
   }
 
   & .sections {
+    padding: 8px 4px;
+
     & .start {
       & .sidebar_button {
         & box {
@@ -48,18 +66,18 @@
           margin-top: 8px;
         }
 
-        & .systray_button {
+        & .button {
           font-size: 21px;
         }
       }
     }
 
     & .center {
-      & .workspace_indicator {
+      & .workspace {
         @include section;
         padding: 1rem 0;
 
-        & .workspace {
+        & .button {
           background-color: $fg;
           border-radius: 8px;
           min-width: 10px;
@@ -67,7 +85,7 @@
           transition: min-height 100ms cubic-bezier(1, 0, 0, 1);
 
           &.active {
-            background-color: $green;
+            background-color: $blue;
             min-height: 42px;
           }
 
@@ -79,39 +97,24 @@
     }
 
     & .end {
-      & .controls {
+      & .desktop_controls {
         @include section;
 
-        & .music_player_button {
+        & .music,
+        & .audio,
+        & .system,
+        & .screenshot {
           @include control_button;
 
           font-size: 20px;
           padding-right: 2px;
         }
 
-        & .audio_control_button {
-          @include control_button;
-
-          font-size: 20px;
-          padding-right: 2px;
-        }
-
-        & .system_control_button {
-          @include control_button;
-
-          font-size: 20px;
-          padding-right: 4px;
-        }
-
-        & .screenshot_button {
-          @include control_button;
-
-          font-size: 20px;
-          padding-right: 6px;
-        }
+        & .system { padding-right: 4px; }
+        & .screenshot { padding-right: 6px; }
       }
 
-      & .time_indicator {
+      & .time {
         @include section;
         @include button;
 
@@ -120,8 +123,7 @@
       }
     }
   }
-=======
-  background-color: $bg3;
-  padding:  8px 16px;
->>>>>>> Stashed changes
 }
+
+@import "./menu/styles.scss";
+@import "./sidebar/styles.scss";

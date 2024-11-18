@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 $bgh:       #2E3440;
 $bg:        #3B4252;
 $bg1:       #434C5E;
@@ -8,19 +7,6 @@ $fgh:       #ECEFF4;
 $fg:        #E5E9F0;
 $fg1:       #D8DEE9;
 $fg2:       #BFC6D1;
-=======
-$bgh:       #1d2021;
-$bg:        #282828;
-$bg1:       #3c3836;
-$bg2:       #504945;
-$bg3:       #665c54;
-
-$fgh:       #fbf1c7;
-$fg:        #ebdbb2;
-$fg1:       #d5c4a1;
-$fg2:       #bdae93;
-$fg3:       #bdae93;
->>>>>>> Stashed changes
 
 $red:       #BF616A;
 $green:     #A3BE8C;
@@ -33,8 +19,24 @@ $gray:      #616E88;
 
 * {
   all: unset;
-    font-family: "JetBrainsMono Nerd Font";
+  font-family: "JetBrainsMono Nerd Font";
   color: $fg;
 }
 
-@import "./windows/bar/style.scss";
+.systray_menu {
+  background-color: $bg;
+  border-radius: 8px;
+  /* padding: 12px; */
+
+  & menuitem {
+    border-radius: 4px;
+    /* padding: 4px 8px; */
+    color: #000;
+
+    &:hover {
+      background-color: $bg2;
+    }
+  }
+}
+
+@import "./windows/bar/styles.scss";

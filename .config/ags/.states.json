@@ -1,4 +1,1 @@
-{
-  "reveal_sidebar": false,
-  "sidebar_shown": "home"
-}
+{ "reveal_sidebar": true, "sidebar_shown": "home" }

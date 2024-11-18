@@ -63,7 +63,7 @@
     }
   }
 
-  &.audio_controls {
+  &.audio_controls_menu {
     min-height: 200px;
     padding: 1rem;
 
@@ -80,12 +80,11 @@
         }
       }
 
-      &.global_volume {
+      &.global_vol {
         padding-right: 2px;
 
-        & .slider highlight {
-          background-color: $blue;
-        }
+        & .slider highlight { background-color: $blue; }
+        & .slider.mute highlight { background-color: $gray; }
 
         & .icon {
           font-size: 15px;
@@ -93,7 +92,7 @@
         }
       }
 
-      &.music_volume {
+      &.music_vol {
         padding-right: 4px;
 
         & .slider highlight {
@@ -105,12 +104,11 @@
         }
       }
 
-      &.input_volume {
+      &.mic_vol {
         padding-right: 4px;
 
-        & .slider highlight {
-          background-color: $green;
-        }
+        & .slider highlight { background-color: $green; }
+        & .slider.mute highlight { background-color: $gray; }
 
         & .icon {
           font-size: 16px;
@@ -119,7 +117,7 @@
     }
   }
 
-  &.system_controls {
+  &.system_controls_menu {
     min-height: 200px;
     padding: 1rem;
 
@@ -143,15 +141,19 @@
 
         & .icon {
           font-size: 15px;
-          padding-right: 4px;
+          padding-right: 6px;
         }
       }
     }
   }
 
-  &.calendar {
-    & .widget {
+  &.calendar_menu {
+    & calendar {
       padding: 0.3rem 0.5rem;
+
+      & .today {
+        color: #000;
+      }
 
       & button {
         color: $orange;

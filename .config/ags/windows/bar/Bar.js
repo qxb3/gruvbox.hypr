@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import Gdk from 'gi://Gdk'
 
 import SideBar from './sidebar/SideBar.js'
@@ -15,117 +16,22 @@ function Divider() {
   })
 }
 
+=======
+>>>>>>> Stashed changes
 function StartSection() {
-  const SideBarButton = Widget.Button({
-    className: 'sidebar_button',
-    cursor: 'pointer',
-    child: Widget.Box({
-      css: `background-image: url("/home/${Utils.exec('whoami')}/.face.icon")`
-    }),
-    onPrimaryClick: () => Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh toggle"`)
-  })
-
-  const SearchButton = Widget.Button({
-    className: 'search_button',
-    cursor: 'pointer',
-    child: Widget.Label(''),
-    onPrimaryClick: () => Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh toggle-applauncher"`)
-  })
-
-  const WallpaperButton = Widget.Button({
-    className: 'wallpaper_button',
-    cursor: 'pointer',
-    child: Widget.Label('󰸉'),
-    onPrimaryClick: () => Utils.exec(`bash -c "${App.configDir}/shared/scripts/sidebar.sh toggle-wallpapers"`)
-  })
-
-  const revealSystray = Variable(false)
-  const SysTray = Widget.Box({
-    className: 'systray',
-    hpack: 'center',
-    vertical: true,
-    children: [
-      Widget.Revealer({
-        revealChild: revealSystray.bind(),
-        transition: 'slide_down',
-        transitionDuration: 300,
-        child: Widget.Box({
-          vertical: true,
-          spacing: 8,
-          className: 'apps',
-          children: SystemTrayService.bind('items').transform(apps => apps.map(app =>
-            Widget.Button({
-              className: 'app',
-              child: Widget.Icon({
-                icon: app.icon,
-                size: 24
-              }),
-              onPrimaryClick: (_, event) => app.activate(event),
-              onSecondaryClick: (self) => {
-                app.menu.class_name = 'systray_menu'
-                app.menu.popup_at_widget(self, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null)
-              }
-            })
-          ))
-        })
-      }),
-      Widget.Button({
-        className: 'systray_button',
-        child: Widget.Label({
-          label: revealSystray.bind().transform(v => v ? '󰅃' : '󰅀')
-        }),
-        onPrimaryClick: () => revealSystray.value = !revealSystray.value,
-        setup: (self) => self.hook(revealSystray, () => {
-          if (revealSystray.value)
-            setTimeout(() => revealSystray.value = false, 5000)
-        })
-      })
-    ]
-  })
-
   return Widget.Box({
     className: 'start',
-    vpack: 'start',
-    vertical: true,
-    spacing: 4,
+    hpack: 'start',
     children: [
-      SideBarButton,
-      Divider(),
-      SearchButton,
-      WallpaperButton,
-      SysTray
-    ]
-  })
-}
-
-function CenterSection() {
-  const WorkspaceIndicator = Widget.Box({
-    className: 'workspace_indicator',
-    vertical: true,
-    spacing: 4,
-    children: Array.from({ length: 5 }).map((_, i) =>
-      Widget.Button({
-        className: 'workspace',
-        hpack: 'center',
-        cursor: 'pointer',
-        onPrimaryClick: () => HyprlandService.message(`dispatch workspace ${i + 1}`)
-      }).hook(HyprlandService.active.workspace, (self) =>
-        self.toggleClassName('active', HyprlandService.active.workspace.id === i + 1)
+      Widget.Label().poll(1000, (self) =>
+        self.label = Utils.exec(`date +"%A %I:%M %p - %m/%d/%Y"`)
       )
-    )
-  })
-
-  return Widget.Box({
-    className: 'center',
-    vpack: 'center',
-    vertical: true,
-    children: [
-      WorkspaceIndicator
     ]
   })
 }
 
 function EndSection() {
+<<<<<<< Updated upstream
   const MusicPlayer = Widget.Button({
     attribute: { menu: Menu('musicPlayer') },
     className: 'music_player_button',
@@ -165,13 +71,19 @@ function EndSection() {
     ),
     onClicked: (self) => self.attribute.menu.toggle()
   })
+=======
+  const SystemButton = Widget.Button()
+  const NetworkButton = Widget.Button()
+  const AudioButton = Widget.Button()
+  const NotificationButton = Widget.Button()
+>>>>>>> Stashed changes
 
   return Widget.Box({
+    hpack: 'end',
     className: 'end',
-    vpack: 'end',
-    vertical: true,
-    spacing: 4,
+    spacing: 8,
     children: [
+<<<<<<< Updated upstream
       Widget.Box({
         className: 'controls',
         hpack: 'center',
@@ -188,24 +100,23 @@ function EndSection() {
         ]
       }),
       TimeIndicator
+=======
+      SystemButton,
+      NetworkButton,
+      AudioButton,
+      NotificationButton
+>>>>>>> Stashed changes
     ]
   })
 }
 
 function Bar() {
   return Widget.Box({
+    className: 'bar',
+    homogeneous: true,
     children: [
-      SideBar(),
-      Widget.Box({
-        className: 'bar',
-        child: Widget.CenterBox({
-          className: 'sections',
-          vertical: true,
-          startWidget: StartSection(),
-          centerWidget: CenterSection(),
-          endWidget: EndSection()
-        })
-      })
+      StartSection(),
+      EndSection()
     ]
   })
 }
@@ -214,7 +125,6 @@ export default Widget.Window({
   name: 'bar',
   layer: 'top',
   exclusivity: 'exclusive',
-  keymode: sidebarShown.bind().transform(shown => shown === 'applauncher' ? 'exclusive' : 'none'),
-  anchor: ['left', 'top', 'bottom'],
+  anchor: ['top', 'left', 'right'],
   child: Bar()
 })

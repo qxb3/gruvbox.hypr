@@ -5,6 +5,7 @@
 }
 
 .bar {
+<<<<<<< Updated upstream
   background-color: #3B4252;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -511,4 +512,8 @@
 }
 .notification_popups .meta .summary {
   color: #616E88;
+=======
+  background-color: #665c54;
+  padding: 8px 16px;
+>>>>>>> Stashed changes
 }

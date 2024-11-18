@@ -1,4 +1,4 @@
-.home {
+.sidebar_home {
   background-color: $bg;
   border-right: solid $gray 1px;
   padding: 8px;
@@ -32,7 +32,7 @@
       }
     }
 
-    & .shutdown_button {
+    & .power_button {
       background-color: $bgh;
       border-radius: 999px;
       font-size: 24px;
