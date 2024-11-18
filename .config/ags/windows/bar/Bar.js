@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import Gdk from 'gi://Gdk'
 
 import SideBar from './sidebar/SideBar.js'
@@ -18,6 +19,8 @@ function Divider() {
 
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 function StartSection() {
   return Widget.Box({
     className: 'start',
@@ -31,6 +34,7 @@ function StartSection() {
 }
 
 function EndSection() {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   const MusicPlayer = Widget.Button({
     attribute: { menu: Menu('musicPlayer') },
@@ -72,10 +76,15 @@ function EndSection() {
     onClicked: (self) => self.attribute.menu.toggle()
   })
 =======
+=======
+>>>>>>> Stashed changes
   const SystemButton = Widget.Button()
   const NetworkButton = Widget.Button()
   const AudioButton = Widget.Button()
   const NotificationButton = Widget.Button()
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
   return Widget.Box({
@@ -83,6 +92,7 @@ function EndSection() {
     className: 'end',
     spacing: 8,
     children: [
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
       Widget.Box({
         className: 'controls',
@@ -101,10 +111,15 @@ function EndSection() {
       }),
       TimeIndicator
 =======
+=======
+>>>>>>> Stashed changes
       SystemButton,
       NetworkButton,
       AudioButton,
       NotificationButton
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     ]
   })
