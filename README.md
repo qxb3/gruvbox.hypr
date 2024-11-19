@@ -1,4 +1,4 @@
-<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/kami/repo/logo.png"><br><br>
+<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ishi/repo/logo.png"><br><br>
 
 &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
@@ -9,7 +9,7 @@
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/kami/repo/1.png" />
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ishi/repo/1.png" />
 </p>
 
 <br>
