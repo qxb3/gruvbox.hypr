@@ -63,6 +63,13 @@
 
   <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/kami/repo/1.png" />
 
+  <p></p>
+  <p></p>
+
+  # [~/ishi[dark].](https://github.com/qxb3/gruvbox.hypr/tree/ishi) ~ A paper styled rice.
+
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ishi/repo/1.png" />
+
 </details>
 
 # Contribution
