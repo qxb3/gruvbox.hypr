@@ -46,7 +46,7 @@
         @include button;
 
         &.active {
-          background-color: $bg2;
+          background-color: $gray;
         }
 
         & label {
@@ -60,7 +60,7 @@
         @include button;
 
         &.active {
-          background-color: $bg2;
+          background-color: $gray;
         }
 
         & label {
