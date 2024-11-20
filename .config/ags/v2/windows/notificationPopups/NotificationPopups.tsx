@@ -3,11 +3,13 @@ import NotifydService from 'gi://AstalNotifd'
 import { App, Astal, Gdk, Gtk } from 'astal/gtk3'
 import { timeout, Variable } from 'astal'
 
-const TIMEOUT_DELAY = 2500
+const TIMEOUT_DELAY = 5000
 const notifyd = NotifydService.get_default()
 const popups = Variable<NotifydService.Notification[]>([])
 
 notifyd.connect('notified', (_, id) => {
+  if (notifyd.get_dont_disturb()) return
+
   const notification = notifyd.get_notification(id)!
   popups.set([...popups.get(), notification])
 })
