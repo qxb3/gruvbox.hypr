@@ -1,3 +1,5 @@
+#!/usr/bin/gjs -m
+
 import { App } from 'astal/gtk3'
 
 import Bar from './windows/bar/Bar'
