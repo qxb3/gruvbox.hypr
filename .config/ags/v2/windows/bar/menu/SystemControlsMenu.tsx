@@ -19,6 +19,7 @@ function SystemControlsMenu() {
         spacing={8}>
         <slider
           className='slider'
+          cursor='pointer'
           value={bind(brightness, 'brightness')}
           drawValue={false}
           vexpand={true}

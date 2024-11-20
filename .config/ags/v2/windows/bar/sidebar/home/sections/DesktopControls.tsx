@@ -1,6 +1,7 @@
 import NetworkService from 'gi://AstalNetwork'
 import BluetoothService from 'gi://AstalBluetooth'
 import WpService from 'gi://AstalWp'
+import MprisService from 'gi://AstalMpris'
 import NotifdService from 'gi://AstalNotifd'
 
 import { Gtk } from 'astal/gtk3'
@@ -15,6 +16,7 @@ export interface ButtonProps {
 const network = NetworkService.get_default()
 const bluetooth = BluetoothService.get_default()
 const audio = WpService.get_default()!.get_audio()!
+const spotify = MprisService.Player.new('spotify')
 const notifyd = NotifdService.get_default()
 
 function ButtonIcon({ name, className, icon = 'icon' }: ButtonProps) {
@@ -226,6 +228,7 @@ function Sliders() {
         {bind(audio, 'defaultSpeaker').as(speaker => (
           <slider
             className='slider'
+            cursor='pointer'
             value={bind(speaker, 'volume')}
             max={1.5}
             drawValue={false}
@@ -246,11 +249,12 @@ function Sliders() {
 
         <slider
           className='slider'
-          value={0.8}
+          cursor='pointer'
+          value={bind(spotify, 'volume')}
           max={1}
           drawValue={false}
           hexpand={true}
-          // onDragged={({ value }) => {}}
+          onDragged={({ value }) => spotify.set_volume(value)}
         />
       </box>
     </box>

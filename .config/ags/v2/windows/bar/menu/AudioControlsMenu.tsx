@@ -1,9 +1,11 @@
 import { App, Astal, Gtk } from 'astal/gtk3'
 
 import WPSerivce from 'gi://AstalWp'
+import MprisService from 'gi://AstalMpris'
 import { bind } from 'astal'
 
 const audio = WPSerivce.get_default()!.audio!
+const spotify = MprisService.Player.new('spotify')
 
 import { revealAudioControlsMenu } from './vars'
 
@@ -25,6 +27,7 @@ function AudioControlsMenu() {
                     'slider mute' : 'slider'
                 )
             }
+            cursor='pointer'
             value={bind(speaker, 'volume')}
             max={1.5}
             step={0.01}
@@ -52,13 +55,15 @@ function AudioControlsMenu() {
         spacing={8}>
         <slider
           className='slider'
-          value={0.8}
+          cursor='pointer'
+          value={bind(spotify, 'volume')}
           max={1}
           step={0.01}
           vexpand={true}
           drawValue={false}
           vertical={true}
-          inverted={true}>
+          inverted={true}
+          onDragged={({ value }) => spotify.set_volume(value)}>
         </slider>
 
         <label className='icon' label='󰎌' />
@@ -78,6 +83,7 @@ function AudioControlsMenu() {
                     'slider mute' : 'slider'
                 )
             }
+            cursor='pointer'
             value={bind(microphone, 'volume')}
             max={1.5}
             step={0.01}
