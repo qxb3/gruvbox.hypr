@@ -77,7 +77,10 @@ function StartSection() {
           )
         }
         cursor='pointer'
-        onClick={() => { /*TODO*/ }}>
+        onClick={() => {
+          sideBarShown.set('wallpapers')
+          revealSideBar.set(true)
+        }}>
         <label label='󰸉' />
       </button>
 

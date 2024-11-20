@@ -2329,6 +2329,8 @@ function StartSection() {
             ),
             cursor: "pointer",
             onClick: () => {
+              sideBarShown.set("wallpapers");
+              revealSideBar.set(true);
             },
             children: /* @__PURE__ */ jsx("label", { label: "\u{F0E09}" })
           }
