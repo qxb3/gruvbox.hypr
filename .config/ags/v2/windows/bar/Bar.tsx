@@ -52,7 +52,13 @@ function StartSection() {
 
       {/* Search Button */}
       <button
-        className='search_button'
+        className={
+          sideBarShown(shown =>
+            shown === 'appLauncher'
+              ? 'search_button active'
+              : 'search_button'
+          )
+        }
         cursor='pointer'
         onClick={() => {
           sideBarShown.set('appLauncher')
@@ -63,7 +69,13 @@ function StartSection() {
 
       {/* Wallpaper Button */}
       <button
-        className='wallpaper_button'
+        className={
+          sideBarShown(shown =>
+            shown === 'wallpapers'
+              ? 'wallpaper_button active'
+              : 'wallpaper_button'
+          )
+        }
         cursor='pointer'
         onClick={() => { /*TODO*/ }}>
         <label label='󰸉' />

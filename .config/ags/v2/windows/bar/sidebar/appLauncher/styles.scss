@@ -41,10 +41,7 @@
         background-color: $bg2;
       }
 
-      &.selected {
-        background-color: $blue;
-      }
-
+      &.selected,
       &:focus {
         background-color: $blue;
       }
