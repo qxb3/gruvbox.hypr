@@ -10,17 +10,17 @@ var __decorateClass = (decorators, target, key, kind) => {
   return result;
 };
 
-// ../../../../../../../../usr/share/astal/gjs/gtk3/index.ts
+// ../../../../../../../usr/share/astal/gjs/gtk3/index.ts
 import Astal7 from "gi://Astal?version=3.0";
 import Gtk4 from "gi://Gtk?version=3.0";
 import Gdk from "gi://Gdk?version=3.0";
 
-// ../../../../../../../../usr/share/astal/gjs/gtk3/astalify.ts
+// ../../../../../../../usr/share/astal/gjs/gtk3/astalify.ts
 import Astal4 from "gi://Astal?version=3.0";
 import Gtk from "gi://Gtk?version=3.0";
 import GObject from "gi://GObject";
 
-// ../../../../../../../../usr/share/astal/gjs/process.ts
+// ../../../../../../../usr/share/astal/gjs/process.ts
 import Astal from "gi://AstalIO";
 var { Process } = Astal;
 function subprocess(argsOrCmd, onOut = print, onErr = printerr) {
@@ -60,10 +60,10 @@ function execAsync(cmd) {
   });
 }
 
-// ../../../../../../../../usr/share/astal/gjs/variable.ts
+// ../../../../../../../usr/share/astal/gjs/variable.ts
 import Astal3 from "gi://AstalIO";
 
-// ../../../../../../../../usr/share/astal/gjs/binding.ts
+// ../../../../../../../usr/share/astal/gjs/binding.ts
 var snakeify = (str) => str.replace(/([a-z])([A-Z])/g, "$1_$2").replaceAll("-", "_").toLowerCase();
 var kebabify = (str) => str.replace(/([a-z])([A-Z])/g, "$1-$2").replaceAll("_", "-").toLowerCase();
 var Binding = class _Binding {
@@ -115,7 +115,7 @@ var Binding = class _Binding {
 };
 var { bind } = Binding;
 
-// ../../../../../../../../usr/share/astal/gjs/time.ts
+// ../../../../../../../usr/share/astal/gjs/time.ts
 import Astal2 from "gi://AstalIO";
 var { Time } = Astal2;
 function interval(interval2, callback) {
@@ -125,7 +125,7 @@ function timeout(timeout2, callback) {
   return Astal2.Time.timeout(timeout2, () => void callback?.());
 }
 
-// ../../../../../../../../usr/share/astal/gjs/variable.ts
+// ../../../../../../../usr/share/astal/gjs/variable.ts
 var VariableWrapper = class extends Function {
   variable;
   errHandler = console.error;
@@ -277,7 +277,7 @@ var Variable = new Proxy(VariableWrapper, {
 });
 var variable_default = Variable;
 
-// ../../../../../../../../usr/share/astal/gjs/gtk3/astalify.ts
+// ../../../../../../../usr/share/astal/gjs/gtk3/astalify.ts
 function mergeBindings(array) {
   function getValues(...args) {
     let i = 0;
@@ -511,11 +511,11 @@ function astalify(cls, clsName = cls.name) {
   return Widget;
 }
 
-// ../../../../../../../../usr/share/astal/gjs/gtk3/app.ts
+// ../../../../../../../usr/share/astal/gjs/gtk3/app.ts
 import Gtk2 from "gi://Gtk?version=3.0";
 import Astal5 from "gi://Astal?version=3.0";
 
-// ../../../../../../../../usr/share/astal/gjs/_app.ts
+// ../../../../../../../usr/share/astal/gjs/_app.ts
 import { setConsoleLogDomain } from "console";
 import { exit, programArgs } from "system";
 import IO from "gi://AstalIO";
@@ -587,11 +587,11 @@ function mkApp(App2) {
   }();
 }
 
-// ../../../../../../../../usr/share/astal/gjs/gtk3/app.ts
+// ../../../../../../../usr/share/astal/gjs/gtk3/app.ts
 Gtk2.init(null);
 var app_default = mkApp(Astal5.Application);
 
-// ../../../../../../../../usr/share/astal/gjs/gtk3/widget.ts
+// ../../../../../../../usr/share/astal/gjs/gtk3/widget.ts
 import Astal6 from "gi://Astal?version=3.0";
 import Gtk3 from "gi://Gtk?version=3.0";
 import GObject3 from "gi://GObject";
@@ -752,10 +752,10 @@ var Window = class extends astalify(Astal6.Window) {
 import HyprlandService from "gi://AstalHyprland";
 import TrayService from "gi://AstalTray";
 
-// ../../../../../../../../usr/share/astal/gjs/index.ts
+// ../../../../../../../usr/share/astal/gjs/index.ts
 import { default as default3 } from "gi://AstalIO?version=0.1";
 
-// ../../../../../../../../usr/share/astal/gjs/file.ts
+// ../../../../../../../usr/share/astal/gjs/file.ts
 import Astal8 from "gi://AstalIO";
 import Gio from "gi://Gio?version=2.0";
 function monitorFile(path, callback) {
@@ -764,7 +764,7 @@ function monitorFile(path, callback) {
   });
 }
 
-// ../../../../../../../../usr/share/astal/gjs/gobject.ts
+// ../../../../../../../usr/share/astal/gjs/gobject.ts
 import GObject4 from "gi://GObject";
 import { default as default2 } from "gi://GLib?version=2.0";
 var meta = Symbol("meta");
@@ -894,7 +894,7 @@ revealSideBar.subscribe((value) => {
   }
 });
 
-// ../../../../../../../../usr/share/astal/gjs/gtk3/jsx-runtime.ts
+// ../../../../../../../usr/share/astal/gjs/gtk3/jsx-runtime.ts
 function isArrowFunction(func) {
   return !Object.hasOwn(func, "prototype");
 }
@@ -1434,7 +1434,7 @@ function MusicCover({ available }) {
     {
       className: "cover",
       css: bind(spotify2, "coverArt").as(
-        (cover) => available ? `background-image: url("${cover}");` : `background-image: url("${"/home/qxb3/.config/ags/v2"}/assets/no-music.png");`
+        (cover) => available ? `background-image: url("${cover}");` : `background-image: url("${"/home/qxb3/.config/ags"}/assets/no-music.png");`
       )
     }
   );
@@ -1671,7 +1671,7 @@ function NotificationList({ notifications }) {
                 "box",
                 {
                   className: "image",
-                  css: `background-image: url("${notification.get_image() ?? `${"/home/qxb3/.config/ags/v2"}/assets/bell.svg`}");`
+                  css: `background-image: url("${notification.get_image() ?? `${"/home/qxb3/.config/ags"}/assets/bell.svg`}");`
                 }
               ),
               /* @__PURE__ */ jsxs(
@@ -2565,7 +2565,7 @@ function NotificationPopups() {
                   "box",
                   {
                     className: "image",
-                    css: `background-image: url("${popupNotif.get_image() ?? `${"/home/qxb3/.config/ags/v2"}/assets/bell.svg`}");`
+                    css: `background-image: url("${popupNotif.get_image() ?? `${"/home/qxb3/.config/ags"}/assets/bell.svg`}");`
                   }
                 ),
                 /* @__PURE__ */ jsxs(
@@ -2638,7 +2638,7 @@ function NotificationPopups_default(gdkmonitor) {
   );
 }
 
-// sass:/home/qxb3/Dev/projects/gruvbox.hypr/.config/ags/v2/styles.scss
+// sass:/home/qxb3/Dev/projects/gruvbox.hypr/.config/ags/styles.scss
 var styles_default = '* {\n  all: unset;\n  font-family: "JetBrainsMono Nerd Font";\n  color: #E5E9F0;\n}\n\n.systray_menu {\n  background-color: #3B4252;\n  border-radius: 8px;\n  /* padding: 12px; */\n}\n.systray_menu menuitem {\n  border-radius: 4px;\n  /* padding: 4px 8px; */\n  color: #000;\n}\n.systray_menu menuitem:hover {\n  background-color: #4C566A;\n}\n\n.bar {\n  background-color: #3B4252;\n  border-top-right-radius: 8px;\n  border-bottom-right-radius: 8px;\n  border-right: solid #81A1C1 1px;\n}\n.bar .divider {\n  background-color: #434C5E;\n  min-height: 2px;\n  margin: 2px 0;\n}\n.bar .sections {\n  padding: 8px 4px;\n}\n.bar .sections .start .sidebar_button box {\n  background-size: cover;\n  border-radius: 999px;\n  min-width: 32px;\n  min-height: 32px;\n}\n.bar .sections .start .search_button {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n}\n.bar .sections .start .search_button:hover {\n  background-color: #4C566A;\n}\n.bar .sections .start .search_button.active {\n  background-color: #616E88;\n}\n.bar .sections .start .search_button label {\n  font-size: 18px;\n  padding-right: 4px;\n}\n.bar .sections .start .wallpaper_button {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n}\n.bar .sections .start .wallpaper_button:hover {\n  background-color: #4C566A;\n}\n.bar .sections .start .wallpaper_button.active {\n  background-color: #616E88;\n}\n.bar .sections .start .wallpaper_button label {\n  font-size: 20px;\n  padding-right: 6px;\n}\n.bar .sections .start .systray .apps {\n  margin-top: 8px;\n}\n.bar .sections .start .systray .button {\n  font-size: 21px;\n}\n.bar .sections .center .workspace {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n  padding: 1rem 0;\n}\n.bar .sections .center .workspace .button {\n  background-color: #E5E9F0;\n  border-radius: 8px;\n  min-width: 10px;\n  min-height: 24px;\n  transition: min-height 100ms cubic-bezier(1, 0, 0, 1);\n}\n.bar .sections .center .workspace .button.active {\n  background-color: #81A1C1;\n  min-height: 42px;\n}\n.bar .sections .center .workspace .button:hover {\n  background-color: #BFC6D1;\n}\n.bar .sections .end .desktop_controls {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n}\n.bar .sections .end .desktop_controls .music, .bar .sections .end .desktop_controls .audio, .bar .sections .end .desktop_controls .system, .bar .sections .end .desktop_controls .screenshot {\n  font-size: 20px;\n  padding-right: 2px;\n}\n.bar .sections .end .desktop_controls .music:hover label, .bar .sections .end .desktop_controls .audio:hover label, .bar .sections .end .desktop_controls .system:hover label, .bar .sections .end .desktop_controls .screenshot:hover label {\n  color: #BFC6D1;\n}\n.bar .sections .end .desktop_controls .system {\n  padding-right: 4px;\n}\n.bar .sections .end .desktop_controls .screenshot {\n  padding-right: 6px;\n}\n.bar .sections .end .time {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n  font-size: 14px;\n  font-weight: 500;\n}\n.bar .sections .end .time:hover {\n  background-color: #4C566A;\n}\n\n.menu {\n  background-color: #434C5E;\n  border-radius: 8px;\n  border: solid #81A1C1 1px;\n  margin: 0 0 8px 8px;\n}\n.menu.audio_controls_menu {\n  min-height: 200px;\n  padding: 1rem;\n}\n.menu.audio_controls_menu .slider_container .slider trough {\n  background-color: #4C566A;\n  border-radius: 8px;\n}\n.menu.audio_controls_menu .slider_container .slider highlight {\n  border-radius: 8px;\n  min-width: 10px;\n}\n.menu.audio_controls_menu .slider_container.global_vol {\n  padding-right: 2px;\n}\n.menu.audio_controls_menu .slider_container.global_vol .slider highlight {\n  background-color: #81A1C1;\n}\n.menu.audio_controls_menu .slider_container.global_vol .slider.mute highlight {\n  background-color: #616E88;\n}\n.menu.audio_controls_menu .slider_container.global_vol .icon {\n  font-size: 15px;\n  padding-right: 4px;\n}\n.menu.audio_controls_menu .slider_container.music_vol {\n  padding-right: 4px;\n}\n.menu.audio_controls_menu .slider_container.music_vol .slider highlight {\n  background-color: #88C0D0;\n}\n.menu.audio_controls_menu .slider_container.music_vol .icon {\n  font-size: 16px;\n}\n.menu.audio_controls_menu .slider_container.mic_vol {\n  padding-right: 4px;\n}\n.menu.audio_controls_menu .slider_container.mic_vol .slider highlight {\n  background-color: #A3BE8C;\n}\n.menu.audio_controls_menu .slider_container.mic_vol .slider.mute highlight {\n  background-color: #616E88;\n}\n.menu.audio_controls_menu .slider_container.mic_vol .icon {\n  font-size: 16px;\n}\n.menu.system_controls_menu {\n  min-height: 200px;\n  padding: 1rem;\n}\n.menu.system_controls_menu .slider_container .slider trough {\n  background-color: #4C566A;\n  border-radius: 8px;\n}\n.menu.system_controls_menu .slider_container .slider highlight {\n  border-radius: 8px;\n  min-width: 10px;\n}\n.menu.system_controls_menu .slider_container.brightness .slider highlight {\n  background-color: #E5E9F0;\n}\n.menu.system_controls_menu .slider_container.brightness .icon {\n  font-size: 15px;\n  padding-right: 6px;\n}\n.menu.calendar_menu calendar {\n  padding: 0.3rem 0.5rem;\n}\n.menu.calendar_menu calendar .today {\n  color: #000;\n}\n.menu.calendar_menu calendar button {\n  color: #D08770;\n}\n\n.sidebar_home {\n  background-color: #3B4252;\n  border-right: solid #616E88 1px;\n  padding: 8px;\n  min-width: 300px;\n}\n.sidebar_home .user_box {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_home .user_box .face {\n  background-size: cover;\n  border: solid #2E3440 0.5px;\n  border-radius: 999px;\n  min-width: 54px;\n  min-height: 54px;\n}\n.sidebar_home .user_box .details .username {\n  font-weight: 900;\n  font-size: 16px;\n  color: #ECEFF4;\n}\n.sidebar_home .user_box .details .wm {\n  font-weight: 900;\n  font-size: 10px;\n  letter-spacing: 2px;\n  color: #EBCB8B;\n}\n.sidebar_home .user_box .power_button {\n  background-color: #2E3440;\n  border-radius: 999px;\n  font-size: 24px;\n  padding: 4px 13px;\n}\n.sidebar_home .user_box .power_button label {\n  color: #BF616A;\n  padding-right: 1px;\n}\n.sidebar_home .user_box .power_menu {\n  background-color: #4C566A;\n  border-radius: 8px;\n  padding: 1rem;\n}\n.sidebar_home .user_box .power_menu .close {\n  border: solid #BF616A 2px;\n}\n.sidebar_home .desktop_controls {\n  border-radius: 8px;\n  margin-top: 10px;\n  padding: 8px;\n}\n.sidebar_home .desktop_controls .buttons .icon {\n  background-color: #616E88;\n  border-radius: 999px;\n  font-size: 32px;\n  padding: 1rem;\n}\n.sidebar_home .desktop_controls .buttons .icon.inactive {\n  color: #BFC6D1;\n}\n.sidebar_home .desktop_controls .buttons .name {\n  color: #616E88;\n  font-weight: 700;\n  font-size: 11px;\n}\n.sidebar_home .desktop_controls .sliders .icon {\n  font-size: 20px;\n}\n.sidebar_home .desktop_controls .sliders scale trough {\n  background-color: #4C566A;\n  border-radius: 8px;\n}\n.sidebar_home .desktop_controls .sliders scale highlight {\n  background-color: #81A1C1;\n  border-radius: 8px;\n  min-height: 16px;\n}\n.sidebar_home .music_player {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_home .music_player .cover {\n  background-size: cover;\n  border-radius: 8px;\n  min-width: 150px;\n  min-height: 150px;\n}\n.sidebar_home .music_player .right {\n  padding: 0.8rem 0;\n}\n.sidebar_home .music_player .right .meta .title {\n  font-size: 20px;\n  font-weight: 900;\n}\n.sidebar_home .music_player .right .meta .artist {\n  color: #EBCB8B;\n  font-weight: 900;\n}\n.sidebar_home .music_player .right .controls .control {\n  border-radius: 8px;\n  font-size: 24px;\n  padding: 0 8px;\n}\n.sidebar_home .music_player .right .position {\n  margin-top: 4px;\n}\n.sidebar_home .music_player .right .position .progress {\n  min-width: 20px;\n}\n.sidebar_home .music_player .right .position .progress trough {\n  background-color: #4C566A;\n  border-radius: 8px;\n}\n.sidebar_home .music_player .right .position .progress trough progress {\n  background-color: #E5E9F0;\n  border-radius: 8px;\n}\n.sidebar_home .music_player .right .position .meta {\n  font-size: 10px;\n}\n.sidebar_home .music_player .right .position .meta .current_progress, .sidebar_home .music_player .right .position .meta .length {\n  color: #616E88;\n}\n.sidebar_home .notification_center {\n  background-color: #434C5E;\n  border-radius: 8px;\n  margin-top: 1rem;\n  padding: 8px;\n}\n.sidebar_home .notification_center .header .title {\n  font-size: 16px;\n  font-weight: 900;\n}\n.sidebar_home .notification_center .header .clear_notifications {\n  border-radius: 999px;\n  font-size: 24px;\n  font-weight: 900;\n  padding: 3px 11px 3px 9px;\n}\n.sidebar_home .notification_center .header .clear_notifications:hover label {\n  color: #616E88;\n}\n.sidebar_home .notification_center .notifications .notification {\n  background-color: #4C566A;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_home .notification_center .notifications .notification .image {\n  background-size: cover;\n  background-repeat: no-repeat;\n  border-radius: 8px;\n  min-width: 80px;\n  min-height: 80px;\n}\n.sidebar_home .notification_center .notifications .notification .meta {\n  padding: 4px 0;\n}\n.sidebar_home .notification_center .notifications .notification .meta .appname {\n  letter-spacing: 2px;\n  font-weight: 900;\n  font-size: 9px;\n  color: #EBCB8B;\n}\n.sidebar_home .notification_center .notifications .notification .meta .summary {\n  color: #616E88;\n}\n.sidebar_home .notification_center .no_notification {\n  margin-top: 3rem;\n}\n.sidebar_home .notification_center .no_notification .icon {\n  font-size: 84px;\n  color: #616E88;\n  padding-right: 12px;\n}\n.sidebar_home .notification_center .no_notification .text {\n  font-size: 24px;\n  margin-top: 1rem;\n  color: #616E88;\n}\n.sidebar_home .notification_center .dismiss_notification {\n  padding-right: 4px;\n}\n.sidebar_home .notification_center .dismiss_notification label {\n  font-size: 14px;\n}\n\n.sidebar_appLauncher {\n  background-color: #3B4252;\n  border-right: solid #616E88 1px;\n  padding: 8px;\n  min-width: 300px;\n}\n.sidebar_appLauncher .header {\n  background-color: #4C566A;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_appLauncher .header .icon {\n  font-size: 20px;\n  font-weight: 200;\n}\n.sidebar_appLauncher .header .input_container .input {\n  border: solid #616E88 1px;\n  border-radius: 8px;\n  font-size: 16px;\n  padding: 4px 8px;\n}\n.sidebar_appLauncher .header .input_container .placeholder {\n  font-weight: 900;\n  font-size: 16px;\n  color: #616E88;\n  padding-left: 12px;\n}\n.sidebar_appLauncher .apps .app {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_appLauncher .apps .app:hover {\n  background-color: #4C566A;\n}\n.sidebar_appLauncher .apps .app.selected, .sidebar_appLauncher .apps .app:focus {\n  background-color: #81A1C1;\n}\n\n.wallpapers {\n  background-color: #3B4252;\n  border-right: solid #616E88 1px;\n  padding: 8px;\n  min-width: 300px;\n}\n.wallpapers .list .wallpaper .img {\n  background-size: cover;\n  background-position: center;\n  min-height: 180px;\n  border-radius: 8px;\n}\n\n.notification_popups {\n  padding: 8px;\n}\n.notification_popups .notification {\n  background-color: #434C5E;\n  border-radius: 8px;\n  border: solid #81A1C1 0.5px;\n  min-width: 300px;\n  padding: 12px;\n}\n.notification_popups .notification .image {\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center;\n  border-radius: 8px;\n  min-width: 80px;\n  min-height: 80px;\n}\n.notification_popups .meta {\n  padding: 8px 0;\n}\n.notification_popups .meta .appname {\n  letter-spacing: 2px;\n  font-weight: 900;\n  font-size: 9px;\n  color: #EBCB8B;\n}\n.notification_popups .meta .summary {\n  color: #616E88;\n}';
 
 // requestHandler.ts
