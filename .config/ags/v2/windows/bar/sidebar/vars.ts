@@ -15,4 +15,8 @@ revealSideBar.subscribe((value) => {
     revealSystemControlsMenu.set(false)
     revealCalendarMenu.set(false)
   }
+
+  if (!value) {
+    sideBarShown.set('home')
+  }
 })

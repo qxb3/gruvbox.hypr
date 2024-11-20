@@ -13,6 +13,8 @@ import CalendarMenu from './menu/CalendarMenu'
 const hyprland = HyprlandService.get_default()
 const tray = TrayService.get_default()
 
+import { sideBarShown } from './sidebar/vars'
+
 import {
   time,
   revealSysTray,
@@ -201,7 +203,14 @@ export default function(gdkmonitor: Gdk.Monitor) {
       application={App}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}>
+      anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
+      keymode={
+        sideBarShown(shown =>
+          shown === 'appLauncher'
+            ? Astal.Keymode.EXCLUSIVE
+            : Astal.Keymode.NONE
+        )
+      }>
       <box>
         <SideBar />
 
