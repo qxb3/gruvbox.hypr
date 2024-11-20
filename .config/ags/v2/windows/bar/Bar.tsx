@@ -43,7 +43,7 @@ function StartSection() {
         <box css={`background-image: url("/home/${exec('whoami')}/.face")`} />
       </button>
 
-      {Divider()}
+      <Divider />
 
       {/* Search Button */}
       <button
@@ -159,7 +159,7 @@ function EndSection() {
         <button
           className='audio'
           cursor='pointer'
-          setup={() => AudioControlsMenu()}
+          setup={() => <AudioControlsMenu />}
           onClick={() => revealAudioControlsMenu.set(!revealAudioControlsMenu.get())}>
           <label label='󰋎' />
         </button>
@@ -168,7 +168,7 @@ function EndSection() {
         <button
           className='system'
           cursor='pointer'
-          setup={() => SystemControlsMenu()}
+          setup={() => <SystemControlsMenu />}
           onClick={() => revealSystemControlsMenu.set(!revealSystemControlsMenu.get())}>
           <label label='' />
         </button>
@@ -186,7 +186,7 @@ function EndSection() {
       <button
         className='time'
         cursor='pointer'
-        setup={() => CalendarMenu()}
+        setup={() => <CalendarMenu />}
         onClick={() => revealCalendarMenu.set(!revealCalendarMenu.get())}>
         <label label={time()} />
       </button>

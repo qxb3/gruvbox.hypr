@@ -1,69 +1,123 @@
-import { Astal, astalify, type ConstructProps, Gtk } from 'astal/gtk3'
-import { exec, GObject } from 'astal'
+import { Gtk } from 'astal/gtk3'
+import { exec, execAsync, Variable } from 'astal'
 
-class Popover extends astalify(Gtk.Popover) {
-  static { GObject.registerClass(this) }
+import { revealSideBar } from '../../vars'
 
-  constructor(props: ConstructProps<Gtk.Popover, Gtk.Popover.ConstructorProps>) {
-    super(props as any)
+const powerMenuShown = Variable('power_button')
+const powerMenuTransitionType = Variable(Gtk.StackTransitionType.SLIDE_LEFT)
+
+revealSideBar.subscribe((value) => {
+  if (value) {
+    powerMenuTransitionType.set(Gtk.StackTransitionType.SLIDE_RIGHT)
+    powerMenuShown.set('power_button')
   }
-}
-
-const username = exec(`whoami`)
+})
 
 function PowerControls() {
-
   return (
-    <button
-      className='power_button'
-      halign={Gtk.Align.END}
-      valign={Gtk.Align.CENTER}
-      hexpand={true}
-      setup={(button) => {
-        <Popover
-          setup={(popover) => {
-            popover.set_relative_to(button)
-            popover.set_position(Gtk.PositionType.LEFT)
+    <stack
+      shown={powerMenuShown()}
+      transitionType={powerMenuTransitionType()}
+      transitionDuration={300}
+      halign={Gtk.Align.END}>
+      <button
+        name='power_button'
+        className='power_button'
+        halign={Gtk.Align.END}
+        valign={Gtk.Align.CENTER}
+        hexpand={true}
+        cursor='pointer'
+        onClick={() => {
+          powerMenuTransitionType.set(Gtk.StackTransitionType.SLIDE_LEFT)
+          powerMenuShown.set('power_menu')
+        }}>
+        <label label='󰐥' />
+      </button>
+
+      <box
+        name='power_menu'
+        className='power_menu'
+        spacing={8}
+        vexpand={false}
+        halign={Gtk.Align.END}
+        valign={Gtk.Align.CENTER}>
+        {/* Close Power Menu */}
+        <button
+          className='close'
+          cursor='pointer'
+          onClick={() => {
+            powerMenuTransitionType.set(Gtk.StackTransitionType.SLIDE_RIGHT)
+            powerMenuShown.set('power_button')
+          }}
+        />
+
+        {/* Shutdown */}
+        <button
+          cursor='pointer'
+          onClick={() => execAsync(`systemctl poweroff`)}>
+          <icon
+            icon='system-shutdown-symbolic'
+            css='font-size: 20px;'
+          />
+        </button>
+
+        {/* Reboot */}
+        <button
+          cursor='pointer'
+          onClick={() => execAsync(`systemctl reboot`)}>
+          <icon
+            icon='view-refresh-symbolic'
+            css='font-size: 18px;'
+          />
+        </button>
+
+        {/* Lock */}
+        <button
+          cursor='pointer'
+          onClick={() => {
+            revealSideBar.set(false)
+            powerMenuShown.set('power_menu')
+
+            execAsync(`hyprlock`)
           }}>
-          <box
-            className='power_menu'
-            spacing={8}>
-            <button>
-              <label
-                label='󰍃'
-                css='font-size: 18px;'
-              />
-            </button>
+          <icon
+            icon='system-lock-screen-symbolic'
+            css='font-size: 18px;'
+          />
+        </button>
 
-            <button>
-              <label
-                label='󰤄'
-                css='font-size: 18px;'
-              />
-            </button>
+        {/* Suspend */}
+        <button
+          cursor='pointer'
+          onClick={() => {
+            revealSideBar.set(false)
+            powerMenuShown.set('power_menu')
 
-            <button>
-              <label
-                label='󰜉'
-                css='font-size: 18px;'
-              />
-            </button>
+            execAsync(`bash -c 'systemctl suspend && hyprlock'`)
+          }}>
+          <icon
+            icon='weather-clear-night-symbolic'
+            css='font-size: 18px;'
+          />
+        </button>
 
-            <button>
-              <label
-                label='󰐥'
-                css='font-size: 18px;'
-              />
-            </button>
-          </box>
-        </Popover>
-      }}>
-      <label label='󰐥' />
-    </button>
+        {/* Exit Hyprland */}
+        <button
+          cursor='pointer'
+          onClick={() => execAsync(`hyprctl dispatch exit`)}>
+          <icon
+            icon='application-exit-symbolic'
+            css='font-size: 18px;'
+          />
+        </button>
+      </box>
+    </stack>
   )
 }
 
 export default function() {
+  const username = exec(`whoami`)
+
   return (
     <box
       className='user_box'

@@ -58,7 +58,6 @@ fn_verbose () {
 }
 
 fn_notify () { # Send notification
-
   notify-send -a "Power" $1 -u $2 "$3" "$4" -p # Call the notify-send command with the provided arguments \$1 is the flags \$2 is the urgency \$3 is the title \$4 is the message
 }
 

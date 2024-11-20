@@ -6,7 +6,7 @@ import {
   revealCalendarMenu
 } from '../menu/vars'
 
-export const revealSideBar = Variable(true)
+export const revealSideBar = Variable(false)
 export const sideBarShown = Variable('home')
 
 revealSideBar.subscribe((value) => {

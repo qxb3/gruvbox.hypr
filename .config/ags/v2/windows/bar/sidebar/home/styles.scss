@@ -43,6 +43,16 @@
         padding-right: 1px;
       }
     }
+
+    .power_menu {
+      background-color: $bg2;
+      border-radius: 8px;
+      padding: 1rem;
+
+      & .close {
+        border: solid $red 2px;
+      }
+    }
   }
 
   & .desktop_controls {
@@ -54,11 +64,11 @@
       & .icon {
         background-color: $gray;
         border-radius: 999px;
-        padding: 10px;
-        color: $green;
+        font-size: 32px;
+        padding: 1rem;
 
         &.inactive {
-          background-color: $gray;
+          color: $fg2;
         }
       }
 
@@ -94,7 +104,7 @@
     border-radius: 8px;
     padding: 8px;
 
-    & .thumbnail {
+    & .cover {
       background-size: cover;
       border-radius: 8px;
       min-width: 150px;
@@ -119,7 +129,7 @@
       & .controls {
         & .control {
           border-radius: 8px;
-          font-size: 28px;
+          font-size: 24px;
           padding: 0 8px;
         }
       }
@@ -164,7 +174,7 @@
         font-weight: 900;
       }
 
-      & .clear_notif_button {
+      & .clear_notifications {
         border-radius: 999px;
         font-size: 24px;
         font-weight: 900;
@@ -179,21 +189,6 @@
     }
 
     & .notifications {
-      & .no_notification {
-        margin-top: 3rem;
-
-        & .icon {
-          font-size: 64px;
-          color: $gray;
-        }
-
-        & .text {
-          font-size: 20px;
-          margin-top: 1rem;
-          color: $gray;
-        }
-      }
-
       & .notification {
         background-color: $bg2;
         border-radius: 8px;
@@ -224,18 +219,28 @@
       }
     }
 
-    & .remove_notif_button {
+    & .no_notification {
+      margin-top: 3rem;
+
+      & .icon {
+        font-size: 84px;
+        color: $gray;
+        padding-right: 12px;
+      }
+
+      & .text {
+        font-size: 24px;
+        margin-top: 1rem;
+        color: $gray;
+      }
+    }
+
+    & .dismiss_notification {
       padding-right: 4px;
 
       & label {
-        font-size: 16px;
+        font-size: 14px;
       }
     }
   }
-}
-
-.power_menu {
-  background-color: $bg2;
-  border-radius: 8px;
-  padding: 1rem;
 }

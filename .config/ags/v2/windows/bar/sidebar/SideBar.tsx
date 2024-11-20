@@ -1,5 +1,5 @@
-import { App, Astal, Gtk, Gdk } from 'astal/gtk3'
-import SideBarHome from './home/SideBarHome'
+import { Gtk } from 'astal/gtk3'
+import Home from './home/Home'
 
 import { revealSideBar, sideBarShown } from './vars'
 
@@ -12,10 +12,8 @@ export default function() {
       <stack
         shown={sideBarShown()}
         transitionType={Gtk.StackTransitionType.SLIDE_RIGHT}
-        transitionDuration={300}
-        setup={(self) => {
-          self.add_named(<SideBarHome />, 'home')
-        }}>
+        transitionDuration={300}>
+        <Home />
       </stack>
     </revealer>
   )
