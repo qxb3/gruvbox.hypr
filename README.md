@@ -41,10 +41,9 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>a</code><br><code>p</code><br><code>p</code><br><code>s</code><br></td><td><table>
   <tr><td>kitty</td><td>terminal emulator</td></tr>
-  <tr><td>dolphin</td><td>file explorer</td></tr>
-  <tr><td>thunar</td><td>another file explorer</td></tr>
+  <tr><td>nemo</td><td>file explorer</td></tr>
   <tr><td>spotify</td><td>music player</td></tr>
-  <tr><td>grimblast</td><td>screenshot tool</td></tr>
+  <tr><td>grimblast & grim</td><td>screenshot tool</td></tr>
   <tr><td>swappy</td><td>screenshot editor & image viewer</td></tr>
   <tr><td>firefox</td><td>browser</td></tr></table>
 </td></tr></table>
@@ -55,7 +54,7 @@ cp -r .scripts ~/ # Optional
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
   <tr><td>swaylock</td><td>screen locker</td></tr>
-  <tr><td>ags</td><td>aylur's gtk widget</td></tr></table>
+  <tr><td>ags (v2)</td><td>aylur's gtk widget</td></tr></table>
 </td></tr></table>
 
 <br>
