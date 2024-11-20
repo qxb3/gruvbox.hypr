@@ -15,13 +15,13 @@ const apps = new AppsService.Apps({
 })
 
 const query = Variable('')
-const queriedApps = Variable<AppsService.Application[]>(apps.get_list())
+const queriedApps = Variable<AppsService.Application[]>(apps.fuzzy_query(query.get()))
 const selectedApp = Variable<AppsService.Application>(queriedApps.get()[0])
 
 revealSideBar.subscribe((value) => {
   if (!value) {
     query.set('')
-    queriedApps.set(apps.get_list())
+    queriedApps.set(apps.fuzzy_query(query.get()))
     selectedApp.set(queriedApps.get()[0])
   }
 })
