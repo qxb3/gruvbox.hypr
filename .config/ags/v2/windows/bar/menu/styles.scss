@@ -4,65 +4,6 @@
   border: solid $blue 1px;
   margin: 0 0 8px 8px;
 
-  &.music_player {
-    margin-bottom: 5.5rem;
-    min-width: 300px;
-
-    & .top {
-      min-height: 90px;
-      padding: 1.2rem 1.2rem 0.8rem 1.2rem;
-
-      & .thumbnail {
-        background-size: cover;
-        border-radius: 8px;
-        min-width: 50px;
-        min-width: 50px;
-      }
-
-      & .meta {
-        & .player {
-          font-size: 10px;
-          font-weight: 900;
-          color: $gray;
-        }
-
-        & .title {
-          font-size: 20px;
-          font-weight: 900;
-          margin-top: 8px;
-        }
-
-        & .artist {
-          color: $yellow;
-          font-size: 14px;
-          font-weight: 900;
-        }
-      }
-    }
-
-    & .position {
-      & .progress {
-        & trough {
-          background-color: $bg2;
-
-          & progress {
-            background-color: $fg;
-          }
-        }
-      }
-    }
-
-    & .controls {
-      padding: 0.5rem;
-      background-color: $bg1;
-
-      & .control {
-        border-radius: 8px;
-        font-size: 25px;
-      }
-    }
-  }
-
   &.audio_controls_menu {
     min-height: 200px;
     padding: 1rem;
