@@ -16,6 +16,22 @@
   }
 }
 
+.systray_menu {
+  background-color: $bg;
+  border-radius: 8px;
+  /* padding: 12px; */
+
+  & menuitem {
+    border-radius: 4px;
+    /* padding: 4px 8px; */
+    color: #000;
+
+    &:hover {
+      background-color: $bg2;
+    }
+  }
+}
+
 .bar {
   background-color: $bg;
   border-top-right-radius: 8px;

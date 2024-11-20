@@ -88,7 +88,7 @@ function StartSection() {
         <revealer
           revealChild={revealSysTray(v => v)}
           transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-          transitionDuration={300}>
+          transitionDuration={500}>
           <box
             className='apps'
             vertical={true}

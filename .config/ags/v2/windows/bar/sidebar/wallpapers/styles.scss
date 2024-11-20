@@ -1,0 +1,17 @@
+.wallpapers {
+  background-color: $bg;
+  border-right: solid $gray 1px;
+  padding: 8px;
+  min-width: 300px;
+
+  & .list {
+    & .wallpaper {
+      & .img {
+        background-size: cover;
+        background-position: center;
+        min-height: 180px;
+        border-radius: 8px;
+      }
+    }
+  }
+}
