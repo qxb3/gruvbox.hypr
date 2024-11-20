@@ -13,7 +13,10 @@ import CalendarMenu from './menu/CalendarMenu'
 const hyprland = HyprlandService.get_default()
 const tray = TrayService.get_default()
 
-import { sideBarShown } from './sidebar/vars'
+import {
+  revealSideBar,
+  sideBarShown
+} from './sidebar/vars'
 
 import {
   time,
@@ -41,7 +44,7 @@ function StartSection() {
       <button
         className='sidebar_button'
         cursor='pointer'
-        onClick={() => { /*TODO*/}}>
+        onClick={() => revealSideBar.set(!revealSideBar.get())}>
         <box css={`background-image: url("/home/${exec('whoami')}/.face")`} />
       </button>
 
@@ -51,7 +54,10 @@ function StartSection() {
       <button
         className='search_button'
         cursor='pointer'
-        onClick={() => { /*TODO*/ }}>
+        onClick={() => {
+          sideBarShown.set('appLauncher')
+          revealSideBar.set(true)
+        }}>
         <label label='' />
       </button>
 
