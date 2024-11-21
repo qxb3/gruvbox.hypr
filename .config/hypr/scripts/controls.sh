@@ -8,14 +8,17 @@ function close_special_workspace() {
 }
 
 function close_sidebar() {
-  bash -c "~/.config/ags/shared/scripts/sidebar.sh close"
+  ags request sidebar:close:home
 }
 
 function control() {
   while read -r line; do
+    echo "${line:0:9}"
+
     # Changes workspace
     if [ ${line:0:9} == "workspace" ]; then
       close_special_workspace
+      close_sidebar
     fi
 
     if [ ${line:0:18} == "changefloatingmode" ] && [ ${line:33:34} == "1" ]; then
@@ -29,4 +32,4 @@ function control() {
   done
 }
 
-socat -u "UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | control
+socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | control
