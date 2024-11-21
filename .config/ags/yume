@@ -1260,7 +1260,7 @@ function BatteryPercentage({ charging }) {
           {
             className: "percentage",
             label: bind(battery2, "percentage").as(
-              (percentage) => `${percentage * 100}%`
+              (percentage) => `${(percentage * 100).toFixed(0)}%`
             ),
             xalign: 0
           }

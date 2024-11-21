@@ -51,7 +51,7 @@ function BatteryPercentage({ charging }: { charging: boolean }) {
         className='percentage'
         label={
           bind(battery, 'percentage').as(percentage =>
-            `${percentage * 100}%`
+            `${(percentage * 100).toFixed(0)}%`
           )
         }
         xalign={0}
