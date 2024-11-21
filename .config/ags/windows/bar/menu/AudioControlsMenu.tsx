@@ -118,7 +118,7 @@ export default function() {
         revealChild={revealAudioControlsMenu()}
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
         transitionDuration={500}>
-        {AudioControlsMenu()}
+        <AudioControlsMenu />
       </revealer>
     </window>
   )

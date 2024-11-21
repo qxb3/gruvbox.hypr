@@ -50,7 +50,7 @@ export default function() {
         revealChild={revealSystemControlsMenu()}
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
         transitionDuration={500}>
-        {SystemControlsMenu()}
+        <SystemControlsMenu />
       </revealer>
     </window>
   )

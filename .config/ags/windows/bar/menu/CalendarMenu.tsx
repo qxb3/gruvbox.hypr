@@ -23,7 +23,7 @@ export default function() {
         revealChild={revealCalendarMenu()}
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
         transitionDuration={500}>
-        {CalendarMenu()}
+        <CalendarMenu />
       </revealer>
     </window>
   )
