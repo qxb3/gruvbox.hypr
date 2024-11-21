@@ -88,6 +88,48 @@
     }
   }
 
+  &.battery_menu {
+    min-width: 250px;
+    min-height: 150px;
+
+    & .battery_percentage {
+      padding: 1rem 2rem 0 2rem;
+
+      & .icon {
+        font-size: 64px;
+        padding-top: 8px;
+
+        &.discharging { padding-right: 12px; }
+        &.charging { padding-right: 24px; }
+      }
+
+      & .percentage {
+        font-size: 64px;
+      }
+    }
+
+    & .battery_info {
+      padding: 0 2rem 2rem 2rem;
+
+      & .state {
+        font-size: 28px;
+
+        &.charging { color: $green; }
+      }
+
+      & .time_to_full,
+      & .time_to_empty {
+        font-size: 16px;
+      }
+    }
+
+    & .divider {
+      background-color: $gray;
+      min-height: 2px;
+      margin: 1rem 0;
+    }
+  }
+
   &.calendar_menu {
     & calendar {
       padding: 0.3rem 0.5rem;

@@ -1,17 +1,18 @@
 import HyprlandService from 'gi://AstalHyprland'
 import TrayService from 'gi://AstalTray'
+import BatteryService from 'gi://AstalBattery'
 
 import { App, Astal, Gtk, Gdk } from 'astal/gtk3'
 import { bind, exec, execAsync, timeout } from 'astal'
 
-import SideBar from './sidebar/SideBar'
+import BatteryIcon from '../../widgets/BatteryIcon'
 
 import AudioControlsMenu from './menu/AudioControlsMenu'
 import SystemControlsMenu from './menu/SystemControlsMenu'
+import BatteryMenu from './menu/BatteryMenu'
 import CalendarMenu from './menu/CalendarMenu'
 
-const hyprland = HyprlandService.get_default()
-const tray = TrayService.get_default()
+import SideBar from './sidebar/SideBar'
 
 import {
   revealSideBar,
@@ -23,8 +24,13 @@ import {
   revealSysTray,
   revealAudioControlsMenu,
   revealSystemControlsMenu,
+  revealBatteryMenu,
   revealCalendarMenu
 } from './menu/vars'
+
+const hyprland = HyprlandService.get_default()
+const tray = TrayService.get_default()
+const battery = BatteryService.get_default()
 
 function Divider() {
   return (
@@ -194,6 +200,26 @@ function EndSection() {
           setup={() => <SystemControlsMenu />}
           onClick={() => revealSystemControlsMenu.set(!revealSystemControlsMenu.get())}>
           <label label='' />
+        </button>
+
+        {/* Battery Button */}
+        <button
+          className={
+            bind(battery, 'charging').as(charging =>
+              charging ? 'battery charging' : 'battery discharging'
+            )
+          }
+          cursor='pointer'
+          visible={
+            bind(battery, 'device_type').as(type =>
+              type === BatteryService.Type.BATTERY ? true : false
+            )
+          }
+          setup={() => <BatteryMenu />}
+          onClick={() => revealBatteryMenu.set(!revealBatteryMenu.get())}>
+          {bind(battery, 'charging').as(charging => (
+            <BatteryIcon charging={charging} />
+          ))}
         </button>
 
         {/* Screenshot Control */}

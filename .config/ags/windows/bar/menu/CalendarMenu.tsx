@@ -5,8 +5,7 @@ const Calendar = astalify(Gtk.Calendar)
 
 function CalendarMenu() {
   return (
-    <box
-      className='calendar_menu menu'>
+    <box className='calendar_menu menu'>
       <Calendar />
     </box>
   )

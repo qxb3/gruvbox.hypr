@@ -3,6 +3,7 @@ import { Variable } from 'astal'
 import {
   revealAudioControlsMenu,
   revealSystemControlsMenu,
+  revealBatteryMenu,
   revealCalendarMenu
 } from '../menu/vars'
 
@@ -13,6 +14,7 @@ revealSideBar.subscribe((value) => {
   if (value) {
     revealAudioControlsMenu.set(false)
     revealSystemControlsMenu.set(false)
+    revealBatteryMenu.set(false)
     revealCalendarMenu.set(false)
   }
 

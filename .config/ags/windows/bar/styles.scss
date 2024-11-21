@@ -106,7 +106,7 @@
           border-radius: 8px;
           min-width: 10px;
           min-height: 24px;
-          transition: min-height 100ms cubic-bezier(1, 0, 0, 1);
+          transition: all 500ms cubic-bezier(1, 0, 0, 1);
 
           &.active {
             background-color: $blue;
@@ -127,11 +127,19 @@
         & .music,
         & .audio,
         & .system,
+        & .battery,
         & .screenshot {
           @include control_button;
 
           font-size: 20px;
           padding-right: 2px;
+        }
+
+        & .battery {
+          font-size: 21px;
+
+          &.discharging { padding-right: 0; }
+          &.charging { padding-right: 4px; }
         }
 
         & .system { padding-right: 4px; }
