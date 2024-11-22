@@ -106,7 +106,7 @@
           border-radius: 8px;
           min-width: 10px;
           min-height: 24px;
-          transition: all 500ms cubic-bezier(1, 0, 0, 1);
+          transition: all 300ms cubic-bezier(1, 0, 0, 1);
 
           &.active {
             background-color: $blue;
