@@ -14,11 +14,11 @@ export default function() {
     <revealer
       revealChild={revealSideBar()}
       transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-      transitionDuration={300}>
+      transitionDuration={ANIMATION_SPEED}>
       <stack
         shown={sideBarShown()}
         transitionType={Gtk.StackTransitionType.SLIDE_RIGHT}
-        transitionDuration={300}>
+        transitionDuration={ANIMATION_SPEED}>
         <Home />
         <AppLauncher />
         <Wallpapers />

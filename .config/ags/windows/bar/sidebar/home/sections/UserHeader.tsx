@@ -18,7 +18,7 @@ function PowerControls() {
     <stack
       shown={powerMenuShown()}
       transitionType={powerMenuTransitionType()}
-      transitionDuration={300}
+      transitionDuration={ANIMATION_SPEED}
       halign={Gtk.Align.END}>
       <button
         name='power_button'
@@ -116,8 +116,6 @@ function PowerControls() {
 }
 
 export default function() {
-  const username = exec(`whoami`)
-
   return (
     <box
       className='user_box'
@@ -125,7 +123,7 @@ export default function() {
       {/* Face */}
       <box
         className='face'
-        css={`background-image: url('/home/${username}/.face')`}>
+        css={`background-image: url('${HOME_DIR}/.face')`}>
       </box>
 
       {/* Details */}
@@ -137,7 +135,7 @@ export default function() {
         {/* Username */}
         <label
           className='username'
-          label={username}
+          label={USER}
           xalign={0} />
 
         {/* WM */}

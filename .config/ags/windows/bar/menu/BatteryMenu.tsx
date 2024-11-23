@@ -123,7 +123,7 @@ export default function() {
       <revealer
         revealChild={revealBatteryMenu()}
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-        transitionDuration={300}>
+        transitionDuration={ANIMATION_SPEED}>
         <BatteryMenu />
       </revealer>
     </window>
