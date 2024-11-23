@@ -1,7 +1,7 @@
 import { exec } from 'astal'
 
 const user = exec(`whoami`)
-const homeDir = `/home/${user}`
+const homeDir = exec(`bash -c 'echo $HOME'`)
 
 declare global {
   const USER: string
