@@ -6,7 +6,7 @@ ZVM_VI_HIGHLIGHT_BACKGROUND=#262626
 ZVM_VI_HIGHLIGHT_FOREGROUND=#FFFFFF
 
 if [ -f /usr/bin/fastfetch ]; then
-  fastfetch --logo ~/.config/fastfetch/logo.txt --logo-width 30
+  fastfetch
 fi
 
 plugins=(
@@ -21,18 +21,18 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 if pacman -Qi yay &>/dev/null ; then
-   aurhelper="yay"
+  aurhelper="yay"
 elif pacman -Qi paru &>/dev/null ; then
-   aurhelper="paru"
+  aurhelper="paru"
 fi
 
 function in {
-    local pkg="$1"
-    if pacman -Si "$pkg" &>/dev/null ; then
-        sudo pacman -S "$pkg"
-    else
-        "$aurhelper" -S "$pkg"
-    fi
+  local pkg="$1"
+  if pacman -Si "$pkg" &>/dev/null ; then
+    sudo pacman -S "$pkg"
+  else
+    "$aurhelper" -S "$pkg"
+  fi
 }
 
 # Aliases
@@ -60,5 +60,3 @@ export PATH=$HOME/.scripts:$PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=./node_modules/.bin:./vendor/bin:$PATH
 export PATH=$PATH:/opt/android-sdk/platform-tools
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

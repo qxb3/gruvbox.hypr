@@ -1,4 +1,4 @@
-import { exec } from 'astal'
+import { exec, execAsync } from 'astal'
 import { revealSideBar, sideBarShown } from '../vars'
 
 const WALLPAPERS_PATH = `/home/${exec('whoami')}/.config/swww`
@@ -20,13 +20,14 @@ export default function() {
               className='wallpaper'
               cursor='pointer'
               onClick={() => {
-                exec(`rm ${WALLPAPERS_PATH}/current.set`)
-                exec(`ln -s ${wallpaper} ${WALLPAPERS_PATH}/current.set`)
+                exec(`ln -sf ${wallpaper} ${WALLPAPERS_PATH}/current.set`)
+                execAsync(`swww img ${wallpaper} --transition-type "wipe" --transition-duration 3`)
+
+                execAsync(`rm -rf /home/${exec('whoami')}/.cache/fastfetch/images`)
+                execAsync(`magick ${wallpaper} -gravity Center -crop 1:1 -resize 500x500 +repage ${WALLPAPERS_PATH}/current.crop`)
 
                 sideBarShown.set('home')
                 revealSideBar.set(false)
-
-                exec(`swww img ${wallpaper} --transition-type "wipe" --transition-duration 2`)
               }}>
               <box
                 className='img'
