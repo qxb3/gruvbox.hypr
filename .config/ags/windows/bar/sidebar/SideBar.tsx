@@ -3,6 +3,7 @@ import { Gtk } from 'astal/gtk3'
 import Home from './home/Home'
 import AppLauncher from './appLauncher/AppLauncher'
 import Wallpapers from './wallpapers/Wallpapers'
+import Themes from './themes/Themes'
 
 import {
   revealSideBar,
@@ -22,6 +23,7 @@ export default function() {
         <Home />
         <AppLauncher />
         <Wallpapers />
+        <Themes />
       </stack>
     </revealer>
   )

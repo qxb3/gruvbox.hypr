@@ -85,6 +85,20 @@
         }
       }
 
+      & .themes_button {
+        @include section;
+        @include button;
+
+        &.active {
+          background-color: $gray;
+        }
+
+        & label {
+          font-size: 20px;
+          padding-right: 6px;
+        }
+      }
+
       & .systray {
         & .apps {
           margin-top: 8px;
