@@ -1,0 +1,2894 @@
+#!/usr/bin/gjs -m
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __decorateClass = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
+  for (var i = decorators.length - 1, decorator; i >= 0; i--)
+    if (decorator = decorators[i])
+      result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+  if (kind && result) __defProp(target, key, result);
+  return result;
+};
+
+// ../../../../../../../usr/share/astal/gjs/index.ts
+import { default as default3 } from "gi://AstalIO?version=0.1";
+
+// ../../../../../../../usr/share/astal/gjs/process.ts
+import Astal from "gi://AstalIO";
+var { Process } = Astal;
+function subprocess(argsOrCmd, onOut = print, onErr = printerr) {
+  const args = Array.isArray(argsOrCmd) || typeof argsOrCmd === "string";
+  const { cmd, err, out } = {
+    cmd: args ? argsOrCmd : argsOrCmd.cmd,
+    err: args ? onErr : argsOrCmd.err || onErr,
+    out: args ? onOut : argsOrCmd.out || onOut
+  };
+  const proc = Array.isArray(cmd) ? Astal.Process.subprocessv(cmd) : Astal.Process.subprocess(cmd);
+  proc.connect("stdout", (_, stdout) => out(stdout));
+  proc.connect("stderr", (_, stderr) => err(stderr));
+  return proc;
+}
+function exec(cmd) {
+  return Array.isArray(cmd) ? Astal.Process.execv(cmd) : Astal.Process.exec(cmd);
+}
+function execAsync(cmd) {
+  return new Promise((resolve, reject) => {
+    if (Array.isArray(cmd)) {
+      Astal.Process.exec_asyncv(cmd, (_, res) => {
+        try {
+          resolve(Astal.Process.exec_asyncv_finish(res));
+        } catch (error) {
+          reject(error);
+        }
+      });
+    } else {
+      Astal.Process.exec_async(cmd, (_, res) => {
+        try {
+          resolve(Astal.Process.exec_finish(res));
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
+  });
+}
+
+// ../../../../../../../usr/share/astal/gjs/time.ts
+import Astal2 from "gi://AstalIO";
+var { Time } = Astal2;
+function interval(interval2, callback) {
+  return Astal2.Time.interval(interval2, () => void callback?.());
+}
+function timeout(timeout2, callback) {
+  return Astal2.Time.timeout(timeout2, () => void callback?.());
+}
+
+// ../../../../../../../usr/share/astal/gjs/file.ts
+import Astal3 from "gi://AstalIO";
+import Gio from "gi://Gio?version=2.0";
+function monitorFile(path, callback) {
+  return Astal3.monitor_file(path, (file, event) => {
+    callback(file, event);
+  });
+}
+
+// ../../../../../../../usr/share/astal/gjs/gobject.ts
+import GObject from "gi://GObject";
+import { default as default2 } from "gi://GLib?version=2.0";
+var meta = Symbol("meta");
+var priv = Symbol("priv");
+var { ParamSpec, ParamFlags } = GObject;
+var kebabify = (str) => str.replace(/([a-z])([A-Z])/g, "$1-$2").replaceAll("_", "-").toLowerCase();
+function register(options = {}) {
+  return function(cls) {
+    const t = options.Template;
+    if (typeof t === "string" && !t.startsWith("resource://") && !t.startsWith("file://")) {
+      options.Template = new TextEncoder().encode(t);
+    }
+    GObject.registerClass({
+      Signals: { ...cls[meta]?.Signals },
+      Properties: { ...cls[meta]?.Properties },
+      ...options
+    }, cls);
+    delete cls[meta];
+  };
+}
+function property(declaration = Object) {
+  return function(target, prop, desc) {
+    target.constructor[meta] ??= {};
+    target.constructor[meta].Properties ??= {};
+    const name = kebabify(prop);
+    if (!desc) {
+      Object.defineProperty(target, prop, {
+        get() {
+          return this[priv]?.[prop] ?? defaultValue(declaration);
+        },
+        set(v) {
+          if (v !== this[prop]) {
+            this[priv] ??= {};
+            this[priv][prop] = v;
+            this.notify(name);
+          }
+        }
+      });
+      Object.defineProperty(target, `set_${name.replace("-", "_")}`, {
+        value(v) {
+          this[prop] = v;
+        }
+      });
+      Object.defineProperty(target, `get_${name.replace("-", "_")}`, {
+        value() {
+          return this[prop];
+        }
+      });
+      target.constructor[meta].Properties[kebabify(prop)] = pspec(name, ParamFlags.READWRITE, declaration);
+    } else {
+      let flags = 0;
+      if (desc.get) flags |= ParamFlags.READABLE;
+      if (desc.set) flags |= ParamFlags.WRITABLE;
+      target.constructor[meta].Properties[kebabify(prop)] = pspec(name, flags, declaration);
+    }
+  };
+}
+function pspec(name, flags, declaration) {
+  if (declaration instanceof ParamSpec)
+    return declaration;
+  switch (declaration) {
+    case String:
+      return ParamSpec.string(name, "", "", flags, "");
+    case Number:
+      return ParamSpec.double(name, "", "", flags, -Number.MAX_VALUE, Number.MAX_VALUE, 0);
+    case Boolean:
+      return ParamSpec.boolean(name, "", "", flags, false);
+    case Object:
+      return ParamSpec.jsobject(name, "", "", flags);
+    default:
+      return ParamSpec.object(name, "", "", flags, declaration.$gtype);
+  }
+}
+function defaultValue(declaration) {
+  if (declaration instanceof ParamSpec)
+    return declaration.get_default_value();
+  switch (declaration) {
+    case String:
+      return "default-string";
+    case Number:
+      return 0;
+    case Boolean:
+      return false;
+    case Object:
+    default:
+      return null;
+  }
+}
+
+// ../../../../../../../usr/share/astal/gjs/binding.ts
+var snakeify = (str) => str.replace(/([a-z])([A-Z])/g, "$1_$2").replaceAll("-", "_").toLowerCase();
+var kebabify2 = (str) => str.replace(/([a-z])([A-Z])/g, "$1-$2").replaceAll("_", "-").toLowerCase();
+var Binding = class _Binding {
+  transformFn = (v) => v;
+  #emitter;
+  #prop;
+  static bind(emitter, prop) {
+    return new _Binding(emitter, prop);
+  }
+  constructor(emitter, prop) {
+    this.#emitter = emitter;
+    this.#prop = prop && kebabify2(prop);
+  }
+  toString() {
+    return `Binding<${this.#emitter}${this.#prop ? `, "${this.#prop}"` : ""}>`;
+  }
+  as(fn) {
+    const bind2 = new _Binding(this.#emitter, this.#prop);
+    bind2.transformFn = (v) => fn(this.transformFn(v));
+    return bind2;
+  }
+  get() {
+    if (typeof this.#emitter.get === "function")
+      return this.transformFn(this.#emitter.get());
+    if (typeof this.#prop === "string") {
+      const getter = `get_${snakeify(this.#prop)}`;
+      if (typeof this.#emitter[getter] === "function")
+        return this.transformFn(this.#emitter[getter]());
+      return this.transformFn(this.#emitter[this.#prop]);
+    }
+    throw Error("can not get value of binding");
+  }
+  subscribe(callback) {
+    if (typeof this.#emitter.subscribe === "function") {
+      return this.#emitter.subscribe(() => {
+        callback(this.get());
+      });
+    } else if (typeof this.#emitter.connect === "function") {
+      const signal = `notify::${this.#prop}`;
+      const id = this.#emitter.connect(signal, () => {
+        callback(this.get());
+      });
+      return () => {
+        this.#emitter.disconnect(id);
+      };
+    }
+    throw Error(`${this.#emitter} is not bindable`);
+  }
+};
+var { bind } = Binding;
+
+// ../../../../../../../usr/share/astal/gjs/variable.ts
+import Astal4 from "gi://AstalIO";
+var VariableWrapper = class extends Function {
+  variable;
+  errHandler = console.error;
+  _value;
+  _poll;
+  _watch;
+  pollInterval = 1e3;
+  pollExec;
+  pollTransform;
+  pollFn;
+  watchTransform;
+  watchExec;
+  constructor(init) {
+    super();
+    this._value = init;
+    this.variable = new Astal4.VariableBase();
+    this.variable.connect("dropped", () => {
+      this.stopWatch();
+      this.stopPoll();
+    });
+    this.variable.connect("error", (_, err) => this.errHandler?.(err));
+    return new Proxy(this, {
+      apply: (target, _, args) => target._call(args[0])
+    });
+  }
+  _call(transform) {
+    const b = Binding.bind(this);
+    return transform ? b.as(transform) : b;
+  }
+  toString() {
+    return String(`Variable<${this.get()}>`);
+  }
+  get() {
+    return this._value;
+  }
+  set(value) {
+    if (value !== this._value) {
+      this._value = value;
+      this.variable.emit("changed");
+    }
+  }
+  startPoll() {
+    if (this._poll)
+      return;
+    if (this.pollFn) {
+      this._poll = interval(this.pollInterval, () => {
+        const v = this.pollFn(this.get());
+        if (v instanceof Promise) {
+          v.then((v2) => this.set(v2)).catch((err) => this.variable.emit("error", err));
+        } else {
+          this.set(v);
+        }
+      });
+    } else if (this.pollExec) {
+      this._poll = interval(this.pollInterval, () => {
+        execAsync(this.pollExec).then((v) => this.set(this.pollTransform(v, this.get()))).catch((err) => this.variable.emit("error", err));
+      });
+    }
+  }
+  startWatch() {
+    if (this._watch)
+      return;
+    this._watch = subprocess({
+      cmd: this.watchExec,
+      out: (out) => this.set(this.watchTransform(out, this.get())),
+      err: (err) => this.variable.emit("error", err)
+    });
+  }
+  stopPoll() {
+    this._poll?.cancel();
+    delete this._poll;
+  }
+  stopWatch() {
+    this._watch?.kill();
+    delete this._watch;
+  }
+  isPolling() {
+    return !!this._poll;
+  }
+  isWatching() {
+    return !!this._watch;
+  }
+  drop() {
+    this.variable.emit("dropped");
+  }
+  onDropped(callback) {
+    this.variable.connect("dropped", callback);
+    return this;
+  }
+  onError(callback) {
+    delete this.errHandler;
+    this.variable.connect("error", (_, err) => callback(err));
+    return this;
+  }
+  subscribe(callback) {
+    const id = this.variable.connect("changed", () => {
+      callback(this.get());
+    });
+    return () => this.variable.disconnect(id);
+  }
+  poll(interval2, exec3, transform = (out) => out) {
+    this.stopPoll();
+    this.pollInterval = interval2;
+    this.pollTransform = transform;
+    if (typeof exec3 === "function") {
+      this.pollFn = exec3;
+      delete this.pollExec;
+    } else {
+      this.pollExec = exec3;
+      delete this.pollFn;
+    }
+    this.startPoll();
+    return this;
+  }
+  watch(exec3, transform = (out) => out) {
+    this.stopWatch();
+    this.watchExec = exec3;
+    this.watchTransform = transform;
+    this.startWatch();
+    return this;
+  }
+  observe(objs, sigOrFn, callback) {
+    const f = typeof sigOrFn === "function" ? sigOrFn : callback ?? (() => this.get());
+    const set = (obj, ...args) => this.set(f(obj, ...args));
+    if (Array.isArray(objs)) {
+      for (const obj of objs) {
+        const [o, s] = obj;
+        const id = o.connect(s, set);
+        this.onDropped(() => o.disconnect(id));
+      }
+    } else {
+      if (typeof sigOrFn === "string") {
+        const id = objs.connect(sigOrFn, set);
+        this.onDropped(() => objs.disconnect(id));
+      }
+    }
+    return this;
+  }
+  static derive(deps, fn = (...args) => args) {
+    const update = () => fn(...deps.map((d) => d.get()));
+    const derived = new Variable(update());
+    const unsubs = deps.map((dep) => dep.subscribe(() => derived.set(update())));
+    derived.onDropped(() => unsubs.map((unsub) => unsub()));
+    return derived;
+  }
+};
+var Variable = new Proxy(VariableWrapper, {
+  apply: (_t, _a, args) => new VariableWrapper(args[0])
+});
+var variable_default = Variable;
+
+// globals.ts
+var user = exec(`whoami`);
+var homeDir = `/home/${user}`;
+Object.assign(globalThis, {
+  USER: user,
+  HOME_DIR: homeDir,
+  WALLPAPERS_PATH: `${homeDir}/.config/swww`,
+  ANIMATION_SPEED: 300
+});
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/index.ts
+import Astal8 from "gi://Astal?version=3.0";
+import Gtk4 from "gi://Gtk?version=3.0";
+import Gdk from "gi://Gdk?version=3.0";
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/astalify.ts
+import Astal5 from "gi://Astal?version=3.0";
+import Gtk from "gi://Gtk?version=3.0";
+import GObject2 from "gi://GObject";
+function mergeBindings(array) {
+  function getValues(...args) {
+    let i = 0;
+    return array.map(
+      (value) => value instanceof Binding ? args[i++] : value
+    );
+  }
+  const bindings = array.filter((i) => i instanceof Binding);
+  if (bindings.length === 0)
+    return array;
+  if (bindings.length === 1)
+    return bindings[0].as(getValues);
+  return variable_default.derive(bindings, getValues)();
+}
+function setProp(obj, prop, value) {
+  try {
+    const setter = `set_${snakeify(prop)}`;
+    if (typeof obj[setter] === "function")
+      return obj[setter](value);
+    return obj[prop] = value;
+  } catch (error) {
+    console.error(`could not set property "${prop}" on ${obj}:`, error);
+  }
+}
+function astalify(cls, clsName = cls.name) {
+  class Widget extends cls {
+    get css() {
+      return Astal5.widget_get_css(this);
+    }
+    set css(css) {
+      Astal5.widget_set_css(this, css);
+    }
+    get_css() {
+      return this.css;
+    }
+    set_css(css) {
+      this.css = css;
+    }
+    get className() {
+      return Astal5.widget_get_class_names(this).join(" ");
+    }
+    set className(className) {
+      Astal5.widget_set_class_names(this, className.split(/\s+/));
+    }
+    get_class_name() {
+      return this.className;
+    }
+    set_class_name(className) {
+      this.className = className;
+    }
+    get cursor() {
+      return Astal5.widget_get_cursor(this);
+    }
+    set cursor(cursor) {
+      Astal5.widget_set_cursor(this, cursor);
+    }
+    get_cursor() {
+      return this.cursor;
+    }
+    set_cursor(cursor) {
+      this.cursor = cursor;
+    }
+    get clickThrough() {
+      return Astal5.widget_get_click_through(this);
+    }
+    set clickThrough(clickThrough) {
+      Astal5.widget_set_click_through(this, clickThrough);
+    }
+    get_click_through() {
+      return this.clickThrough;
+    }
+    set_click_through(clickThrough) {
+      this.clickThrough = clickThrough;
+    }
+    get noImplicitDestroy() {
+      return this.__no_implicit_destroy;
+    }
+    set noImplicitDestroy(value) {
+      this.__no_implicit_destroy = value;
+    }
+    _setChildren(children) {
+      children = children.flat(Infinity).map((ch) => ch instanceof Gtk.Widget ? ch : new Gtk.Label({ visible: true, label: String(ch) }));
+      if (this instanceof Gtk.Bin) {
+        const ch = this.get_child();
+        if (ch)
+          this.remove(ch);
+        if (ch && !children.includes(ch) && !this.noImplicitDestroy)
+          ch?.destroy();
+      } else if (this instanceof Gtk.Container) {
+        for (const ch of this.get_children()) {
+          this.remove(ch);
+          if (!children.includes(ch) && !this.noImplicitDestroy)
+            ch?.destroy();
+        }
+      }
+      if (this instanceof Astal5.Box) {
+        this.set_children(children);
+      } else if (this instanceof Astal5.Stack) {
+        this.set_children(children);
+      } else if (this instanceof Astal5.CenterBox) {
+        this.startWidget = children[0];
+        this.centerWidget = children[1];
+        this.endWidget = children[2];
+      } else if (this instanceof Astal5.Overlay) {
+        const [child, ...overlays] = children;
+        this.set_child(child);
+        this.set_overlays(overlays);
+      } else if (this instanceof Gtk.Container) {
+        for (const ch of children)
+          this.add(ch);
+      } else {
+        throw Error(`can not add children to ${this.constructor.name}, it is not a container widget`);
+      }
+    }
+    toggleClassName(cn, cond = true) {
+      Astal5.widget_toggle_class_name(this, cn, cond);
+    }
+    hook(object, signalOrCallback, callback) {
+      if (typeof object.connect === "function" && callback) {
+        const id = object.connect(signalOrCallback, (_, ...args) => {
+          callback(this, ...args);
+        });
+        this.connect("destroy", () => {
+          object.disconnect(id);
+        });
+      } else if (typeof object.subscribe === "function" && typeof signalOrCallback === "function") {
+        const unsub = object.subscribe((...args) => {
+          signalOrCallback(this, ...args);
+        });
+        this.connect("destroy", unsub);
+      }
+      return this;
+    }
+    constructor(...params) {
+      super();
+      const [config] = params;
+      const { setup, child, children = [], ...props } = config;
+      props.visible ??= true;
+      if (child)
+        children.unshift(child);
+      const bindings = Object.keys(props).reduce((acc, prop) => {
+        if (props[prop] instanceof Binding) {
+          const binding = props[prop];
+          delete props[prop];
+          return [...acc, [prop, binding]];
+        }
+        return acc;
+      }, []);
+      const onHandlers = Object.keys(props).reduce((acc, key) => {
+        if (key.startsWith("on")) {
+          const sig = kebabify2(key).split("-").slice(1).join("-");
+          const handler = props[key];
+          delete props[key];
+          return [...acc, [sig, handler]];
+        }
+        return acc;
+      }, []);
+      const mergedChildren = mergeBindings(children.flat(Infinity));
+      if (mergedChildren instanceof Binding) {
+        this._setChildren(mergedChildren.get());
+        this.connect("destroy", mergedChildren.subscribe((v) => {
+          this._setChildren(v);
+        }));
+      } else {
+        if (mergedChildren.length > 0) {
+          this._setChildren(mergedChildren);
+        }
+      }
+      for (const [signal, callback] of onHandlers) {
+        if (typeof callback === "function") {
+          this.connect(signal, callback);
+        } else {
+          this.connect(signal, () => execAsync(callback).then(print).catch(console.error));
+        }
+      }
+      for (const [prop, binding] of bindings) {
+        if (prop === "child" || prop === "children") {
+          this.connect("destroy", binding.subscribe((v) => {
+            this._setChildren(v);
+          }));
+        }
+        this.connect("destroy", binding.subscribe((v) => {
+          setProp(this, prop, v);
+        }));
+        setProp(this, prop, binding.get());
+      }
+      Object.assign(this, props);
+      setup?.(this);
+    }
+  }
+  GObject2.registerClass({
+    GTypeName: `Astal_${clsName}`,
+    Properties: {
+      "class-name": GObject2.ParamSpec.string(
+        "class-name",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        ""
+      ),
+      "css": GObject2.ParamSpec.string(
+        "css",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        ""
+      ),
+      "cursor": GObject2.ParamSpec.string(
+        "cursor",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        "default"
+      ),
+      "click-through": GObject2.ParamSpec.boolean(
+        "click-through",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        false
+      ),
+      "no-implicit-destroy": GObject2.ParamSpec.boolean(
+        "no-implicit-destroy",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        false
+      )
+    }
+  }, Widget);
+  return Widget;
+}
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/app.ts
+import Gtk2 from "gi://Gtk?version=3.0";
+import Astal6 from "gi://Astal?version=3.0";
+
+// ../../../../../../../usr/share/astal/gjs/_app.ts
+import { setConsoleLogDomain } from "console";
+import { exit, programArgs } from "system";
+import IO from "gi://AstalIO";
+import GObject3 from "gi://GObject";
+function mkApp(App2) {
+  return new class AstalJS extends App2 {
+    static {
+      GObject3.registerClass({ GTypeName: "AstalJS" }, this);
+    }
+    eval(body) {
+      return new Promise((res, rej) => {
+        try {
+          const fn = Function(`return (async function() {
+                        ${body.includes(";") ? body : `return ${body};`}
+                    })`);
+          fn()().then(res).catch(rej);
+        } catch (error) {
+          rej(error);
+        }
+      });
+    }
+    requestHandler;
+    vfunc_request(msg, conn) {
+      if (typeof this.requestHandler === "function") {
+        this.requestHandler(msg, (response) => {
+          IO.write_sock(
+            conn,
+            String(response),
+            (_, res) => IO.write_sock_finish(res)
+          );
+        });
+      } else {
+        super.vfunc_request(msg, conn);
+      }
+    }
+    apply_css(style, reset = false) {
+      super.apply_css(style, reset);
+    }
+    quit(code) {
+      super.quit();
+      exit(code ?? 0);
+    }
+    start({ requestHandler: requestHandler2, css, hold, main, client, icons, ...cfg } = {}) {
+      const app = this;
+      client ??= () => {
+        print(`Astal instance "${app.instanceName}" already running`);
+        exit(1);
+      };
+      Object.assign(this, cfg);
+      setConsoleLogDomain(app.instanceName);
+      this.requestHandler = requestHandler2;
+      app.connect("activate", () => {
+        main?.(...programArgs);
+      });
+      try {
+        app.acquire_socket();
+      } catch (error) {
+        return client((msg) => IO.send_message(app.instanceName, msg), ...programArgs);
+      }
+      if (css)
+        this.apply_css(css, false);
+      if (icons)
+        app.add_icons(icons);
+      hold ??= true;
+      if (hold)
+        app.hold();
+      app.runAsync([]);
+    }
+  }();
+}
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/app.ts
+Gtk2.init(null);
+var app_default = mkApp(Astal6.Application);
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/widget.ts
+import Astal7 from "gi://Astal?version=3.0";
+import Gtk3 from "gi://Gtk?version=3.0";
+import GObject4 from "gi://GObject";
+Object.defineProperty(Astal7.Box.prototype, "children", {
+  get() {
+    return this.get_children();
+  },
+  set(v) {
+    this.set_children(v);
+  }
+});
+var Box = class extends astalify(Astal7.Box) {
+  static {
+    GObject4.registerClass({ GTypeName: "Box" }, this);
+  }
+  constructor(props, ...children) {
+    super({ children, ...props });
+  }
+};
+var Button = class extends astalify(Astal7.Button) {
+  static {
+    GObject4.registerClass({ GTypeName: "Button" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var CenterBox = class extends astalify(Astal7.CenterBox) {
+  static {
+    GObject4.registerClass({ GTypeName: "CenterBox" }, this);
+  }
+  constructor(props, ...children) {
+    super({ children, ...props });
+  }
+};
+var CircularProgress = class extends astalify(Astal7.CircularProgress) {
+  static {
+    GObject4.registerClass({ GTypeName: "CircularProgress" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var DrawingArea = class extends astalify(Gtk3.DrawingArea) {
+  static {
+    GObject4.registerClass({ GTypeName: "DrawingArea" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var Entry = class extends astalify(Gtk3.Entry) {
+  static {
+    GObject4.registerClass({ GTypeName: "Entry" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var EventBox = class extends astalify(Astal7.EventBox) {
+  static {
+    GObject4.registerClass({ GTypeName: "EventBox" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var Icon = class extends astalify(Astal7.Icon) {
+  static {
+    GObject4.registerClass({ GTypeName: "Icon" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var Label = class extends astalify(Astal7.Label) {
+  static {
+    GObject4.registerClass({ GTypeName: "Label" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var LevelBar = class extends astalify(Astal7.LevelBar) {
+  static {
+    GObject4.registerClass({ GTypeName: "LevelBar" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+Object.defineProperty(Astal7.Overlay.prototype, "overlays", {
+  get() {
+    return this.get_overlays();
+  },
+  set(v) {
+    this.set_overlays(v);
+  }
+});
+var Overlay = class extends astalify(Astal7.Overlay) {
+  static {
+    GObject4.registerClass({ GTypeName: "Overlay" }, this);
+  }
+  constructor(props, ...children) {
+    super({ children, ...props });
+  }
+};
+var Revealer = class extends astalify(Gtk3.Revealer) {
+  static {
+    GObject4.registerClass({ GTypeName: "Revealer" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var Scrollable = class extends astalify(Astal7.Scrollable) {
+  static {
+    GObject4.registerClass({ GTypeName: "Scrollable" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var Slider = class extends astalify(Astal7.Slider) {
+  static {
+    GObject4.registerClass({ GTypeName: "Slider" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var Stack = class extends astalify(Astal7.Stack) {
+  static {
+    GObject4.registerClass({ GTypeName: "Stack" }, this);
+  }
+  constructor(props, ...children) {
+    super({ children, ...props });
+  }
+};
+var Switch = class extends astalify(Gtk3.Switch) {
+  static {
+    GObject4.registerClass({ GTypeName: "Switch" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var Window = class extends astalify(Astal7.Window) {
+  static {
+    GObject4.registerClass({ GTypeName: "Window" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+
+// windows/bar/Bar.tsx
+import HyprlandService from "gi://AstalHyprland";
+import TrayService from "gi://AstalTray";
+import BatteryService3 from "gi://AstalBattery";
+
+// widgets/BatteryIcon.tsx
+import BatteryService from "gi://AstalBattery";
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/jsx-runtime.ts
+function isArrowFunction(func) {
+  return !Object.hasOwn(func, "prototype");
+}
+function jsx(ctor, { children, ...props }) {
+  children ??= [];
+  if (!Array.isArray(children))
+    children = [children];
+  children = children.filter(Boolean);
+  if (children.length === 1)
+    props.child = children[0];
+  else if (children.length > 1)
+    props.children = children;
+  if (typeof ctor === "string") {
+    return new ctors[ctor](props);
+  }
+  if (isArrowFunction(ctor))
+    return ctor(props);
+  return new ctor(props);
+}
+var ctors = {
+  box: Box,
+  button: Button,
+  centerbox: CenterBox,
+  circularprogress: CircularProgress,
+  drawingarea: DrawingArea,
+  entry: Entry,
+  eventbox: EventBox,
+  // TODO: fixed
+  // TODO: flowbox
+  icon: Icon,
+  label: Label,
+  levelbar: LevelBar,
+  // TODO: listbox
+  overlay: Overlay,
+  revealer: Revealer,
+  scrollable: Scrollable,
+  slider: Slider,
+  stack: Stack,
+  switch: Switch,
+  window: Window
+};
+var jsxs = jsx;
+
+// widgets/BatteryIcon.tsx
+var battery = BatteryService.get_default();
+function BatteryIcon({ className = "", charging }) {
+  return /* @__PURE__ */ jsx(
+    "label",
+    {
+      className,
+      label: bind(battery, "percentage").as((percentage) => {
+        percentage *= 100;
+        if (!charging) {
+          if (percentage < 5) return "\u{F008E}";
+          if (percentage < 10) return "\u{F007A}";
+          if (percentage < 20) return "\u{F007B}";
+          if (percentage < 30) return "\u{F007C}";
+          if (percentage < 40) return "\u{F007D}";
+          if (percentage < 50) return "\u{F007E}";
+          if (percentage < 60) return "\u{F007F}";
+          if (percentage < 70) return "\u{F0080}";
+          if (percentage < 80) return "\u{F0081}";
+          if (percentage < 90) return "\u{F0082}";
+          if (percentage <= 100) return "\u{F0079}";
+        }
+        if (charging) {
+          if (percentage < 10) return "\u{F089C}";
+          if (percentage < 20) return "\u{F0086}";
+          if (percentage < 30) return "\u{F0087}";
+          if (percentage < 40) return "\u{F0088}";
+          if (percentage < 50) return "\u{F089D}";
+          if (percentage < 60) return "\u{F0089}";
+          if (percentage < 70) return "\u{F089E}";
+          if (percentage < 80) return "\u{F008A}";
+          if (percentage < 90) return "\u{F008B}";
+          if (percentage <= 100) return "\u{F0085}";
+        }
+      })
+    }
+  );
+}
+
+// windows/bar/menu/AudioControlsMenu.tsx
+import WPSerivce from "gi://AstalWp";
+import MprisService from "gi://AstalMpris";
+
+// windows/bar/menu/vars.ts
+var time = Variable("").poll(1e3, `date +'%H
+%M'`);
+var revealSysTray = Variable(false);
+var revealAudioControlsMenu = Variable(false);
+var revealSystemControlsMenu = Variable(false);
+var revealBatteryMenu = Variable(false);
+var revealCalendarMenu = Variable(false);
+revealAudioControlsMenu.subscribe((value) => {
+  if (value) {
+    revealSystemControlsMenu.set(false);
+    revealBatteryMenu.set(false);
+    revealCalendarMenu.set(false);
+  }
+});
+revealSystemControlsMenu.subscribe((value) => {
+  if (value) {
+    revealAudioControlsMenu.set(false);
+    revealBatteryMenu.set(false);
+    revealCalendarMenu.set(false);
+  }
+});
+revealBatteryMenu.subscribe((value) => {
+  if (value) {
+    revealAudioControlsMenu.set(false);
+    revealSystemControlsMenu.set(false);
+    revealCalendarMenu.set(false);
+  }
+});
+revealCalendarMenu.subscribe((value) => {
+  if (value) {
+    revealAudioControlsMenu.set(false);
+    revealSystemControlsMenu.set(false);
+    revealBatteryMenu.set(false);
+  }
+});
+
+// windows/bar/menu/AudioControlsMenu.tsx
+var audio = WPSerivce.get_default().audio;
+var spotify = MprisService.Player.new("spotify");
+function AudioControlsMenu() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "audio_controls_menu menu",
+      spacing: 8,
+      children: [
+        bind(audio, "defaultSpeaker").as((speaker) => /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "global_vol slider_container",
+            vertical: true,
+            spacing: 8,
+            children: [
+              /* @__PURE__ */ jsx(
+                "slider",
+                {
+                  className: bind(speaker, "mute").as(
+                    (isMute) => isMute ? "slider mute" : "slider"
+                  ),
+                  cursor: "pointer",
+                  value: bind(speaker, "volume"),
+                  max: 1.5,
+                  step: 0.01,
+                  vexpand: true,
+                  drawValue: false,
+                  vertical: true,
+                  inverted: true,
+                  onDragged: ({ value }) => speaker.set_volume(value)
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "icon",
+                  label: bind(speaker, "mute").as((isMute) => !isMute ? "\u{F057E}" : "\u{F0E08}")
+                }
+              )
+            ]
+          }
+        )),
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "music_vol slider_container",
+            vertical: true,
+            spacing: 8,
+            children: [
+              /* @__PURE__ */ jsx(
+                "slider",
+                {
+                  className: "slider",
+                  cursor: "pointer",
+                  value: bind(spotify, "volume"),
+                  max: 1,
+                  step: 0.01,
+                  vexpand: true,
+                  drawValue: false,
+                  vertical: true,
+                  inverted: true,
+                  onDragged: ({ value }) => spotify.set_volume(value)
+                }
+              ),
+              /* @__PURE__ */ jsx("label", { className: "icon", label: "\u{F038C}" })
+            ]
+          }
+        ),
+        bind(audio, "defaultMicrophone").as((microphone) => /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "mic_vol slider_container",
+            vertical: true,
+            spacing: 8,
+            halign: Gtk4.Align.CENTER,
+            children: [
+              /* @__PURE__ */ jsx(
+                "slider",
+                {
+                  className: bind(microphone, "mute").as(
+                    (isMute) => isMute ? "slider mute" : "slider"
+                  ),
+                  cursor: "pointer",
+                  value: bind(microphone, "volume"),
+                  max: 1.5,
+                  step: 0.01,
+                  vexpand: true,
+                  drawValue: false,
+                  vertical: true,
+                  inverted: true,
+                  onDragged: ({ value }) => microphone.set_volume(value)
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "icon",
+                  label: bind(microphone, "mute").as((isMute) => !isMute ? "\u{F036C}" : "\u{F036D}")
+                }
+              )
+            ]
+          }
+        ))
+      ]
+    }
+  );
+}
+function AudioControlsMenu_default() {
+  return /* @__PURE__ */ jsx(
+    "window",
+    {
+      namespace: "menu",
+      layer: Astal8.Layer.OVERLAY,
+      anchor: Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
+      setup: (self) => app_default.add_window(self),
+      children: /* @__PURE__ */ jsx(
+        "revealer",
+        {
+          revealChild: revealAudioControlsMenu(),
+          transitionType: Gtk4.RevealerTransitionType.SLIDE_RIGHT,
+          transitionDuration: ANIMATION_SPEED,
+          children: /* @__PURE__ */ jsx(AudioControlsMenu, {})
+        }
+      )
+    }
+  );
+}
+
+// services/BrightnessService.ts
+var BrightnessService = class extends GObject.Object {
+  get brightness() {
+    return this._brightness;
+  }
+  set brightness(value) {
+    value = Math.max(0, Math.min(value, 1));
+    execAsync(`brightnessctl set ${value * 100}% -q`);
+  }
+  constructor() {
+    super();
+    this.interface = exec(`sh -c 'ls -w1 /sys/class/backlight | head -1'`).trim();
+    this.interfacePath = `/sys/class/backlight/${this.interface}/brightness`;
+    this.maxBrightness = Number(exec(`brightnessctl max`));
+    this._brightness = Number(exec(`brightnessctl get`)) / this.maxBrightness;
+    monitorFile(this.interfacePath, () => {
+      this._brightness = Number(exec(`brightnessctl get`)) / this.maxBrightness;
+      this.notify("brightness");
+    });
+  }
+};
+__decorateClass([
+  property(String)
+], BrightnessService.prototype, "interface", 2);
+__decorateClass([
+  property(String)
+], BrightnessService.prototype, "interfacePath", 2);
+__decorateClass([
+  property(Number)
+], BrightnessService.prototype, "maxBrightness", 2);
+__decorateClass([
+  property(Number)
+], BrightnessService.prototype, "brightness", 1);
+BrightnessService = __decorateClass([
+  register()
+], BrightnessService);
+
+// windows/bar/menu/SystemControlsMenu.tsx
+var brightness = new BrightnessService();
+function SystemControlsMenu() {
+  return /* @__PURE__ */ jsx(
+    "box",
+    {
+      className: "system_controls_menu menu",
+      spacing: 8,
+      children: /* @__PURE__ */ jsxs(
+        "box",
+        {
+          className: "brightness slider_container",
+          halign: Gtk4.Align.CENTER,
+          vertical: true,
+          spacing: 8,
+          children: [
+            /* @__PURE__ */ jsx(
+              "slider",
+              {
+                className: "slider",
+                cursor: "pointer",
+                value: bind(brightness, "brightness"),
+                drawValue: false,
+                vexpand: true,
+                vertical: true,
+                inverted: true,
+                onDragged: ({ value }) => {
+                  brightness.brightness = value;
+                }
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              "label",
+              {
+                className: "icon",
+                label: "\uF522"
+              }
+            )
+          ]
+        }
+      )
+    }
+  );
+}
+function SystemControlsMenu_default() {
+  return /* @__PURE__ */ jsx(
+    "window",
+    {
+      namespace: "menu",
+      layer: Astal8.Layer.OVERLAY,
+      anchor: Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
+      setup: (self) => app_default.add_window(self),
+      children: /* @__PURE__ */ jsx(
+        "revealer",
+        {
+          revealChild: revealSystemControlsMenu(),
+          transitionType: Gtk4.RevealerTransitionType.SLIDE_RIGHT,
+          transitionDuration: ANIMATION_SPEED,
+          children: /* @__PURE__ */ jsx(SystemControlsMenu, {})
+        }
+      )
+    }
+  );
+}
+
+// windows/bar/menu/BatteryMenu.tsx
+import BatteryService2 from "gi://AstalBattery";
+var battery2 = BatteryService2.get_default();
+function toRelativeTime(seconds) {
+  if (seconds < 60)
+    return `${seconds}sec${seconds === 1 ? "" : "s"}`;
+  if (seconds < 3600) {
+    const minutes = Math.floor(seconds / 60);
+    return `${minutes}min${minutes === 1 ? "" : "s"}`;
+  }
+  if (seconds < 86400) {
+    const hours = Math.floor(seconds / 3600);
+    return `${hours}h`;
+  }
+  const days = Math.floor(seconds / 86400);
+  return `${days} day${days === 1 ? "" : "s"}`;
+}
+function Divider() {
+  return /* @__PURE__ */ jsx(
+    "box",
+    {
+      className: "divider",
+      hexpand: true
+    }
+  );
+}
+function BatteryPercentage({ charging }) {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "battery_percentage",
+      valign: Gtk4.Align.START,
+      spacing: 12,
+      children: [
+        /* @__PURE__ */ jsx(
+          BatteryIcon,
+          {
+            className: charging ? "icon charging" : "icon discharging",
+            charging
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "percentage",
+            label: bind(battery2, "percentage").as(
+              (percentage) => `${(percentage * 100).toFixed(0)}%`
+            ),
+            xalign: 0
+          }
+        )
+      ]
+    }
+  );
+}
+function BatteryInfo({ charging }) {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "battery_info",
+      valign: Gtk4.Align.CENTER,
+      vertical: true,
+      children: [
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: charging ? "state charging" : "state discharging",
+            label: charging ? "Charging" : "Discharging",
+            xalign: 0
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "time_to_full",
+            label: bind(battery2, "timeToFull").as(
+              (timeToFull) => `- Time To Full: ${toRelativeTime(timeToFull)}`
+            ),
+            xalign: 0,
+            visible: charging
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "time_to_empty",
+            label: bind(battery2, "timeToEmpty").as(
+              (timeToEmpty) => `- Time To Empty: ${toRelativeTime(timeToEmpty)}`
+            ),
+            xalign: 0,
+            visible: !charging
+          }
+        )
+      ]
+    }
+  );
+}
+function BatteryMenu() {
+  return /* @__PURE__ */ jsx("box", { className: "battery_menu menu", children: bind(battery2, "charging").as((charging) => /* @__PURE__ */ jsxs(
+    "box",
+    {
+      vertical: true,
+      children: [
+        /* @__PURE__ */ jsx(BatteryPercentage, { charging }),
+        /* @__PURE__ */ jsx(Divider, {}),
+        /* @__PURE__ */ jsx(BatteryInfo, { charging })
+      ]
+    }
+  )) });
+}
+function BatteryMenu_default() {
+  return /* @__PURE__ */ jsx(
+    "window",
+    {
+      namespace: "menu",
+      layer: Astal8.Layer.OVERLAY,
+      anchor: Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
+      setup: (self) => app_default.add_window(self),
+      children: /* @__PURE__ */ jsx(
+        "revealer",
+        {
+          revealChild: revealBatteryMenu(),
+          transitionType: Gtk4.RevealerTransitionType.SLIDE_RIGHT,
+          transitionDuration: ANIMATION_SPEED,
+          children: /* @__PURE__ */ jsx(BatteryMenu, {})
+        }
+      )
+    }
+  );
+}
+
+// windows/bar/menu/CalendarMenu.tsx
+var Calendar = astalify(Gtk4.Calendar);
+function CalendarMenu() {
+  return /* @__PURE__ */ jsx("box", { className: "calendar_menu menu", children: /* @__PURE__ */ jsx(Calendar, {}) });
+}
+function CalendarMenu_default() {
+  return /* @__PURE__ */ jsx(
+    "window",
+    {
+      namespace: "menu",
+      layer: Astal8.Layer.OVERLAY,
+      anchor: Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
+      setup: (self) => app_default.add_window(self),
+      children: /* @__PURE__ */ jsx(
+        "revealer",
+        {
+          revealChild: revealCalendarMenu(),
+          transitionType: Gtk4.RevealerTransitionType.SLIDE_RIGHT,
+          transitionDuration: ANIMATION_SPEED,
+          children: /* @__PURE__ */ jsx(CalendarMenu, {})
+        }
+      )
+    }
+  );
+}
+
+// windows/bar/sidebar/vars.ts
+var revealSideBar = Variable(false);
+var sideBarShown = Variable("home");
+revealSideBar.subscribe((value) => {
+  if (value) {
+    revealAudioControlsMenu.set(false);
+    revealSystemControlsMenu.set(false);
+    revealBatteryMenu.set(false);
+    revealCalendarMenu.set(false);
+  }
+  if (!value) {
+    sideBarShown.set("home");
+  }
+});
+
+// windows/bar/sidebar/home/sections/UserHeader.tsx
+var powerMenuShown = Variable("power_button");
+var powerMenuTransitionType = Variable(Gtk4.StackTransitionType.SLIDE_LEFT);
+revealSideBar.subscribe((value) => {
+  if (value) {
+    powerMenuTransitionType.set(Gtk4.StackTransitionType.SLIDE_RIGHT);
+    powerMenuShown.set("power_button");
+  }
+});
+function PowerControls() {
+  return /* @__PURE__ */ jsxs(
+    "stack",
+    {
+      shown: powerMenuShown(),
+      transitionType: powerMenuTransitionType(),
+      transitionDuration: ANIMATION_SPEED,
+      halign: Gtk4.Align.END,
+      children: [
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            name: "power_button",
+            className: "power_button",
+            halign: Gtk4.Align.END,
+            valign: Gtk4.Align.CENTER,
+            hexpand: true,
+            cursor: "pointer",
+            onClick: () => {
+              powerMenuTransitionType.set(Gtk4.StackTransitionType.SLIDE_LEFT);
+              powerMenuShown.set("power_menu");
+            },
+            children: /* @__PURE__ */ jsx("label", { label: "\u{F0425}" })
+          }
+        ),
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            name: "power_menu",
+            className: "power_menu",
+            spacing: 8,
+            vexpand: false,
+            halign: Gtk4.Align.END,
+            valign: Gtk4.Align.CENTER,
+            children: [
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  className: "close",
+                  cursor: "pointer",
+                  onClick: () => {
+                    powerMenuTransitionType.set(Gtk4.StackTransitionType.SLIDE_RIGHT);
+                    powerMenuShown.set("power_button");
+                  }
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  cursor: "pointer",
+                  onClick: () => execAsync(`systemctl poweroff`),
+                  children: /* @__PURE__ */ jsx(
+                    "icon",
+                    {
+                      icon: "system-shutdown-symbolic",
+                      css: "font-size: 20px;"
+                    }
+                  )
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  cursor: "pointer",
+                  onClick: () => execAsync(`systemctl reboot`),
+                  children: /* @__PURE__ */ jsx(
+                    "icon",
+                    {
+                      icon: "view-refresh-symbolic",
+                      css: "font-size: 18px;"
+                    }
+                  )
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  cursor: "pointer",
+                  onClick: () => {
+                    revealSideBar.set(false);
+                    powerMenuShown.set("power_menu");
+                    execAsync(`hyprlock`);
+                  },
+                  children: /* @__PURE__ */ jsx(
+                    "icon",
+                    {
+                      icon: "system-lock-screen-symbolic",
+                      css: "font-size: 18px;"
+                    }
+                  )
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  cursor: "pointer",
+                  onClick: () => {
+                    revealSideBar.set(false);
+                    powerMenuShown.set("power_menu");
+                    execAsync(`bash -c 'systemctl suspend && hyprlock'`);
+                  },
+                  children: /* @__PURE__ */ jsx(
+                    "icon",
+                    {
+                      icon: "weather-clear-night-symbolic",
+                      css: "font-size: 18px;"
+                    }
+                  )
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  cursor: "pointer",
+                  onClick: () => execAsync(`hyprctl dispatch exit`),
+                  children: /* @__PURE__ */ jsx(
+                    "icon",
+                    {
+                      icon: "application-exit-symbolic",
+                      css: "font-size: 18px;"
+                    }
+                  )
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+}
+function UserHeader_default() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "user_box",
+      spacing: 12,
+      children: [
+        /* @__PURE__ */ jsx(
+          "box",
+          {
+            className: "face",
+            css: `background-image: url('${HOME_DIR}/.face')`
+          }
+        ),
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "details",
+            valign: Gtk4.Align.CENTER,
+            spacing: 2,
+            vertical: true,
+            children: [
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "username",
+                  label: USER,
+                  xalign: 0
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "wm",
+                  label: "HYPRLAND",
+                  xalign: 0
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx(PowerControls, {})
+      ]
+    }
+  );
+}
+
+// windows/bar/sidebar/home/sections/DesktopControls.tsx
+import NetworkService from "gi://AstalNetwork";
+import BluetoothService from "gi://AstalBluetooth";
+import WpService from "gi://AstalWp";
+import MprisService2 from "gi://AstalMpris";
+import NotifdService from "gi://AstalNotifd";
+var network = NetworkService.get_default();
+var bluetooth = BluetoothService.get_default();
+var audio2 = WpService.get_default().get_audio();
+var spotify2 = MprisService2.Player.new("spotify");
+var notifyd = NotifdService.get_default();
+function ButtonIcon({ name, className, icon = "icon" }) {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      vertical: true,
+      spacing: 6,
+      children: [
+        /* @__PURE__ */ jsx(
+          "icon",
+          {
+            className,
+            icon
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "name",
+            label: name
+          }
+        )
+      ]
+    }
+  );
+}
+function NetworkButton() {
+  return /* @__PURE__ */ jsx(
+    "button",
+    {
+      className: "network_button",
+      valign: Gtk4.Align.CENTER,
+      children: bind(network, "primary").as((primary) => /* @__PURE__ */ jsxs("stack", { shown: primary.toString(), children: [
+        /* @__PURE__ */ jsx("box", { name: NetworkService.Primary.WIRED.toString(), children: /* @__PURE__ */ jsx(
+          ButtonIcon,
+          {
+            name: "WIRED",
+            className: "icon",
+            icon: bind(network.get_wired(), "state").as((state) => {
+              switch (state) {
+                case NetworkService.DeviceState.ACTIVATED:
+                  return "network-wired-symbolic";
+                case NetworkService.DeviceState.DISCONNECTED:
+                  return "network-wired-disconnected-symbolic";
+                case NetworkService.DeviceState.UNKNOWN | NetworkService.DeviceState.UNAVAILABLE:
+                  return "network-wired-no-route-symbolic";
+                default:
+                  return "network-wireless-offline-symbolic";
+              }
+            })
+          }
+        ) }),
+        /* @__PURE__ */ jsx("box", { name: NetworkService.Primary.WIFI.toString(), children: /* @__PURE__ */ jsx(
+          ButtonIcon,
+          {
+            name: "WIFI",
+            className: "icon",
+            icon: bind(network.get_wifi(), "state").as((state) => {
+              switch (state) {
+                case NetworkService.DeviceState.ACTIVATED:
+                  return "network-wireless-symbolic";
+                case NetworkService.DeviceState.UNKNOWN | NetworkService.DeviceState.UNAVAILABLE:
+                  return "network-wireless-offline-symbolic";
+                case NetworkService.DeviceState.DISCONNECTED:
+                  return "network-wireless-no-route-symbolic";
+                default:
+                  return "network-wireless-offline-symbolic";
+              }
+            })
+          }
+        ) })
+      ] }))
+    }
+  );
+}
+function BluetoothButton() {
+  return /* @__PURE__ */ jsx(
+    "button",
+    {
+      className: "blueetoth_button",
+      valign: Gtk4.Align.CENTER,
+      cursor: "pointer",
+      onClick: () => bluetooth.toggle(),
+      children: /* @__PURE__ */ jsxs(
+        "stack",
+        {
+          shown: bind(bluetooth, "isPowered").as((isPowered) => isPowered ? "on" : "off"),
+          children: [
+            /* @__PURE__ */ jsx("box", { name: "on", children: /* @__PURE__ */ jsx(
+              ButtonIcon,
+              {
+                name: "BLUE",
+                className: "icon",
+                icon: "bluetooth-active-symbolic"
+              }
+            ) }),
+            /* @__PURE__ */ jsx("box", { name: "off", children: /* @__PURE__ */ jsx(
+              ButtonIcon,
+              {
+                name: "BLUE",
+                className: "icon inactive",
+                icon: "bluetooth-disconnected-symbolic"
+              }
+            ) })
+          ]
+        }
+      )
+    }
+  );
+}
+function MuteButton() {
+  const isMute = Variable(false);
+  isMute.subscribe((value) => {
+    if (value) {
+      audio2.get_speakers().map((speaker) => speaker.set_mute(true));
+    }
+    if (!value) {
+      audio2.get_speakers().map((speaker) => speaker.set_mute(false));
+    }
+  });
+  return /* @__PURE__ */ jsx(
+    "button",
+    {
+      className: "mute_button",
+      cursor: "pointer",
+      valign: Gtk4.Align.CENTER,
+      onClick: () => isMute.set(!isMute.get()),
+      onDestroy: () => isMute.drop(),
+      children: /* @__PURE__ */ jsxs("stack", { shown: isMute().as((mute) => !mute ? "active" : "silent"), children: [
+        /* @__PURE__ */ jsx("box", { name: "active", children: /* @__PURE__ */ jsx(
+          ButtonIcon,
+          {
+            name: "SILENT",
+            className: "icon",
+            icon: "audio-volume-high-symbolic"
+          }
+        ) }),
+        /* @__PURE__ */ jsx("box", { name: "silent", children: /* @__PURE__ */ jsx(
+          ButtonIcon,
+          {
+            name: "SILENT",
+            className: "icon inactive",
+            icon: "audio-volume-muted-symbolic"
+          }
+        ) })
+      ] })
+    }
+  );
+}
+function DnDButton() {
+  return /* @__PURE__ */ jsx(
+    "button",
+    {
+      className: "dnd_button",
+      cursor: "pointer",
+      valign: Gtk4.Align.CENTER,
+      onClick: () => notifyd.set_dont_disturb(!notifyd.get_dont_disturb()),
+      children: /* @__PURE__ */ jsxs("stack", { shown: bind(notifyd, "dontDisturb").as((isDnD) => !isDnD ? "active" : "dnd"), children: [
+        /* @__PURE__ */ jsx("box", { name: "active", children: /* @__PURE__ */ jsx(
+          ButtonIcon,
+          {
+            name: "DND",
+            className: "icon",
+            icon: "preferences-system-notifications"
+          }
+        ) }),
+        /* @__PURE__ */ jsx("box", { name: "dnd", children: /* @__PURE__ */ jsx(
+          ButtonIcon,
+          {
+            name: "DND",
+            className: "icon inactive",
+            icon: "notifications-disabled-symbolic"
+          }
+        ) })
+      ] })
+    }
+  );
+}
+function ButtonControls() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "buttons",
+      valign: Gtk4.Align.CENTER,
+      homogeneous: true,
+      spacing: 12,
+      children: [
+        /* @__PURE__ */ jsx(NetworkButton, {}),
+        /* @__PURE__ */ jsx(BluetoothButton, {}),
+        /* @__PURE__ */ jsx(MuteButton, {}),
+        /* @__PURE__ */ jsx(DnDButton, {})
+      ]
+    }
+  );
+}
+function Sliders() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "sliders",
+      vertical: true,
+      children: [
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "volume_slider",
+            spacing: 12,
+            children: [
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "icon",
+                  label: "\u{F057E}"
+                }
+              ),
+              bind(audio2, "defaultSpeaker").as((speaker) => /* @__PURE__ */ jsx(
+                "slider",
+                {
+                  className: "slider",
+                  cursor: "pointer",
+                  value: bind(speaker, "volume"),
+                  max: 1.5,
+                  drawValue: false,
+                  hexpand: true,
+                  onDragged: ({ value }) => speaker.set_volume(value)
+                }
+              ))
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "music_slider",
+            spacing: 12,
+            children: [
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "icon",
+                  label: "\u{F038C}"
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "slider",
+                {
+                  className: "slider",
+                  cursor: "pointer",
+                  value: bind(spotify2, "volume"),
+                  max: 1,
+                  drawValue: false,
+                  hexpand: true,
+                  onDragged: ({ value }) => spotify2.set_volume(value)
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+}
+function DesktopControls_default() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "desktop_controls",
+      vertical: true,
+      spacing: 12,
+      children: [
+        /* @__PURE__ */ jsx(ButtonControls, {}),
+        /* @__PURE__ */ jsx(Sliders, {})
+      ]
+    }
+  );
+}
+
+// windows/bar/sidebar/home/sections/MusicPlayer.tsx
+import MprisService3 from "gi://AstalMpris";
+
+// widgets/ProgressBar.ts
+var ProgressBar = class extends astalify(Gtk4.ProgressBar) {
+  static {
+    GObject.registerClass(this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+
+// windows/bar/sidebar/home/sections/MusicPlayer.tsx
+var spotify3 = MprisService3.Player.new("spotify");
+function MusicCover({ available }) {
+  return /* @__PURE__ */ jsx(
+    "box",
+    {
+      className: "cover",
+      css: bind(spotify3, "coverArt").as(
+        (cover) => available ? `background-image: url("${cover}");` : `background-image: url("${"/home/qxb3/.config/ags"}/assets/no-music.png");`
+      )
+    }
+  );
+}
+function MusicMeta({ available }) {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "meta",
+      vertical: true,
+      vexpand: true,
+      children: [
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "title",
+            label: bind(spotify3, "title").as((title) => available ? title : "No Music"),
+            maxWidthChars: 8,
+            truncate: true,
+            justify: Gtk4.Justification.CENTER,
+            hexpand: true
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "artist",
+            label: bind(spotify3, "artist").as((artist) => available ? artist : "Artist"),
+            maxWidthChars: 16,
+            truncate: true,
+            justify: Gtk4.Justification.CENTER,
+            hexpand: true
+          }
+        )
+      ]
+    }
+  );
+}
+function MusicControls({ available: _ }) {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "controls",
+      halign: Gtk4.Align.CENTER,
+      valign: Gtk4.Align.END,
+      spacing: 16,
+      children: [
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            className: "prev control",
+            cursor: "pointer",
+            onClick: () => spotify3.previous(),
+            children: /* @__PURE__ */ jsx("label", { label: "\u{F04AE}" })
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            className: "toggle control",
+            cursor: "pointer",
+            onClick: () => spotify3.play_pause(),
+            children: /* @__PURE__ */ jsx(
+              "label",
+              {
+                label: bind(spotify3, "playbackStatus").as((status) => {
+                  switch (status) {
+                    case MprisService3.PlaybackStatus.STOPPED:
+                      return "\u{F04DB}";
+                    case MprisService3.PlaybackStatus.PAUSED:
+                      return "\u{F040A}";
+                    case MprisService3.PlaybackStatus.PLAYING:
+                      return "\u{F03E4}";
+                  }
+                })
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            className: "prev control",
+            cursor: "pointer",
+            onClick: () => spotify3.next(),
+            children: /* @__PURE__ */ jsx("label", { label: "\u{F04AD}" })
+          }
+        )
+      ]
+    }
+  );
+}
+function MusicPosition({ available }) {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "position",
+      vertical: true,
+      spacing: 4,
+      children: [
+        bind(spotify3, "length").as((length) => /* @__PURE__ */ jsx(
+          ProgressBar,
+          {
+            className: "progress",
+            fraction: bind(spotify3, "position").as((position) => position / length),
+            hexpand: false,
+            halign: Gtk4.Align.CENTER
+          }
+        )),
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "meta",
+            spacing: 8,
+            children: [
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "current_progress",
+                  label: bind(spotify3, "position").as(
+                    (position) => position <= 0 ? "0:00" : `${Math.floor(spotify3.get_length() / 60)}:${String(Math.round(position) % 60).padStart(2, "0")}`
+                  )
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "box",
+                {
+                  className: "seperator",
+                  valign: Gtk4.Align.CENTER,
+                  hexpand: true
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "current_progress",
+                  label: bind(spotify3, "length").as(
+                    (length) => !available ? "0:00" : `${Math.floor(spotify3.get_length() / 60)}:${String(Math.round(length) % 60).padStart(2, "0")}`
+                  )
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+}
+function MusicPlayer_default() {
+  return /* @__PURE__ */ jsx(
+    "box",
+    {
+      className: "music_player",
+      vexpand: false,
+      children: bind(spotify3, "available").as((available) => /* @__PURE__ */ jsxs("box", { spacing: 10, children: [
+        /* @__PURE__ */ jsx(MusicCover, { available }),
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "right",
+            vertical: true,
+            children: [
+              /* @__PURE__ */ jsx(MusicMeta, { available }),
+              /* @__PURE__ */ jsx(MusicControls, { available }),
+              /* @__PURE__ */ jsx(MusicPosition, { available })
+            ]
+          }
+        )
+      ] }))
+    }
+  );
+}
+
+// windows/bar/sidebar/home/sections/NotificationCenter.tsx
+import NotifdService2 from "gi://AstalNotifd";
+var notifyd2 = NotifdService2.get_default();
+function Header() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "header",
+      valign: Gtk4.Align.START,
+      children: [
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "title",
+            label: "Notifications",
+            halign: Gtk4.Align.START,
+            hexpand: true
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            className: "clear_notifications",
+            cursor: "pointer",
+            halign: Gtk4.Align.END,
+            onClick: () => notifyd2.get_notifications().forEach((notification) => notification.dismiss()),
+            children: /* @__PURE__ */ jsx("label", { label: "\u{F039F}" })
+          }
+        )
+      ]
+    }
+  );
+}
+function NotificationList({ notifications }) {
+  return /* @__PURE__ */ jsx(
+    "box",
+    {
+      className: "notifications",
+      vertical: true,
+      spacing: 8,
+      children: notifications.map((notification) => (
+        // <revealer
+        //   revealChild={true}
+        //   transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+        //   transitionDuration={300}
+        //   hexpand={true}
+        //   setup={(self) => {
+        //     self.hook(notification, 'resolved', (_, reason) => {
+        //       if (reason === NotifdService.ClosedReason.DISMISSED_BY_USER) {
+        //         self.revealChild = false
+        //       }
+        //     })
+        //   }}>
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "notification",
+            spacing: 8,
+            children: [
+              /* @__PURE__ */ jsx(
+                "box",
+                {
+                  className: "image",
+                  css: `background-image: url("${notification.get_image() ?? `${"/home/qxb3/.config/ags"}/assets/bell.svg`}");`
+                }
+              ),
+              /* @__PURE__ */ jsxs(
+                "box",
+                {
+                  className: "meta",
+                  vertical: true,
+                  spacing: 4,
+                  children: [
+                    /* @__PURE__ */ jsx(
+                      "label",
+                      {
+                        className: "appname",
+                        label: notification.get_app_name().toUpperCase(),
+                        truncate: true,
+                        xalign: 0,
+                        hexpand: true
+                      }
+                    ),
+                    /* @__PURE__ */ jsxs("box", { vertical: true, children: [
+                      /* @__PURE__ */ jsx(
+                        "label",
+                        {
+                          className: "summary",
+                          label: notification.get_summary(),
+                          justify: Gtk4.Justification.LEFT,
+                          truncate: true,
+                          useMarkup: true,
+                          xalign: 0
+                        }
+                      ),
+                      /* @__PURE__ */ jsx(
+                        "label",
+                        {
+                          className: "body",
+                          label: `- ${notification.get_body()}`,
+                          justify: Gtk4.Justification.LEFT,
+                          truncate: true,
+                          useMarkup: true,
+                          hexpand: true,
+                          wrap: true,
+                          lines: 2,
+                          xalign: 0
+                        }
+                      )
+                    ] })
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  className: "dismiss_notification",
+                  cursor: "pointer",
+                  halign: Gtk4.Align.END,
+                  valign: Gtk4.Align.START,
+                  hexpand: true,
+                  onClick: () => notification.dismiss(),
+                  children: /* @__PURE__ */ jsx("label", { label: "\u{F0159}" })
+                }
+              )
+            ]
+          }
+        )
+      ))
+    }
+  );
+}
+function NoNotification() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "no_notification",
+      halign: Gtk4.Align.CENTER,
+      vertical: true,
+      children: [
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "icon",
+            label: "\u{F009B}",
+            justify: Gtk4.Justification.CENTER
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "text",
+            label: "No Notification",
+            justify: Gtk4.Justification.CENTER
+          }
+        )
+      ]
+    }
+  );
+}
+function Notifications() {
+  return /* @__PURE__ */ jsx("scrollable", { vexpand: true, children: bind(notifyd2, "notifications").as((notifications) => notifications.length > 0 ? /* @__PURE__ */ jsx(NotificationList, { notifications }) : /* @__PURE__ */ jsx(NoNotification, {})) });
+}
+function NotificationCenter_default() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "notification_center",
+      spacing: 8,
+      vertical: true,
+      vexpand: true,
+      children: [
+        /* @__PURE__ */ jsx(Header, {}),
+        /* @__PURE__ */ jsx(Notifications, {})
+      ]
+    }
+  );
+}
+
+// windows/bar/sidebar/home/Home.tsx
+function Home_default() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      name: "home",
+      className: "sidebar_home",
+      vertical: true,
+      children: [
+        /* @__PURE__ */ jsx(UserHeader_default, {}),
+        /* @__PURE__ */ jsx(DesktopControls_default, {}),
+        /* @__PURE__ */ jsx(MusicPlayer_default, {}),
+        /* @__PURE__ */ jsx(NotificationCenter_default, {})
+      ]
+    }
+  );
+}
+
+// windows/bar/sidebar/appLauncher/AppLauncher.tsx
+import AppsService from "gi://AstalApps";
+var apps = new AppsService.Apps({
+  nameMultiplier: 2,
+  entryMultiplier: 0,
+  executableMultiplier: 2
+});
+var query = Variable("");
+var queriedApps = Variable(apps.fuzzy_query(query.get()));
+var selectedApp = Variable(queriedApps.get()[0]);
+revealSideBar.subscribe((value) => {
+  if (!value) {
+    query.set("");
+    queriedApps.set(apps.fuzzy_query(query.get()));
+    selectedApp.set(queriedApps.get()[0]);
+  }
+});
+function launchApp(app) {
+  revealSideBar.set(false);
+  sideBarShown.set("home");
+  app.launch();
+}
+function Header2() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "header",
+      valign: Gtk4.Align.START,
+      spacing: 16,
+      children: [
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "icon",
+            label: "\uF002",
+            xalign: 0
+          }
+        ),
+        /* @__PURE__ */ jsxs(
+          "overlay",
+          {
+            className: "input_container",
+            passThrough: true,
+            hexpand: true,
+            children: [
+              /* @__PURE__ */ jsx(
+                "entry",
+                {
+                  className: "input",
+                  onChanged: ({ text }) => {
+                    query.set(text);
+                    queriedApps.set(apps.fuzzy_query(text));
+                    selectedApp.set(queriedApps.get()[0]);
+                  },
+                  onActivate: () => launchApp(selectedApp.get()),
+                  setup: (self) => {
+                    self.hook(sideBarShown, () => {
+                      if (sideBarShown.get() === "appLauncher" && !self.has_grab())
+                        return self.grab_focus();
+                      self.text = "";
+                    });
+                  }
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "placeholder",
+                  label: query(
+                    (query2) => query2.length <= 0 ? "Search Apps" : ""
+                  ),
+                  xalign: 0
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+}
+function App(app) {
+  return /* @__PURE__ */ jsx(
+    "button",
+    {
+      className: selectedApp(
+        (selectedApp2) => selectedApp2.name === app.name ? "app selected" : "app"
+      ),
+      cursor: "pointer",
+      onClick: () => launchApp(app),
+      onKeyPressEvent: (_, event) => {
+        if (event.get_keycode().pop() === 36) {
+          launchApp(app);
+        }
+      },
+      setup: (self) => {
+        self.connect("focus-in-event", () => {
+          selectedApp.set(app);
+        });
+      },
+      children: /* @__PURE__ */ jsxs("box", { spacing: 8, children: [
+        /* @__PURE__ */ jsx(
+          "icon",
+          {
+            icon: app.iconName,
+            css: "font-size: 32px;"
+          }
+        ),
+        /* @__PURE__ */ jsx("label", { label: app.name })
+      ] })
+    }
+  );
+}
+function Applications() {
+  return /* @__PURE__ */ jsx("scrollable", { vexpand: true, children: /* @__PURE__ */ jsx(
+    "box",
+    {
+      className: "apps",
+      vertical: true,
+      spacing: 8,
+      children: queriedApps(
+        (apps2) => apps2.map((app) => App(app))
+      )
+    }
+  ) });
+}
+function AppLauncher_default() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      name: "appLauncher",
+      className: "sidebar_appLauncher",
+      spacing: 8,
+      vertical: true,
+      children: [
+        /* @__PURE__ */ jsx(Header2, {}),
+        /* @__PURE__ */ jsx(Applications, {})
+      ]
+    }
+  );
+}
+
+// windows/bar/sidebar/wallpapers/Wallpapers.tsx
+var wallpapers = exec(`find -L ${WALLPAPERS_PATH} -iname '*.png' -or -iname '*.jpg'`).split("\n");
+function Wallpapers_default() {
+  return /* @__PURE__ */ jsx(
+    "box",
+    {
+      name: "wallpapers",
+      className: "wallpapers",
+      vertical: true,
+      children: /* @__PURE__ */ jsx("scrollable", { vexpand: true, children: /* @__PURE__ */ jsx(
+        "box",
+        {
+          className: "list",
+          vertical: true,
+          spacing: 12,
+          children: wallpapers.map((wallpaper) => /* @__PURE__ */ jsx(
+            "button",
+            {
+              className: "wallpaper",
+              cursor: "pointer",
+              onClick: () => {
+                exec(`ln -sf ${wallpaper} ${WALLPAPERS_PATH}/current.set`);
+                execAsync(`swww img ${wallpaper} --transition-type "wipe" --transition-duration 3`);
+                execAsync(`rm -rf /home/${exec("whoami")}/.cache/fastfetch/images`);
+                execAsync(`magick ${wallpaper} -gravity Center -crop 1:1 -resize 500x500 +repage ${WALLPAPERS_PATH}/current.crop`);
+                sideBarShown.set("home");
+                revealSideBar.set(false);
+              },
+              children: /* @__PURE__ */ jsx(
+                "box",
+                {
+                  className: "img",
+                  css: `background-image: url("${wallpaper}");`
+                }
+              )
+            }
+          ))
+        }
+      ) })
+    }
+  );
+}
+
+// windows/bar/sidebar/SideBar.tsx
+function SideBar_default() {
+  return /* @__PURE__ */ jsx(
+    "revealer",
+    {
+      revealChild: revealSideBar(),
+      transitionType: Gtk4.RevealerTransitionType.SLIDE_RIGHT,
+      transitionDuration: ANIMATION_SPEED,
+      children: /* @__PURE__ */ jsxs(
+        "stack",
+        {
+          shown: sideBarShown(),
+          transitionType: Gtk4.StackTransitionType.SLIDE_RIGHT,
+          transitionDuration: ANIMATION_SPEED,
+          children: [
+            /* @__PURE__ */ jsx(Home_default, {}),
+            /* @__PURE__ */ jsx(AppLauncher_default, {}),
+            /* @__PURE__ */ jsx(Wallpapers_default, {})
+          ]
+        }
+      )
+    }
+  );
+}
+
+// windows/bar/Bar.tsx
+var hyprland = HyprlandService.get_default();
+var tray = TrayService.get_default();
+var battery3 = BatteryService3.get_default();
+function Divider2() {
+  return /* @__PURE__ */ jsx("box", { className: "divider" });
+}
+function StartSection() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "start",
+      valign: Gtk4.Align.START,
+      halign: Gtk4.Align.CENTER,
+      spacing: 4,
+      vertical: true,
+      children: [
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            className: "sidebar_button",
+            cursor: "pointer",
+            onClick: () => revealSideBar.set(!revealSideBar.get()),
+            children: /* @__PURE__ */ jsx("box", { css: `background-image: url("/home/${exec("whoami")}/.face")` })
+          }
+        ),
+        /* @__PURE__ */ jsx(Divider2, {}),
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            className: sideBarShown(
+              (shown) => shown === "appLauncher" ? "search_button active" : "search_button"
+            ),
+            cursor: "pointer",
+            onClick: () => {
+              sideBarShown.set("appLauncher");
+              revealSideBar.set(true);
+            },
+            children: /* @__PURE__ */ jsx("label", { label: "\uE68F" })
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            className: sideBarShown(
+              (shown) => shown === "wallpapers" ? "wallpaper_button active" : "wallpaper_button"
+            ),
+            cursor: "pointer",
+            onClick: () => {
+              sideBarShown.set("wallpapers");
+              revealSideBar.set(true);
+            },
+            children: /* @__PURE__ */ jsx("label", { label: "\u{F0E09}" })
+          }
+        ),
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "systray",
+            vertical: true,
+            children: [
+              /* @__PURE__ */ jsx(
+                "revealer",
+                {
+                  revealChild: revealSysTray((v) => v),
+                  transitionType: Gtk4.RevealerTransitionType.SLIDE_DOWN,
+                  transitionDuration: ANIMATION_SPEED,
+                  children: /* @__PURE__ */ jsx(
+                    "box",
+                    {
+                      className: "apps",
+                      vertical: true,
+                      spacing: 8,
+                      children: bind(tray, "items").as((apps2) => apps2.map(
+                        (app) => /* @__PURE__ */ jsx(
+                          "button",
+                          {
+                            className: "app",
+                            cursor: "pointer",
+                            onClickRelease: (self, event) => {
+                              if (event.button === Astal8.MouseButton.PRIMARY) app.activate(0, 0);
+                              if (event.button === Astal8.MouseButton.SECONDARY) {
+                                const menu = app.create_menu();
+                                Astal8.widget_toggle_class_name(menu, "systray_menu", true);
+                                menu.popup_at_widget(self, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null);
+                              }
+                            },
+                            children: /* @__PURE__ */ jsx(
+                              "icon",
+                              {
+                                gIcon: app.gicon,
+                                css: "font-size: 22px;"
+                              }
+                            )
+                          }
+                        )
+                      ))
+                    }
+                  )
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  className: "button",
+                  cursor: "pointer",
+                  onClick: () => revealSysTray.set(!revealSysTray.get()),
+                  setup: (self) => {
+                    self.hook(revealSysTray, () => {
+                      if (revealSysTray.get())
+                        timeout(5e3, () => revealSysTray.set(false));
+                    });
+                  },
+                  children: /* @__PURE__ */ jsx("label", { label: revealSysTray((v) => v ? "\u{F0143}" : "\u{F0140}") })
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+}
+function CenterSection() {
+  return /* @__PURE__ */ jsx(
+    "box",
+    {
+      className: "center",
+      valign: Gtk4.Align.CENTER,
+      vertical: true,
+      spacing: 8,
+      children: /* @__PURE__ */ jsx(
+        "box",
+        {
+          className: "workspace",
+          vertical: true,
+          spacing: 4,
+          children: Array.from({ length: 5 }).map(
+            (_, i) => /* @__PURE__ */ jsx(
+              "button",
+              {
+                className: "button",
+                cursor: "pointer",
+                halign: Gtk4.Align.CENTER,
+                onClick: () => hyprland.message(`dispatch workspace ${i + 1}`),
+                setup: (self) => {
+                  self.hook(hyprland, "event", () => {
+                    self.toggleClassName("active", hyprland.get_focused_workspace().get_id() === i + 1);
+                  });
+                }
+              }
+            )
+          )
+        }
+      )
+    }
+  );
+}
+function EndSection() {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "end",
+      valign: Gtk4.Align.END,
+      halign: Gtk4.Align.CENTER,
+      vertical: true,
+      spacing: 4,
+      children: [
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "desktop_controls",
+            vertical: true,
+            children: [
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  className: "audio",
+                  cursor: "pointer",
+                  setup: () => /* @__PURE__ */ jsx(AudioControlsMenu_default, {}),
+                  onClick: () => revealAudioControlsMenu.set(!revealAudioControlsMenu.get()),
+                  children: /* @__PURE__ */ jsx("label", { label: "\u{F02CE}" })
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  className: "system",
+                  cursor: "pointer",
+                  setup: () => /* @__PURE__ */ jsx(SystemControlsMenu_default, {}),
+                  onClick: () => revealSystemControlsMenu.set(!revealSystemControlsMenu.get()),
+                  children: /* @__PURE__ */ jsx("label", { label: "\uF1DE" })
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  className: bind(battery3, "charging").as(
+                    (charging) => charging ? "battery charging" : "battery discharging"
+                  ),
+                  cursor: "pointer",
+                  visible: bind(battery3, "device_type").as(
+                    (type) => type === BatteryService3.Type.BATTERY ? true : false
+                  ),
+                  setup: () => /* @__PURE__ */ jsx(BatteryMenu_default, {}),
+                  onClick: () => revealBatteryMenu.set(!revealBatteryMenu.get()),
+                  children: bind(battery3, "charging").as((charging) => /* @__PURE__ */ jsx(BatteryIcon, { charging }))
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  className: "screenshot",
+                  cursor: "pointer",
+                  onClick: () => execAsync(`bash -c '~/.config/hypr/scripts/screenshot.sh p'`),
+                  children: /* @__PURE__ */ jsx("label", { label: "\u{F0104}" })
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            className: "time",
+            cursor: "pointer",
+            setup: () => /* @__PURE__ */ jsx(CalendarMenu_default, {}),
+            onClick: () => revealCalendarMenu.set(!revealCalendarMenu.get()),
+            children: /* @__PURE__ */ jsx("label", { label: time() })
+          }
+        )
+      ]
+    }
+  );
+}
+function Bar_default(gdkmonitor) {
+  return /* @__PURE__ */ jsx(
+    "window",
+    {
+      namespace: "bar",
+      application: app_default,
+      gdkmonitor,
+      exclusivity: Astal8.Exclusivity.EXCLUSIVE,
+      anchor: Astal8.WindowAnchor.TOP | Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
+      keymode: sideBarShown(
+        (shown) => shown === "appLauncher" ? Astal8.Keymode.EXCLUSIVE : Astal8.Keymode.NONE
+      ),
+      children: /* @__PURE__ */ jsxs("box", { children: [
+        /* @__PURE__ */ jsx(SideBar_default, {}),
+        /* @__PURE__ */ jsx("box", { className: "bar", children: /* @__PURE__ */ jsxs(
+          "centerbox",
+          {
+            className: "sections",
+            vertical: true,
+            children: [
+              StartSection(),
+              CenterSection(),
+              EndSection()
+            ]
+          }
+        ) })
+      ] })
+    }
+  );
+}
+
+// windows/notificationPopups/NotificationPopups.tsx
+import NotifydService from "gi://AstalNotifd";
+var TIMEOUT_DELAY = 5e3;
+var notifyd3 = NotifydService.get_default();
+var popups = Variable([]);
+notifyd3.connect("notified", (_, id) => {
+  if (notifyd3.get_dont_disturb()) return;
+  const notification = notifyd3.get_notification(id);
+  popups.set([...popups.get(), notification]);
+});
+function removePopup(id) {
+  const filteredPopups = popups.get().filter((popup) => id !== popup.id);
+  popups.set(filteredPopups);
+}
+function NotificationPopups() {
+  return /* @__PURE__ */ jsx(
+    "box",
+    {
+      className: "notification_popups",
+      spacing: 8,
+      vertical: true,
+      children: popups().as((popupNotifs) => popupNotifs.map((popupNotif) => /* @__PURE__ */ jsx(
+        "eventbox",
+        {
+          onClick: () => removePopup(popupNotif.id),
+          setup: () => timeout(TIMEOUT_DELAY, () => removePopup(popupNotif.id)),
+          children: /* @__PURE__ */ jsxs(
+            "box",
+            {
+              className: "notification",
+              spacing: 8,
+              children: [
+                /* @__PURE__ */ jsx(
+                  "box",
+                  {
+                    className: "image",
+                    css: `background-image: url("${popupNotif.get_image() ?? `${"/home/qxb3/.config/ags"}/assets/bell.svg`}");`
+                  }
+                ),
+                /* @__PURE__ */ jsxs(
+                  "box",
+                  {
+                    className: "meta",
+                    vertical: true,
+                    spacing: 4,
+                    children: [
+                      /* @__PURE__ */ jsx(
+                        "label",
+                        {
+                          className: "appname",
+                          label: popupNotif.get_app_name().toUpperCase(),
+                          truncate: true,
+                          xalign: 0,
+                          hexpand: true
+                        }
+                      ),
+                      /* @__PURE__ */ jsxs("box", { vertical: true, children: [
+                        /* @__PURE__ */ jsx(
+                          "label",
+                          {
+                            className: "summary",
+                            label: popupNotif.get_summary(),
+                            justify: Gtk4.Justification.LEFT,
+                            truncate: true,
+                            useMarkup: true,
+                            xalign: 0
+                          }
+                        ),
+                        /* @__PURE__ */ jsx(
+                          "label",
+                          {
+                            className: "body",
+                            label: `- ${popupNotif.get_body()}`,
+                            justify: Gtk4.Justification.LEFT,
+                            truncate: true,
+                            useMarkup: true,
+                            hexpand: true,
+                            wrap: true,
+                            lines: 2,
+                            xalign: 0
+                          }
+                        )
+                      ] })
+                    ]
+                  }
+                )
+              ]
+            }
+          )
+        }
+      )))
+    }
+  );
+}
+function NotificationPopups_default(gdkmonitor) {
+  return /* @__PURE__ */ jsx(
+    "window",
+    {
+      namespace: "notifications",
+      application: app_default,
+      gdkmonitor,
+      exclusivity: Astal8.Exclusivity.IGNORE,
+      layer: Astal8.Layer.OVERLAY,
+      anchor: Astal8.WindowAnchor.TOP | Astal8.WindowAnchor.RIGHT,
+      children: /* @__PURE__ */ jsx("box", { css: "padding: 0.1px;", children: /* @__PURE__ */ jsx(NotificationPopups, {}) })
+    }
+  );
+}
+
+// sass:/home/qxb3/Dev/projects/gruvbox.hypr/.config/ags/styles.scss
+var styles_default = '* {\n  all: unset;\n  font-family: "JetBrainsMono Nerd Font";\n  color: #E5E9F0;\n}\n\n.systray_menu {\n  background-color: #3B4252;\n  border-radius: 8px;\n  /* padding: 12px; */\n}\n.systray_menu menuitem {\n  border-radius: 4px;\n  /* padding: 4px 8px; */\n  color: #000;\n}\n.systray_menu menuitem:hover {\n  background-color: #4C566A;\n}\n\n.bar {\n  background-color: #3B4252;\n  border-top-right-radius: 8px;\n  border-bottom-right-radius: 8px;\n  border-right: solid #81A1C1 1px;\n}\n.bar .divider {\n  background-color: #434C5E;\n  min-height: 2px;\n  margin: 2px 0;\n}\n.bar .sections {\n  padding: 8px 4px;\n}\n.bar .sections .start .sidebar_button box {\n  background-size: cover;\n  border-radius: 999px;\n  min-width: 32px;\n  min-height: 32px;\n}\n.bar .sections .start .search_button {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n}\n.bar .sections .start .search_button:hover {\n  background-color: #4C566A;\n}\n.bar .sections .start .search_button.active {\n  background-color: #616E88;\n}\n.bar .sections .start .search_button label {\n  font-size: 18px;\n  padding-right: 4px;\n}\n.bar .sections .start .wallpaper_button {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n}\n.bar .sections .start .wallpaper_button:hover {\n  background-color: #4C566A;\n}\n.bar .sections .start .wallpaper_button.active {\n  background-color: #616E88;\n}\n.bar .sections .start .wallpaper_button label {\n  font-size: 20px;\n  padding-right: 6px;\n}\n.bar .sections .start .systray .apps {\n  margin-top: 8px;\n}\n.bar .sections .start .systray .button {\n  font-size: 21px;\n}\n.bar .sections .center .workspace {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n  padding: 1rem 0;\n}\n.bar .sections .center .workspace .button {\n  background-color: #E5E9F0;\n  border-radius: 8px;\n  min-width: 10px;\n  min-height: 24px;\n  transition: all 300ms cubic-bezier(1, 0, 0, 1);\n}\n.bar .sections .center .workspace .button.active {\n  background-color: #81A1C1;\n  min-height: 42px;\n}\n.bar .sections .center .workspace .button:hover {\n  background-color: #BFC6D1;\n}\n.bar .sections .end .desktop_controls {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n}\n.bar .sections .end .desktop_controls .music, .bar .sections .end .desktop_controls .audio, .bar .sections .end .desktop_controls .system, .bar .sections .end .desktop_controls .battery, .bar .sections .end .desktop_controls .screenshot {\n  font-size: 20px;\n  padding-right: 2px;\n}\n.bar .sections .end .desktop_controls .music:hover label, .bar .sections .end .desktop_controls .audio:hover label, .bar .sections .end .desktop_controls .system:hover label, .bar .sections .end .desktop_controls .battery:hover label, .bar .sections .end .desktop_controls .screenshot:hover label {\n  color: #BFC6D1;\n}\n.bar .sections .end .desktop_controls .battery {\n  font-size: 21px;\n}\n.bar .sections .end .desktop_controls .battery.discharging {\n  padding-right: 0;\n}\n.bar .sections .end .desktop_controls .battery.charging {\n  padding-right: 4px;\n}\n.bar .sections .end .desktop_controls .system {\n  padding-right: 4px;\n}\n.bar .sections .end .desktop_controls .screenshot {\n  padding-right: 6px;\n}\n.bar .sections .end .time {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 4px 8px;\n  font-size: 14px;\n  font-weight: 500;\n}\n.bar .sections .end .time:hover {\n  background-color: #4C566A;\n}\n\n.menu {\n  background-color: #434C5E;\n  border-radius: 8px;\n  border: solid #81A1C1 1px;\n  margin: 0 0 8px 8px;\n}\n.menu.audio_controls_menu {\n  min-height: 200px;\n  padding: 1rem;\n}\n.menu.audio_controls_menu .slider_container .slider trough {\n  background-color: #4C566A;\n  border-radius: 8px;\n}\n.menu.audio_controls_menu .slider_container .slider highlight {\n  border-radius: 8px;\n  min-width: 10px;\n}\n.menu.audio_controls_menu .slider_container.global_vol {\n  padding-right: 2px;\n}\n.menu.audio_controls_menu .slider_container.global_vol .slider highlight {\n  background-color: #81A1C1;\n}\n.menu.audio_controls_menu .slider_container.global_vol .slider.mute highlight {\n  background-color: #616E88;\n}\n.menu.audio_controls_menu .slider_container.global_vol .icon {\n  font-size: 15px;\n  padding-right: 4px;\n}\n.menu.audio_controls_menu .slider_container.music_vol {\n  padding-right: 4px;\n}\n.menu.audio_controls_menu .slider_container.music_vol .slider highlight {\n  background-color: #88C0D0;\n}\n.menu.audio_controls_menu .slider_container.music_vol .icon {\n  font-size: 16px;\n}\n.menu.audio_controls_menu .slider_container.mic_vol {\n  padding-right: 4px;\n}\n.menu.audio_controls_menu .slider_container.mic_vol .slider highlight {\n  background-color: #A3BE8C;\n}\n.menu.audio_controls_menu .slider_container.mic_vol .slider.mute highlight {\n  background-color: #616E88;\n}\n.menu.audio_controls_menu .slider_container.mic_vol .icon {\n  font-size: 16px;\n}\n.menu.system_controls_menu {\n  min-height: 200px;\n  padding: 1rem;\n}\n.menu.system_controls_menu .slider_container .slider trough {\n  background-color: #4C566A;\n  border-radius: 8px;\n}\n.menu.system_controls_menu .slider_container .slider highlight {\n  border-radius: 8px;\n  min-width: 10px;\n}\n.menu.system_controls_menu .slider_container.brightness .slider highlight {\n  background-color: #E5E9F0;\n}\n.menu.system_controls_menu .slider_container.brightness .icon {\n  font-size: 15px;\n  padding-right: 6px;\n}\n.menu.battery_menu {\n  min-width: 250px;\n  min-height: 150px;\n}\n.menu.battery_menu .battery_percentage {\n  padding: 1rem 2rem 0 2rem;\n}\n.menu.battery_menu .battery_percentage .icon {\n  font-size: 64px;\n  padding-top: 8px;\n}\n.menu.battery_menu .battery_percentage .icon.discharging {\n  padding-right: 12px;\n}\n.menu.battery_menu .battery_percentage .icon.charging {\n  padding-right: 24px;\n}\n.menu.battery_menu .battery_percentage .percentage {\n  font-size: 64px;\n}\n.menu.battery_menu .battery_info {\n  padding: 0 2rem 2rem 2rem;\n}\n.menu.battery_menu .battery_info .state {\n  font-size: 28px;\n}\n.menu.battery_menu .battery_info .state.charging {\n  color: #A3BE8C;\n}\n.menu.battery_menu .battery_info .time_to_full, .menu.battery_menu .battery_info .time_to_empty {\n  font-size: 16px;\n}\n.menu.battery_menu .divider {\n  background-color: #616E88;\n  min-height: 2px;\n  margin: 1rem 0;\n}\n.menu.calendar_menu calendar {\n  padding: 0.3rem 0.5rem;\n}\n.menu.calendar_menu calendar .today {\n  color: #000;\n}\n.menu.calendar_menu calendar button {\n  color: #D08770;\n}\n\n.sidebar_home {\n  background-color: #3B4252;\n  border-right: solid #616E88 1px;\n  padding: 8px;\n  min-width: 300px;\n}\n.sidebar_home .user_box {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_home .user_box .face {\n  background-size: cover;\n  border: solid #2E3440 0.5px;\n  border-radius: 999px;\n  min-width: 54px;\n  min-height: 54px;\n}\n.sidebar_home .user_box .details .username {\n  font-weight: 900;\n  font-size: 16px;\n  color: #ECEFF4;\n}\n.sidebar_home .user_box .details .wm {\n  font-weight: 900;\n  font-size: 10px;\n  letter-spacing: 2px;\n  color: #EBCB8B;\n}\n.sidebar_home .user_box .power_button {\n  background-color: #2E3440;\n  border-radius: 999px;\n  font-size: 24px;\n  padding: 4px 13px;\n}\n.sidebar_home .user_box .power_button label {\n  color: #BF616A;\n  padding-right: 1px;\n}\n.sidebar_home .user_box .power_menu {\n  background-color: #4C566A;\n  border-radius: 8px;\n  padding: 1rem;\n}\n.sidebar_home .user_box .power_menu .close {\n  border: solid #BF616A 2px;\n}\n.sidebar_home .desktop_controls {\n  border-radius: 8px;\n  margin-top: 10px;\n  padding: 8px;\n}\n.sidebar_home .desktop_controls .buttons .icon {\n  background-color: #616E88;\n  border-radius: 999px;\n  font-size: 32px;\n  padding: 1rem;\n}\n.sidebar_home .desktop_controls .buttons .icon.inactive {\n  color: #BFC6D1;\n}\n.sidebar_home .desktop_controls .buttons .name {\n  color: #616E88;\n  font-weight: 700;\n  font-size: 11px;\n}\n.sidebar_home .desktop_controls .sliders .icon {\n  font-size: 20px;\n}\n.sidebar_home .desktop_controls .sliders scale trough {\n  background-color: #4C566A;\n  border-radius: 8px;\n}\n.sidebar_home .desktop_controls .sliders scale highlight {\n  background-color: #81A1C1;\n  border-radius: 8px;\n  min-height: 16px;\n}\n.sidebar_home .music_player {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_home .music_player .cover {\n  background-size: cover;\n  border-radius: 8px;\n  min-width: 150px;\n  min-height: 150px;\n}\n.sidebar_home .music_player .right {\n  padding: 0.8rem 0;\n}\n.sidebar_home .music_player .right .meta .title {\n  font-size: 20px;\n  font-weight: 900;\n}\n.sidebar_home .music_player .right .meta .artist {\n  color: #EBCB8B;\n  font-weight: 900;\n}\n.sidebar_home .music_player .right .controls .control {\n  border-radius: 8px;\n  font-size: 24px;\n  padding: 0 8px;\n}\n.sidebar_home .music_player .right .position {\n  margin-top: 4px;\n}\n.sidebar_home .music_player .right .position .progress {\n  min-width: 20px;\n}\n.sidebar_home .music_player .right .position .progress trough {\n  background-color: #4C566A;\n  border-radius: 8px;\n}\n.sidebar_home .music_player .right .position .progress trough progress {\n  background-color: #E5E9F0;\n  border-radius: 8px;\n}\n.sidebar_home .music_player .right .position .meta {\n  font-size: 10px;\n}\n.sidebar_home .music_player .right .position .meta .current_progress, .sidebar_home .music_player .right .position .meta .length {\n  color: #616E88;\n}\n.sidebar_home .notification_center {\n  background-color: #434C5E;\n  border-radius: 8px;\n  margin-top: 1rem;\n  padding: 8px;\n}\n.sidebar_home .notification_center .header .title {\n  font-size: 16px;\n  font-weight: 900;\n}\n.sidebar_home .notification_center .header .clear_notifications {\n  border-radius: 999px;\n  font-size: 24px;\n  font-weight: 900;\n  padding: 3px 11px 3px 9px;\n}\n.sidebar_home .notification_center .header .clear_notifications:hover label {\n  color: #616E88;\n}\n.sidebar_home .notification_center .notifications .notification {\n  background-color: #4C566A;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_home .notification_center .notifications .notification .image {\n  background-size: cover;\n  background-repeat: no-repeat;\n  border-radius: 8px;\n  min-width: 80px;\n  min-height: 80px;\n}\n.sidebar_home .notification_center .notifications .notification .meta {\n  padding: 4px 0;\n}\n.sidebar_home .notification_center .notifications .notification .meta .appname {\n  letter-spacing: 2px;\n  font-weight: 900;\n  font-size: 9px;\n  color: #EBCB8B;\n}\n.sidebar_home .notification_center .notifications .notification .meta .summary {\n  color: #616E88;\n}\n.sidebar_home .notification_center .no_notification {\n  margin-top: 3rem;\n}\n.sidebar_home .notification_center .no_notification .icon {\n  font-size: 84px;\n  color: #616E88;\n  padding-right: 12px;\n}\n.sidebar_home .notification_center .no_notification .text {\n  font-size: 24px;\n  margin-top: 1rem;\n  color: #616E88;\n}\n.sidebar_home .notification_center .dismiss_notification {\n  padding-right: 4px;\n}\n.sidebar_home .notification_center .dismiss_notification label {\n  font-size: 14px;\n}\n\n.sidebar_appLauncher {\n  background-color: #3B4252;\n  border-right: solid #616E88 1px;\n  padding: 8px;\n  min-width: 300px;\n}\n.sidebar_appLauncher .header {\n  background-color: #4C566A;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_appLauncher .header .icon {\n  font-size: 20px;\n  font-weight: 200;\n}\n.sidebar_appLauncher .header .input_container .input {\n  border: solid #616E88 1px;\n  border-radius: 8px;\n  font-size: 16px;\n  padding: 4px 8px;\n}\n.sidebar_appLauncher .header .input_container .placeholder {\n  font-weight: 900;\n  font-size: 16px;\n  color: #616E88;\n  padding-left: 12px;\n}\n.sidebar_appLauncher .apps .app {\n  background-color: #434C5E;\n  border-radius: 8px;\n  padding: 8px;\n}\n.sidebar_appLauncher .apps .app:hover {\n  background-color: #4C566A;\n}\n.sidebar_appLauncher .apps .app.selected, .sidebar_appLauncher .apps .app:focus {\n  background-color: #81A1C1;\n}\n\n.wallpapers {\n  background-color: #3B4252;\n  border-right: solid #616E88 1px;\n  padding: 8px;\n  min-width: 300px;\n}\n.wallpapers .list .wallpaper .img {\n  background-size: cover;\n  background-position: center;\n  min-height: 180px;\n  border-radius: 8px;\n}\n\n.notification_popups {\n  padding: 8px;\n}\n.notification_popups .notification {\n  background-color: #434C5E;\n  border-radius: 8px;\n  border: solid #81A1C1 0.5px;\n  min-width: 300px;\n  padding: 12px;\n}\n.notification_popups .notification .image {\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center;\n  border-radius: 8px;\n  min-width: 80px;\n  min-height: 80px;\n}\n.notification_popups .meta {\n  padding: 8px 0;\n}\n.notification_popups .meta .appname {\n  letter-spacing: 2px;\n  font-weight: 900;\n  font-size: 9px;\n  color: #EBCB8B;\n}\n.notification_popups .meta .summary {\n  color: #616E88;\n}';
+
+// requestHandler.ts
+function handleSideBar(request) {
+  const [state, shown] = request;
+  if (!state) return `err [msg="'state' is required"]`;
+  if (!shown) return `err [msg="'shown' is required"]`;
+  if (state === "toggle") {
+    switch (shown) {
+      case "home":
+        revealSideBar.set(!revealSideBar.get());
+        return `ok [cmd="toggle",state=${revealSideBar.get()},shown="${sideBarShown.get()}"]`;
+      case "appLauncher":
+      case "wallpapers":
+        if (!revealSideBar.get()) revealSideBar.set(true);
+        sideBarShown.set(sideBarShown.get() === shown ? "home" : shown);
+        return `ok [cmd="toggle",state=${revealSideBar.get()},shown="${sideBarShown.get()}"]`;
+    }
+  }
+  if (state === "open") {
+    sideBarShown.set(shown);
+    revealSideBar.set(true);
+    return `ok [cmd="open",state=${revealSideBar.get()},shown="${sideBarShown.get()}"]`;
+  }
+  if (state === "close") {
+    sideBarShown.set("home");
+    revealSideBar.set(false);
+    return `ok [cmd="close",state=${revealSideBar.get()}]`;
+  }
+  return 'err [msg="unknown request"]';
+}
+function requestHandler(request, res) {
+  if (request.startsWith("sidebar")) {
+    const result = handleSideBar(request.split(":").slice(-2));
+    return res(result);
+  }
+}
+
+// app.ts
+app_default.start({
+  css: styles_default,
+  main() {
+    const mainMonitor = app_default.get_monitors().at(0);
+    Bar_default(mainMonitor);
+    NotificationPopups_default(mainMonitor);
+  },
+  requestHandler
+});
