@@ -3,7 +3,7 @@ import MprisService from 'gi://AstalMpris'
 import { Gtk } from 'astal/gtk3'
 import { bind } from 'astal'
 
-import ProgressBar from '../../../../../widgets/ProgressBar'
+import ProgressBar from '@widgets/ProgressBar'
 
 const spotify = MprisService.Player.new('spotify')
 

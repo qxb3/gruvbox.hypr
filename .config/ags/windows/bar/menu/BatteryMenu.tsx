@@ -3,7 +3,7 @@ import BatteryService from 'gi://AstalBattery'
 import { App, Astal, Gtk } from 'astal/gtk3'
 import { bind } from 'astal'
 
-import BatteryIcon from '../../../widgets/BatteryIcon'
+import BatteryIcon from '@widgets/BatteryIcon'
 
 import { revealBatteryMenu } from './vars'
 

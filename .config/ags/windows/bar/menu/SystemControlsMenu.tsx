@@ -1,4 +1,4 @@
-import BrightnessService from '../../../services/BrightnessService'
+import BrightnessService from '@services/BrightnessService'
 
 import { App, Astal, Gtk } from 'astal/gtk3'
 import { bind } from 'astal'

@@ -1,11 +1,11 @@
 #!/usr/bin/gjs -m
 
-import "./globals"
+import './globals'
 
 import { App } from 'astal/gtk3'
 
-import Bar from './windows/bar/Bar'
-import NotificationPopups from './windows/notificationPopups/NotificationPopups'
+import Bar from '@windows/bar/Bar'
+import NotificationPopups from '@windows/notificationPopups/NotificationPopups'
 import style from './styles.scss'
 
 import requestHandler from './requestHandler'

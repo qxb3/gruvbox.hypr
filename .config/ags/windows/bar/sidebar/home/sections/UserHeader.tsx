@@ -1,7 +1,7 @@
 import { Gtk } from 'astal/gtk3'
 import { exec, execAsync, Variable } from 'astal'
 
-import { revealSideBar } from '../../vars'
+import { revealSideBar } from '@windows/bar/sidebar/vars'
 
 const powerMenuShown = Variable('power_button')
 const powerMenuTransitionType = Variable(Gtk.StackTransitionType.SLIDE_LEFT)

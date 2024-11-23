@@ -5,7 +5,7 @@ import BatteryService from 'gi://AstalBattery'
 import { App, Astal, Gtk, Gdk } from 'astal/gtk3'
 import { bind, exec, execAsync, timeout } from 'astal'
 
-import BatteryIcon from '../../widgets/BatteryIcon'
+import BatteryIcon from '@widgets/BatteryIcon'
 
 import AudioControlsMenu from './menu/AudioControlsMenu'
 import SystemControlsMenu from './menu/SystemControlsMenu'
@@ -99,21 +99,21 @@ function StartSection() {
         <label label='󰸉' />
       </button>
 
-      {/* Colors Button */}
+      {/* Themes Button */}
       <button
         className={
           sideBarShown(shown =>
-            shown === 'colors'
-              ? 'colors_button active'
-              : 'colors_button'
+            shown === 'themes'
+              ? 'themes_button active'
+              : 'themes_button'
           )
         }
         cursor='pointer'
         onClick={() => {
           sideBarShown.set(
-            sideBarShown.get() === 'colors'
+            sideBarShown.get() === 'themes'
               ? 'home'
-              : 'colors'
+              : 'themes'
           )
           revealSideBar.set(true)
         }}>
