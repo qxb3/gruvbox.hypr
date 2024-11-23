@@ -67,7 +67,12 @@ function StartSection() {
         }
         cursor='pointer'
         onClick={() => {
-          sideBarShown.set('appLauncher')
+          sideBarShown.set(
+            sideBarShown.get() === 'appLauncher'
+              ? 'home'
+              : 'appLauncher'
+          )
+
           revealSideBar.set(true)
         }}>
         <label label='' />
@@ -84,11 +89,37 @@ function StartSection() {
         }
         cursor='pointer'
         onClick={() => {
-          sideBarShown.set('wallpapers')
+          sideBarShown.set(
+            sideBarShown.get() === 'wallpapers'
+              ? 'home'
+              : 'wallpapers'
+          )
           revealSideBar.set(true)
         }}>
         <label label='󰸉' />
       </button>
+
+      {/* Colors Button */}
+      <button
+        className={
+          sideBarShown(shown =>
+            shown === 'colors'
+              ? 'colors_button active'
+              : 'colors_button'
+          )
+        }
+        cursor='pointer'
+        onClick={() => {
+          sideBarShown.set(
+            sideBarShown.get() === 'colors'
+              ? 'home'
+              : 'colors'
+          )
+          revealSideBar.set(true)
+        }}>
+        <label label='' />
+      </button>
+
 
       {/* Systray */}
       <box
