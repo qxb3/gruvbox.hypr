@@ -369,7 +369,7 @@ var variable_default = Variable;
 
 // globals.ts
 var user = exec(`whoami`);
-var homeDir = `/home/${user}`;
+var homeDir = exec(`bash -c 'echo $HOME'`);
 Object.assign(globalThis, {
   USER: user,
   HOME_DIR: homeDir,
