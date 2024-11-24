@@ -11,6 +11,7 @@ fi
 
 WALLPAPERS_PATH="$HOME/.config/swww"
 KITTY_PATH="$HOME/.config/kitty"
+NVIM_PATH="$HOME/.config/nvim"
 
 sync_wallpapers() {
   theme=$1
@@ -40,7 +41,7 @@ sync_wallpapers() {
 sync_kitty() {
   theme=$1
   if [ -z $theme ]; then
-    echo 'sync_wallpapers <theme> is required'
+    echo 'sync_kitty <theme> is required'
     exit 1
   fi
 
@@ -48,5 +49,17 @@ sync_kitty() {
   killall -USR1 kitty
 }
 
+sync_nvim() {
+  theme=$1
+  if [ -z $theme ]; then
+    echo 'sync_nvim <theme> is required'
+    exit 1
+  fi
+
+  ln -sf "$NVIM_PATH/lua/core/themes/$theme.lua" "$NVIM_PATH/lua/core/themes/current.lua"
+  nvim --server /tmp/nvim --remote-send ':source ~/.config/nvim/lua/core/themes/current.lua<CR>'
+}
+
 sync_wallpapers $theme
 sync_kitty $theme
+sync_nvim $theme

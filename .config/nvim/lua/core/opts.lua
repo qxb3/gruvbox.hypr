@@ -48,8 +48,7 @@ option.updatetime = 4000
 -- Colorscheme                                            --
 ------------------------------------------------------------
 
-vim.o.background = 'dark'
-vim.cmd('colorscheme nord')
+require('core/themes/current')
 
 ------------------------------------------------------------
 -- Vim Remaps                                             --

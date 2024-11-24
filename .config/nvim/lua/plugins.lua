@@ -95,6 +95,8 @@ require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'        -- Dev icons with color
   use 'xiyaowong/transparent.nvim'          -- Remove Background
   use 'shaunsingh/nord.nvim'                -- Nord Colorscheme
+  use 'ellisonleao/gruvbox.nvim'            -- Gruvbox Colorscheme
+  use 'nyoom-engineering/oxocarbon.nvim'    -- Oxocarbon Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins                                         --
