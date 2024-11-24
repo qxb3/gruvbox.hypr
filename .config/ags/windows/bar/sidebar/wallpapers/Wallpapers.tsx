@@ -29,7 +29,7 @@ function Wallpapers() {
             className='wallpaper'
             cursor='pointer'
             onClick={() => {
-              exec(`ln -sf ${wallpaper} ${WALLPAPERS_PATH}/current.walls`)
+              exec(`ln -sf ${wallpaper} ${WALLPAPERS_PATH}/current.walls/current.set`)
               execAsync(`swww img ${wallpaper} --transition-type "wipe" --transition-duration 3`)
 
               execAsync(`rm -rf ${HOME_DIR}/.cache/fastfetch/images`)
