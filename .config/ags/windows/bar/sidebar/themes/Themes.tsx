@@ -3,6 +3,11 @@ import { exec, execAsync, readFile } from 'astal'
 
 import FlowBox from '@widgets/FlowBox'
 
+import {
+  revealSideBar,
+  sideBarShown
+} from '../vars'
+
 interface ThemeColor {
   name: string
   color: string
@@ -94,7 +99,27 @@ function ApplyThemeButton({ theme }: { theme: Theme}) {
           )!.color
         }`
       }
-      onClick={() => execAsync(`bash -c '${SRC}/themes/script.sh ${theme.name} ${DEV}'`)}>
+      onClick={() => {
+        const currentTheme =
+          exec(`readlink ${SRC}/themes/current.scss`)
+            .split('/')
+            .pop()!
+            .replace('.scss', '')
+
+        if (currentTheme === theme.name)
+          return execAsync(`notify-send 'Theme Manager' 'Already have the same theme'`)
+
+        if (currentTheme !== theme.name) {
+          // Symlink the theme and css hot reload will do the rest
+          exec(`ln -sf ${theme.path} ${SRC}/themes/current.scss`)
+
+          // Sync other stuff to the current colorscheme
+          execAsync(`bash -c '${SRC}/themes/sync.sh ${theme.name}'`)
+        }
+
+        sideBarShown.set('home')
+        revealSideBar.set(false)
+      }}>
       <label
         label='Apply Theme'
         css={

@@ -15,6 +15,22 @@ $green:     #99b035;
 $yellow:    #d0a929;
 $orange:    #c85d1f;
 $blue:      #6f8b99;
-$purple:    #9f5f83;
+$purple:    #FF7EB6;
 $aqua:      #4c9f8d;
-$gray:      #7a6f5a;
+$gray:      #737373;
+
+.bar {
+  border-right: solid $fg 1px;
+
+  & .sections {
+    & .center {
+      & .workspace {
+        & .button {
+          &.active {
+            background-color: $purple;
+          }
+        }
+      }
+    }
+  }
+}

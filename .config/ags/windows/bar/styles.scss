@@ -36,7 +36,6 @@
   background-color: $bg;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  border-right: solid $blue 1px;
 
   & .divider {
     background-color: $bg1;
@@ -122,14 +121,8 @@
           min-height: 24px;
           transition: all 300ms cubic-bezier(1, 0, 0, 1);
 
-          &.active {
-            background-color: $blue;
-            min-height: 42px;
-          }
-
-          &:hover {
-            background-color: $fg2;
-          }
+          &.active { min-height: 42px; }
+          &:hover { background-color: $fg2; }
         }
       }
     }

@@ -16,5 +16,8 @@ import { exec, monitorFile } from 'astal'
     }
   }
 
-  scssFiles.forEach(file => monitorFile(file, compile))
+  scssFiles
+    .forEach(file =>
+      monitorFile(file, compile)
+    )
 })()

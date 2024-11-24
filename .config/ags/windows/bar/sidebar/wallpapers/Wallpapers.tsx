@@ -1,10 +1,22 @@
-import { exec, execAsync } from 'astal'
-import { revealSideBar, sideBarShown } from '../vars'
+import { exec, execAsync, monitorFile, Variable } from 'astal'
+
+import {
+  revealSideBar,
+  sideBarShown
+} from '../vars'
+
+function getWallpapers() {
+  return exec(`find -L ${WALLPAPERS_PATH}/current.walls -iname '*.png' -or -iname '*.jpg'`)
+    .split('\n')
+}
 
 function Wallpapers() {
-  const wallpapers =
-    exec(`find -L ${WALLPAPERS_PATH}/current.walls -iname '*.png' -or -iname '*.jpg'`)
-      .split('\n')
+  const wallpapers = Variable<string[]>(getWallpapers())
+
+  monitorFile(
+    `${WALLPAPERS_PATH}/.changed`,
+    () => wallpapers.set(getWallpapers())
+  )
 
   return (
     <scrollable vexpand={true}>
@@ -12,7 +24,7 @@ function Wallpapers() {
         className='list'
         vertical={true}
         spacing={12}>
-        {wallpapers.map(wallpaper => (
+        {wallpapers(wallpapers => wallpapers.map(wallpaper => (
           <button
             className='wallpaper'
             cursor='pointer'
@@ -31,7 +43,7 @@ function Wallpapers() {
               css={`background-image: url("${wallpaper}");`}
             />
           </button>
-        ))}
+        )))}
       </box>
     </scrollable>
   )
