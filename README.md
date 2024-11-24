@@ -1,4 +1,4 @@
-<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/logo.png"><br><br>
+<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-beyond/repo/logo.png"><br><br>
 
 &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
@@ -9,10 +9,10 @@
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/1.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/2.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/3.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/4.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-beyond/repo/1.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-beyond/repo/2.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-beyond/repo/3.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-beyond/repo/4.png" />
 </p>
 
 <br>
@@ -53,7 +53,7 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
-  <tr><td>swaylock</td><td>screen locker</td></tr>
+  <tr><td>hyprlock</td><td>screen locker</td></tr>
   <tr><td>ags (v2)</td><td>aylur's gtk widget</td></tr></table>
 </td></tr></table>
 
@@ -63,7 +63,7 @@ cp -r .scripts ~/ # Optional
   <code>s</code><br><code>h</code><br><code>e</code><br><code>l</code><br><code>l</code></td><td><table>
   <tr><td>zsh</td><td>main shell</td></tr>
   <tr><td>neovim</td><td>text editor</td></tr>
-  <tr><td>neofetch</td><td>beautiful sys info</td></tr></table>
+  <tr><td>fastfetch</td><td>new system info fetcher</td></tr></table>
 </td></tr></table>
 
 <br>
