@@ -62,14 +62,12 @@
 
     & .buttons {
       & .icon {
-        background-color: $gray;
+        background-color: $bg1;
         border-radius: 999px;
         font-size: 32px;
         padding: 1rem;
 
-        &.inactive {
-          color: $fg2;
-        }
+        &.inactive { color: $fg2; }
       }
 
       & .name {

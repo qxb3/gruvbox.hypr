@@ -33,7 +33,7 @@ function Wallpapers() {
               execAsync(`swww img ${wallpaper} --transition-type "wipe" --transition-duration 3`)
 
               execAsync(`rm -rf ${HOME_DIR}/.cache/fastfetch/images`)
-              execAsync(`magick ${wallpaper} -gravity Center -crop 1:1 -resize 500x500 +repage ${WALLPAPERS_PATH}/current.crop`)
+              execAsync(`magick ${wallpaper} -gravity Center -crop 1:1 -resize 500x500 +repage ${WALLPAPERS_PATH}/current.walls/current.crop`)
 
               sideBarShown.set('home')
               revealSideBar.set(false)
