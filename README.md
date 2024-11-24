@@ -46,7 +46,7 @@
 </summary>
   <p></p>
 
-  # [~/yume[nord].](https://github.com/qxb3/gruvbox.hypr/tree/yume-nord) ~ Yume but in nord theme.
+  # [~/yume[nord].](https://github.com/qxb3/gruvbox.hypr/tree/yume-beyond) ~ Yume with extra features.
 
   <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/1.png" />
   <p></p>
@@ -66,7 +66,7 @@
   <p></p>
   <p></p>
 
-  # [~/ishi[dark].](https://github.com/qxb3/gruvbox.hypr/tree/ishi) ~ A paper styled rice.
+  # [~/ishi[dark].](https://github.com/qxb3/gruvbox.hypr/tree/ishi) ~ A stone styled rice.
 
   <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ishi/repo/1.png" />
 
