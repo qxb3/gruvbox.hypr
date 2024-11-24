@@ -1,1 +1,1 @@
-/home/qxb3/.config/nvim/lua/core/themes/nord.lua
+/home/qxb3/.config/nvim/lua/core/themes/oxocarbon.lua
