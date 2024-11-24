@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "DEV=false ags run",
-    "dev": "nodemon --ext ts,tsx,scss --exec 'DEV=true ags run'"
+    "dev": "nodemon --ext ts,tsx --exec 'DEV=true ags run'"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

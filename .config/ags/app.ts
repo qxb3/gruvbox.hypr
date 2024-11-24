@@ -1,6 +1,7 @@
 #!/usr/bin/gjs -m
 
 import './globals'
+import './cssHotReload'
 
 import { App } from 'astal/gtk3'
 
