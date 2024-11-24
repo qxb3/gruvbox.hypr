@@ -94,7 +94,7 @@ function ApplyThemeButton({ theme }: { theme: Theme}) {
           )!.color
         }`
       }
-      onClick={() => execAsync(`bash -c '${SRC}/themes/script.sh ${theme.path} ${DEV}'`)}>
+      onClick={() => execAsync(`bash -c '${SRC}/themes/script.sh ${theme.name} ${DEV}'`)}>
       <label
         label='Apply Theme'
         css={
