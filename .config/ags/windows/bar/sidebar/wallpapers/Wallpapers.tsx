@@ -6,7 +6,7 @@ import {
 } from '../vars'
 
 function getWallpapers() {
-  return exec(`find -L ${WALLPAPERS_PATH}/current.walls -iname '*.png' -or -iname '*.jpg'`)
+  return exec(`find -L ${TMP}/wallpapers -iname '*.png' -or -iname '*.jpg'`)
     .split('\n')
 }
 
@@ -14,7 +14,7 @@ function Wallpapers() {
   const wallpapers = Variable<string[]>(getWallpapers())
 
   monitorFile(
-    `${WALLPAPERS_PATH}/.changed`,
+    `${TMP}/wallpapers_changed`,
     () => wallpapers.set(getWallpapers())
   )
 
@@ -29,11 +29,11 @@ function Wallpapers() {
             className='wallpaper'
             cursor='pointer'
             onClick={() => {
-              exec(`ln -sf ${wallpaper} ${WALLPAPERS_PATH}/current.walls/current.set`)
-              execAsync(`swww img ${wallpaper} --transition-type "wipe" --transition-duration 3`)
+              exec(`ln -sf ${wallpaper} ${TMP}/current_wallpaper`)
+              execAsync(`swww img ${TMP}/current_wallpaper --transition-type "wipe" --transition-duration 3`)
 
               execAsync(`rm -rf ${HOME_DIR}/.cache/fastfetch/images`)
-              execAsync(`magick ${wallpaper} -gravity Center -crop 1:1 -resize 500x500 +repage ${WALLPAPERS_PATH}/current.walls/current.crop`)
+              execAsync(`magick ${wallpaper} -gravity Center -crop 1:1 -resize 500x500 +repage ${TMP}/current_wallpaper.crop`)
 
               sideBarShown.set('home')
               revealSideBar.set(false)

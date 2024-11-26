@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# sync.sh
+# Sync ricable things to the current theme
+
 theme=$1
 
 if [ -z $theme ]; then
@@ -12,6 +15,7 @@ fi
 WALLPAPERS_PATH="$HOME/.config/swww"
 KITTY_PATH="$HOME/.config/kitty"
 NVIM_PATH="$HOME/.config/nvim"
+TMP="/tmp"
 
 sync_wallpapers() {
   theme=$1
@@ -20,20 +24,20 @@ sync_wallpapers() {
     exit 1
   fi
 
-  current_wall="$WALLPAPERS_PATH/current.walls"
+  current_wall="$TMP/wallpapers"
 
   rm -rf $current_wall
-  rm -rf ~/.config/swww/current.walls
-  ln -sf "$WALLPAPERS_PATH/$theme" $current_wall
+  ln -sf "$WALLPAPERS_PATH/$theme" "$TMP/wallpapers"
+  ln -sf "$WALLPAPERS_PATH/$theme/default.png" "$TMP/current_wallpaper"
 
   # Since monitorFile cant work with symlinks
   # This is a shitty workaround to get updates
   # This just modify a file that change 0 to 1 and vice versa
-  [ "$(cat "$WALLPAPERS_PATH/.changed")" = "0" ] && \
-    echo "1" > "$WALLPAPERS_PATH/.changed" || \
-    echo "0" > "$WALLPAPERS_PATH/.changed"
+  [ "$(cat "$TMP/wallpapers_changed")" = "0" ] && \
+    echo "1" > "$TMP/wallpapers_changed" || \
+    echo "0" > "$TMP/wallpapers_changed"
 
-  swww img "$current_wall/current.set" \
+  swww img "$TMP/current_wallpaper" \
     --transition-type "wipe" \
     --transition-duration 3
 }
@@ -45,7 +49,7 @@ sync_kitty() {
     exit 1
   fi
 
-  ln -sf "$KITTY_PATH/themes/$theme.conf" "$KITTY_PATH/themes/current.set"
+  ln -sf "$KITTY_PATH/themes/$theme.conf" "$TMP/kitty_theme.conf"
   killall -USR1 kitty
 }
 
@@ -56,8 +60,10 @@ sync_nvim() {
     exit 1
   fi
 
-  ln -sf "$NVIM_PATH/lua/core/themes/$theme.lua" "$NVIM_PATH/lua/core/themes/current.lua"
-  nvim --server /tmp/nvim --remote-send ':source ~/.config/nvim/lua/core/themes/current.lua<CR>'
+  ln -sf "$NVIM_PATH/lua/core/themes/$theme.lua" "$TMP/nvim_theme.lua"
+  nvim \
+    --server /tmp/nvim \
+    --remote-send ":source $TMP/nvim_theme.lua<CR>"
 }
 
 sync_wallpapers $theme

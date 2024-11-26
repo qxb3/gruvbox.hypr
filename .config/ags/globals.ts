@@ -7,7 +7,7 @@ const homeDir = exec(`bash -c 'echo $HOME'`)
 declare global {
   const USER: string
   const HOME_DIR: string
-  const WALLPAPERS_PATH: string
+  const TMP: string
 
   const ANIMATION_SPEED: number
 
@@ -17,7 +17,7 @@ declare global {
 Object.assign(globalThis, {
   USER: user,
   HOME_DIR: homeDir,
-  WALLPAPERS_PATH: `${homeDir}/.config/swww`,
+  TMP: '/tmp',
 
   ANIMATION_SPEED: 300,
 

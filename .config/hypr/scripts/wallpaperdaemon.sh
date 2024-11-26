@@ -4,7 +4,7 @@ swww query
 if [ $? -eq 1 ]; then
   swww-daemon --format xrgb &
 
-  swww img ~/.config/swww/current.walls/current.set \
+  swww img /tmp/current_wallpaper \
     --transition-type "wipe" \
-    --transition-duration 2
+    --transition-duration 3
 fi
