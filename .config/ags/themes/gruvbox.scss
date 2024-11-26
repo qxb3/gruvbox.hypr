@@ -32,3 +32,27 @@ $gray:      #928374;
     }
   }
 }
+
+.sidebar_home {
+  & .music_player {
+    & .right {
+      & .meta {
+        & .artist {
+          color: $yellow;
+        }
+      }
+    }
+  }
+
+  & .notification_center {
+    & .notifications {
+      & .notification {
+        & .meta {
+          & .appname {
+            color: $yellow;
+          }
+        }
+      }
+    }
+  }
+}

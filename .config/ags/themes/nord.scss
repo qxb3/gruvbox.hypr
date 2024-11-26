@@ -34,3 +34,27 @@ $gray:      #616E88;
     }
   }
 }
+
+.sidebar_home {
+  & .music_player {
+    & .right {
+      & .meta {
+        & .artist {
+          color: $blue;
+        }
+      }
+    }
+  }
+
+  & .notification_center {
+    & .notifications {
+      & .notification {
+        & .meta {
+          & .appname {
+            color: $blue;
+          }
+        }
+      }
+    }
+  }
+}
