@@ -13,6 +13,7 @@ if [ -z $theme ]; then
 fi
 
 WALLPAPERS_PATH="$HOME/.config/swww"
+HYPR_PATH="$HOME/.config/hypr"
 KITTY_PATH="$HOME/.config/kitty"
 NVIM_PATH="$HOME/.config/nvim"
 TMP="/tmp"
@@ -42,6 +43,17 @@ sync_wallpapers() {
     --transition-duration 3
 }
 
+sync_hypr() {
+  theme=$1
+  if [ -z $theme ]; then
+    echo 'sync_hypr <theme> is required'
+    exit 1
+  fi
+
+  ln -sf "$HYPR_PATH/themes/$theme.conf" "$TMP/hypr_theme.conf"
+  hyprctl reload
+}
+
 sync_kitty() {
   theme=$1
   if [ -z $theme ]; then
@@ -67,5 +79,6 @@ sync_nvim() {
 }
 
 sync_wallpapers $theme
+sync_hypr $theme
 sync_kitty $theme
 sync_nvim $theme

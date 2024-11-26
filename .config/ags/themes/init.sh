@@ -4,6 +4,7 @@
 # Initialize symlinks of theme defaults (nord) on /tmp
 
 WALLPAPERS_PATH="$HOME/.config/swww"
+HYPR_THEME="$HOME/.config/hypr"
 AGS_PATH="$HOME/.config/ags"
 KITTY_PATH="$HOME/.config/kitty"
 NVIM_PATH="$HOME/.config/nvim"
@@ -18,6 +19,15 @@ if [[ ! -e "$TMP/wallpapers" && ! -e "$TMP/current_wallpaper" ]]; then
   echo "> Init Wallpapers"
 else
   echo "> Init Wallpapers (Already Exists)"
+fi
+
+# Init Nord Hypr Theme
+if [ ! -e "$TMP/hypr_theme.conf" ]; then
+  ln -s "$HYPR_THEME/themes/nord.conf" "$TMP/hypr_theme.conf"
+
+  echo "> Init Hypr"
+else
+  echo "> Init Hypr (Already Exists)"
 fi
 
 # Init Nord AGS Theme
