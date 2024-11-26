@@ -281,6 +281,7 @@ export default function(gdkmonitor: Gdk.Monitor) {
       application={App}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.IGNORE}
+      layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
       keymode={
         sideBarShown(shown =>
@@ -295,6 +296,7 @@ export default function(gdkmonitor: Gdk.Monitor) {
           application={App}
           gdkmonitor={gdkmonitor}
           exclusivity={Astal.Exclusivity.EXCLUSIVE}
+          layer={Astal.Layer.BOTTOM}
           anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
           setup={(self) => App.add_window(self)}>
           <box
