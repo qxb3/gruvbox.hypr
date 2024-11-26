@@ -1,4 +1,3 @@
-import GLib from 'gi://GLib'
 import { exec } from 'astal'
 
 const user = exec(`whoami`)
@@ -10,8 +9,6 @@ declare global {
   const TMP: string
 
   const ANIMATION_SPEED: number
-
-  const DEV: boolean
 }
 
 Object.assign(globalThis, {
@@ -19,7 +16,5 @@ Object.assign(globalThis, {
   HOME_DIR: homeDir,
   TMP: '/tmp',
 
-  ANIMATION_SPEED: 300,
-
-  DEV: GLib.getenv('DEV') ?? false
+  ANIMATION_SPEED: 300
 })

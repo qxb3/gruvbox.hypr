@@ -4,8 +4,8 @@
   "author": "qxb3",
   "license": "MIT",
   "scripts": {
-    "start": "DEV=false ags run",
-    "dev": "nodemon --ext ts,tsx --exec 'DEV=true ags run'"
+    "start": "ags run",
+    "dev": "nodemon --ext ts,tsx --exec 'ags run'"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
