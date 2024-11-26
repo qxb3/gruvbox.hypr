@@ -280,7 +280,7 @@ export default function(gdkmonitor: Gdk.Monitor) {
       namespace='bar'
       application={App}
       gdkmonitor={gdkmonitor}
-      exclusivity={Astal.Exclusivity.EXCLUSIVE}
+      exclusivity={Astal.Exclusivity.IGNORE}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
       keymode={
         sideBarShown(shown =>
@@ -288,7 +288,20 @@ export default function(gdkmonitor: Gdk.Monitor) {
             ? Astal.Keymode.EXCLUSIVE
             : Astal.Keymode.NONE
         )
-      }>
+      }
+      setup={(bar) => {
+        <window
+          namespace='bar'
+          application={App}
+          gdkmonitor={gdkmonitor}
+          exclusivity={Astal.Exclusivity.EXCLUSIVE}
+          anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
+          setup={(self) => App.add_window(self)}>
+          <box
+            css={`min-width: ${bar.get_allocated_width()}px`}
+          />
+        </window>
+      }}>
       <box>
         <SideBar />
 
