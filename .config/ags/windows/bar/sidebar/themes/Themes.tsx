@@ -1,4 +1,4 @@
-import { App, Gtk } from 'astal/gtk3'
+import { Gtk } from 'astal/gtk3'
 import { exec, execAsync, readFile } from 'astal'
 
 import FlowBox from '@widgets/FlowBox'

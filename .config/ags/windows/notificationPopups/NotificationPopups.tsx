@@ -93,9 +93,7 @@ export default function (gdkmonitor: Gdk.Monitor) {
       exclusivity={Astal.Exclusivity.IGNORE}
       layer={Astal.Layer.OVERLAY}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}>
-      <box css='padding: 0.1px;'>
-        <NotificationPopups />
-      </box>
+      <NotificationPopups />
     </window>
   )
 }
