@@ -6,7 +6,7 @@ import {
 } from '../vars'
 
 function getWallpapers() {
-  return exec(`find -L ${TMP}/wallpapers -iname '*.png' -or -iname '*.jpg'`)
+  return exec(`find -L ${TMP}/wallpapers -iname '*.png' ! -iname 'default.png'`)
     .split('\n')
 }
 
