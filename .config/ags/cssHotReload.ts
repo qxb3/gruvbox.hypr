@@ -7,12 +7,15 @@ import { exec, monitorFile } from 'astal'
     exec(`find -L ${SRC} -iname '*.scss'`)
       .split('\n')
 
+  // Add the symlink ags_theme.scss to the files to watch
+  scssFiles.push('/tmp/ags_theme.scss')
+
   function compile() {
     try {
-      exec(`sass ${SRC}/styles.scss /tmp/styles.scss`)
-      App.apply_css('/tmp/styles.scss')
+      exec(`sass ${SRC}/styles.scss /tmp/styles.css`)
+      App.apply_css('/tmp/styles.css')
     } catch(err) {
-      printerr("Error compiling scss files.", err)
+      printerr('Error compiling scss files.', err)
     }
   }
 

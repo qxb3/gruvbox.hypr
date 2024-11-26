@@ -4,6 +4,7 @@
 # Initialize symlinks of theme defaults (nord) on /tmp
 
 WALLPAPERS_PATH="$HOME/.config/swww"
+AGS_PATH="$HOME/.config/ags"
 KITTY_PATH="$HOME/.config/kitty"
 NVIM_PATH="$HOME/.config/nvim"
 TMP="/tmp"
@@ -17,6 +18,15 @@ if [[ ! -e "$TMP/wallpapers" && ! -e "$TMP/current_wallpaper" ]]; then
   echo "> Init Wallpapers"
 else
   echo "> Init Wallpapers (Already Exists)"
+fi
+
+# Init Nord AGS Theme
+if [ ! -e "$TMP/ags_theme.scss" ]; then
+  ln -s "$AGS_PATH/themes/nord.scss" "$TMP/ags_theme.scss"
+
+  echo "> Init AGS"
+else
+  echo "> Init AGS (Already Exists)"
 fi
 
 # Init Nord Kitty Theme

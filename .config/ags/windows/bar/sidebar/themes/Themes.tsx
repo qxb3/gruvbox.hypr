@@ -1,4 +1,4 @@
-import { Gtk } from 'astal/gtk3'
+import { App, Gtk } from 'astal/gtk3'
 import { exec, execAsync, readFile } from 'astal'
 
 import FlowBox from '@widgets/FlowBox'
@@ -101,7 +101,7 @@ function ApplyThemeButton({ theme }: { theme: Theme}) {
       }
       onClick={() => {
         const currentTheme =
-          exec(`readlink ${SRC}/themes/current.scss`)
+          exec(`readlink ${TMP}/ags_theme.scss`)
             .split('/')
             .pop()!
             .replace('.scss', '')
@@ -111,7 +111,7 @@ function ApplyThemeButton({ theme }: { theme: Theme}) {
 
         if (currentTheme !== theme.name) {
           // Symlink the theme and css hot reload will do the rest
-          exec(`ln -sf ${theme.path} ${SRC}/themes/current.scss`)
+          exec(`ln -sf ${theme.path} ${TMP}/ags_theme.scss`)
 
           // Sync other stuff to the current colorscheme
           execAsync(`bash -c '${SRC}/themes/sync.sh ${theme.name}'`)

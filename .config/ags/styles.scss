@@ -1,10 +1,9 @@
-@import "./themes/current.scss";
+@import "/tmp/ags_theme.scss";
 
 * {
   all: unset;
   font-family: "JetBrainsMono Nerd Font";
   color: $fg;
-  transition: all 500ms cubic-bezier(1, 0, 0, 1);
 }
 
 @import "./windows/bar/styles.scss";
