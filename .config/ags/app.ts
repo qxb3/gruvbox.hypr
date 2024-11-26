@@ -1,18 +1,17 @@
 #!/usr/bin/gjs -m
 
 import './globals'
-import './cssHotReload'
 
 import { App } from 'astal/gtk3'
+import { compileScss } from './cssHotReload'
 
 import Bar from '@windows/bar/Bar'
 import NotificationPopups from '@windows/notificationPopups/NotificationPopups'
-import style from './styles.scss'
 
 import requestHandler from './requestHandler'
 
 App.start({
-  css: style,
+  css: compileScss(),
   main() {
     const mainMonitor = App.get_monitors().at(0)!
 

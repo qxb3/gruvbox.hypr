@@ -1,6 +1,17 @@
 import { App } from 'astal/gtk3'
 import { exec, monitorFile } from 'astal'
 
+export function compileScss(): string {
+  try {
+    exec(`sass ${SRC}/styles.scss ${TMP}/styles.css --load-path="${LOCAL_STATE}"`)
+    App.apply_css('/tmp/styles.css')
+    return `${TMP}/styles.scss`
+  } catch(err) {
+    printerr('Error compiling scss files.', err)
+    return ''
+  }
+}
+
 // Hot Reload Scss
 (function() {
   const scssFiles =
@@ -8,19 +19,13 @@ import { exec, monitorFile } from 'astal'
       .split('\n')
 
   // Add the symlink ags_theme.scss to the files to watch
-  scssFiles.push('/tmp/ags_theme.scss')
+  scssFiles.push(`${HOME_DIR}/.local/state/theme/ags_theme.scss`)
 
-  function compile() {
-    try {
-      exec(`sass ${SRC}/styles.scss /tmp/styles.css`)
-      App.apply_css('/tmp/styles.css')
-    } catch(err) {
-      printerr('Error compiling scss files.', err)
-    }
-  }
+  // Compile scss files at startup
+  compileScss()
 
   scssFiles
     .forEach(file =>
-      monitorFile(file, compile)
+      monitorFile(file, compileScss)
     )
 })()

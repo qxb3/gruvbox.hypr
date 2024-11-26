@@ -48,7 +48,7 @@ option.updatetime = 4000
 -- Colorscheme                                            --
 ------------------------------------------------------------
 
-dofile('/tmp/nvim_theme.lua')
+dofile(vim.fn.expand("~/.local/state/theme/nvim_theme.lua"))
 
 ------------------------------------------------------------
 -- Vim Remaps                                             --

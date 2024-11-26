@@ -101,7 +101,7 @@ function ApplyThemeButton({ theme }: { theme: Theme}) {
       }
       onClick={() => {
         const currentTheme =
-          exec(`readlink ${TMP}/ags_theme.scss`)
+          exec(`readlink ${LOCAL_STATE}/ags_theme.scss`)
             .split('/')
             .pop()!
             .replace('.scss', '')
@@ -111,7 +111,7 @@ function ApplyThemeButton({ theme }: { theme: Theme}) {
 
         if (currentTheme !== theme.name) {
           // Symlink the theme and css hot reload will do the rest
-          exec(`ln -sf ${theme.path} ${TMP}/ags_theme.scss`)
+          exec(`ln -sf ${theme.path} ${LOCAL_STATE}/ags_theme.scss`)
 
           // Sync other stuff to the current colorscheme
           execAsync(`bash -c '${SRC}/themes/sync.sh ${theme.name}'`)
