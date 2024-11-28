@@ -290,7 +290,7 @@ export default function(gdkmonitor: Gdk.Monitor) {
             : Astal.Keymode.NONE
         )
       }
-      setup={() => {
+      setup={(bar) => {
         <window
           namespace='bar'
           application={App}
@@ -299,6 +299,9 @@ export default function(gdkmonitor: Gdk.Monitor) {
           layer={Astal.Layer.BOTTOM}
           anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
           setup={(self) => App.add_window(self)}>
+          <box
+            css={`min-width: ${bar.get_allocated_width()}px`}
+          />
         </window>
       }}>
       <box>
@@ -308,9 +311,9 @@ export default function(gdkmonitor: Gdk.Monitor) {
           <centerbox
             className='sections'
             vertical={true}>
-            <StartSection />
-            <CenterSection />
-            <EndSection />
+            {StartSection()}
+            {CenterSection()}
+            {EndSection()}
           </centerbox>
         </box>
       </box>
