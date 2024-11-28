@@ -2935,9 +2935,9 @@ function Bar_default(gdkmonitor) {
             className: "sections",
             vertical: true,
             children: [
-              StartSection(),
-              CenterSection(),
-              EndSection()
+              /* @__PURE__ */ jsx(StartSection, {}),
+              /* @__PURE__ */ jsx(CenterSection, {}),
+              /* @__PURE__ */ jsx(EndSection, {})
             ]
           }
         ) })
