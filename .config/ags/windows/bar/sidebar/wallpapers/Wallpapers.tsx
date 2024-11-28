@@ -1,9 +1,11 @@
+import { Gtk } from 'astal/gtk3'
 import { exec, execAsync, monitorFile, Variable } from 'astal'
 
 import {
   revealSideBar,
   sideBarShown
 } from '../vars'
+import GdkPixbuf from 'gi://GdkPixbuf?version=2.0'
 
 function getWallpapers() {
   return exec(`find -L ${LOCAL_STATE}/wallpapers -iname '*.png' ! -iname 'default.png'`)
@@ -38,10 +40,13 @@ function Wallpapers() {
               sideBarShown.set('home')
               revealSideBar.set(false)
             }}>
-            <box
-              className='img'
-              css={`background-image: url("${wallpaper}");`}
-            />
+            <overlay>
+              <box className='img_container' />
+              <icon
+                className='img'
+                pixbuf={GdkPixbuf.Pixbuf.new_from_file(wallpaper)}
+              />
+            </overlay>
           </button>
         )))}
       </box>

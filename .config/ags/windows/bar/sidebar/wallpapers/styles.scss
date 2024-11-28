@@ -6,11 +6,13 @@
 
   & .list {
     & .wallpaper {
+      & .img_container {
+        min-height: 200px;
+      }
+
       & .img {
-        background-size: cover;
-        background-position: center;
-        min-height: 180px;
         border-radius: 8px;
+        font-size: 450px;
       }
     }
   }
