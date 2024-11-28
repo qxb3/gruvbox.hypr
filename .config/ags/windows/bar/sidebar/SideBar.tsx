@@ -7,7 +7,7 @@ import Themes from './themes/Themes'
 
 import {
   revealSideBar,
-  sideBarShown
+  sideBarShown,
 } from './vars'
 
 export default function() {
