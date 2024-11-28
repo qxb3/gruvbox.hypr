@@ -311,9 +311,9 @@ export default function(gdkmonitor: Gdk.Monitor) {
           <centerbox
             className='sections'
             vertical={true}>
-            {StartSection()}
-            {CenterSection()}
-            {EndSection()}
+            <StartSection />
+            <CenterSection />
+            <EndSection />
           </centerbox>
         </box>
       </box>
