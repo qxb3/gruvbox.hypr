@@ -1,3 +1,5 @@
+#!/bin/gjs -m
+
 // ../../../../../../../usr/share/astal/gjs/index.ts
 import { default as default3 } from "gi://AstalIO?version=0.1";
 
