@@ -48,7 +48,9 @@ option.updatetime = 4000
 -- Colorscheme                                            --
 ------------------------------------------------------------
 
-dofile(vim.fn.expand("~/.local/state/theme/nvim_theme.lua"))
+vim.o.background = 'light'
+vim.cmd('colorscheme vim-material')
+vim.cmd('highlight Normal guibg=#FFFBE2')
 
 ------------------------------------------------------------
 -- Vim Remaps                                             --
