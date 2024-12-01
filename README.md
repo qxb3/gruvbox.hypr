@@ -75,7 +75,7 @@
 
    # [~/hana.](https://github.com/qxb3/gruvbox.hypr/tree/hana) ~ An old calendar rice.
 
-  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ishi/repo/1.png" />
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/hana/repo/1.png" />
 
 </details>
 
