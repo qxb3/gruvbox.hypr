@@ -1,3 +1,5 @@
+#!/bin/gjs -m
+
 import './globals'
 import './cssHotReload'
 
