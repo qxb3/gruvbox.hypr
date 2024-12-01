@@ -1,0 +1,975 @@
+// ../../../../../../../usr/share/astal/gjs/index.ts
+import { default as default3 } from "gi://AstalIO?version=0.1";
+
+// ../../../../../../../usr/share/astal/gjs/process.ts
+import Astal from "gi://AstalIO";
+var { Process } = Astal;
+function subprocess(argsOrCmd, onOut = print, onErr = printerr) {
+  const args = Array.isArray(argsOrCmd) || typeof argsOrCmd === "string";
+  const { cmd, err, out } = {
+    cmd: args ? argsOrCmd : argsOrCmd.cmd,
+    err: args ? onErr : argsOrCmd.err || onErr,
+    out: args ? onOut : argsOrCmd.out || onOut
+  };
+  const proc = Array.isArray(cmd) ? Astal.Process.subprocessv(cmd) : Astal.Process.subprocess(cmd);
+  proc.connect("stdout", (_, stdout) => out(stdout));
+  proc.connect("stderr", (_, stderr) => err(stderr));
+  return proc;
+}
+function exec(cmd) {
+  return Array.isArray(cmd) ? Astal.Process.execv(cmd) : Astal.Process.exec(cmd);
+}
+function execAsync(cmd) {
+  return new Promise((resolve, reject) => {
+    if (Array.isArray(cmd)) {
+      Astal.Process.exec_asyncv(cmd, (_, res) => {
+        try {
+          resolve(Astal.Process.exec_asyncv_finish(res));
+        } catch (error) {
+          reject(error);
+        }
+      });
+    } else {
+      Astal.Process.exec_async(cmd, (_, res) => {
+        try {
+          resolve(Astal.Process.exec_finish(res));
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
+  });
+}
+
+// ../../../../../../../usr/share/astal/gjs/time.ts
+import Astal2 from "gi://AstalIO";
+var { Time } = Astal2;
+function interval(interval2, callback) {
+  return Astal2.Time.interval(interval2, () => void callback?.());
+}
+
+// ../../../../../../../usr/share/astal/gjs/file.ts
+import Astal3 from "gi://AstalIO";
+import Gio from "gi://Gio?version=2.0";
+function monitorFile(path, callback) {
+  return Astal3.monitor_file(path, (file, event) => {
+    callback(file, event);
+  });
+}
+
+// ../../../../../../../usr/share/astal/gjs/gobject.ts
+import GObject from "gi://GObject";
+import { default as default2 } from "gi://GLib?version=2.0";
+var meta = Symbol("meta");
+var priv = Symbol("priv");
+var { ParamSpec, ParamFlags } = GObject;
+
+// ../../../../../../../usr/share/astal/gjs/binding.ts
+var snakeify = (str) => str.replace(/([a-z])([A-Z])/g, "$1_$2").replaceAll("-", "_").toLowerCase();
+var kebabify = (str) => str.replace(/([a-z])([A-Z])/g, "$1-$2").replaceAll("_", "-").toLowerCase();
+var Binding = class _Binding {
+  transformFn = (v) => v;
+  #emitter;
+  #prop;
+  static bind(emitter, prop) {
+    return new _Binding(emitter, prop);
+  }
+  constructor(emitter, prop) {
+    this.#emitter = emitter;
+    this.#prop = prop && kebabify(prop);
+  }
+  toString() {
+    return `Binding<${this.#emitter}${this.#prop ? `, "${this.#prop}"` : ""}>`;
+  }
+  as(fn) {
+    const bind2 = new _Binding(this.#emitter, this.#prop);
+    bind2.transformFn = (v) => fn(this.transformFn(v));
+    return bind2;
+  }
+  get() {
+    if (typeof this.#emitter.get === "function")
+      return this.transformFn(this.#emitter.get());
+    if (typeof this.#prop === "string") {
+      const getter = `get_${snakeify(this.#prop)}`;
+      if (typeof this.#emitter[getter] === "function")
+        return this.transformFn(this.#emitter[getter]());
+      return this.transformFn(this.#emitter[this.#prop]);
+    }
+    throw Error("can not get value of binding");
+  }
+  subscribe(callback) {
+    if (typeof this.#emitter.subscribe === "function") {
+      return this.#emitter.subscribe(() => {
+        callback(this.get());
+      });
+    } else if (typeof this.#emitter.connect === "function") {
+      const signal = `notify::${this.#prop}`;
+      const id = this.#emitter.connect(signal, () => {
+        callback(this.get());
+      });
+      return () => {
+        this.#emitter.disconnect(id);
+      };
+    }
+    throw Error(`${this.#emitter} is not bindable`);
+  }
+};
+var { bind } = Binding;
+
+// ../../../../../../../usr/share/astal/gjs/variable.ts
+import Astal4 from "gi://AstalIO";
+var VariableWrapper = class extends Function {
+  variable;
+  errHandler = console.error;
+  _value;
+  _poll;
+  _watch;
+  pollInterval = 1e3;
+  pollExec;
+  pollTransform;
+  pollFn;
+  watchTransform;
+  watchExec;
+  constructor(init) {
+    super();
+    this._value = init;
+    this.variable = new Astal4.VariableBase();
+    this.variable.connect("dropped", () => {
+      this.stopWatch();
+      this.stopPoll();
+    });
+    this.variable.connect("error", (_, err) => this.errHandler?.(err));
+    return new Proxy(this, {
+      apply: (target, _, args) => target._call(args[0])
+    });
+  }
+  _call(transform) {
+    const b = Binding.bind(this);
+    return transform ? b.as(transform) : b;
+  }
+  toString() {
+    return String(`Variable<${this.get()}>`);
+  }
+  get() {
+    return this._value;
+  }
+  set(value) {
+    if (value !== this._value) {
+      this._value = value;
+      this.variable.emit("changed");
+    }
+  }
+  startPoll() {
+    if (this._poll)
+      return;
+    if (this.pollFn) {
+      this._poll = interval(this.pollInterval, () => {
+        const v = this.pollFn(this.get());
+        if (v instanceof Promise) {
+          v.then((v2) => this.set(v2)).catch((err) => this.variable.emit("error", err));
+        } else {
+          this.set(v);
+        }
+      });
+    } else if (this.pollExec) {
+      this._poll = interval(this.pollInterval, () => {
+        execAsync(this.pollExec).then((v) => this.set(this.pollTransform(v, this.get()))).catch((err) => this.variable.emit("error", err));
+      });
+    }
+  }
+  startWatch() {
+    if (this._watch)
+      return;
+    this._watch = subprocess({
+      cmd: this.watchExec,
+      out: (out) => this.set(this.watchTransform(out, this.get())),
+      err: (err) => this.variable.emit("error", err)
+    });
+  }
+  stopPoll() {
+    this._poll?.cancel();
+    delete this._poll;
+  }
+  stopWatch() {
+    this._watch?.kill();
+    delete this._watch;
+  }
+  isPolling() {
+    return !!this._poll;
+  }
+  isWatching() {
+    return !!this._watch;
+  }
+  drop() {
+    this.variable.emit("dropped");
+  }
+  onDropped(callback) {
+    this.variable.connect("dropped", callback);
+    return this;
+  }
+  onError(callback) {
+    delete this.errHandler;
+    this.variable.connect("error", (_, err) => callback(err));
+    return this;
+  }
+  subscribe(callback) {
+    const id = this.variable.connect("changed", () => {
+      callback(this.get());
+    });
+    return () => this.variable.disconnect(id);
+  }
+  poll(interval2, exec2, transform = (out) => out) {
+    this.stopPoll();
+    this.pollInterval = interval2;
+    this.pollTransform = transform;
+    if (typeof exec2 === "function") {
+      this.pollFn = exec2;
+      delete this.pollExec;
+    } else {
+      this.pollExec = exec2;
+      delete this.pollFn;
+    }
+    this.startPoll();
+    return this;
+  }
+  watch(exec2, transform = (out) => out) {
+    this.stopWatch();
+    this.watchExec = exec2;
+    this.watchTransform = transform;
+    this.startWatch();
+    return this;
+  }
+  observe(objs, sigOrFn, callback) {
+    const f = typeof sigOrFn === "function" ? sigOrFn : callback ?? (() => this.get());
+    const set = (obj, ...args) => this.set(f(obj, ...args));
+    if (Array.isArray(objs)) {
+      for (const obj of objs) {
+        const [o, s] = obj;
+        const id = o.connect(s, set);
+        this.onDropped(() => o.disconnect(id));
+      }
+    } else {
+      if (typeof sigOrFn === "string") {
+        const id = objs.connect(sigOrFn, set);
+        this.onDropped(() => objs.disconnect(id));
+      }
+    }
+    return this;
+  }
+  static derive(deps, fn = (...args) => args) {
+    const update = () => fn(...deps.map((d) => d.get()));
+    const derived = new Variable(update());
+    const unsubs = deps.map((dep) => dep.subscribe(() => derived.set(update())));
+    derived.onDropped(() => unsubs.map((unsub) => unsub()));
+    return derived;
+  }
+};
+var Variable = new Proxy(VariableWrapper, {
+  apply: (_t, _a, args) => new VariableWrapper(args[0])
+});
+var variable_default = Variable;
+
+// globals.ts
+var user = exec(`whoami`);
+var homeDir = exec(`bash -c 'echo $HOME'`);
+Object.assign(globalThis, {
+  USER: user,
+  HOME_DIR: homeDir,
+  TMP: `/tmp`
+});
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/index.ts
+import Astal8 from "gi://Astal?version=3.0";
+import Gtk4 from "gi://Gtk?version=3.0";
+import Gdk from "gi://Gdk?version=3.0";
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/astalify.ts
+import Astal5 from "gi://Astal?version=3.0";
+import Gtk from "gi://Gtk?version=3.0";
+import GObject2 from "gi://GObject";
+function mergeBindings(array) {
+  function getValues(...args) {
+    let i = 0;
+    return array.map(
+      (value) => value instanceof Binding ? args[i++] : value
+    );
+  }
+  const bindings = array.filter((i) => i instanceof Binding);
+  if (bindings.length === 0)
+    return array;
+  if (bindings.length === 1)
+    return bindings[0].as(getValues);
+  return variable_default.derive(bindings, getValues)();
+}
+function setProp(obj, prop, value) {
+  try {
+    const setter = `set_${snakeify(prop)}`;
+    if (typeof obj[setter] === "function")
+      return obj[setter](value);
+    return obj[prop] = value;
+  } catch (error) {
+    console.error(`could not set property "${prop}" on ${obj}:`, error);
+  }
+}
+function astalify(cls, clsName = cls.name) {
+  class Widget extends cls {
+    get css() {
+      return Astal5.widget_get_css(this);
+    }
+    set css(css) {
+      Astal5.widget_set_css(this, css);
+    }
+    get_css() {
+      return this.css;
+    }
+    set_css(css) {
+      this.css = css;
+    }
+    get className() {
+      return Astal5.widget_get_class_names(this).join(" ");
+    }
+    set className(className) {
+      Astal5.widget_set_class_names(this, className.split(/\s+/));
+    }
+    get_class_name() {
+      return this.className;
+    }
+    set_class_name(className) {
+      this.className = className;
+    }
+    get cursor() {
+      return Astal5.widget_get_cursor(this);
+    }
+    set cursor(cursor) {
+      Astal5.widget_set_cursor(this, cursor);
+    }
+    get_cursor() {
+      return this.cursor;
+    }
+    set_cursor(cursor) {
+      this.cursor = cursor;
+    }
+    get clickThrough() {
+      return Astal5.widget_get_click_through(this);
+    }
+    set clickThrough(clickThrough) {
+      Astal5.widget_set_click_through(this, clickThrough);
+    }
+    get_click_through() {
+      return this.clickThrough;
+    }
+    set_click_through(clickThrough) {
+      this.clickThrough = clickThrough;
+    }
+    get noImplicitDestroy() {
+      return this.__no_implicit_destroy;
+    }
+    set noImplicitDestroy(value) {
+      this.__no_implicit_destroy = value;
+    }
+    _setChildren(children) {
+      children = children.flat(Infinity).map((ch) => ch instanceof Gtk.Widget ? ch : new Gtk.Label({ visible: true, label: String(ch) }));
+      if (this instanceof Gtk.Bin) {
+        const ch = this.get_child();
+        if (ch)
+          this.remove(ch);
+        if (ch && !children.includes(ch) && !this.noImplicitDestroy)
+          ch?.destroy();
+      } else if (this instanceof Gtk.Container) {
+        for (const ch of this.get_children()) {
+          this.remove(ch);
+          if (!children.includes(ch) && !this.noImplicitDestroy)
+            ch?.destroy();
+        }
+      }
+      if (this instanceof Astal5.Box) {
+        this.set_children(children);
+      } else if (this instanceof Astal5.Stack) {
+        this.set_children(children);
+      } else if (this instanceof Astal5.CenterBox) {
+        this.startWidget = children[0];
+        this.centerWidget = children[1];
+        this.endWidget = children[2];
+      } else if (this instanceof Astal5.Overlay) {
+        const [child, ...overlays] = children;
+        this.set_child(child);
+        this.set_overlays(overlays);
+      } else if (this instanceof Gtk.Container) {
+        for (const ch of children)
+          this.add(ch);
+      } else {
+        throw Error(`can not add children to ${this.constructor.name}, it is not a container widget`);
+      }
+    }
+    toggleClassName(cn, cond = true) {
+      Astal5.widget_toggle_class_name(this, cn, cond);
+    }
+    hook(object, signalOrCallback, callback) {
+      if (typeof object.connect === "function" && callback) {
+        const id = object.connect(signalOrCallback, (_, ...args) => {
+          callback(this, ...args);
+        });
+        this.connect("destroy", () => {
+          object.disconnect(id);
+        });
+      } else if (typeof object.subscribe === "function" && typeof signalOrCallback === "function") {
+        const unsub = object.subscribe((...args) => {
+          signalOrCallback(this, ...args);
+        });
+        this.connect("destroy", unsub);
+      }
+      return this;
+    }
+    constructor(...params) {
+      super();
+      const [config] = params;
+      const { setup, child, children = [], ...props } = config;
+      props.visible ??= true;
+      if (child)
+        children.unshift(child);
+      const bindings = Object.keys(props).reduce((acc, prop) => {
+        if (props[prop] instanceof Binding) {
+          const binding = props[prop];
+          delete props[prop];
+          return [...acc, [prop, binding]];
+        }
+        return acc;
+      }, []);
+      const onHandlers = Object.keys(props).reduce((acc, key) => {
+        if (key.startsWith("on")) {
+          const sig = kebabify(key).split("-").slice(1).join("-");
+          const handler = props[key];
+          delete props[key];
+          return [...acc, [sig, handler]];
+        }
+        return acc;
+      }, []);
+      const mergedChildren = mergeBindings(children.flat(Infinity));
+      if (mergedChildren instanceof Binding) {
+        this._setChildren(mergedChildren.get());
+        this.connect("destroy", mergedChildren.subscribe((v) => {
+          this._setChildren(v);
+        }));
+      } else {
+        if (mergedChildren.length > 0) {
+          this._setChildren(mergedChildren);
+        }
+      }
+      for (const [signal, callback] of onHandlers) {
+        if (typeof callback === "function") {
+          this.connect(signal, callback);
+        } else {
+          this.connect(signal, () => execAsync(callback).then(print).catch(console.error));
+        }
+      }
+      for (const [prop, binding] of bindings) {
+        if (prop === "child" || prop === "children") {
+          this.connect("destroy", binding.subscribe((v) => {
+            this._setChildren(v);
+          }));
+        }
+        this.connect("destroy", binding.subscribe((v) => {
+          setProp(this, prop, v);
+        }));
+        setProp(this, prop, binding.get());
+      }
+      Object.assign(this, props);
+      setup?.(this);
+    }
+  }
+  GObject2.registerClass({
+    GTypeName: `Astal_${clsName}`,
+    Properties: {
+      "class-name": GObject2.ParamSpec.string(
+        "class-name",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        ""
+      ),
+      "css": GObject2.ParamSpec.string(
+        "css",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        ""
+      ),
+      "cursor": GObject2.ParamSpec.string(
+        "cursor",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        "default"
+      ),
+      "click-through": GObject2.ParamSpec.boolean(
+        "click-through",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        false
+      ),
+      "no-implicit-destroy": GObject2.ParamSpec.boolean(
+        "no-implicit-destroy",
+        "",
+        "",
+        GObject2.ParamFlags.READWRITE,
+        false
+      )
+    }
+  }, Widget);
+  return Widget;
+}
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/app.ts
+import Gtk2 from "gi://Gtk?version=3.0";
+import Astal6 from "gi://Astal?version=3.0";
+
+// ../../../../../../../usr/share/astal/gjs/_app.ts
+import { setConsoleLogDomain } from "console";
+import { exit, programArgs } from "system";
+import IO from "gi://AstalIO";
+import GObject3 from "gi://GObject";
+function mkApp(App) {
+  return new class AstalJS extends App {
+    static {
+      GObject3.registerClass({ GTypeName: "AstalJS" }, this);
+    }
+    eval(body) {
+      return new Promise((res, rej) => {
+        try {
+          const fn = Function(`return (async function() {
+                        ${body.includes(";") ? body : `return ${body};`}
+                    })`);
+          fn()().then(res).catch(rej);
+        } catch (error) {
+          rej(error);
+        }
+      });
+    }
+    requestHandler;
+    vfunc_request(msg, conn) {
+      if (typeof this.requestHandler === "function") {
+        this.requestHandler(msg, (response) => {
+          IO.write_sock(
+            conn,
+            String(response),
+            (_, res) => IO.write_sock_finish(res)
+          );
+        });
+      } else {
+        super.vfunc_request(msg, conn);
+      }
+    }
+    apply_css(style, reset = false) {
+      super.apply_css(style, reset);
+    }
+    quit(code) {
+      super.quit();
+      exit(code ?? 0);
+    }
+    start({ requestHandler, css, hold, main, client, icons, ...cfg } = {}) {
+      const app = this;
+      client ??= () => {
+        print(`Astal instance "${app.instanceName}" already running`);
+        exit(1);
+      };
+      Object.assign(this, cfg);
+      setConsoleLogDomain(app.instanceName);
+      this.requestHandler = requestHandler;
+      app.connect("activate", () => {
+        main?.(...programArgs);
+      });
+      try {
+        app.acquire_socket();
+      } catch (error) {
+        return client((msg) => IO.send_message(app.instanceName, msg), ...programArgs);
+      }
+      if (css)
+        this.apply_css(css, false);
+      if (icons)
+        app.add_icons(icons);
+      hold ??= true;
+      if (hold)
+        app.hold();
+      app.runAsync([]);
+    }
+  }();
+}
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/app.ts
+Gtk2.init(null);
+var app_default = mkApp(Astal6.Application);
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/widget.ts
+import Astal7 from "gi://Astal?version=3.0";
+import Gtk3 from "gi://Gtk?version=3.0";
+import GObject4 from "gi://GObject";
+Object.defineProperty(Astal7.Box.prototype, "children", {
+  get() {
+    return this.get_children();
+  },
+  set(v) {
+    this.set_children(v);
+  }
+});
+var Box = class extends astalify(Astal7.Box) {
+  static {
+    GObject4.registerClass({ GTypeName: "Box" }, this);
+  }
+  constructor(props, ...children) {
+    super({ children, ...props });
+  }
+};
+var Button = class extends astalify(Astal7.Button) {
+  static {
+    GObject4.registerClass({ GTypeName: "Button" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var CenterBox = class extends astalify(Astal7.CenterBox) {
+  static {
+    GObject4.registerClass({ GTypeName: "CenterBox" }, this);
+  }
+  constructor(props, ...children) {
+    super({ children, ...props });
+  }
+};
+var CircularProgress = class extends astalify(Astal7.CircularProgress) {
+  static {
+    GObject4.registerClass({ GTypeName: "CircularProgress" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var DrawingArea = class extends astalify(Gtk3.DrawingArea) {
+  static {
+    GObject4.registerClass({ GTypeName: "DrawingArea" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var Entry = class extends astalify(Gtk3.Entry) {
+  static {
+    GObject4.registerClass({ GTypeName: "Entry" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var EventBox = class extends astalify(Astal7.EventBox) {
+  static {
+    GObject4.registerClass({ GTypeName: "EventBox" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var Icon = class extends astalify(Astal7.Icon) {
+  static {
+    GObject4.registerClass({ GTypeName: "Icon" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var Label = class extends astalify(Astal7.Label) {
+  static {
+    GObject4.registerClass({ GTypeName: "Label" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var LevelBar = class extends astalify(Astal7.LevelBar) {
+  static {
+    GObject4.registerClass({ GTypeName: "LevelBar" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+Object.defineProperty(Astal7.Overlay.prototype, "overlays", {
+  get() {
+    return this.get_overlays();
+  },
+  set(v) {
+    this.set_overlays(v);
+  }
+});
+var Overlay = class extends astalify(Astal7.Overlay) {
+  static {
+    GObject4.registerClass({ GTypeName: "Overlay" }, this);
+  }
+  constructor(props, ...children) {
+    super({ children, ...props });
+  }
+};
+var Revealer = class extends astalify(Gtk3.Revealer) {
+  static {
+    GObject4.registerClass({ GTypeName: "Revealer" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var Scrollable = class extends astalify(Astal7.Scrollable) {
+  static {
+    GObject4.registerClass({ GTypeName: "Scrollable" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+var Slider = class extends astalify(Astal7.Slider) {
+  static {
+    GObject4.registerClass({ GTypeName: "Slider" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var Stack = class extends astalify(Astal7.Stack) {
+  static {
+    GObject4.registerClass({ GTypeName: "Stack" }, this);
+  }
+  constructor(props, ...children) {
+    super({ children, ...props });
+  }
+};
+var Switch = class extends astalify(Gtk3.Switch) {
+  static {
+    GObject4.registerClass({ GTypeName: "Switch" }, this);
+  }
+  constructor(props) {
+    super(props);
+  }
+};
+var Window = class extends astalify(Astal7.Window) {
+  static {
+    GObject4.registerClass({ GTypeName: "Window" }, this);
+  }
+  constructor(props, child) {
+    super({ child, ...props });
+  }
+};
+
+// cssHotReload.ts
+function compileScss() {
+  try {
+    exec(`sass ${"/home/qxb3/.config/ags"}/styles.scss ${TMP}/styles.css`);
+    app_default.apply_css("/tmp/styles.css");
+    return `${TMP}/styles.scss`;
+  } catch (err) {
+    printerr("Error compiling scss files.", err);
+    return "";
+  }
+}
+(function() {
+  const scssFiles = exec(`find -L ${"/home/qxb3/.config/ags"} -iname '*.scss'`).split("\n");
+  compileScss();
+  scssFiles.forEach(
+    (file) => monitorFile(file, compileScss)
+  );
+})();
+
+// windows/sidebar/SideBar.tsx
+import Hyprland from "gi://AstalHyprland";
+
+// ../../../../../../../usr/share/astal/gjs/gtk3/jsx-runtime.ts
+function isArrowFunction(func) {
+  return !Object.hasOwn(func, "prototype");
+}
+function jsx(ctor, { children, ...props }) {
+  children ??= [];
+  if (!Array.isArray(children))
+    children = [children];
+  children = children.filter(Boolean);
+  if (children.length === 1)
+    props.child = children[0];
+  else if (children.length > 1)
+    props.children = children;
+  if (typeof ctor === "string") {
+    return new ctors[ctor](props);
+  }
+  if (isArrowFunction(ctor))
+    return ctor(props);
+  return new ctor(props);
+}
+var ctors = {
+  box: Box,
+  button: Button,
+  centerbox: CenterBox,
+  circularprogress: CircularProgress,
+  drawingarea: DrawingArea,
+  entry: Entry,
+  eventbox: EventBox,
+  // TODO: fixed
+  // TODO: flowbox
+  icon: Icon,
+  label: Label,
+  levelbar: LevelBar,
+  // TODO: listbox
+  overlay: Overlay,
+  revealer: Revealer,
+  scrollable: Scrollable,
+  slider: Slider,
+  stack: Stack,
+  switch: Switch,
+  window: Window
+};
+var jsxs = jsx;
+
+// windows/sidebar/SideBar.tsx
+var hyprland = Hyprland.get_default();
+var timeCommand = `date +'%I%M'`;
+var time = Variable(mapTimeToJP(exec(timeCommand))).poll(1e3, timeCommand, (time2) => mapTimeToJP(time2));
+function mapTimeToJP(time2) {
+  return time2.split("").map((char) => {
+    switch (char) {
+      case "0":
+        return "\u3007";
+      case "1":
+        return "\u4E00";
+      case "2":
+        return "\u4E8C";
+      case "3":
+        return "\u4E09";
+      case "4":
+        return "\u56DB";
+      case "5":
+        return "\u4E94";
+      case "6":
+        return "\u516D";
+      case "7":
+        return "\u4E03";
+      case "8":
+        return "\u516B";
+      case "9":
+        return "\u4E5D";
+      default:
+        return "";
+    }
+  }).join("");
+}
+function Text(props) {
+  const { text } = props;
+  return text.split("").map((char) => /* @__PURE__ */ jsx("box", { className: "box", children: /* @__PURE__ */ jsx(
+    "label",
+    {
+      label: char,
+      hexpand: true
+    }
+  ) }));
+}
+function Filler(props) {
+  const { count } = props;
+  return Array.from({ length: count }).map(
+    () => Text({ text: " " })
+  );
+}
+function SideBar() {
+  return /* @__PURE__ */ jsx(
+    "box",
+    {
+      className: "sidebar",
+      valign: Gtk4.Align.CENTER,
+      children: /* @__PURE__ */ jsxs(
+        "box",
+        {
+          className: "container",
+          spacing: 8,
+          vexpand: false,
+          children: [
+            /* @__PURE__ */ jsxs("box", { vertical: true, children: [
+              Text({ text: "\u4E00\u4E8C\u4E09\u56DB\u4E94\u516D\u4E03\u516B" }),
+              Filler({ count: 4 }),
+              bind(time).as(
+                (time2) => Text({ text: time2 })
+              )
+            ] }),
+            /* @__PURE__ */ jsxs("box", { vertical: true, children: [
+              Array.from({ length: 8 }).map(
+                (_, id) => bind(hyprland, "focusedWorkspace").as(
+                  (workspace) => /* @__PURE__ */ jsx("box", { className: "box", children: /* @__PURE__ */ jsx(
+                    "label",
+                    {
+                      label: id === workspace.get_id() - 1 ? "\uEA71" : "",
+                      hexpand: true
+                    }
+                  ) })
+                  // (workspace.get_id() - 1) === id
+                  //   ? Text({ text: '' })
+                  //   : Text({ text: ' ' })
+                )
+              ),
+              Filler({ count: 8 })
+            ] }),
+            /* @__PURE__ */ jsxs("box", { vertical: true, children: [
+              Text({ text: "\u30EA\u30E9\u30C3\u30AF\u30B9 \u3059\u3079\u3066\u5927\u4E08\u592B\u3067\u3059" }),
+              Filler({ count: 2 })
+            ] })
+          ]
+        }
+      )
+    }
+  );
+}
+function SideBar_default(gdkmonitor) {
+  return /* @__PURE__ */ jsx(
+    "window",
+    {
+      namespace: "sidebar",
+      application: app_default,
+      gdkmonitor,
+      exclusivity: Astal8.Exclusivity.EXCLUSIVE,
+      layer: Astal8.Layer.TOP,
+      anchor: Astal8.WindowAnchor.TOP | Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
+      children: /* @__PURE__ */ jsx(SideBar, {})
+    }
+  );
+}
+
+// windows/block/Block.tsx
+function Block_default(props) {
+  const { gdkmonitor, anchor } = props;
+  return /* @__PURE__ */ jsx(
+    "window",
+    {
+      namespace: "block",
+      application: app_default,
+      gdkmonitor,
+      exclusivity: Astal8.Exclusivity.EXCLUSIVE,
+      layer: Astal8.Layer.TOP,
+      anchor,
+      children: /* @__PURE__ */ jsx("box", { className: "block" })
+    }
+  );
+}
+
+// sass:/home/qxb3/Dev/projects/gruvbox.hypr/.config/ags/styles.scss
+var styles_default = '* {\n  all: unset;\n  background-color: #fffbe2;\n  font-family: "JetBrainsMono Nerd Font";\n  color: #2a281f;\n}\n\n.sidebar {\n  padding-top: 5rem;\n  padding-bottom: 5rem;\n  padding-left: 4rem;\n  padding-right: 4rem;\n}\n.sidebar .container {\n  border: solid #a45e5e 2px;\n  padding: 0 1rem;\n}\n.sidebar .container .box {\n  border-left: solid #a45e5e 1.5px;\n  border-right: solid #a45e5e 1.5px;\n  border-bottom: solid #a45e5e 1.5px;\n  min-width: 38px;\n  min-height: 38px;\n  font-size: 23px;\n}\n.sidebar .container .box:last-child {\n  border-bottom: none;\n}\n\n.block {\n  background-color: #fffbe2;\n  padding: 2rem;\n}';
+
+// app.ts
+app_default.start({
+  css: styles_default,
+  main() {
+    const mainMonitor = app_default.get_monitors().at(0);
+    SideBar_default(mainMonitor);
+    Block_default({
+      gdkmonitor: mainMonitor,
+      anchor: Astal8.WindowAnchor.LEFT | Astal8.WindowAnchor.RIGHT | Astal8.WindowAnchor.TOP
+    });
+    Block_default({
+      gdkmonitor: mainMonitor,
+      anchor: Astal8.WindowAnchor.LEFT | Astal8.WindowAnchor.RIGHT | Astal8.WindowAnchor.BOTTOM
+    });
+    Block_default({
+      gdkmonitor: mainMonitor,
+      anchor: Astal8.WindowAnchor.TOP | Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.RIGHT
+    });
+  }
+});
