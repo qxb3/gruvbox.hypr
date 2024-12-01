@@ -1,0 +1,16 @@
+/**
+ *
+ * Author : qxb3
+ * Github : @qxb3
+ *
+ * Colors
+ **/
+
+* {
+    background:     #FFFBE2ff;
+    background-alt: #FFFCE6FF;
+    foreground:     #2A281FFF;
+    selected:       #D7DB83FF;
+    active:         #F4AC3BFF;
+    urgent:         #A45E5EFF;
+}
