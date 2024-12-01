@@ -1,0 +1,24 @@
+.sidebar {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+
+  & .container {
+    border: solid $red 2px;
+    padding: 0 1rem;
+
+    & .box {
+      border-left: solid $red 1.5px;
+      border-right: solid $red 1.5px;
+      border-bottom: solid $red 1.5px;
+      min-width: 38px;
+      min-height: 38px;
+      font-size: 23px;
+    }
+
+    & .box:last-child {
+      border-bottom: none;
+    }
+  }
+}

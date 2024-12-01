@@ -1,0 +1,24 @@
+$bgh:       #fffce6;
+$bg:        #fffbe2;
+$bg1:       #fff8cc;
+$bg2:       #fff5b3;
+
+$fgh:       #0f0e0b;
+$fg:        #2a281f;
+$fg1:       #3b382b;
+$fg2:       #585441;
+
+$red:       #a45e5e;
+$green:     #d7db83;
+$yellow:    #f4ac3b;
+$gray:      #8f9589;
+
+* {
+  all: unset;
+  background-color: $bg;
+  font-family: "JetBrainsMono Nerd Font";
+  color: $fg;
+}
+
+@import "./windows/sidebar/styles.scss";
+@import "./windows/block/styles.scss";
