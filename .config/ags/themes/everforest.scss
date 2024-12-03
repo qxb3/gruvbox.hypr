@@ -1,0 +1,58 @@
+// everforest
+
+$bgh:       #232a2d;
+$bg:        #2d353b;
+$bg1:       #3c444a;
+$bg2:       #4b5359;
+
+$fgh:       #d5c9b2;
+$fg:        #c8ba9e;
+$fg1:       #b7aa95;
+$fg2:       #a79a89;
+
+$red:       #e68183;
+$green:     #a7c080;
+$yellow:    #d9bb80;
+$orange:    #e39b7b;
+$blue:      #83b6af;
+$purple:    #d39bb6;
+$aqua:      #89b482;
+$gray:      #868d80;
+
+.bar {
+  & .sections {
+    & .center {
+      & .workspace {
+        & .button {
+          &.active {
+            background-color: $green;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sidebar_home {
+  & .music_player {
+    & .right {
+      & .meta {
+        & .artist {
+          color: $green;
+        }
+      }
+    }
+  }
+
+  & .notification_center {
+    & .notifications {
+      & .notification {
+        & .meta {
+          & .appname {
+            color: $green;
+          }
+        }
+      }
+    }
+  }
+}
