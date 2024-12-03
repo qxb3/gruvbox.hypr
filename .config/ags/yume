@@ -2425,7 +2425,7 @@ function AppLauncher_default() {
 }
 
 // windows/bar/sidebar/wallpapers/Wallpapers.tsx
-import GdkPixbuf from "gi://GdkPixbuf?version=2.0";
+import GdkPixbuf from "gi://GdkPixbuf";
 function getWallpapers() {
   return exec(`find -L ${LOCAL_STATE}/wallpapers -iname '*.png' ! -iname 'default.png'`).split("\n");
 }
@@ -2496,7 +2496,7 @@ function getThemes() {
   const themes = exec(`find -L ${"/home/qxb3/.config/ags"}/themes -iname '*.scss' ! -name 'current.scss'`).split("\n").map((file) => ({
     name: file.split("/").pop().replace(".scss", ""),
     path: file,
-    lines: readFile(file).split("\n").filter((line) => line.startsWith("$"))
+    lines: readFile(file).split("\n").filter((line) => line.startsWith("$") && line.includes("#"))
   }));
   return themes.map((theme) => ({
     name: theme.name,
@@ -2574,7 +2574,7 @@ function ApplyThemeButton({ theme }) {
         {
           label: "Apply Theme",
           css: `color: ${theme.colors.find(
-            (color) => color.name === "fg"
+            (color) => color.name === "bg"
           ).color}`
         }
       )
@@ -2922,12 +2922,7 @@ function Bar_default(gdkmonitor) {
             layer: Astal8.Layer.BOTTOM,
             anchor: Astal8.WindowAnchor.TOP | Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
             setup: (self) => app_default.add_window(self),
-            children: /* @__PURE__ */ jsx(
-              "box",
-              {
-                css: `min-width: ${bar.get_allocated_width()}px`
-              }
-            )
+            children: /* @__PURE__ */ jsx("box", { css: `min-width: ${bar.get_allocated_width() ?? 1}px` })
           }
         );
       },
