@@ -19,15 +19,19 @@ $purple:    #d39bb6;
 $aqua:      #89b482;
 $gray:      #868d80;
 
+$primary: $green;
+$secondary: $blue;
+$border: $bg2;
+
 .bar {
-  border-right: solid $bg2 1.5px;
+  border-right: solid $border 1.5px;
 
   & .sections {
     & .center {
       & .workspace {
         & .button {
           &.active {
-            background-color: $green;
+            background-color: $primary;
           }
         }
       }
@@ -40,7 +44,7 @@ $gray:      #868d80;
     & .right {
       & .meta {
         & .artist {
-          color: $green;
+          color: $primary;
         }
       }
     }
@@ -51,7 +55,7 @@ $gray:      #868d80;
       & .notification {
         & .meta {
           & .appname {
-            color: $green;
+            color: $primary;
           }
         }
       }

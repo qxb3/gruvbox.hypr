@@ -299,9 +299,7 @@ export default function(gdkmonitor: Gdk.Monitor) {
           layer={Astal.Layer.BOTTOM}
           anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
           setup={(self) => App.add_window(self)}>
-          <box
-            css={`min-width: ${bar.get_allocated_width()}px`}
-          />
+          <box css={`min-width: ${bar.get_allocated_width() ?? 1}px`} />
         </window>
       }}>
       <box>

@@ -28,7 +28,7 @@ function getThemes(): Theme[] {
         path: file,
         lines: readFile(file)
                   .split('\n')
-                  .filter(line => line.startsWith('$'))
+                  .filter(line => line.startsWith('$') && line.includes('#'))
       }))
 
   return themes

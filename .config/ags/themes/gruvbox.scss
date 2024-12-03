@@ -19,7 +19,13 @@ $purple:    #b16286;
 $aqua:      #689d6a;
 $gray:      #928374;
 
+$primary: $yellow;
+$secondary: $blue;
+$border: $fg;
+
 .bar {
+  border-right: solid $border 1.5px;
+
   & .sections {
     & .center {
       & .workspace {
