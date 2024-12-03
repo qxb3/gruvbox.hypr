@@ -1,5 +1,5 @@
 import { Gtk } from 'astal/gtk3'
-import { exec, execAsync, Variable } from 'astal'
+import { execAsync, Variable } from 'astal'
 
 import { revealSideBar } from '@windows/bar/sidebar/vars'
 
