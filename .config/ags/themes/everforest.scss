@@ -20,6 +20,8 @@ $aqua:      #89b482;
 $gray:      #868d80;
 
 .bar {
+  border-right: solid $bg2 1.5px;
+
   & .sections {
     & .center {
       & .workspace {
