@@ -1,11 +1,10 @@
-import { Gtk } from 'astal/gtk3'
+import GdkPixbuf from 'gi://GdkPixbuf'
 import { exec, execAsync, monitorFile, Variable } from 'astal'
 
 import {
   revealSideBar,
   sideBarShown
 } from '../vars'
-import GdkPixbuf from 'gi://GdkPixbuf?version=2.0'
 
 function getWallpapers() {
   return exec(`find -L ${LOCAL_STATE}/wallpapers -iname '*.png' ! -iname 'default.png'`)
