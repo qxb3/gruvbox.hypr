@@ -125,7 +125,7 @@ function ApplyThemeButton({ theme }: { theme: Theme}) {
         css={
           `color: ${
             theme.colors.find(
-              color => color.name === 'fg'
+              color => color.name === 'bg'
             )!.color
           }`
         }
