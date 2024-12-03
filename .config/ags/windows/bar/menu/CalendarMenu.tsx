@@ -1,11 +1,13 @@
-import { astalify, App, Astal, Gtk } from 'astal/gtk3'
+import { App, Astal, Gtk } from 'astal/gtk3'
 import { revealCalendarMenu } from './vars'
 
-const Calendar = astalify(Gtk.Calendar)
+import Calendar from '@widgets/Calendar'
 
 function CalendarMenu() {
   return (
-    <box className='calendar_menu menu'>
+    <box
+      className='calendar_menu menu'
+      hexpand={true}>
       <Calendar />
     </box>
   )
