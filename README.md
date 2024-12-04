@@ -46,7 +46,7 @@
 </summary>
   <p></p>
 
-  # [~/yume[nord].](https://github.com/qxb3/gruvbox.hypr/tree/yume-beyond) ~ Yume with extra features.
+  # [~/yume-beyond.](https://github.com/qxb3/gruvbox.hypr/tree/yume-beyond) ~ Yume with extra features.
 
   <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume-nord/repo/1.png" />
   <p></p>
