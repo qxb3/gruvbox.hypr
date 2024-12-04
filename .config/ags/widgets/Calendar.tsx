@@ -1,26 +1,53 @@
+import FlowBox from './FlowBox'
+
 import { Gtk } from 'astal/gtk3'
 import { Variable } from 'astal'
 
-import FlowBox from './FlowBox'
-
-const currentDate = new Date()
-const grid = Variable(
-  generateGridDates(
-    currentDate.getMonth() + 1,
-    currentDate.getFullYear()
-  )
-)
+import { revealCalendarMenu } from '@windows/bar/menu/vars'
 
 export default function Calendar() {
+  const currentDate = new Date()
+
+  const pageDate = Variable(currentDate)
+  const grid = Variable(
+    generateGridDates(
+      currentDate.getMonth() + 1,
+      currentDate.getFullYear()
+    )
+  )
+
+  pageDate.subscribe(pageDate => {
+    grid.set(
+      generateGridDates(
+        pageDate.getMonth() + 1,
+        pageDate.getFullYear()
+      )
+    )
+  })
+
+  revealCalendarMenu.subscribe(value => {
+    if (!value) {
+      pageDate.set(currentDate)
+    }
+  })
+
   return (
     <box
       className='calendar'
       vertical={true}
-      spacing={8}>
+      spacing={8}
+      onDestroy={() => {
+        pageDate.drop()
+        grid.drop()
+      }}>
       <box hexpand={true}>
         <label
           className='month_year'
-          label='December 2024'
+          label={
+            pageDate(date =>
+              `${date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`
+            )
+          }
         />
 
         <box
@@ -29,13 +56,25 @@ export default function Calendar() {
           halign={Gtk.Align.END}>
           <button
             className='control'
-            cursor='pointer'>
+            cursor='pointer'
+            onClick={() => {
+              const prevDate = new Date(pageDate.get())
+              prevDate.setMonth(prevDate.getMonth() - 1)
+
+              pageDate.set(prevDate)
+            }}>
             <label label='<' />
           </button>
 
           <button
             className='control'
-            cursor='pointer'>
+            cursor='pointer'
+            onClicked={() => {
+              const nextDate = new Date(pageDate.get())
+              nextDate.setMonth(nextDate.getMonth() + 1)
+
+              pageDate.set(nextDate)
+            }}>
             <label label='>' />
           </button>
         </box>
@@ -68,12 +107,14 @@ export default function Calendar() {
               <label
                 className={
                   !day.inCurrent
-                    ? day.date.getDate() === currentDate.getDate() &&
-                      day.date.getMonth() === currentDate.getMonth()
+                    ? day.date.getFullYear() === currentDate.getFullYear() &&
+                      day.date.getMonth() === currentDate.getMonth() &&
+                      day.date.getDate() === currentDate.getDate()
                         ? 'today not_incurrent day'
                         : 'not_incurrent day'
-                    : day.date.getDate() === currentDate.getDate() &&
-                      day.date.getMonth() === currentDate.getMonth()
+                    : day.date.getFullYear() === currentDate.getFullYear() &&
+                      day.date.getMonth() === currentDate.getMonth() &&
+                      day.date.getDate() === currentDate.getDate()
                         ? 'today day'
                         : 'day'
                 }
@@ -138,6 +179,20 @@ function generateGridDates(month: number, year: number) {
       ...nextMonthDays.slice(0, trailingDays)
         .map(date => ({ inCurrent: false, date }))
     )
+  }
+
+  while (days.length < 6 * daysOfWeek) {
+    if (days.length < 3 * daysOfWeek) {
+      days.unshift(
+        ...prevMonthDays.slice(-(6 * daysOfWeek - days.length))
+          .map(date => ({ inCurrent: false, date }))
+      )
+    } else {
+      days.push(
+        ...nextMonthDays.slice(0, 6 * daysOfWeek - days.length)
+          .map(date => ({ inCurrent: false, date }))
+      )
+    }
   }
 
   const weeks = []
