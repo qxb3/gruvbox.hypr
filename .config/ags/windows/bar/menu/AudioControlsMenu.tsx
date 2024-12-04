@@ -4,10 +4,11 @@ import WPSerivce from 'gi://AstalWp'
 import MprisService from 'gi://AstalMpris'
 import { bind } from 'astal'
 
+import { revealAudioControlsMenu } from './vars'
+import { sideBarWidth } from '@windows/bar/sidebar/vars'
+
 const audio = WPSerivce.get_default()!.audio!
 const spotify = MprisService.Player.new('spotify')
-
-import { revealAudioControlsMenu } from './vars'
 
 function AudioControlsMenu() {
   return (
@@ -114,12 +115,14 @@ export default function() {
       layer={Astal.Layer.OVERLAY}
       anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
       setup={(self) => App.add_window(self)}>
-      <revealer
-        revealChild={revealAudioControlsMenu()}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-        transitionDuration={ANIMATION_SPEED}>
-        <AudioControlsMenu />
-      </revealer>
+      <box css={sideBarWidth(width => `margin-left: ${width}px;`)}>
+        <revealer
+          revealChild={revealAudioControlsMenu()}
+          transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+          transitionDuration={ANIMATION_SPEED}>
+          <AudioControlsMenu />
+        </revealer>
+      </box>
     </window>
   )
 }

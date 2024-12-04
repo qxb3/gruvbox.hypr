@@ -9,6 +9,7 @@ import {
 
 export const revealSideBar = Variable(false)
 export const sideBarShown = Variable('home')
+export const sideBarWidth = Variable(0)
 
 revealSideBar.subscribe((value) => {
   if (value) {

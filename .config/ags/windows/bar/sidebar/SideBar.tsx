@@ -7,7 +7,8 @@ import Themes from './themes/Themes'
 
 import {
   revealSideBar,
-  sideBarShown
+  sideBarShown,
+  sideBarWidth
 } from './vars'
 
 export default function() {
@@ -15,7 +16,12 @@ export default function() {
     <revealer
       revealChild={revealSideBar()}
       transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-      transitionDuration={ANIMATION_SPEED}>
+      transitionDuration={ANIMATION_SPEED}
+      setup={(self) => {
+        self.connect('size-allocate', () => {
+          sideBarWidth.set(self.get_allocated_width())
+        })
+      }}>
       <stack
         shown={sideBarShown()}
         transitionType={Gtk.StackTransitionType.SLIDE_RIGHT}

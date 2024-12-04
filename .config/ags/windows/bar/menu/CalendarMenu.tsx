@@ -1,7 +1,8 @@
-import { App, Astal, Gtk } from 'astal/gtk3'
-import { revealCalendarMenu } from './vars'
-
 import Calendar from '@widgets/Calendar'
+import { App, Astal, Gtk } from 'astal/gtk3'
+
+import { revealCalendarMenu } from './vars'
+import { sideBarWidth } from '@windows/bar/sidebar/vars'
 
 function CalendarMenu() {
   return (
@@ -20,12 +21,14 @@ export default function() {
       layer={Astal.Layer.OVERLAY}
       anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
       setup={(self) => App.add_window(self)}>
-      <revealer
-        revealChild={revealCalendarMenu()}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-        transitionDuration={ANIMATION_SPEED}>
-        <CalendarMenu />
-      </revealer>
+      <box css={sideBarWidth(width => `margin-left: ${width}px;`)}>
+        <revealer
+          revealChild={revealCalendarMenu()}
+          transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+          transitionDuration={ANIMATION_SPEED}>
+          <CalendarMenu />
+        </revealer>
+      </box>
     </window>
   )
 }

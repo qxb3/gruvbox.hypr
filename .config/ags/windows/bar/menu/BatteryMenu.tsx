@@ -1,11 +1,11 @@
 import BatteryService from 'gi://AstalBattery'
+import BatteryIcon from '@widgets/BatteryIcon'
 
 import { App, Astal, Gtk } from 'astal/gtk3'
 import { bind } from 'astal'
 
-import BatteryIcon from '@widgets/BatteryIcon'
-
 import { revealBatteryMenu } from './vars'
+import { sideBarWidth } from '@windows/bar/sidebar/vars'
 
 const battery = BatteryService.get_default()
 
@@ -120,12 +120,14 @@ export default function() {
       layer={Astal.Layer.OVERLAY}
       anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
       setup={(self) => App.add_window(self)}>
-      <revealer
-        revealChild={revealBatteryMenu()}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-        transitionDuration={ANIMATION_SPEED}>
-        <BatteryMenu />
-      </revealer>
+      <box css={sideBarWidth(width => `margin-left: ${width}px;`)}>
+        <revealer
+          revealChild={revealBatteryMenu()}
+          transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+          transitionDuration={ANIMATION_SPEED}>
+          <BatteryMenu />
+        </revealer>
+      </box>
     </window>
   )
 }

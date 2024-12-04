@@ -3,9 +3,10 @@ import BrightnessService from '@services/BrightnessService'
 import { App, Astal, Gtk } from 'astal/gtk3'
 import { bind } from 'astal'
 
-const brightness = new BrightnessService()
-
 import { revealSystemControlsMenu } from './vars'
+import { sideBarWidth } from '@windows/bar/sidebar/vars'
+
+const brightness = new BrightnessService()
 
 function SystemControlsMenu() {
   return (
@@ -46,12 +47,14 @@ export default function() {
       layer={Astal.Layer.OVERLAY}
       anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
       setup={(self) => App.add_window(self)}>
-      <revealer
-        revealChild={revealSystemControlsMenu()}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-        transitionDuration={ANIMATION_SPEED}>
-        <SystemControlsMenu />
-      </revealer>
+      <box css={sideBarWidth(width => `margin-left: ${width}px;`)}>
+        <revealer
+          revealChild={revealSystemControlsMenu()}
+          transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+          transitionDuration={ANIMATION_SPEED}>
+          <SystemControlsMenu />
+        </revealer>
+      </box>
     </window>
   )
 }
