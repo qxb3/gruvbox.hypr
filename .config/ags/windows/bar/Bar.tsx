@@ -138,13 +138,13 @@ function StartSection() {
                 <button
                   className='app'
                   cursor='pointer'
-                  onClickRelease={(self, event) => {
+                  onClickRelease={(_self, event) => {
                     if (event.button === Astal.MouseButton.PRIMARY) app.activate(0, 0)
-                    if (event.button === Astal.MouseButton.SECONDARY) {
-                      const menu = app.create_menu()!
-                      Astal.widget_toggle_class_name(menu, 'systray_menu', true)
-                      menu.popup_at_widget(self, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null)
-                    }
+                    // if (event.button === Astal.MouseButton.SECONDARY) {
+                    //   const menu = app.create_menu()!
+                    //   Astal.widget_toggle_class_name(menu, 'systray_menu', true)
+                    //   menu.popup_at_widget(self, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null)
+                    // }
                   }}>
                   <icon
                     gIcon={app.gicon}
