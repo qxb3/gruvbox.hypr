@@ -110,11 +110,15 @@ function App(app: AppsService.Application) {
       }}>
       <box spacing={8}>
         <icon
+          className='icon'
           icon={app.iconName}
           css='font-size: 32px;'
         />
 
-        <label label={app.name} />
+        <label
+          className='name'
+          label={app.name}
+        />
       </box>
     </button>
   )

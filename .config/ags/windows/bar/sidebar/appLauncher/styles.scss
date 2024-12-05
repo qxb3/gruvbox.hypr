@@ -36,6 +36,7 @@
       background-color: $bg1;
       border-radius: 8px;
       padding: 8px;
+      color: red;
 
       &:hover {
         background-color: $bg2;
@@ -43,7 +44,11 @@
 
       &.selected,
       &:focus {
-        background-color: $blue;
+        background-color: $primary;
+
+        & .name {
+          color: $bg;
+        }
       }
     }
   }
