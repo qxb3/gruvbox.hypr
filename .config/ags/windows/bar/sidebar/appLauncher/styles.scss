@@ -5,27 +5,21 @@
   min-width: 300px;
 
   & .header {
-    background-color: $bg2;
     border-radius: 8px;
     padding: 8px;
-
-    & .icon {
-      font-size: 20px;
-      font-weight: 200;
-    }
 
     & .input_container {
       & .input {
         border: solid $gray 1px;
         border-radius: 8px;
         font-size: 16px;
-        padding: 4px 8px;
+        padding: 6px 10px;
       }
 
       & .placeholder {
-        font-weight: 900;
+        font-weight: 400;
         font-size: 16px;
-        color: $gray;
+        color: $bg2;
         padding-left: 12px;
       }
     }

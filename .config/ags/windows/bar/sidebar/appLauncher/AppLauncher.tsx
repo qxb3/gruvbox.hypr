@@ -39,13 +39,6 @@ function Header() {
       className='header'
       valign={Gtk.Align.START}
       spacing={16}>
-      {/* Icon */}
-      <label
-        className='icon'
-        label=''
-        xalign={0}
-      />
-
       {/* Input */}
       <overlay
         className='input_container'
