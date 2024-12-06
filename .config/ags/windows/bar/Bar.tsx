@@ -281,7 +281,7 @@ export default function(gdkmonitor: Gdk.Monitor) {
       application={App}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.IGNORE}
-      layer={Astal.Layer.OVERLAY}
+      layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
       keymode={
         sideBarShown(shown =>

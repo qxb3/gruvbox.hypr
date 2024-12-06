@@ -44,7 +44,7 @@ export default function() {
   return (
     <window
       namespace='menu'
-      layer={Astal.Layer.OVERLAY}
+      layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
       setup={(self) => App.add_window(self)}>
       <box css={sideBarWidth(width => `margin-left: ${width}px;`)}>
