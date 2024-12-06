@@ -100,6 +100,9 @@ function ApplyThemeButton({ theme }: { theme: Theme}) {
         }`
       }
       onClick={() => {
+        sideBarShown.set('home')
+        revealSideBar.set(false)
+
         const currentTheme =
           exec(`readlink ${LOCAL_STATE}/ags_theme.scss`)
             .split('/')
@@ -107,18 +110,12 @@ function ApplyThemeButton({ theme }: { theme: Theme}) {
             .replace('.scss', '')
 
         if (currentTheme === theme.name)
-          return execAsync(`notify-send 'Theme Manager' 'Already have the same theme'`)
+          return execAsync(`notify-send -a 'ags' 'Theme Manager' 'Already have the same theme.'`)
 
-        if (currentTheme !== theme.name) {
-          // Symlink the theme and css hot reload will do the rest
-          exec(`ln -sf ${theme.path} ${LOCAL_STATE}/ags_theme.scss`)
+        exec(`ln -sf ${theme.path} ${LOCAL_STATE}/ags_theme.scss`)
+        execAsync(`bash -c '${SRC}/themes/sync.sh ${theme.name}'`)
 
-          // Sync other stuff to the current colorscheme
-          execAsync(`bash -c '${SRC}/themes/sync.sh ${theme.name}'`)
-        }
-
-        sideBarShown.set('home')
-        revealSideBar.set(false)
+        execAsync(`notify-send -a 'ags' 'Theme Manager' 'Successfuly changed the theme to ${theme.name}. Restart the session to update the gtk theme.'`)
       }}>
       <label
         label='Apply Theme'
