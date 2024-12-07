@@ -6,5 +6,9 @@
   color: $fg;
 }
 
+// Widgets
+@import "./widgets/calendar.scss";
+
+// Windows
 @import "./windows/bar/styles.scss";
 @import "./windows/notificationPopups/styles.scss";
