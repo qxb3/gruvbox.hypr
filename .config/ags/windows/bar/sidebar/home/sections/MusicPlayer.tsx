@@ -19,7 +19,7 @@ function MusicCover({ available }: MusicComponentProps) {
         bind(spotify, 'coverArt')
         .as(cover => available ?
           `background-image: url("${cover}");` :
-          `background-image: url("${SRC}/assets/no-music.png");`
+          `background-image: url("${LOCAL_STATE}/no_music");`
         )
       }
     />

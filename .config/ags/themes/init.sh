@@ -57,6 +57,15 @@ else
   echo "> Init AGS (Already Exists)"
 fi
 
+# Init Nord AGS no_music image
+if [ ! -e "$LOCAL_STATE/no_music" ]; then
+  ln -s "$AGS_PATH/assets/no_music/nord.png" "$LOCAL_STATE/no_music"
+
+  echo "> Init AGS no_music image"
+else
+  echo "> Init AGS no_music image (Already Exists)"
+fi
+
 # Init Nord Kitty Theme
 if [ ! -e "$LOCAL_STATE/kitty_theme.conf" ]; then
   ln -s "$KITTY_PATH/themes/nord.conf" "$LOCAL_STATE/kitty_theme.conf"

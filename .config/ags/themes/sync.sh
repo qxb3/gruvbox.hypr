@@ -13,6 +13,7 @@ if [ -z $theme ]; then
 fi
 
 WALLPAPERS_PATH="$HOME/.config/swww"
+AGS_PATH="$HOME/.config/ags"
 HYPR_PATH="$HOME/.config/hypr"
 KITTY_PATH="$HOME/.config/kitty"
 NVIM_PATH="$HOME/.config/nvim"
@@ -41,6 +42,16 @@ sync_wallpapers() {
   swww img "$LOCAL_STATE/current_wallpaper" \
     --transition-type "wipe" \
     --transition-duration 3
+}
+
+sync_no_music() {
+  theme=$1
+  if [ -z $theme ]; then
+    echo 'sync_no_music <theme> is required'
+    exit 1
+  fi
+
+  ln -sf "$AGS_PATH/assets/no_music/$theme.png" "$LOCAL_STATE/no_music"
 }
 
 sync_hypr() {
@@ -79,6 +90,7 @@ sync_nvim() {
 }
 
 sync_wallpapers $theme
+sync_no_music $theme
 sync_hypr $theme
 sync_kitty $theme
 sync_nvim $theme
