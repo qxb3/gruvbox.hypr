@@ -142,9 +142,9 @@
           padding-right: 2px;
         }
 
-        & .battery {
-          font-size: 21px;
-        }
+        & .battery { font-size: 21px; }
+        & .battery.discharging { padding-left: 3px; }
+
 
         & .system { padding-right: 4px; }
         & .screenshot { padding-right: 6px; }
