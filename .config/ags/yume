@@ -2146,15 +2146,20 @@ var ProgressBar = class extends astalify(Gtk4.ProgressBar) {
 // windows/bar/sidebar/home/sections/MusicPlayer.tsx
 var spotify3 = MprisService3.Player.new("spotify");
 function MusicCover({ available }) {
-  return /* @__PURE__ */ jsx(
+  const themeChanged = Variable(false);
+  monitorFile(
+    `${LOCAL_STATE}/theme_changed`,
+    () => themeChanged.set(!themeChanged.get())
+  );
+  return /* @__PURE__ */ jsx("box", { children: bind(themeChanged).as(() => /* @__PURE__ */ jsx(
     "box",
     {
       className: "cover",
       css: bind(spotify3, "coverArt").as(
-        (cover) => available ? `background-image: url("${cover}");` : `background-image: url("${"/home/qxb3/.config/ags"}/assets/no-music.png");`
+        (cover) => available ? `background-image: url("${cover}");` : `background-image: url("${LOCAL_STATE}/no_music");`
       )
     }
-  );
+  )) });
 }
 function MusicMeta({ available }) {
   return /* @__PURE__ */ jsxs(
@@ -2327,6 +2332,87 @@ function MusicPlayer_default() {
 
 // windows/bar/sidebar/home/sections/NotificationCenter.tsx
 import NotifdService2 from "gi://AstalNotifd";
+
+// widgets/Notification.tsx
+function Notification({ notification }) {
+  return /* @__PURE__ */ jsxs(
+    "box",
+    {
+      className: "notification",
+      spacing: 8,
+      children: [
+        /* @__PURE__ */ jsx(
+          "box",
+          {
+            className: "image",
+            css: `background-image: url("${notification.get_image() ?? `${"/home/qxb3/.config/ags"}/assets/bell.svg`}");`
+          }
+        ),
+        /* @__PURE__ */ jsxs(
+          "box",
+          {
+            className: "meta",
+            vertical: true,
+            spacing: 4,
+            children: [
+              /* @__PURE__ */ jsx(
+                "label",
+                {
+                  className: "appname",
+                  label: notification.get_app_name().toUpperCase(),
+                  truncate: true,
+                  xalign: 0,
+                  hexpand: true
+                }
+              ),
+              /* @__PURE__ */ jsxs("box", { vertical: true, children: [
+                /* @__PURE__ */ jsx(
+                  "label",
+                  {
+                    className: "summary",
+                    label: notification.get_summary(),
+                    justify: Gtk4.Justification.LEFT,
+                    truncate: true,
+                    useMarkup: true,
+                    xalign: 0
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  "label",
+                  {
+                    className: "body",
+                    label: `- ${notification.get_body()}`,
+                    justify: Gtk4.Justification.LEFT,
+                    truncate: true,
+                    useMarkup: true,
+                    hexpand: true,
+                    wrap: true,
+                    lines: 2,
+                    xalign: 0
+                  }
+                )
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            className: "dismiss_notification",
+            cursor: "pointer",
+            halign: Gtk4.Align.END,
+            valign: Gtk4.Align.START,
+            hexpand: true,
+            onClick: () => notification.dismiss(),
+            children: /* @__PURE__ */ jsx("label", { label: "\u{F0159}" })
+          }
+        )
+      ]
+    }
+  );
+}
+
+// windows/bar/sidebar/home/sections/NotificationCenter.tsx
 var notifyd2 = NotifdService2.get_default();
 function Header() {
   return /* @__PURE__ */ jsxs(
@@ -2365,94 +2451,27 @@ function NotificationList({ notifications }) {
       className: "notifications",
       vertical: true,
       spacing: 8,
-      children: notifications.map((notification) => (
-        // <revealer
-        //   revealChild={true}
-        //   transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-        //   transitionDuration={300}
-        //   hexpand={true}
-        //   setup={(self) => {
-        //     self.hook(notification, 'resolved', (_, reason) => {
-        //       if (reason === NotifdService.ClosedReason.DISMISSED_BY_USER) {
-        //         self.revealChild = false
-        //       }
-        //     })
-        //   }}>
-        /* @__PURE__ */ jsxs(
-          "box",
-          {
-            className: "notification",
-            spacing: 8,
-            children: [
-              /* @__PURE__ */ jsx(
-                "box",
-                {
-                  className: "image",
-                  css: `background-image: url("${notification.get_image() ?? `${"/home/qxb3/.config/ags"}/assets/bell.svg`}");`
-                }
-              ),
-              /* @__PURE__ */ jsxs(
-                "box",
-                {
-                  className: "meta",
-                  vertical: true,
-                  spacing: 4,
-                  children: [
-                    /* @__PURE__ */ jsx(
-                      "label",
-                      {
-                        className: "appname",
-                        label: notification.get_app_name().toUpperCase(),
-                        truncate: true,
-                        xalign: 0,
-                        hexpand: true
-                      }
-                    ),
-                    /* @__PURE__ */ jsxs("box", { vertical: true, children: [
-                      /* @__PURE__ */ jsx(
-                        "label",
-                        {
-                          className: "summary",
-                          label: notification.get_summary(),
-                          justify: Gtk4.Justification.LEFT,
-                          truncate: true,
-                          useMarkup: true,
-                          xalign: 0
-                        }
-                      ),
-                      /* @__PURE__ */ jsx(
-                        "label",
-                        {
-                          className: "body",
-                          label: `- ${notification.get_body()}`,
-                          justify: Gtk4.Justification.LEFT,
-                          truncate: true,
-                          useMarkup: true,
-                          hexpand: true,
-                          wrap: true,
-                          lines: 2,
-                          xalign: 0
-                        }
-                      )
-                    ] })
-                  ]
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                "button",
-                {
-                  className: "dismiss_notification",
-                  cursor: "pointer",
-                  halign: Gtk4.Align.END,
-                  valign: Gtk4.Align.START,
-                  hexpand: true,
-                  onClick: () => notification.dismiss(),
-                  children: /* @__PURE__ */ jsx("label", { label: "\u{F0159}" })
-                }
-              )
-            ]
-          }
-        )
+      children: notifications.map((notification) => /* @__PURE__ */ jsx(
+        "revealer",
+        {
+          revealChild: true,
+          transitionType: Gtk4.RevealerTransitionType.SLIDE_DOWN,
+          transitionDuration: ANIMATION_SPEED,
+          children: /* @__PURE__ */ jsx(
+            "revealer",
+            {
+              revealChild: false,
+              transitionType: Gtk4.RevealerTransitionType.SLIDE_LEFT,
+              transitionDuration: ANIMATION_SPEED,
+              setup: (self) => {
+                timeout(1, () => {
+                  self.revealChild = true;
+                });
+              },
+              children: /* @__PURE__ */ jsx(Notification, { notification })
+            }
+          )
+        }
       ))
     }
   );
@@ -2669,7 +2688,7 @@ function getWallpapers() {
 function Wallpapers() {
   const wallpapers = Variable(getWallpapers());
   monitorFile(
-    `${LOCAL_STATE}/wallpapers_changed`,
+    `${LOCAL_STATE}/theme_changed`,
     () => wallpapers.set(getWallpapers())
   );
   return /* @__PURE__ */ jsx("scrollable", { vexpand: true, children: /* @__PURE__ */ jsx(
