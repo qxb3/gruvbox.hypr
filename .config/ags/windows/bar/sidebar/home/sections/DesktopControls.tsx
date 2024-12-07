@@ -127,18 +127,18 @@ function MuteButton() {
   const isMute = Variable(false)
 
   isMute.subscribe((value) => {
-      if (value) {
-        audio
-          .get_speakers()!
-          .map(speaker => speaker.set_mute(true))
-      }
+    if (value) {
+      audio
+        .get_speakers()!
+        .map(speaker => speaker.set_mute(true))
+    }
 
-      if (!value) {
-        audio
-          .get_speakers()!
-          .map(speaker => speaker.set_mute(false))
-      }
-    })
+    if (!value) {
+      audio
+        .get_speakers()!
+        .map(speaker => speaker.set_mute(false))
+    }
+  })
 
   return (
     <button
@@ -217,17 +217,29 @@ function Sliders() {
       className='sliders'
       vertical={true}>
       {/* Volume Slider */}
-      <box
-        className='volume_slider'
-        spacing={12}>
-        <label
-          className='icon'
-          label='󰕾'
-        />
+      {bind(audio, 'defaultSpeaker').as(speaker => (
+        <box
+          className='volume_slider'
+          spacing={12}>
+          <button
+            cursor='pointer'
+            onClick={() => speaker.set_mute(!speaker.get_mute())}>
+            <label
+              className='icon'
+              label={
+                bind(speaker, 'mute')
+                  .as(isMute => !isMute ? '󰕾' : '󰸈')
+              }
+            />
+          </button>
 
-        {bind(audio, 'defaultSpeaker').as(speaker => (
           <slider
-            className='slider'
+            className={
+              bind(speaker, 'mute')
+                .as(isMute => isMute ?
+                    'slider mute' : 'slider'
+                )
+            }
             cursor='pointer'
             value={bind(speaker, 'volume')}
             max={1.5}
@@ -235,17 +247,24 @@ function Sliders() {
             hexpand={true}
             onDragged={({ value }) => speaker.set_volume(value)}
           />
-        ))}
-      </box>
+        </box>
+      ))}
 
       {/* Music Slider */}
       <box
         className='music_slider'
         spacing={12}>
-        <label
-          className='icon'
-          label='󰎌'
-        />
+        <button
+          cursor='pointer'
+          onClick={() => spotify.set_volume(spotify.get_volume() <= 0 ? 100 : 0)}>
+          <label
+            className='icon'
+            label={
+              bind(spotify, 'volume')
+                .as(volume => volume <= 0 ? '󰎊' : '󰎌')
+            }
+          />
+        </button>
 
         <slider
           className='slider'

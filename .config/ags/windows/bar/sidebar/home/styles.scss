@@ -82,6 +82,8 @@
         font-size: 20px;
       }
 
+      & .slider.mute highlight { background-color: $gray; }
+
       & scale {
         & trough {
           background-color: $bg2;

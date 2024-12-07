@@ -39,13 +39,17 @@ function AudioControlsMenu() {
             onDragged={({ value }) => speaker.set_volume(value)}>
           </slider>
 
-          <label
-            className='icon'
-            label={
-              bind(speaker, 'mute')
-                .as(isMute => !isMute ? '󰕾' : '󰸈')
-            }
-          />
+          <button
+            cursor='pointer'
+            onClick={() => speaker.set_mute(!speaker.get_mute())}>
+            <label
+              className='icon'
+              label={
+                bind(speaker, 'mute')
+                  .as(isMute => !isMute ? '󰕾' : '󰸈')
+              }
+            />
+          </button>
         </box>
       ))}
 
@@ -67,7 +71,17 @@ function AudioControlsMenu() {
           onDragged={({ value }) => spotify.set_volume(value)}>
         </slider>
 
-        <label className='icon' label='󰎌' />
+        <button
+          cursor='pointer'
+          onClick={() => spotify.set_volume(spotify.get_volume() <= 0 ? 100 : 0)}>
+          <label
+            className='icon'
+            label={
+              bind(spotify, 'volume')
+                .as(volume => volume <= 0 ? '󰎊' : '󰎌')
+            }
+          />
+        </button>
       </box>
 
       {/* Microphone Vol */}
@@ -80,9 +94,7 @@ function AudioControlsMenu() {
           <slider
             className={
               bind(microphone, 'mute')
-                .as(isMute => isMute ?
-                    'slider mute' : 'slider'
-                )
+                .as(isMute => isMute ? 'slider mute' : 'slider')
             }
             cursor='pointer'
             value={bind(microphone, 'volume')}
@@ -95,13 +107,17 @@ function AudioControlsMenu() {
             onDragged={({ value }) => microphone.set_volume(value)}>
           </slider>
 
-          <label
-            className='icon'
-            label={
-              bind(microphone, 'mute')
-                .as(isMute => !isMute ? '󰍬' : '󰍭')
-            }
-          />
+          <button
+            cursor='pointer'
+            onClick={() => microphone.set_mute(!microphone.get_mute())}>
+            <label
+              className='icon'
+              label={
+                bind(microphone, 'mute')
+                  .as(isMute => !isMute ? '󰍬' : '󰍭')
+              }
+            />
+          </button>
         </box>
       ))}
     </box>
