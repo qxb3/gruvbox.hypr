@@ -1012,6 +1012,22 @@ revealCalendarMenu.subscribe((value) => {
   }
 });
 
+// windows/bar/sidebar/vars.ts
+var revealSideBar = Variable(false);
+var sideBarShown = Variable("home");
+var sideBarWidth = Variable(0);
+revealSideBar.subscribe((value) => {
+  if (value) {
+    revealAudioControlsMenu.set(false);
+    revealSystemControlsMenu.set(false);
+    revealBatteryMenu.set(false);
+    revealCalendarMenu.set(false);
+  }
+  if (!value) {
+    sideBarShown.set("home");
+  }
+});
+
 // windows/bar/menu/AudioControlsMenu.tsx
 var audio = WPSerivce.get_default().audio;
 var spotify = MprisService.Player.new("spotify");
@@ -1047,10 +1063,17 @@ function AudioControlsMenu() {
                 }
               ),
               /* @__PURE__ */ jsx(
-                "label",
+                "button",
                 {
-                  className: "icon",
-                  label: bind(speaker, "mute").as((isMute) => !isMute ? "\u{F057E}" : "\u{F0E08}")
+                  cursor: "pointer",
+                  onClick: () => speaker.set_mute(!speaker.get_mute()),
+                  children: /* @__PURE__ */ jsx(
+                    "label",
+                    {
+                      className: "icon",
+                      label: bind(speaker, "mute").as((isMute) => !isMute ? "\u{F057E}" : "\u{F0E08}")
+                    }
+                  )
                 }
               )
             ]
@@ -1078,7 +1101,20 @@ function AudioControlsMenu() {
                   onDragged: ({ value }) => spotify.set_volume(value)
                 }
               ),
-              /* @__PURE__ */ jsx("label", { className: "icon", label: "\u{F038C}" })
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  cursor: "pointer",
+                  onClick: () => spotify.set_volume(spotify.get_volume() <= 0 ? 100 : 0),
+                  children: /* @__PURE__ */ jsx(
+                    "label",
+                    {
+                      className: "icon",
+                      label: bind(spotify, "volume").as((volume) => volume <= 0 ? "\u{F038A}" : "\u{F038C}")
+                    }
+                  )
+                }
+              )
             ]
           }
         ),
@@ -1093,9 +1129,7 @@ function AudioControlsMenu() {
               /* @__PURE__ */ jsx(
                 "slider",
                 {
-                  className: bind(microphone, "mute").as(
-                    (isMute) => isMute ? "slider mute" : "slider"
-                  ),
+                  className: bind(microphone, "mute").as((isMute) => isMute ? "slider mute" : "slider"),
                   cursor: "pointer",
                   value: bind(microphone, "volume"),
                   max: 1.5,
@@ -1108,10 +1142,17 @@ function AudioControlsMenu() {
                 }
               ),
               /* @__PURE__ */ jsx(
-                "label",
+                "button",
                 {
-                  className: "icon",
-                  label: bind(microphone, "mute").as((isMute) => !isMute ? "\u{F036C}" : "\u{F036D}")
+                  cursor: "pointer",
+                  onClick: () => microphone.set_mute(!microphone.get_mute()),
+                  children: /* @__PURE__ */ jsx(
+                    "label",
+                    {
+                      className: "icon",
+                      label: bind(microphone, "mute").as((isMute) => !isMute ? "\u{F036C}" : "\u{F036D}")
+                    }
+                  )
                 }
               )
             ]
@@ -1126,10 +1167,10 @@ function AudioControlsMenu_default() {
     "window",
     {
       namespace: "menu",
-      layer: Astal8.Layer.OVERLAY,
+      layer: Astal8.Layer.TOP,
       anchor: Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
       setup: (self) => app_default.add_window(self),
-      children: /* @__PURE__ */ jsx(
+      children: /* @__PURE__ */ jsx("box", { css: sideBarWidth((width) => `margin-left: ${width}px;`), children: /* @__PURE__ */ jsx(
         "revealer",
         {
           revealChild: revealAudioControlsMenu(),
@@ -1137,7 +1178,7 @@ function AudioControlsMenu_default() {
           transitionDuration: ANIMATION_SPEED,
           children: /* @__PURE__ */ jsx(AudioControlsMenu, {})
         }
-      )
+      ) })
     }
   );
 }
@@ -1228,10 +1269,10 @@ function SystemControlsMenu_default() {
     "window",
     {
       namespace: "menu",
-      layer: Astal8.Layer.OVERLAY,
+      layer: Astal8.Layer.TOP,
       anchor: Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
       setup: (self) => app_default.add_window(self),
-      children: /* @__PURE__ */ jsx(
+      children: /* @__PURE__ */ jsx("box", { css: sideBarWidth((width) => `margin-left: ${width}px;`), children: /* @__PURE__ */ jsx(
         "revealer",
         {
           revealChild: revealSystemControlsMenu(),
@@ -1239,7 +1280,7 @@ function SystemControlsMenu_default() {
           transitionDuration: ANIMATION_SPEED,
           children: /* @__PURE__ */ jsx(SystemControlsMenu, {})
         }
-      )
+      ) })
     }
   );
 }
@@ -1359,10 +1400,10 @@ function BatteryMenu_default() {
     "window",
     {
       namespace: "menu",
-      layer: Astal8.Layer.OVERLAY,
+      layer: Astal8.Layer.TOP,
       anchor: Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
       setup: (self) => app_default.add_window(self),
-      children: /* @__PURE__ */ jsx(
+      children: /* @__PURE__ */ jsx("box", { css: sideBarWidth((width) => `margin-left: ${width}px;`), children: /* @__PURE__ */ jsx(
         "revealer",
         {
           revealChild: revealBatteryMenu(),
@@ -1370,7 +1411,7 @@ function BatteryMenu_default() {
           transitionDuration: ANIMATION_SPEED,
           children: /* @__PURE__ */ jsx(BatteryMenu, {})
         }
-      )
+      ) })
     }
   );
 }
@@ -1583,10 +1624,10 @@ function CalendarMenu_default() {
     "window",
     {
       namespace: "menu",
-      layer: Astal8.Layer.OVERLAY,
+      layer: Astal8.Layer.TOP,
       anchor: Astal8.WindowAnchor.BOTTOM | Astal8.WindowAnchor.LEFT,
       setup: (self) => app_default.add_window(self),
-      children: /* @__PURE__ */ jsx(
+      children: /* @__PURE__ */ jsx("box", { css: sideBarWidth((width) => `margin-left: ${width}px;`), children: /* @__PURE__ */ jsx(
         "revealer",
         {
           revealChild: revealCalendarMenu(),
@@ -1594,25 +1635,10 @@ function CalendarMenu_default() {
           transitionDuration: ANIMATION_SPEED,
           children: /* @__PURE__ */ jsx(CalendarMenu, {})
         }
-      )
+      ) })
     }
   );
 }
-
-// windows/bar/sidebar/vars.ts
-var revealSideBar = Variable(false);
-var sideBarShown = Variable("home");
-revealSideBar.subscribe((value) => {
-  if (value) {
-    revealAudioControlsMenu.set(false);
-    revealSystemControlsMenu.set(false);
-    revealBatteryMenu.set(false);
-    revealCalendarMenu.set(false);
-  }
-  if (!value) {
-    sideBarShown.set("home");
-  }
-});
 
 // windows/bar/sidebar/home/sections/UserHeader.tsx
 var powerMenuShown = Variable("power_button");
@@ -2013,23 +2039,32 @@ function Sliders() {
       className: "sliders",
       vertical: true,
       children: [
-        /* @__PURE__ */ jsxs(
+        bind(audio2, "defaultSpeaker").as((speaker) => /* @__PURE__ */ jsxs(
           "box",
           {
             className: "volume_slider",
             spacing: 12,
             children: [
               /* @__PURE__ */ jsx(
-                "label",
+                "button",
                 {
-                  className: "icon",
-                  label: "\u{F057E}"
+                  cursor: "pointer",
+                  onClick: () => speaker.set_mute(!speaker.get_mute()),
+                  children: /* @__PURE__ */ jsx(
+                    "label",
+                    {
+                      className: "icon",
+                      label: bind(speaker, "mute").as((isMute) => !isMute ? "\u{F057E}" : "\u{F0E08}")
+                    }
+                  )
                 }
               ),
-              bind(audio2, "defaultSpeaker").as((speaker) => /* @__PURE__ */ jsx(
+              /* @__PURE__ */ jsx(
                 "slider",
                 {
-                  className: "slider",
+                  className: bind(speaker, "mute").as(
+                    (isMute) => isMute ? "slider mute" : "slider"
+                  ),
                   cursor: "pointer",
                   value: bind(speaker, "volume"),
                   max: 1.5,
@@ -2037,10 +2072,10 @@ function Sliders() {
                   hexpand: true,
                   onDragged: ({ value }) => speaker.set_volume(value)
                 }
-              ))
+              )
             ]
           }
-        ),
+        )),
         /* @__PURE__ */ jsxs(
           "box",
           {
@@ -2048,10 +2083,17 @@ function Sliders() {
             spacing: 12,
             children: [
               /* @__PURE__ */ jsx(
-                "label",
+                "button",
                 {
-                  className: "icon",
-                  label: "\u{F038C}"
+                  cursor: "pointer",
+                  onClick: () => spotify2.set_volume(spotify2.get_volume() <= 0 ? 100 : 0),
+                  children: /* @__PURE__ */ jsx(
+                    "label",
+                    {
+                      className: "icon",
+                      label: bind(spotify2, "volume").as((volume) => volume <= 0 ? "\u{F038A}" : "\u{F038C}")
+                    }
+                  )
                 }
               ),
               /* @__PURE__ */ jsx(
@@ -2503,61 +2545,51 @@ function launchApp(app) {
   app.launch();
 }
 function Header2() {
-  return /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsx(
     "box",
     {
       className: "header",
       valign: Gtk4.Align.START,
       spacing: 16,
-      children: [
-        /* @__PURE__ */ jsx(
-          "label",
-          {
-            className: "icon",
-            label: "\uF002",
-            xalign: 0
-          }
-        ),
-        /* @__PURE__ */ jsxs(
-          "overlay",
-          {
-            className: "input_container",
-            passThrough: true,
-            hexpand: true,
-            children: [
-              /* @__PURE__ */ jsx(
-                "entry",
-                {
-                  className: "input",
-                  onChanged: ({ text }) => {
-                    query.set(text);
-                    queriedApps.set(apps.fuzzy_query(text));
-                    selectedApp.set(queriedApps.get()[0]);
-                  },
-                  onActivate: () => launchApp(selectedApp.get()),
-                  setup: (self) => {
-                    self.hook(sideBarShown, () => {
-                      if (sideBarShown.get() === "appLauncher" && !self.has_grab())
-                        return self.grab_focus();
-                      self.text = "";
-                    });
-                  }
+      children: /* @__PURE__ */ jsxs(
+        "overlay",
+        {
+          className: "input_container",
+          passThrough: true,
+          hexpand: true,
+          children: [
+            /* @__PURE__ */ jsx(
+              "entry",
+              {
+                className: "input",
+                onChanged: ({ text }) => {
+                  query.set(text);
+                  queriedApps.set(apps.fuzzy_query(text));
+                  selectedApp.set(queriedApps.get()[0]);
+                },
+                onActivate: () => launchApp(selectedApp.get()),
+                setup: (self) => {
+                  self.hook(sideBarShown, () => {
+                    if (sideBarShown.get() === "appLauncher" && !self.has_grab())
+                      return self.grab_focus();
+                    self.text = "";
+                  });
                 }
-              ),
-              /* @__PURE__ */ jsx(
-                "label",
-                {
-                  className: "placeholder",
-                  label: query(
-                    (query2) => query2.length <= 0 ? "Search Apps" : ""
-                  ),
-                  xalign: 0
-                }
-              )
-            ]
-          }
-        )
-      ]
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              "label",
+              {
+                className: "placeholder",
+                label: query(
+                  (query2) => query2.length <= 0 ? "Search Apps" : ""
+                ),
+                xalign: 0
+              }
+            )
+          ]
+        }
+      )
     }
   );
 }
@@ -2584,11 +2616,18 @@ function App(app) {
         /* @__PURE__ */ jsx(
           "icon",
           {
+            className: "icon",
             icon: app.iconName,
             css: "font-size: 32px;"
           }
         ),
-        /* @__PURE__ */ jsx("label", { label: app.name })
+        /* @__PURE__ */ jsx(
+          "label",
+          {
+            className: "name",
+            label: app.name
+          }
+        )
       ] })
     }
   );
@@ -2747,15 +2786,14 @@ function ApplyThemeButton({ theme }) {
         (color) => color.name === "green"
       ).color}`,
       onClick: () => {
-        const currentTheme = exec(`readlink ${LOCAL_STATE}/ags_theme.scss`).split("/").pop().replace(".scss", "");
-        if (currentTheme === theme.name)
-          return execAsync(`notify-send 'Theme Manager' 'Already have the same theme'`);
-        if (currentTheme !== theme.name) {
-          exec(`ln -sf ${theme.path} ${LOCAL_STATE}/ags_theme.scss`);
-          execAsync(`bash -c '${"/home/qxb3/.config/ags"}/themes/sync.sh ${theme.name}'`);
-        }
         sideBarShown.set("home");
         revealSideBar.set(false);
+        const currentTheme = exec(`readlink ${LOCAL_STATE}/ags_theme.scss`).split("/").pop().replace(".scss", "");
+        if (currentTheme === theme.name)
+          return execAsync(`notify-send -a 'ags' 'Theme Manager' 'Already have the same theme.'`);
+        exec(`ln -sf ${theme.path} ${LOCAL_STATE}/ags_theme.scss`);
+        execAsync(`bash -c '${"/home/qxb3/.config/ags"}/themes/sync.sh ${theme.name}'`);
+        execAsync(`notify-send -a 'ags' 'Theme Manager' 'Successfuly changed the theme to ${theme.name}. Restart the session to update the gtk theme.'`);
       },
       children: /* @__PURE__ */ jsx(
         "label",
@@ -2813,6 +2851,11 @@ function SideBar_default() {
       revealChild: revealSideBar(),
       transitionType: Gtk4.RevealerTransitionType.SLIDE_RIGHT,
       transitionDuration: ANIMATION_SPEED,
+      setup: (self) => {
+        self.connect("size-allocate", () => {
+          sideBarWidth.set(self.get_allocated_width());
+        });
+      },
       children: /* @__PURE__ */ jsxs(
         "stack",
         {
@@ -2930,13 +2973,8 @@ function StartSection() {
                           {
                             className: "app",
                             cursor: "pointer",
-                            onClickRelease: (self, event) => {
+                            onClickRelease: (_self, event) => {
                               if (event.button === Astal8.MouseButton.PRIMARY) app.activate(0, 0);
-                              if (event.button === Astal8.MouseButton.SECONDARY) {
-                                const menu = app.create_menu();
-                                Astal8.widget_toggle_class_name(menu, "systray_menu", true);
-                                menu.popup_at_widget(self, Gdk.Gravity.EAST, Gdk.Gravity.WEST, null);
-                              }
                             },
                             children: /* @__PURE__ */ jsx(
                               "icon",
