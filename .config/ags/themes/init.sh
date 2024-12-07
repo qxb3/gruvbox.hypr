@@ -32,7 +32,7 @@ if [[ ! -e "$LOCAL_STATE/wallpapers" && ! -e "$LOCAL_STATE/current_wallpaper" ]]
     +repage \
     "$LOCAL_STATE/current_wallpaper.crop"
 
-  echo "0" > "$LOCAL_STATE/wallpapers_changed"
+  echo "0" > "$LOCAL_STATE/theme_changed"
 
   echo "> Init Wallpapers"
 else

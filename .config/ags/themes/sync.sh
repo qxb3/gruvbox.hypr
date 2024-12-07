@@ -32,13 +32,6 @@ sync_wallpapers() {
   ln -sf "$WALLPAPERS_PATH/$theme" "$LOCAL_STATE/wallpapers"
   ln -sf "$WALLPAPERS_PATH/$theme/default.png" "$LOCAL_STATE/current_wallpaper"
 
-  # Since monitorFile cant work with symlinks
-  # This is a shitty workaround to get updates
-  # This just modify a file that change 0 to 1 and vice versa
-  [ "$(cat "$LOCAL_STATE/wallpapers_changed")" = "0" ] && \
-    echo "1" > "$LOCAL_STATE/wallpapers_changed" || \
-    echo "0" > "$LOCAL_STATE/wallpapers_changed"
-
   swww img "$LOCAL_STATE/current_wallpaper" \
     --transition-type "wipe" \
     --transition-duration 3
@@ -94,3 +87,10 @@ sync_no_music $theme
 sync_hypr $theme
 sync_kitty $theme
 sync_nvim $theme
+
+# Since monitorFile cant work with symlinks
+# This is a shitty workaround to get updates
+# This just modify a file that change 0 to 1 or 1 to 0
+[ "$(cat "$LOCAL_STATE/theme_changed")" = "0" ] && \
+  echo "1" > "$LOCAL_STATE/theme_changed" || \
+  echo "0" > "$LOCAL_STATE/theme_changed"

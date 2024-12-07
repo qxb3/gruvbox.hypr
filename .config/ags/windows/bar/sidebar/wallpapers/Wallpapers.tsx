@@ -15,7 +15,7 @@ function Wallpapers() {
   const wallpapers = Variable<string[]>(getWallpapers())
 
   monitorFile(
-    `${LOCAL_STATE}/wallpapers_changed`,
+    `${LOCAL_STATE}/theme_changed`,
     () => wallpapers.set(getWallpapers())
   )
 

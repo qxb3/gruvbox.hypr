@@ -1,7 +1,7 @@
 import MprisService from 'gi://AstalMpris'
 
 import { Gtk } from 'astal/gtk3'
-import { bind } from 'astal'
+import { bind, monitorFile, Variable } from 'astal'
 
 import ProgressBar from '@widgets/ProgressBar'
 
@@ -12,17 +12,28 @@ interface MusicComponentProps {
 }
 
 function MusicCover({ available }: MusicComponentProps) {
+  const themeChanged = Variable(false)
+
+  monitorFile(
+    `${LOCAL_STATE}/theme_changed`,
+    () => themeChanged.set(!themeChanged.get())
+  )
+
   return (
-    <box
-      className='cover'
-      css={
-        bind(spotify, 'coverArt')
-        .as(cover => available ?
-          `background-image: url("${cover}");` :
-          `background-image: url("${LOCAL_STATE}/no_music");`
-        )
-      }
-    />
+    <box>
+      {bind(themeChanged).as(() => (
+        <box
+          className='cover'
+          css={
+            bind(spotify, 'coverArt')
+              .as(cover => available ?
+                `background-image: url("${cover}");` :
+                `background-image: url("${LOCAL_STATE}/no_music");`
+              )
+          }
+        />
+      ))}
+    </box>
   )
 }
 
