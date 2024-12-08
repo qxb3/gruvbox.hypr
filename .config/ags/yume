@@ -2361,8 +2361,7 @@ function Notification({ notification }) {
                   className: "appname",
                   label: notification.get_app_name().toUpperCase(),
                   truncate: true,
-                  xalign: 0,
-                  hexpand: true
+                  xalign: 0
                 }
               ),
               /* @__PURE__ */ jsxs("box", { vertical: true, children: [
@@ -2385,7 +2384,6 @@ function Notification({ notification }) {
                     justify: Gtk4.Justification.LEFT,
                     truncate: true,
                     useMarkup: true,
-                    hexpand: true,
                     wrap: true,
                     lines: 2,
                     xalign: 0
@@ -2451,28 +2449,7 @@ function NotificationList({ notifications }) {
       className: "notifications",
       vertical: true,
       spacing: 8,
-      children: notifications.map((notification) => /* @__PURE__ */ jsx(
-        "revealer",
-        {
-          revealChild: true,
-          transitionType: Gtk4.RevealerTransitionType.SLIDE_DOWN,
-          transitionDuration: ANIMATION_SPEED,
-          children: /* @__PURE__ */ jsx(
-            "revealer",
-            {
-              revealChild: false,
-              transitionType: Gtk4.RevealerTransitionType.SLIDE_LEFT,
-              transitionDuration: ANIMATION_SPEED,
-              setup: (self) => {
-                timeout(1, () => {
-                  self.revealChild = true;
-                });
-              },
-              children: /* @__PURE__ */ jsx(Notification, { notification })
-            }
-          )
-        }
-      ))
+      children: notifications.map((notification) => /* @__PURE__ */ jsx(Notification, { notification }))
     }
   );
 }
@@ -3216,69 +3193,7 @@ function NotificationPopups() {
         {
           onClick: () => removePopup(popupNotif.id),
           setup: () => timeout(TIMEOUT_DELAY, () => removePopup(popupNotif.id)),
-          children: /* @__PURE__ */ jsxs(
-            "box",
-            {
-              className: "notification",
-              spacing: 8,
-              children: [
-                /* @__PURE__ */ jsx(
-                  "box",
-                  {
-                    className: "image",
-                    css: `background-image: url("${popupNotif.get_image() ?? `${"/home/qxb3/.config/ags"}/assets/bell.svg`}");`
-                  }
-                ),
-                /* @__PURE__ */ jsxs(
-                  "box",
-                  {
-                    className: "meta",
-                    vertical: true,
-                    spacing: 4,
-                    children: [
-                      /* @__PURE__ */ jsx(
-                        "label",
-                        {
-                          className: "appname",
-                          label: popupNotif.get_app_name().toUpperCase(),
-                          truncate: true,
-                          xalign: 0,
-                          hexpand: true
-                        }
-                      ),
-                      /* @__PURE__ */ jsxs("box", { vertical: true, children: [
-                        /* @__PURE__ */ jsx(
-                          "label",
-                          {
-                            className: "summary",
-                            label: popupNotif.get_summary(),
-                            justify: Gtk4.Justification.LEFT,
-                            truncate: true,
-                            useMarkup: true,
-                            xalign: 0
-                          }
-                        ),
-                        /* @__PURE__ */ jsx(
-                          "label",
-                          {
-                            className: "body",
-                            label: `- ${popupNotif.get_body()}`,
-                            justify: Gtk4.Justification.LEFT,
-                            truncate: true,
-                            useMarkup: true,
-                            hexpand: true,
-                            wrap: true,
-                            lines: 2,
-                            xalign: 0
-                          }
-                        )
-                      ] })
-                    ]
-                  }
-                )
-              ]
-            }
-          )
+          children: /* @__PURE__ */ jsx(Notification, { notification: popupNotif })
         }
       )))
     }
