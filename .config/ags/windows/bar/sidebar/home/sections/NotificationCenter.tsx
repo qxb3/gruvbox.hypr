@@ -1,4 +1,6 @@
 import NotifdService from 'gi://AstalNotifd'
+import Notification from '@widgets/Notification'
+
 import { Gtk } from 'astal/gtk3'
 import { bind } from 'astal'
 
@@ -40,79 +42,7 @@ function NotificationList({ notifications }: { notifications: NotifdService.Noti
       vertical={true}
       spacing={8}>
       {notifications.map(notification => (
-        // <revealer
-        //   revealChild={true}
-        //   transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-        //   transitionDuration={300}
-        //   hexpand={true}
-        //   setup={(self) => {
-        //     self.hook(notification, 'resolved', (_, reason) => {
-        //       if (reason === NotifdService.ClosedReason.DISMISSED_BY_USER) {
-        //         self.revealChild = false
-        //       }
-        //     })
-        //   }}>
-        <box
-          className='notification'
-          spacing={8}>
-          {/* Image */}
-          <box
-            className='image'
-            css={`background-image: url("${notification.get_image() ?? `${SRC}/assets/bell.svg`}");`}>
-          </box>
-
-          {/* Meta */}
-          <box
-            className='meta'
-            vertical={true}
-            spacing={4}>
-            {/* App Name */}
-            <label
-              className='appname'
-              label={notification.get_app_name().toUpperCase()}
-              truncate={true}
-              xalign={0}
-              hexpand={true}
-            />
-
-            <box vertical={true}>
-              {/* Summary */}
-              <label
-                className='summary'
-                label={notification.get_summary()}
-                justify={Gtk.Justification.LEFT}
-                truncate={true}
-                useMarkup={true}
-                xalign={0}
-              />
-
-              {/* Body */}
-              <label
-                className='body'
-                label={`- ${notification.get_body()}`}
-                justify={Gtk.Justification.LEFT}
-                truncate={true}
-                useMarkup={true}
-                hexpand={true}
-                wrap={true}
-                lines={2}
-                xalign={0}
-              />
-            </box>
-          </box>
-
-          {/* Dismiss Notification */}
-          <button
-            className='dismiss_notification'
-            cursor='pointer'
-            halign={Gtk.Align.END}
-            valign={Gtk.Align.START}
-            hexpand={true}
-            onClick={() => notification.dismiss()}>
-            <label label='󰅙' />
-          </button>
-        </box>
-        // </revealer>
+        <Notification notification={notification} />
       ))}
     </box>
   )

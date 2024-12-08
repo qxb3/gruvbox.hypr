@@ -1,6 +1,7 @@
 import NotifydService from 'gi://AstalNotifd'
+import Notification from '@widgets/Notification'
 
-import { App, Astal, Gdk, Gtk } from 'astal/gtk3'
+import { App, Astal, Gdk } from 'astal/gtk3'
 import { timeout, Variable } from 'astal'
 
 const TIMEOUT_DELAY = 5000
@@ -29,55 +30,7 @@ function NotificationPopups() {
         <eventbox
           onClick={() => removePopup(popupNotif.id)}
           setup={() => timeout(TIMEOUT_DELAY, () => removePopup(popupNotif.id))}>
-          <box
-            className='notification'
-            spacing={8}>
-            {/* Image */}
-            <box
-              className='image'
-              css={`background-image: url("${popupNotif.get_image() ?? `${SRC}/assets/bell.svg`}");`}>
-            </box>
-
-            {/* Meta */}
-            <box
-              className='meta'
-              vertical={true}
-              spacing={4}>
-              {/* App Name */}
-              <label
-                className='appname'
-                label={popupNotif.get_app_name().toUpperCase()}
-                truncate={true}
-                xalign={0}
-                hexpand={true}
-              />
-
-              <box vertical={true}>
-                {/* Summary */}
-                <label
-                  className='summary'
-                  label={popupNotif.get_summary()}
-                  justify={Gtk.Justification.LEFT}
-                  truncate={true}
-                  useMarkup={true}
-                  xalign={0}
-                />
-
-                {/* Body */}
-                <label
-                  className='body'
-                  label={`- ${popupNotif.get_body()}`}
-                  justify={Gtk.Justification.LEFT}
-                  truncate={true}
-                  useMarkup={true}
-                  hexpand={true}
-                  wrap={true}
-                  lines={2}
-                  xalign={0}
-                />
-              </box>
-            </box>
-          </box>
+          <Notification notification={popupNotif} />
         </eventbox>
       )))}
     </box>
