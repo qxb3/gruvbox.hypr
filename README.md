@@ -1,13 +1,11 @@
-<div align="center">
-    <img width="80%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/logo.png">
+<div align="center"><img width="80%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/logo.png">
     <br><br>
 
-    &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
-    &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
-    &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
-    &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
-    <br><br>
-</div>
+&ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
+&ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
+&ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
+ &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
+<br><br></div>
 
 ## Screenshots
 
