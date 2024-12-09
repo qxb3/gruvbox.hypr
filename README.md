@@ -13,6 +13,7 @@
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/2.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/3.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/4.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/5.png" />
 </p>
 
 <br>
