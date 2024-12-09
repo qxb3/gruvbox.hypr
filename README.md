@@ -1,4 +1,4 @@
-<div align = center>
+<div align="center">
   <img src="https://raw.githubusercontent.com/qxb3/conf/refs/heads/main/repo/logo.png" width="80%" />
 
   &ensp;[<kbd> <br> Yume <br> </kbd>](#------yume----)&ensp;
