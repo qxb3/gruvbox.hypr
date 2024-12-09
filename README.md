@@ -1,11 +1,11 @@
-<div align="center"><img width="80%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/logo.png">
-    <br><br>
+<div align="center">
+  <img width="80%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/logo.png" />
 
-&ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
-&ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
-&ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
- &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
-<br><br></div>
+  &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
+  &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
+  &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
+  &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
+</div>
 
 ## Screenshots
 
@@ -62,6 +62,16 @@ cp -r .scripts ~/ # Optional
 <br>
 
 <table><tr><td>
+  <code>t</code><br><code>h</code><br><code>e</code><br><code>m</code><br><code>e</code><br></td><td><table>
+  <tr><td>gruvbox-dark-gtk</td><td>Gruvbox GTK Theme</td></tr>
+  <tr><td>Everforest</td><td>Everforest GTK Theme</td></tr>
+  <tr><td>Nordic-darker</td><td>Nord GTK Theme</td></tr>
+  <tr><td>phocus</td><td>Oxocarbon like GTK Theme</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table><tr><td>
   <code>s</code><br><code>h</code><br><code>e</code><br><code>l</code><br><code>l</code></td><td><table>
   <tr><td>zsh</td><td>main shell</td></tr>
   <tr><td>neovim</td><td>text editor</td></tr>
@@ -73,8 +83,7 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
   <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
-  <tr><td>gnome-bluetooth-3.0</td><td>for bluetooth</td></tr>
-  <tr><td>pipwire-pulse</td><td>audio</td></tr>
+  <tr><td>pipwire-pulse</td><td>For audio</td></tr>
   <tr><td>NetworkManager</td><td>manages network</td></tr></table>
 </td></tr></table>
 
