@@ -18,5 +18,5 @@ Object.assign(globalThis, {
   LOCAL_STATE: `${homeDir}/.local/state/theme`,
   TMP: `/tmp`,
 
-  ANIMATION_SPEED: 300
+  ANIMATION_SPEED: 600
 })

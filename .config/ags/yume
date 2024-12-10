@@ -446,7 +446,7 @@ Object.assign(globalThis, {
   HOME_DIR: homeDir,
   LOCAL_STATE: `${homeDir}/.local/state/theme`,
   TMP: `/tmp`,
-  ANIMATION_SPEED: 300
+  ANIMATION_SPEED: 600
 });
 
 // ../../../../../../../usr/share/astal/gjs/gtk3/index.ts
