@@ -17,16 +17,16 @@ zero.on_attach(function(_, bufnr)
   vim.keymap.set('n', '<leader>sd', '<cmd>lua vim.lsp.buf.hover()<cr>', { silent = true })
 
   zero.format_on_save({
-  format_opts = {
-    async = false,
-    timeout_ms = 10000,
-  },
-  servers = {
-    ['tsserver'] = {'javascript', 'typescript'},
-    ['svelte-language-server'] = {'svelte'},
-    ['rust_anaylzer'] = {'rust'},
-  }
-})
+    format_opts = {
+      async = false,
+      timeout_ms = 10000,
+    },
+    servers = {
+      ['tsserver'] = {'javascript', 'typescript'},
+      ['svelte-language-server'] = {'svelte'},
+      ['rust_anaylzer'] = {'rust'},
+    }
+  })
 end)
 
 zero.setup()
