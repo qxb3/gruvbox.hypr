@@ -2729,7 +2729,7 @@ function AppLauncher_default() {
 // windows/bar/sidebar/wallpapers/Wallpapers.tsx
 import GdkPixbuf from "gi://GdkPixbuf";
 function getWallpapers() {
-  return exec(`find -L ${LOCAL_STATE}/wallpapers -iname '*.png' ! -iname 'default.png'`).split("\n");
+  return exec(`find -L ${LOCAL_STATE}/wallpapers -iname '*.png'`).split("\n");
 }
 function Wallpapers() {
   const wallpapers = Variable(getWallpapers());
