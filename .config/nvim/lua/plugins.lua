@@ -98,6 +98,7 @@ require('packer').startup(function(use)
   use 'ellisonleao/gruvbox.nvim'            -- Gruvbox Colorscheme
   use 'nyoom-engineering/oxocarbon.nvim'    -- Oxocarbon Colorscheme
   use 'neanias/everforest-nvim'             -- Everforest Colorscheme
+  use 'rebelot/kanagawa.nvim'               -- Kanagawa Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins                                         --
