@@ -1,0 +1,31 @@
+$bgh:       #1F1F28;
+$bg:        #1F1F28;
+$bg1:       #252535;
+$bg2:       #34344b;
+
+$fgh:       #DCD7BA;
+$fg:        #DCD7BA;
+$fg1:       #DCD7BA;
+$fg2:       #C8C093;
+
+$red:       #C34043;
+$green:     #76946A;
+$yellow:    #C0A36E;
+$orange:    #E82424;
+$blue:      #7E9CD8;
+$purple:    #957FB8;
+$aqua:      #6A9589;
+$gray:      #727169;
+
+$primary: $blue;
+$secondary: $green;
+$border: $fg;
+
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font";
+  color: $fg;
+}
+
+// Windows
+@import "./windows/statusline/styles.scss";

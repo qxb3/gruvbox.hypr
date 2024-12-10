@@ -1,10 +1,17 @@
-import { App } from "astal/gtk3"
-import style from "./style.scss"
-import Bar from "./widget/Bar"
+#!/usr/bin/gjs -m
+
+import './globals'
+
+import { App } from 'astal/gtk3'
+import { compileScss } from './cssHotReload'
+
+import StatusLine from '@windows/statusline/StatusLine'
 
 App.start({
-    css: style,
-    main() {
-        App.get_monitors().map(Bar)
-    },
+  css: compileScss(),
+  main() {
+    const mainMonitor = App.get_monitors().at(0)!
+
+    StatusLine(mainMonitor)
+  },
 })

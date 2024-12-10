@@ -1,0 +1,10 @@
+{
+  "name": "vim_styled",
+  "author": "qxb3",
+  "license": "MIT",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "ags run",
+    "dev": "nodemon --ext ts,tsx --exec 'ags run'"
+  }
+}
