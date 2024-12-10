@@ -42,7 +42,7 @@ function NotificationList({ notifications }: { notifications: NotifdService.Noti
       vertical={true}
       spacing={8}>
       {notifications.map(notification => (
-        <Notification notification={notification} />
+        <Notification notification={notification} showDismiss={true} />
       ))}
     </box>
   )

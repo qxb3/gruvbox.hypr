@@ -10,6 +10,74 @@ var __decorateClass = (decorators, target, key, kind) => {
   return result;
 };
 
+// ../../../../../../../usr/share/astal/gjs/overrides.ts
+var snakeify = (str) => str.replace(/([a-z])([A-Z])/g, "$1_$2").replaceAll("-", "_").toLowerCase();
+async function suppress(mod, patch2) {
+  return mod.then((m) => patch2(m.default)).catch(() => void 0);
+}
+function patch(proto, prop) {
+  Object.defineProperty(proto, prop, {
+    get() {
+      return this[`get_${snakeify(prop)}`]();
+    }
+  });
+}
+await suppress(import("gi://AstalApps"), ({ Apps, Application }) => {
+  patch(Apps.prototype, "list");
+  patch(Application.prototype, "keywords");
+  patch(Application.prototype, "categories");
+});
+await suppress(import("gi://AstalBattery"), ({ UPower }) => {
+  patch(UPower.prototype, "devices");
+});
+await suppress(import("gi://AstalBluetooth"), ({ Adapter, Bluetooth, Device }) => {
+  patch(Adapter.prototype, "uuids");
+  patch(Bluetooth.prototype, "adapters");
+  patch(Bluetooth.prototype, "devices");
+  patch(Device.prototype, "uuids");
+});
+await suppress(import("gi://AstalHyprland"), ({ Hyprland, Monitor, Workspace }) => {
+  patch(Hyprland.prototype, "monitors");
+  patch(Hyprland.prototype, "workspaces");
+  patch(Hyprland.prototype, "clients");
+  patch(Monitor.prototype, "availableModes");
+  patch(Monitor.prototype, "available_modes");
+  patch(Workspace.prototype, "clients");
+});
+await suppress(import("gi://AstalMpris"), ({ Mpris, Player }) => {
+  patch(Mpris.prototype, "players");
+  patch(Player.prototype, "supported_uri_schemas");
+  patch(Player.prototype, "supportedUriSchemas");
+  patch(Player.prototype, "supported_mime_types");
+  patch(Player.prototype, "supportedMimeTypes");
+  patch(Player.prototype, "comments");
+});
+await suppress(import("gi://AstalNetwork"), ({ Wifi }) => {
+  patch(Wifi.prototype, "access_points");
+  patch(Wifi.prototype, "accessPoints");
+});
+await suppress(import("gi://AstalNotifd"), ({ Notifd, Notification: Notification2 }) => {
+  patch(Notifd.prototype, "notifications");
+  patch(Notification2.prototype, "actions");
+});
+await suppress(import("gi://AstalPowerProfiles"), ({ PowerProfiles }) => {
+  patch(PowerProfiles.prototype, "actions");
+});
+await suppress(import("gi://AstalWp"), ({ Wp, Audio, Video }) => {
+  patch(Wp.prototype, "endpoints");
+  patch(Wp.prototype, "devices");
+  patch(Audio.prototype, "streams");
+  patch(Audio.prototype, "recorders");
+  patch(Audio.prototype, "microphones");
+  patch(Audio.prototype, "speakers");
+  patch(Audio.prototype, "devices");
+  patch(Video.prototype, "streams");
+  patch(Video.prototype, "recorders");
+  patch(Video.prototype, "sinks");
+  patch(Video.prototype, "sources");
+  patch(Video.prototype, "devices");
+});
+
 // ../../../../../../../usr/share/astal/gjs/index.ts
 import { default as default3 } from "gi://AstalIO?version=0.1";
 
@@ -166,7 +234,7 @@ function defaultValue(declaration) {
 }
 
 // ../../../../../../../usr/share/astal/gjs/binding.ts
-var snakeify = (str) => str.replace(/([a-z])([A-Z])/g, "$1_$2").replaceAll("-", "_").toLowerCase();
+var snakeify2 = (str) => str.replace(/([a-z])([A-Z])/g, "$1_$2").replaceAll("-", "_").toLowerCase();
 var kebabify2 = (str) => str.replace(/([a-z])([A-Z])/g, "$1-$2").replaceAll("_", "-").toLowerCase();
 var Binding = class _Binding {
   transformFn = (v) => v;
@@ -191,7 +259,7 @@ var Binding = class _Binding {
     if (typeof this.#emitter.get === "function")
       return this.transformFn(this.#emitter.get());
     if (typeof this.#prop === "string") {
-      const getter = `get_${snakeify(this.#prop)}`;
+      const getter = `get_${snakeify2(this.#prop)}`;
       if (typeof this.#emitter[getter] === "function")
         return this.transformFn(this.#emitter[getter]());
       return this.transformFn(this.#emitter[this.#prop]);
@@ -406,7 +474,7 @@ function mergeBindings(array) {
 }
 function setProp(obj, prop, value) {
   try {
-    const setter = `set_${snakeify(prop)}`;
+    const setter = `set_${snakeify2(prop)}`;
     if (typeof obj[setter] === "function")
       return obj[setter](value);
     return obj[prop] = value;
@@ -2334,7 +2402,7 @@ function MusicPlayer_default() {
 import NotifdService2 from "gi://AstalNotifd";
 
 // widgets/Notification.tsx
-function Notification({ notification }) {
+function Notification({ notification, showDismiss }) {
   return /* @__PURE__ */ jsxs(
     "box",
     {
@@ -2401,6 +2469,7 @@ function Notification({ notification }) {
             halign: Gtk4.Align.END,
             valign: Gtk4.Align.START,
             hexpand: true,
+            visible: showDismiss,
             onClick: () => notification.dismiss(),
             children: /* @__PURE__ */ jsx("label", { label: "\u{F0159}" })
           }
@@ -2449,7 +2518,7 @@ function NotificationList({ notifications }) {
       className: "notifications",
       vertical: true,
       spacing: 8,
-      children: notifications.map((notification) => /* @__PURE__ */ jsx(Notification, { notification }))
+      children: notifications.map((notification) => /* @__PURE__ */ jsx(Notification, { notification, showDismiss: true }))
     }
   );
 }
@@ -3193,7 +3262,7 @@ function NotificationPopups() {
         {
           onClick: () => removePopup(popupNotif.id),
           setup: () => timeout(TIMEOUT_DELAY, () => removePopup(popupNotif.id)),
-          children: /* @__PURE__ */ jsx(Notification, { notification: popupNotif })
+          children: /* @__PURE__ */ jsx(Notification, { notification: popupNotif, showDismiss: false })
         }
       )))
     }

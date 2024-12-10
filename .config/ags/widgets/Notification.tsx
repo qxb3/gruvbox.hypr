@@ -2,7 +2,7 @@ import NotifdService from 'gi://AstalNotifd'
 
 import { Gtk } from 'astal/gtk3'
 
-export default function Notification({ notification }: { notification: NotifdService.Notification }) {
+export default function Notification({ notification, showDismiss }: { notification: NotifdService.Notification, showDismiss: boolean }) {
   return (
     <box
       className='notification'
@@ -58,6 +58,7 @@ export default function Notification({ notification }: { notification: NotifdSer
         halign={Gtk.Align.END}
         valign={Gtk.Align.START}
         hexpand={true}
+        visible={showDismiss}
         onClick={() => notification.dismiss()}>
         <label label='󰅙' />
       </button>

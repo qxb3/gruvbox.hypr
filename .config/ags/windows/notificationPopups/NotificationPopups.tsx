@@ -30,7 +30,7 @@ function NotificationPopups() {
         <eventbox
           onClick={() => removePopup(popupNotif.id)}
           setup={() => timeout(TIMEOUT_DELAY, () => removePopup(popupNotif.id))}>
-          <Notification notification={popupNotif} />
+          <Notification notification={popupNotif} showDismiss={false} />
         </eventbox>
       )))}
     </box>
