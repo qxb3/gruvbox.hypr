@@ -43,7 +43,7 @@
 
         & trough {
           & progress {
-            background-color: $yellow;
+            background-color: $secondary;
             min-width: 5px;
             min-height: 12px;
           }
@@ -58,7 +58,7 @@
         }
 
         & highlight {
-          background-color: $fg2;
+          background-color: $secondary;
         }
       }
     }

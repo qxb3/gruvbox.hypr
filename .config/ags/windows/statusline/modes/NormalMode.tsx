@@ -13,7 +13,7 @@ export default function NormalMode() {
   return (
     <box
       name='normal'
-      className='left'
+      className='normal'
       spacing={8}
       hexpand={true}>
       <stack

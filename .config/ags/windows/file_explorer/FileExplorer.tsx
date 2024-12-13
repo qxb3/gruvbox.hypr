@@ -6,6 +6,8 @@ import { createTree, FType } from './utils'
 import fetch from './folders/fetch'
 import stats from './folders/stats'
 import musicPlayer from './folders/desktop/music_player'
+import desktopControls from './folders/desktop/desktop_controls'
+import notifications from './folders/desktop/notifications'
 
 function FileExplorer() {
   const tree = createTree({
@@ -18,7 +20,9 @@ function FileExplorer() {
         type: FType.DIR,
         name: 'desktop',
         children: [
-          musicPlayer
+          musicPlayer,
+          desktopControls,
+          notifications
         ]
       }
     ]

@@ -13,7 +13,11 @@ const musicPlayer: Tree = {
       name: 'title',
       icon: '󰲹',
       widget: (
-        <label label={bind(spotify, 'title')} />
+        <label
+          label={bind(spotify, 'title')}
+          maxWidthChars={16}
+          truncate={true}
+        />
       )
     },
     {
@@ -21,7 +25,11 @@ const musicPlayer: Tree = {
       name: 'artist',
       icon: '󰠃',
       widget: (
-        <label label={bind(spotify, 'artist')} />
+        <label
+          label={bind(spotify, 'artist')}
+          maxWidthChars={16}
+          truncate={true}
+        />
       )
     },
     {
@@ -29,7 +37,11 @@ const musicPlayer: Tree = {
       name: 'album',
       icon: '󰀥',
       widget: (
-        <label label={bind(spotify, 'album')} />
+        <label
+          label={bind(spotify, 'album')}
+          maxWidthChars={16}
+          truncate={true}
+        />
       )
     },
     {

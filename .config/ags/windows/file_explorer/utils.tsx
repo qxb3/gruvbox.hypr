@@ -3,7 +3,8 @@ import { Gtk } from 'astal/gtk3'
 export enum FType {
   DIR,
   FILE,
-  WIDGET
+  WIDGET,
+  CUSTOM
 }
 
 export interface TDir {
@@ -27,7 +28,12 @@ export interface TWidget {
   widget: Gtk.Widget
 }
 
-export type Tree = TDir | TFile | TWidget
+export interface TCustom {
+  type: FType.CUSTOM
+  widget: Gtk.Widget
+}
+
+export type Tree = TDir | TFile | TWidget | TCustom
 
 export function createTree(tree: Tree): Gtk.Widget[] {
   const generatedTree: Gtk.Widget[] = []
@@ -48,6 +54,7 @@ export function createTree(tree: Tree): Gtk.Widget[] {
     }
 
     traverse(tree)
+
     return maxLength
   }
 
@@ -97,6 +104,13 @@ export function createTree(tree: Tree): Gtk.Widget[] {
                 `${current.icon ?? ''} ${current.name.padEnd(padSize)} -> `
               }
             />
+            {current.widget}
+          </box>
+        )}
+
+        {current.type === FType.CUSTOM && (
+          <box className='custom'>
+            {space}
             {current.widget}
           </box>
         )}
