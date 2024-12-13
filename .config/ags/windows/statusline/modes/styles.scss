@@ -1,0 +1,18 @@
+.applications_menu {
+  background-color: $bg1;
+
+  & .app {
+    font-size: 12px;
+    font-weight: 900;
+    padding: 2px 2px;
+    min-width: 200px;
+
+    &.selected {
+      background-color: $primary;
+
+      & .name {
+        color: $bg2;
+      }
+    }
+  }
+}

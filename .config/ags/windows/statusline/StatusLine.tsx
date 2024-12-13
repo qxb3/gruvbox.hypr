@@ -1,117 +1,23 @@
 import Hyprland from 'gi://AstalHyprland'
-import Mpris from 'gi://AstalMpris'
 import Battery from 'gi://AstalBattery'
 
 import { App, Astal, Gdk, Gtk } from 'astal/gtk3'
-import { bind, Binding, Variable } from 'astal'
+import { bind, Variable } from 'astal'
+
 import BatteryIcon from '@widgets/BatteryIcon'
+import StatusLineDivider from '@widgets/StatusLineDivider'
+
+import NormalMode from './modes/NormalMode'
+
+import { statusLineMode } from './vars'
+import AppLauncherMode from './modes/AppLauncherMode'
 
 const hyprland = Hyprland.get_default()
-const spotify = Mpris.Player.new('spotify')
 const battery = Battery.get_default()
 
 const time = Variable('')
   .poll(1000, `date "+%I : %M %p"`)
 
-function Divider(
-  {
-    divider = '',
-    margin = 5 ,
-    visible = true
-  }:
-  { divider?: string,
-    margin?: number,
-    visible?: boolean | Binding<boolean | undefined> | undefined  }
-) {
-  return (
-    <label
-      className='divider'
-      label={divider}
-      visible={visible}
-      css={`
-        font-weight: 900;
-        margin: 0 ${margin}px;;
-      `}
-    />
-  )
-}
-
-function LeftSection() {
-  return (
-    <box
-      className='left'
-      spacing={8}
-      hexpand={true}>
-      <stack
-        className='window_state'
-        transitionType={Gtk.StackTransitionType.OVER_RIGHT_LEFT}
-        transitionDuration={ANIMATION_SPEED}
-        setup={(self) => {
-          self.hook(hyprland, 'event', () => {
-            const isFloating = hyprland
-              .get_focused_client()
-              .get_floating()
-
-            self.set_shown(
-              !isFloating ? 'tiling' : 'floating'
-            )
-          })
-        }}>
-        <label
-          name='tiling'
-          className='tiling'
-          label='TILING'
-        />
-
-        <label
-          name='floating'
-          className='floating'
-          label='FLOATING'
-        />
-      </stack>
-
-      <label
-        className='active_window'
-        setup={(self) => {
-          self.hook(hyprland, 'event', () => {
-            const focusedClient = hyprland.get_focused_client()
-
-            self.set_label(
-              focusedClient
-                ? focusedClient.get_class()
-                : '~'
-            )
-          })
-        }}
-      />
-
-      <box className='decoration'>
-        <label label='[+]' />
-      </box>
-
-      <Divider />
-
-      {bind(spotify, 'available').as(musicAvailable =>
-        !musicAvailable
-          ? (
-              <label
-                className='music_indicator'
-                label='󰝛 No Music - Title'
-              />
-            )
-          : (
-              <label
-                className='music_indicator'
-                label={
-                  bind(spotify, 'title')
-                    .as(title => `󰝚 Playing - ${title}`)
-                }
-              />
-            )
-      )}
-    </box>
-  )
-}
 
 function RightSection() {
   return (
@@ -121,25 +27,26 @@ function RightSection() {
         label=''
       />
 
-      <Divider />
+      <StatusLineDivider />
 
-      <box
-        className='battery'
-        visible={bind(battery, 'isPresent')}
-        halign={Gtk.Align.CENTER}
-        spacing={8}>
-        <BatteryIcon className='icon' />
+      <box visible={bind(battery, 'isPresent')}>
+        <box
+          className='battery'
+          halign={Gtk.Align.CENTER}
+          spacing={8}>
+          <BatteryIcon className='icon' />
 
-        <label
-          className='percentage'
-          label={
-            bind(battery, 'percentage')
+          <label
+            className='percentage'
+            label={
+              bind(battery, 'percentage')
               .as(percentage => `${Math.floor(percentage * 100)}%`)
-          }
-        />
-      </box>
+            }
+          />
+        </box>
 
-      <Divider visible={bind(battery, 'isPresent')} />
+        <StatusLineDivider />
+      </box>
 
       <label
         className='user'
@@ -169,11 +76,14 @@ function RightSection() {
   )
 }
 
-function StatusLine() {
+function StatusLine(props: { gdkmonitor: Gdk.Monitor }) {
+  const { gdkmonitor } = props
+
   return (
     <box className='statusline'>
-      <stack>
-        <LeftSection />
+      <stack shown={statusLineMode()}>
+        <NormalMode />
+        <AppLauncherMode gdkmonitor={gdkmonitor} />
       </stack>
 
       <RightSection />
@@ -184,13 +94,19 @@ function StatusLine() {
 export default function(gdkmonitor: Gdk.Monitor) {
   return (
     <window
-      name='bar'
-      namespace='bar'
+      name='statusline'
+      namespace='astal_statusline'
       application={App}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT | Astal.WindowAnchor.BOTTOM}>
-      <StatusLine />
+      layer={Astal.Layer.TOP}
+      anchor={Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT | Astal.WindowAnchor.BOTTOM}
+      keymode={statusLineMode(mode =>
+        mode === 'normal'
+          ? Astal.Keymode.NONE
+          : Astal.Keymode.EXCLUSIVE
+      )}>
+      <StatusLine gdkmonitor={gdkmonitor} />
     </window>
   )
 }
