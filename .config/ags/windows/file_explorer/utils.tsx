@@ -36,7 +36,9 @@ export function createTree(tree: Tree): Gtk.Widget[] {
     let maxLength = 0
 
     function traverse(current: Tree) {
-      maxLength = Math.max(maxLength, current.name.length)
+      if (current.type === FType.FILE || current.type === FType.WIDGET) {
+        maxLength = Math.max(maxLength, current.name.length)
+      }
 
       if (current.type === FType.DIR) {
         for (const item of current.children) {

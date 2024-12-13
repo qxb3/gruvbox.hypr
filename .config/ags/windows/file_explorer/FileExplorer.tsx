@@ -5,6 +5,7 @@ import { createTree, FType } from './utils'
 
 import fetch from './folders/fetch'
 import stats from './folders/stats'
+import musicPlayer from './folders/desktop/music_player'
 
 function FileExplorer() {
   const tree = createTree({
@@ -12,7 +13,14 @@ function FileExplorer() {
     name: 'info',
     children: [
       fetch,
-      stats
+      stats,
+      {
+        type: FType.DIR,
+        name: 'desktop',
+        children: [
+          musicPlayer
+        ]
+      }
     ]
   })
 

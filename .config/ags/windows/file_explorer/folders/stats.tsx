@@ -90,11 +90,11 @@ const stats: Tree = {
     {
       type: FType.DIR,
       name: 'disks',
-      icon: '󰉉',
       children: disks.get().map((disk, i) => {
         return {
           type: FType.WIDGET,
           name: disk.partition,
+          icon: '󰉉',
           widget: (
             <box>
               <label label='[' />
