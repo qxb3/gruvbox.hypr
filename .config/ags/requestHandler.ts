@@ -1,5 +1,5 @@
 import { statusLineMode } from '@windows/statusline/vars'
-import { revealSideBar } from '@windows/file_explorer/vars'
+import { revealFileExplorer } from '@windows/file_explorer/vars'
 
 function handleStatusLine(args: string[]): string {
   const [command, mode] = args
@@ -25,23 +25,23 @@ function handleStatusLine(args: string[]): string {
   return `err [msg="Unknown args for statusline."]`
 }
 
-function handleSideBar(args: string[]): string {
+function handleFileExplorer(args: string[]): string {
   const [command] = args
 
   if (!command) return `err [msg="'command' is required."]`
 
   switch(command) {
     case 'open':
-      revealSideBar.set(true)
+      revealFileExplorer.set(true)
       return `ok [state=true']`
     case 'close':
-      revealSideBar.set(false)
+      revealFileExplorer.set(false)
       return `ok [state=false']`
     case 'toggle':
-      revealSideBar.set(
-        !revealSideBar.get()
+      revealFileExplorer.set(
+        !revealFileExplorer.get()
       )
-      return `ok [state=${revealSideBar.get()}]`
+      return `ok [state=${revealFileExplorer.get()}]`
     default:
       return `err [msg="Uknown args for sidebar."]`
   }
@@ -53,8 +53,8 @@ export default function requestHandler(request: string, res: (response: any) => 
   switch (args[0]) {
     case 'statusline':
       return res(handleStatusLine(args.slice(1)))
-    case 'sidebar':
-      return res(handleSideBar(args.slice(1)))
+    case 'file_explorer':
+      return res(handleFileExplorer(args.slice(1)))
     default:
       return res('Unknown request.')
   }

@@ -1,6 +1,6 @@
 import { App, Astal, Gdk, Gtk } from 'astal/gtk3'
 
-import { revealSideBar } from './vars'
+import { revealFileExplorer } from './vars'
 import { createTree, FType } from './utils'
 
 import fetch from './folders/fetch'
@@ -63,7 +63,7 @@ export default function(gdkmonitor: Gdk.Monitor) {
       gdkmonitor={gdkmonitor}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}>
       <revealer
-        revealChild={revealSideBar()}
+        revealChild={revealFileExplorer()}
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
         transitionDuration={ANIMATION_SPEED}>
         <FileExplorer />

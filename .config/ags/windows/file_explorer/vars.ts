@@ -1,3 +1,3 @@
 import { Variable } from 'astal'
 
-export const revealSideBar = Variable(false)
+export const revealFileExplorer = Variable(false)
