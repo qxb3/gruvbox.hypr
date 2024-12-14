@@ -5,7 +5,6 @@
 &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
 &ensp;[<kbd> <br> Commands <br> </kbd>](#Command-Mode-Commands)&ensp;
-<!-- &ensp;[<kbd> <br> Issues <br> </kbd>](#Issues)&ensp; -->
 <br><br></div>
 
 ## Screenshots
@@ -16,6 +15,7 @@
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/3.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/5.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/6.png" />
 </p>
 
 <br>
@@ -44,7 +44,7 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>a</code><br><code>p</code><br><code>p</code><br><code>s</code><br></td><td><table>
   <tr><td>kitty</td><td>terminal emulator</td></tr>
-  <tr><td>dolphin</td><td>file explorer</td></tr>
+  <tr><td>nemo</td><td>file explorer</td></tr>
   <tr><td>spotify</td><td>music player</td></tr>
   <tr><td>grimblast</td><td>screenshot tool</td></tr>
   <tr><td>swappy</td><td>screenshot editor & image viewer</td></tr>
@@ -55,9 +55,10 @@ cp -r .scripts ~/ # Optional
 
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
+  <tr><td>kanagawa-gtk-theme-git</td><td>kanagawa gtk theme</td></tr>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
-  <tr><td>swaylock</td><td>screen locker</td></tr>
-  <tr><td>ags</td><td>aylur's gtk widget</td></tr></table>
+  <tr><td>hyprlock</td><td>screen locker</td></tr>
+  <tr><td>ags (v2)</td><td>aylur's gtk widget</td></tr></table>
 </td></tr></table>
 
 <br>
@@ -76,7 +77,6 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
   <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
-  <tr><td>pipwire-pulse</td><td>audio</td></tr>
   <tr><td>NetworkManager</td><td>manages network</td></tr></table>
 </td></tr></table>
 
@@ -104,9 +104,9 @@ cp -r .scripts ~/ # Optional
 | Keys | Action |
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>T</kbd> | launch kitty terminal
-| <kbd>Super</kbd> + <kbd>E</kbd> | launch dolphin file explorer
+| <kbd>Super</kbd> + <kbd>E</kbd> | launch file explorer
 | <kbd>Super</kbd> + <kbd>F</kbd> | launch firefox
-| <kbd>Super</kbd> + <kbd>D</kbd> | launch vencord (replace it with normal discord if u want)
+| <kbd>Super</kbd> + <kbd>D</kbd> | launch vesktop (replace it with normal discord if u want)
 
 #### Widgets
 
@@ -114,7 +114,8 @@ cp -r .scripts ~/ # Optional
 | :--  | :-- |
 | <kbd>Super</kbd> + <kbd>Tab</kbd> | toggle sidebar
 | <kbd>Super</kbd> + <kbd>A</kbd> | toggle app launcher mode
-| <kbd>Super</kbd> + <kbd>C</kbd> | toggle command launcher mode
+| <kbd>Super</kbd> + <kbd>C</kbd> | toggle command mode
+| <kbd>Super</kbd> + <kbd>SHIFT</kbd> + <kbd>W</kbd> | toggle command mode
 
 #### Print Screen
 
@@ -154,13 +155,5 @@ cp -r .scripts ~/ # Optional
 | <kbd>restart</kbd>| restart pc
 | <kbd>suspend</kbd>| suspend & lock pc
 | <kbd>logout</kbd>| logout out hyprland session
+| <kbd>lock</kbd>| lock screen
 | <kbd>notif-clear</kbd>| clear notifications
-| <kbd>change-wallpaper</kbd>| open wallpapers menu
-
-<!-- ## Issues -->
-<!-- * This is built for a laptop with a resolution of 1366x768 so the widgets/wallpaper or the overall look might be messed up for you. -->
-<!-- * I have only one monitor (which is from the laptop) so multiple monitor support is not really in mind, so you might need to tweak the config for it to work properly. -->
-<!-- * The AppLauncher widget has a problem with focus where if your cursor is inside of it and you close the AppLauncher the focus will not be transferred back to the active window. Solutions: Move the cursor or Move the cursor outside the AppLauncher when you open it. (idk why this is happening but i think its a gtk problem) -->
-<!-- * Not really a problem but if you want to support multiple music players and not just spotify change the `PLAYER` variable in `config/eww/sidebar/scripts/music.sh`. -->
-<!---->
-<!-- <br> -->
