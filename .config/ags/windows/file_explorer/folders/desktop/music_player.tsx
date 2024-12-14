@@ -14,7 +14,10 @@ const musicPlayer: Tree = {
       icon: '󰲹',
       widget: (
         <label
-          label={bind(spotify, 'title')}
+          label={
+            bind(spotify, 'title')
+              .as(title => title ?? 'No Music')
+          }
           maxWidthChars={16}
           truncate={true}
         />
@@ -26,7 +29,10 @@ const musicPlayer: Tree = {
       icon: '󰠃',
       widget: (
         <label
-          label={bind(spotify, 'artist')}
+          label={
+            bind(spotify, 'artist')
+              .as(artist => artist ?? 'Artist')
+          }
           maxWidthChars={16}
           truncate={true}
         />
@@ -38,7 +44,10 @@ const musicPlayer: Tree = {
       icon: '󰀥',
       widget: (
         <label
-          label={bind(spotify, 'album')}
+          label={
+            bind(spotify, 'album')
+              .as(album => album ?? 'Album')
+          }
           maxWidthChars={16}
           truncate={true}
         />
