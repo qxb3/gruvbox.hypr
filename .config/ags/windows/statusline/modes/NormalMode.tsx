@@ -22,12 +22,15 @@ export default function NormalMode() {
         transitionDuration={ANIMATION_SPEED}
         setup={(self) => {
           self.hook(hyprland, 'event', () => {
-            const isFloating = hyprland
-              .get_focused_client()
-              .get_floating()
+            const focusedClient = hyprland.get_focused_client()
+            if (!focusedClient) {
+              self.set_shown('tiling')
+              return
+            }
 
             self.set_shown(
-              !isFloating ? 'tiling' : 'floating'
+              !focusedClient.get_floating()
+                ? 'tiling' : 'floating'
             )
           })
         }}>
