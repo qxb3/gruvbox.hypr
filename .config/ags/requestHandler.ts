@@ -24,6 +24,13 @@ function handleStatusLine(args: string[]): string {
             : 'command'
         )
         return `ok [cmd="toggle",mode="${statusLineMode.get()}"]`
+      case 'wallpapers':
+        statusLineMode.set(
+          statusLineMode.get() === 'wallpapers'
+            ? 'normal'
+            : 'wallpapers'
+        )
+        return `ok [cmd="toggle",mode="${statusLineMode.get()}"]`
       default:
         return `err [msg="Unknown args for toggle statusline."]`
     }

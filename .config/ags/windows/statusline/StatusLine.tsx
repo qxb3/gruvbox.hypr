@@ -9,6 +9,7 @@ import StatusLineDivider from '@widgets/StatusLineDivider'
 
 import NormalMode from './modes/NormalMode'
 import CommandMode from './modes/CommandMode'
+import WallpapersMode from './modes/WallpapersMode'
 
 import { statusLineMode } from './vars'
 import AppLauncherMode from './modes/AppLauncherMode'
@@ -86,6 +87,7 @@ function StatusLine(props: { gdkmonitor: Gdk.Monitor }) {
         <NormalMode />
         <AppLauncherMode gdkmonitor={gdkmonitor} />
         <CommandMode gdkmonitor={gdkmonitor} />
+        <WallpapersMode gdkmonitor={gdkmonitor} />
       </stack>
 
       <RightSection />
