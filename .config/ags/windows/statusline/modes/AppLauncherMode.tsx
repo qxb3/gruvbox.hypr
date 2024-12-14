@@ -39,10 +39,6 @@ function ApplicationsMenu(props: { gdkmonitor: Gdk.Monitor }) {
                 : 'app'
             )}
             spacing={4}>
-            <icon
-              icon={app.iconName}
-              css='font-size: 18px;'
-            />
             <label
               className='name'
               label={app.get_name()}
