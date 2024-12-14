@@ -17,6 +17,13 @@ function handleStatusLine(args: string[]): string {
             : 'appLauncher'
         )
         return `ok [cmd="toggle",mode="${statusLineMode.get()}"]`
+      case 'command':
+        statusLineMode.set(
+          statusLineMode.get() === 'command'
+            ? 'normal'
+            : 'command'
+        )
+        return `ok [cmd="toggle",mode="${statusLineMode.get()}"]`
       default:
         return `err [msg="Unknown args for toggle statusline."]`
     }

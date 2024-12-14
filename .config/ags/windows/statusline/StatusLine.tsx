@@ -8,6 +8,7 @@ import BatteryIcon from '@widgets/BatteryIcon'
 import StatusLineDivider from '@widgets/StatusLineDivider'
 
 import NormalMode from './modes/NormalMode'
+import CommandMode from './modes/CommandMode'
 
 import { statusLineMode } from './vars'
 import AppLauncherMode from './modes/AppLauncherMode'
@@ -84,6 +85,7 @@ function StatusLine(props: { gdkmonitor: Gdk.Monitor }) {
       <stack shown={statusLineMode()}>
         <NormalMode />
         <AppLauncherMode gdkmonitor={gdkmonitor} />
+        <CommandMode gdkmonitor={gdkmonitor} />
       </stack>
 
       <RightSection />

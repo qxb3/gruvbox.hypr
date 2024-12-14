@@ -6,5 +6,10 @@
   "scripts": {
     "start": "ags run",
     "dev": "nodemon --ext ts,tsx --exec 'ags run'"
+  },
+  "devDependencies": {
+    "@types/fuse": "^2.5.2",
+    "fuse.js": "^7.0.0",
+    "nodemon": "^3.1.9"
   }
 }

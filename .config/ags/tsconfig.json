@@ -13,7 +13,7 @@
     "paths": {
       "astal": ["/usr/share/astal/gjs"],
       "astal/*": ["/usr/share/astal/gjs/*"],
-      "@root": ["./"],
+      "@root/*": ["./*"],
       "@assets/*": ["./assets/*"],
       "@widgets/*": ["./widgets/*"],
       "@services/*": ["./services/*"],

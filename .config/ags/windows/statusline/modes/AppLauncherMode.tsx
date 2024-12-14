@@ -37,8 +37,7 @@ function ApplicationsMenu(props: { gdkmonitor: Gdk.Monitor }) {
               selectedApp.get_name() === app.get_name()
                 ? 'selected app'
                 : 'app'
-            )}
-            spacing={4}>
+            )}>
             <label
               className='name'
               label={app.get_name()}
@@ -67,7 +66,6 @@ export default function AppLauncherMode(props: { gdkmonitor: Gdk.Monitor }) {
         }}
         onKeyPressEvent={(_, event) => {
           const keyval = event.get_keyval().pop()
-          console.log(keyval)
 
           const queried = queriedApps.get()
           const index = selectedIndex.get()
@@ -106,20 +104,24 @@ export default function AppLauncherMode(props: { gdkmonitor: Gdk.Monitor }) {
           }
         }}
         setup={(self) => {
-          <ApplicationsMenu gdkmonitor={gdkmonitor} />
-          App.toggle_window('applicationsMenu') // Close ApplicationsMenu at first
+          const applicationsMenu = ApplicationsMenu({ gdkmonitor })
+          applicationsMenu.set_visible(false)
 
           self.hook(statusLineMode, () => {
             const mode = statusLineMode.get()
-            App.toggle_window('applicationsMenu')
 
             if (mode !== 'appLauncher') {
+              applicationsMenu.set_visible(false)
+
               self.text = ''
+
               selectedApp.set(queriedApps.get()[0])
               selectedIndex.set(0)
+
               return
             }
 
+            applicationsMenu.set_visible(true)
             self.grab_focus()
           })
         }}
