@@ -42,7 +42,7 @@
 
   <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/1.png" />
   <br><br>
-  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" />
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/5.png" />
 </details>
 
 <details open>
