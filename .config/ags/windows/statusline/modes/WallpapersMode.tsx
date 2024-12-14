@@ -28,7 +28,7 @@ export default function WallpapersMode(props: { gdkmonitor: Gdk.Monitor }) {
       selectedIndex={selectedIndex}
       onEnter={(selectedWallpaper) => {
         execAsync(`
-          swww img ${selectedWallpaper.path} \
+          swww img ${selectedWallpaper.path}
             --transition-type "none"
             --transition-duration 0
         `)
