@@ -115,7 +115,7 @@ cp -r .scripts ~/ # Optional
 | <kbd>Super</kbd> + <kbd>Tab</kbd> | toggle sidebar
 | <kbd>Super</kbd> + <kbd>A</kbd> | toggle app launcher mode
 | <kbd>Super</kbd> + <kbd>C</kbd> | toggle command mode
-| <kbd>Super</kbd> + <kbd>SHIFT</kbd> + <kbd>W</kbd> | toggle command mode
+| <kbd>Super</kbd> + <kbd>SHIFT</kbd> + <kbd>W</kbd> | toggle wallpapers mode
 
 #### Print Screen
 
