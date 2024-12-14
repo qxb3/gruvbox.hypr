@@ -37,7 +37,7 @@ const notifications: Tree = {
                         ? `󰝚 Playing - ${notification.get_summary()}`
                         : notification.get_summary()
                     }
-                    maxWidthChars={32}
+                    maxWidthChars={24}
                     truncate={true}
                   />
                 )
