@@ -58,7 +58,8 @@ cp -r .scripts ~/ # Optional
   <tr><td>kanagawa-gtk-theme-git</td><td>kanagawa gtk theme</td></tr>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
   <tr><td>hyprlock</td><td>screen locker</td></tr>
-  <tr><td>ags (v2)</td><td>aylur's gtk widget</td></tr></table>
+  <tr><td>aylurs-gtk-shell-git</td><td>ags</td></tr>
+  <tr><td>libastal-meta</td><td>ags widget library</td></tr></table>
 </td></tr></table>
 
 <br>
