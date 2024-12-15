@@ -35,7 +35,7 @@ function getRam() {
 function getDisks() {
   return exec('df -h')
     .split('\n')
-    .filter(line => line.includes('/') && !line.includes('tmpfs'))
+    .filter(line => line.startsWith('/') || line.startsWith('/home'))
     .map(line => {
       const partition = line
         .split(/\s+/)[5]

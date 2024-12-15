@@ -2982,7 +2982,7 @@ function getRam() {
   return parseFloat(used) / parseFloat(total);
 }
 function getDisks() {
-  return exec("df -h").split("\n").filter((line) => line.includes("/") && !line.includes("tmpfs")).map((line) => {
+  return exec("df -h").split("\n").filter((line) => line.startsWith("/") || line.startsWith("/home")).map((line) => {
     const partition = line.split(/\s+/)[5];
     const [size, used] = line.split(/\s+/).slice(1, 3).map((line2) => parseFloat(line2.replace("G", "")));
     return {
