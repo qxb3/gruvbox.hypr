@@ -56,6 +56,7 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
   <tr><td>kanagawa-gtk-theme-git</td><td>kanagawa gtk theme</td></tr>
+  <tr><td>bibata-cursor-theme</td><td>bibata cursor</td></tr>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
   <tr><td>hyprlock</td><td>screen locker</td></tr>
   <tr><td>aylurs-gtk-shell-git</td><td>ags</td></tr>
