@@ -22,7 +22,13 @@ export default function AppLauncherMode(props: { gdkmonitor: Gdk.Monitor }) {
       gdkmonitor={gdkmonitor}
       mode='appLauncher'
       items={applications}
-      keys={['name']}
+      keys={
+        [
+          'name', 'description',
+          'entry', 'keywords',
+          'categories', 'wm-class'
+        ]
+      }
       queriedItems={queriedApps}
       selectedItem={selectedApp}
       selectedIndex={selectedIndex}

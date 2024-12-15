@@ -46,8 +46,8 @@ await suppress(import("gi://AstalHyprland"), ({ Hyprland: Hyprland3, Monitor, Wo
 });
 await suppress(import("gi://AstalMpris"), ({ Mpris: Mpris4, Player }) => {
   patch(Mpris4.prototype, "players");
-  patch(Player.prototype, "supported_uri_schemas");
-  patch(Player.prototype, "supportedUriSchemas");
+  patch(Player.prototype, "supported_uri_schemes");
+  patch(Player.prototype, "supportedUriSchemes");
   patch(Player.prototype, "supported_mime_types");
   patch(Player.prototype, "supportedMimeTypes");
   patch(Player.prototype, "comments");
@@ -216,7 +216,7 @@ function defaultValue(declaration) {
     return declaration.get_default_value();
   switch (declaration) {
     case String:
-      return "default-string";
+      return "";
     case Number:
       return 0;
     case Boolean:
@@ -2680,7 +2680,14 @@ function AppLauncherMode(props) {
       gdkmonitor,
       mode: "appLauncher",
       items: applications,
-      keys: ["name"],
+      keys: [
+        "name",
+        "description",
+        "entry",
+        "keywords",
+        "categories",
+        "wm-class"
+      ],
       queriedItems: queriedApps,
       selectedItem: selectedApp,
       selectedIndex: selectedIndex3,
