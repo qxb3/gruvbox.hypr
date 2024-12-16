@@ -64,10 +64,11 @@ cp -r .scripts ~/ # Optional
 
 <table><tr><td>
   <code>t</code><br><code>h</code><br><code>e</code><br><code>m</code><br><code>e</code><br><code>s</code><br></td><td><table>
+  <tr><td>phocus-gtk-theme-git</td><td>Oxocarbon like GTK Theme</td></tr>
   <tr><td>gruvbox-dark-gtk</td><td>Gruvbox GTK Theme</td></tr>
-  <tr><td>Everforest</td><td>Everforest GTK Theme</td></tr>
-  <tr><td>Nordic-darker</td><td>Nord GTK Theme</td></tr>
-  <tr><td>phocus</td><td>Oxocarbon like GTK Theme</td></tr></table>
+  <tr><td>everforest-gtk-theme-git</td><td>Everforest GTK Theme</td></tr>
+  <tr><td>nordic-darker-theme</td><td>Nord GTK Theme</td></tr>
+  <tr><td>bibata-cursor-theme</td><td>The main cursor theme</td></tr></table>
 </td></tr></table>
 
 <br>
@@ -84,6 +85,7 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
   <tr><td>brightnessctl</td><td>controlling the brightness</td></tr>
+  <tr><td>wl-clipboard</td><td>for copy & paste</td></tr>
   <tr><td>gjs</td><td>for running the bundled ags widget</td></tr>
   <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
   <tr><td>pipwire-pulse</td><td>For audio</td></tr>
