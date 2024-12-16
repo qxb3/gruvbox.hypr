@@ -40,56 +40,61 @@ cp -r .scripts ~/ # Optional
 
 ## Dependecies
 
+> [!IMPORTANT]
+> `*` Signifies that this dependency is required for the overall functionality to work.
+
+<br>
+
 <table><tr><td>
   <code>a</code><br><code>p</code><br><code>p</code><br><code>s</code><br></td><td><table>
-  <tr><td>kitty</td><td>terminal emulator</td></tr>
-  <tr><td>nemo</td><td>file explorer</td></tr>
-  <tr><td>spotify</td><td>music player</td></tr>
-  <tr><td>grimblast & grim</td><td>screenshot tool</td></tr>
-  <tr><td>swappy</td><td>image viewer</td></tr>
-  <tr><td>firefox</td><td>browser</td></tr></table>
+  <tr><td> </td><td>kitty</td><td>terminal emulator</td></tr>
+  <tr><td> </td><td>nemo</td><td>file explorer</td></tr>
+  <tr><td> </td><td>spotify</td><td>music player</td></tr>
+  <tr><td>*</td><td>grimblast & grim</td><td>screenshot tool</td></tr>
+  <tr><td>*</td><td>swappy</td><td>image viewer</td></tr>
+  <tr><td> </td><td>firefox</td><td>browser</td></tr></table>
 </td></tr></table>
 
 <br>
 
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
-  <tr><td>swww</td><td>wallpaper daemon</td></tr>
-  <tr><td>hyprlock</td><td>screen locker</td></tr>
-  <tr><td>aylurs-gtk-shell-git</td><td>ags</td></tr>
-  <tr><td>libastal-meta</td><td>ags widget library</td></tr></table>
+  <tr><td>*</td><td>swww</td><td>wallpaper daemon</td></tr>
+  <tr><td>*</td><td>hyprlock</td><td>screen locker</td></tr>
+  <tr><td>*</td><td>aylurs-gtk-shell-git</td><td>ags</td></tr>
+  <tr><td>*</td><td>libastal-meta</td><td>ags widget library</td></tr></table>
 </td></tr></table>
 
 <br>
 
 <table><tr><td>
   <code>t</code><br><code>h</code><br><code>e</code><br><code>m</code><br><code>e</code><br><code>s</code><br></td><td><table>
-  <tr><td>phocus-gtk-theme-git</td><td>Oxocarbon like GTK Theme</td></tr>
-  <tr><td>gruvbox-dark-gtk</td><td>Gruvbox GTK Theme</td></tr>
-  <tr><td>everforest-gtk-theme-git</td><td>Everforest GTK Theme</td></tr>
-  <tr><td>nordic-darker-theme</td><td>Nord GTK Theme</td></tr>
-  <tr><td>bibata-cursor-theme</td><td>The main cursor theme</td></tr></table>
+  <tr><td>*</td><td>phocus-gtk-theme-git</td><td>Oxocarbon like GTK Theme</td></tr>
+  <tr><td>*</td><td>gruvbox-dark-gtk</td><td>Gruvbox GTK Theme</td></tr>
+  <tr><td>*</td><td>everforest-gtk-theme-git</td><td>Everforest GTK Theme</td></tr>
+  <tr><td>*</td><td>nordic-darker-theme</td><td>Nord GTK Theme</td></tr>
+  <tr><td>*</td><td>bibata-cursor-theme</td><td>The main cursor theme</td></tr></table>
 </td></tr></table>
 
 <br>
 
 <table><tr><td>
   <code>s</code><br><code>h</code><br><code>e</code><br><code>l</code><br><code>l</code></td><td><table>
-  <tr><td>zsh</td><td>main shell</td></tr>
-  <tr><td>neovim</td><td>text editor</td></tr>
-  <tr><td>fastfetch</td><td>new system info fetcher</td></tr></table>
+  <tr><td> </td><td>zsh</td><td>main shell</td></tr>
+  <tr><td> </td><td>neovim</td><td>text editor</td></tr>
+  <tr><td> </td><td>fastfetch</td><td>new system info fetcher</td></tr></table>
 </td></tr></table>
 
 <br>
 
 <table><tr><td>
   <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
-  <tr><td>brightnessctl</td><td>controlling the brightness</td></tr>
-  <tr><td>wl-clipboard</td><td>for copy & paste</td></tr>
-  <tr><td>gjs</td><td>for running the bundled ags widget</td></tr>
-  <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
-  <tr><td>pipwire-pulse</td><td>For audio</td></tr>
-  <tr><td>NetworkManager</td><td>manages network</td></tr></table>
+  <tr><td>*</td><td>brightnessctl</td><td>controlling the brightness</td></tr>
+  <tr><td>*</td><td>wl-clipboard</td><td>for copy & paste</td></tr>
+  <tr><td>*</td><td>gjs</td><td>for running the bundled ags widget</td></tr>
+  <tr><td>*</td><td>gvfs</td><td>mpris cover art caching</td></tr>
+  <tr><td>*</td><td>pipwire-pulse</td><td>For audio</td></tr>
+  <tr><td>*</td><td>NetworkManager</td><td>manages network</td></tr></table>
 </td></tr></table>
 
 <br>
