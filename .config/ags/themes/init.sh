@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # init.sh
-# Initialize symlinks of theme defaults (nord) on LOCAL_STATE
+# Initialize symlinks of theme defaults ($DEFAULT_THEME) on LOCAL_STATE
+
+DEFAULT_THEME="oxocarbon"
 
 WALLPAPERS_PATH="$HOME/.config/swww"
 HYPR_THEME="$HOME/.config/hypr"
@@ -21,8 +23,8 @@ fi
 
 # Init Nord Wallpapers
 if [[ ! -e "$LOCAL_STATE/wallpapers" && ! -e "$LOCAL_STATE/current_wallpaper" ]]; then
-  ln -s "$WALLPAPERS_PATH/nord" "$LOCAL_STATE/wallpapers"
-  ln -s "$WALLPAPERS_PATH/nord/outer_space.png" "$LOCAL_STATE/current_wallpaper"
+  ln -s "$WALLPAPERS_PATH/$DEFAULT_THEME" "$LOCAL_STATE/wallpapers"
+  ln -s "$WALLPAPERS_PATH/$DEFAULT_THEME/default.png" "$LOCAL_STATE/current_wallpaper"
 
   # Crop current_wallpaper
   magick "$LOCAL_STATE/current_wallpaper" \
@@ -41,7 +43,7 @@ fi
 
 # Init Nord Hypr Theme
 if [ ! -e "$LOCAL_STATE/hypr_theme.conf" ]; then
-  ln -s "$HYPR_THEME/themes/nord.conf" "$LOCAL_STATE/hypr_theme.conf"
+  ln -s "$HYPR_THEME/themes/$DEFAULT_THEME.conf" "$LOCAL_STATE/hypr_theme.conf"
 
   echo "> Init Hypr"
 else
@@ -50,7 +52,7 @@ fi
 
 # Init Nord AGS Theme
 if [ ! -e "$LOCAL_STATE/ags_theme.scss" ]; then
-  ln -s "$AGS_PATH/themes/nord.scss" "$LOCAL_STATE/ags_theme.scss"
+  ln -s "$AGS_PATH/themes/$DEFAULT_THEME.scss" "$LOCAL_STATE/ags_theme.scss"
 
   echo "> Init AGS"
 else
@@ -59,7 +61,7 @@ fi
 
 # Init Nord AGS no_music image
 if [ ! -e "$LOCAL_STATE/no_music" ]; then
-  ln -s "$AGS_PATH/assets/no_music/nord.png" "$LOCAL_STATE/no_music"
+  ln -s "$AGS_PATH/assets/no_music/$DEFAULT_THEME.png" "$LOCAL_STATE/no_music"
 
   echo "> Init AGS no_music image"
 else
@@ -68,7 +70,7 @@ fi
 
 # Init Nord Kitty Theme
 if [ ! -e "$LOCAL_STATE/kitty_theme.conf" ]; then
-  ln -s "$KITTY_PATH/themes/nord.conf" "$LOCAL_STATE/kitty_theme.conf"
+  ln -s "$KITTY_PATH/themes/$DEFAULT_THEME.conf" "$LOCAL_STATE/kitty_theme.conf"
   killall -USR1 kitty
 
   echo "> Init Kitty"
@@ -78,7 +80,7 @@ fi
 
 # Init Nord Neovim Theme
 if [ ! -e "$LOCAL_STATE/nvim_theme.lua" ]; then
-  ln -s "$NVIM_PATH/lua/core/themes/nord.lua" "$LOCAL_STATE/nvim_theme.lua"
+  ln -s "$NVIM_PATH/lua/core/themes/$DEFAULT_THEME.lua" "$LOCAL_STATE/nvim_theme.lua"
   nvim \
     --server /tmp/nvim \
     --remote-send ":source $LOCAL_STATE/nvim_theme.lua<CR>"
