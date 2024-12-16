@@ -46,7 +46,7 @@ cp -r .scripts ~/ # Optional
   <tr><td>nemo</td><td>file explorer</td></tr>
   <tr><td>spotify</td><td>music player</td></tr>
   <tr><td>grimblast & grim</td><td>screenshot tool</td></tr>
-  <tr><td>swappy</td><td>screenshot editor & image viewer</td></tr>
+  <tr><td>swappy</td><td>image viewer</td></tr>
   <tr><td>firefox</td><td>browser</td></tr></table>
 </td></tr></table>
 
@@ -56,13 +56,14 @@ cp -r .scripts ~/ # Optional
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
   <tr><td>hyprlock</td><td>screen locker</td></tr>
-  <tr><td>ags (v2)</td><td>aylur's gtk widget</td></tr></table>
+  <tr><td>aylurs-gtk-shell-git</td><td>ags</td></tr>
+  <tr><td>libastal-meta</td><td>ags widget library</td></tr></table>
 </td></tr></table>
 
 <br>
 
 <table><tr><td>
-  <code>t</code><br><code>h</code><br><code>e</code><br><code>m</code><br><code>e</code><br></td><td><table>
+  <code>t</code><br><code>h</code><br><code>e</code><br><code>m</code><br><code>e</code><br><code>s</code><br></td><td><table>
   <tr><td>gruvbox-dark-gtk</td><td>Gruvbox GTK Theme</td></tr>
   <tr><td>Everforest</td><td>Everforest GTK Theme</td></tr>
   <tr><td>Nordic-darker</td><td>Nord GTK Theme</td></tr>
@@ -82,6 +83,8 @@ cp -r .scripts ~/ # Optional
 
 <table><tr><td>
   <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
+  <tr><td>brightnessctl</td><td>controlling the brightness</td></tr>
+  <tr><td>gjs</td><td>for running the bundled ags widget</td></tr>
   <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
   <tr><td>pipwire-pulse</td><td>For audio</td></tr>
   <tr><td>NetworkManager</td><td>manages network</td></tr></table>
