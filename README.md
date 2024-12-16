@@ -79,6 +79,7 @@ cp -r .scripts ~/ # Optional
 <table><tr><td>
   <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
   <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
+  <tr><td>gjs</td><td>for running the bundled ags</td></tr>
   <tr><td>NetworkManager</td><td>manages network</td></tr></table>
 </td></tr></table>
 
