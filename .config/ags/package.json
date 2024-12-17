@@ -5,7 +5,8 @@
   "version": "0.0.1",
   "scripts": {
     "start": "ags run",
-    "dev": "nodemon --ext ts,tsx --exec 'ags run'"
+    "dev": "nodemon --ext ts,tsx --exec 'ags run'",
+    "build": "ags bundle ./app.ts vim_styled"
   },
   "devDependencies": {
     "@types/fuse": "^2.5.2",
