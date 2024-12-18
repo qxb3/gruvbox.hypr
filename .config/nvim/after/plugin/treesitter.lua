@@ -17,7 +17,7 @@ require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'c', 'cpp', 'rust', 'asm', 'java', 'go', 'bash',
     'typescript', 'tsx', 'javascript', 'svelte', 'html',
-    'python', 'lua', 'vim', 'vimdoc', 'markdown',
+    'python', 'lua', 'vim', 'vimdoc', 'markdown', 'hyprlang',
     'json', 'toml', 'xml', 'cmake', 'meson', 'ninja',
     'yuck', 'jq', 'css', 'scss',
   }
