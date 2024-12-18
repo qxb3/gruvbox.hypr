@@ -1,4 +1,5 @@
 require('nvim-treesitter.configs').setup({
+  auto_install = true,
   highlight = {
     enable = true
   },
@@ -15,7 +16,7 @@ require('nvim-treesitter.configs').setup({
   },
   ensure_installed = {
     'c', 'cpp', 'rust', 'asm', 'java', 'go', 'bash',
-    'typescript', 'javascript', 'svelte', 'html',
+    'typescript', 'tsx', 'javascript', 'svelte', 'html',
     'python', 'lua', 'vim', 'vimdoc', 'markdown',
     'json', 'toml', 'xml', 'cmake', 'meson', 'ninja',
     'yuck', 'jq', 'css', 'scss',
