@@ -1,0 +1,66 @@
+.file_explorer {
+  background-color: $bg;
+  border-right: solid $border 2px;
+  font-size: 14px;
+  min-width: 200px;
+
+  & .header {
+    background-color: $bg2;
+  }
+
+  & .path {
+    color: $yellow;
+    font-weight: 700;
+    padding-left: 5px;
+  }
+
+  & .tree {
+    padding: 0 2.5rem 0 1rem;
+
+    & .item {
+      & .dir {
+        & .down {
+          color: $fgh;
+          font-weight: 900;
+          padding-right: 6px;
+        }
+
+        & .text {
+          color: $blue;
+        }
+      }
+
+      & .music_controls {
+        font-size: 20px;
+
+        & button {
+          padding: 0 2px;
+        }
+      }
+
+      & progressbar {
+        margin-bottom: 8px;
+
+        & trough {
+          & progress {
+            background-color: $secondary;
+            min-width: 5px;
+            min-height: 12px;
+          }
+        }
+      }
+
+      & scale {
+        margin-bottom: 1px;
+
+        & trough {
+          min-height: 12px;
+        }
+
+        & highlight {
+          background-color: $secondary;
+        }
+      }
+    }
+  }
+}
