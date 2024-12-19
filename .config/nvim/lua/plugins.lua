@@ -89,12 +89,10 @@ require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim'           -- LuaLine
   use 'chrisbra/changesPlugin'              -- Easy visibility on changes i made on a file
   use 'ryanoasis/vim-devicons'              -- Dev icons without color
-  use 'wfxr/minimap.vim'                    -- Minimap Preview
   use 'lukas-reineke/indent-blankline.nvim' -- Indent Guide lines
   use 'echasnovski/mini.indentscope'        -- Highlight indent scope
   use 'kyazdani42/nvim-web-devicons'        -- Dev icons with color
   use 'xiyaowong/transparent.nvim'          -- Remove Background
-  use 'rebelot/kanagawa.nvim'               -- Kanagawa Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins                                         --
@@ -117,7 +115,3 @@ end)
 -- Setups
 require('renamer').setup()
 require('presence').setup()
-
--- Minimap.nvim
--- vim.g.minimap_auto_start = 1
--- vim.g.minimap_git_colors = 1

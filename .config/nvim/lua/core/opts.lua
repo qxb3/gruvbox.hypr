@@ -48,8 +48,7 @@ option.updatetime = 4000
 -- Colorscheme                                            --
 ------------------------------------------------------------
 
-vim.o.background = 'dark'
-vim.cmd('colorscheme kanagawa')
+require('colors.inku').setup()
 
 ------------------------------------------------------------
 -- Vim Remaps                                             --
