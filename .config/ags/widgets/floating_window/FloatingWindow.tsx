@@ -43,28 +43,32 @@ export default function FloatingWindow(props: {
           className={`floating_window ${className}`}
           vertical={true}>
           <box className='title_bar'>
-            <label
-              className='title'
-              label={title}
-              hexpand={true}
-            />
+            <overlay>
+              <label
+                className='title'
+                label={title}
+                hexpand={true}
+              />
 
-            <box
-              className='buttons'
-              spacing={8}
-              valign={Gtk.Align.CENTER}>
-              {Array.from({ length: 3 }).map(() => (
-                <button
-                  className='button'
-                  cursor='pointer'
-                  onClick={() => {
-                    revealer.set(
-                      !revealer.get()
-                    )
-                  }}>
-                </button>
-              ))}
+              <box
+                className='buttons'
+                spacing={8}
+                halign={Gtk.Align.END}
+                valign={Gtk.Align.CENTER}
+                hexpand={true}>
+                {Array.from({ length: 3 }).map(() => (
+                  <button
+                    className='button'
+                    cursor='pointer'
+                    onClick={() => {
+                      revealer.set(
+                        !revealer.get()
+                      )
+                    }}>
+                  </button>
+                ))}
             </box>
+            </overlay>
           </box>
 
           {child ?? children}
