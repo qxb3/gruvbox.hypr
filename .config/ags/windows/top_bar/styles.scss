@@ -1,0 +1,27 @@
+.top_bar {
+  background-color: $bg;
+  font-size: 18px;
+  padding: 4px;
+
+  /* & .left {} */
+
+  & .center {
+    & .workspaces {
+      & .workspace {
+        background-color: $primary;
+        min-height: 12px;
+        min-width: 24px;
+        transition: all 500ms cubic-bezier(1, 0, 0, 1);
+
+        &.active {
+          background-color: #fff;
+          min-width: 64px;
+        }
+      }
+    }
+  }
+
+  & .right {
+    & .bell { font-size: 16px; }
+  }
+}
