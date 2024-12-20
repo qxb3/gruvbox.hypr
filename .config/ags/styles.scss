@@ -1,0 +1,36 @@
+$bgh:       #1a1a1a;
+$bg:        #2A2A2A;
+$bg1:       #4d4d4d;
+$bg2:       #737373;
+
+$fgh:       #e8e7e3;
+$fg:        #C9C6BC;
+$fg1:       #bbb7aa;
+$fg2:       #a49f8e;
+
+$red:       #cc241d;
+$green:     #98971a;
+$yellow:    #d79921;
+$orange:    #d65d0e;
+$blue:      #458588;
+$purple:    #b16286;
+$aqua:      #689d6a;
+$gray:      #928374;
+
+$primary: $fg;
+$secondary: $fg2;
+$border: $fg;
+
+* {
+  all: unset;
+  font-family: "Patrick Hand";
+  color: $fg;
+}
+
+// Widgets
+@import "./widgets/floating_window.scss";
+
+// Windows
+@import "./windows/top_bar/styles.scss";
+@import "./windows/side_bar/styles.scss";
+@import "./windows/app_launcher/styles.scss";

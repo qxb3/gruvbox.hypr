@@ -1,0 +1,32 @@
+.floating_window {
+  background-color: $fg;
+  box-shadow:
+    -4px 0 4px rgba(42, 42, 42, 0.3),
+    4px 0  4px rgba(42, 42, 42, 0.3),
+    0 4px  4px rgba(42, 42, 42, 0.3);
+  margin: 8px;
+
+  & * {
+    color: $bg;
+    font-family: 'Iosevka Nerd Font Mono';
+  }
+
+  & .title_bar {
+    background-color: $bg;
+    min-height: 10px;
+    padding: 6px 12px;
+
+    & .title {
+      font-size: 13px;
+      color: $fg;
+    }
+
+    & .buttons {
+      & button {
+        background-color: #fff;
+        min-width: 10px;
+        min-height: 10px;
+      }
+    }
+  }
+}

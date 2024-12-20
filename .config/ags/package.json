@@ -1,0 +1,14 @@
+{
+  "name": "inku",
+  "version": "1.0.0",
+  "author": "qxb3",
+  "license": "MIT",
+  "scripts": {
+    "start": "ags run",
+    "dev": "nodemon --ext ts,tsx --exec 'ags run'",
+    "build": "ags bundle ./app.ts inku"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
