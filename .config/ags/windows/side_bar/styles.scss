@@ -1,0 +1,23 @@
+.side_bar {
+  background-color: $bg;
+
+  & .bun {
+    background-size: cover;
+    background-position: center;
+    min-width: 24px;
+    min-height: 18px;
+    margin: 8px 10px;
+  }
+
+  & .buttons {
+    & button { font-size: 24px; }
+    & button.code { font-size: 28px; }
+    & button.browser { font-size: 28px; }
+    & button.controls { font-size: 32px; }
+
+    & label {
+      font-size: 12px;
+      color: $fg2;
+    }
+  }
+}
