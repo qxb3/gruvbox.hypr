@@ -3,7 +3,7 @@ import Applications from 'gi://AstalApps'
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { Variable } from 'astal'
 
-import FloatingWindow from '@root/widgets/FloatingWindow'
+import { FloatingWindow } from '@widgets'
 import { revealAppLauncher } from './vars'
 
 const applications = new Applications.Apps({

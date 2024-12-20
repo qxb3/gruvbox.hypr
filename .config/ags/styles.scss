@@ -28,7 +28,8 @@ $border: $fg;
 }
 
 // Widgets
-@import "./widgets/floating_window.scss";
+@import "./widgets/floating_window/floating_window.scss";
+@import "./widgets/calendar/calendar.scss";
 
 // Windows
 @import "./windows/top_bar/styles.scss";

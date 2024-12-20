@@ -13,6 +13,7 @@
       "astal/*": ["/usr/share/astal/gjs/*"],
       "@root/*": ["./*"],
       "@assets/*": ["./assets/*"],
+      "@widgets": ["./widgets/index.ts"],
       "@widgets/*": ["./widgets/*"],
       "@services/*": ["./services/*"],
       "@themes/*": ["./themes/*"],
