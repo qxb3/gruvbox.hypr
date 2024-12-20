@@ -21,7 +21,13 @@ function SideBar() {
         spacing={24}
         halign={Gtk.Align.CENTER}>
         <button
-          className='search_apps'
+          className={
+            revealAppLauncher().as(revealed =>
+              revealed
+                ? 'search active'
+                : 'search'
+            )
+          }
           cursor='pointer'
           onClick={() => {
             revealAppLauncher.set(

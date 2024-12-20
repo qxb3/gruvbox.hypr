@@ -10,6 +10,11 @@
   }
 
   & .buttons {
+    & .active {
+      & icon { color: #fff; }
+      & label { color: #fff; }
+    }
+
     & button { font-size: 24px; }
     & button.wallpaper { font-size: 28px; }
     & button.music { font-size: 28px; }
