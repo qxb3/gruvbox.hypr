@@ -3,20 +3,19 @@
   min-height: 400px;
 
   & .query_box {
-    & .query {
-      font-size: 17px;
-      padding: 4px 8px;
-      caret-color: $bg;
-      box-shadow:
-        -4px 0 4px rgba(42, 42, 42, 0.3),
-        4px 0  4px rgba(42, 42, 42, 0.3),
-        0 4px  4px rgba(42, 42, 42, 0.3);
+    & .query_container {
+      & .query {
+        border-top: solid $bg2 1px;
+        font-size: 17px;
+        padding: 8px 8px;
+        caret-color: $bg;
+      }
     }
 
     & .placeholder {
       font-size: 17px;
       font-weight: 100;
-      padding: 4px 10px;
+      padding: 8px 10px;
       color: $bg2;
     }
   }
@@ -26,10 +25,8 @@
   /* } */
 
   & .applications {
-    padding: 1rem;
-
     & .application {
-      padding: 4px;
+      padding: 8px;
 
       & .icon { font-size: 22px; }
       & .name { font-size: 16px; }

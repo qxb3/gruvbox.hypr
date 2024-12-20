@@ -31,6 +31,6 @@ Object.assign(globalThis, {
     terminal: 'kitty',
     codeEditor: 'nvim',
     browser: 'firefox',
-    animationSpeed: 500
+    animationSpeed: 300
   }
 })

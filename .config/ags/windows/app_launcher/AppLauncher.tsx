@@ -23,23 +23,25 @@ function QueryBox() {
       className='query_box'
       passThrough={true}
       hexpand={true}>
-      <entry
-        className='query'
-        hexpand={true}
-        onChanged={({ text }) => {
-          query.set(text)
-          queriedApplications.set(applications.fuzzy_query(text))
-          selectedApplication.set(queriedApplications.get()[0])
-        }}
-        setup={(self) => {
-          self.hook(revealAppLauncher, () => {
-            if (!revealAppLauncher.get())
-              self.text = ''
+      <box className='query_container'>
+        <entry
+          className='query'
+          hexpand={true}
+          onChanged={({ text }) => {
+            query.set(text)
+            queriedApplications.set(applications.fuzzy_query(text))
+            selectedApplication.set(queriedApplications.get()[0])
+          }}
+          setup={(self) => {
+            self.hook(revealAppLauncher, () => {
+              if (!revealAppLauncher.get())
+                self.text = ''
 
-            self.grab_focus()
-          })
-        }}
-      />
+              self.grab_focus()
+            })
+          }}
+        />
+      </box>
 
       <label
         className='placeholder'
@@ -146,7 +148,6 @@ export default function(gdkmonitor: Gdk.Monitor) {
           case Gdk.KEY_Down:
             if (queriedApplications.get().length <= 0) return
 
-            console.log(queriedApplications.get().length - 1)
             if (selectedIndex.get() < queriedApplications.get().length - 1) {
               selectedIndex.set(selectedIndex.get() + 1)
               selectedApplication.set(queriedApplications.get()[selectedIndex.get()])
