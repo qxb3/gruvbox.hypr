@@ -1,0 +1,43 @@
+.app_launcher {
+  min-width: 300px;
+  min-height: 400px;
+
+  & .query_box {
+    & .query {
+      font-size: 17px;
+      padding: 4px 8px;
+      caret-color: $bg;
+      box-shadow:
+        -4px 0 4px rgba(42, 42, 42, 0.3),
+        4px 0  4px rgba(42, 42, 42, 0.3),
+        0 4px  4px rgba(42, 42, 42, 0.3);
+    }
+
+    & .placeholder {
+      font-size: 17px;
+      font-weight: 100;
+      padding: 4px 10px;
+      color: $bg2;
+    }
+  }
+
+  /* & .category_selector { */
+  /*   padding: 1rem; */
+  /* } */
+
+  & .applications {
+    padding: 1rem;
+
+    & .application {
+      padding: 4px;
+
+      & .icon { font-size: 22px; }
+      & .name { font-size: 16px; }
+
+      &.selected,
+      &:hover {
+        background-color: $fg1;
+      }
+    }
+  }
+}
