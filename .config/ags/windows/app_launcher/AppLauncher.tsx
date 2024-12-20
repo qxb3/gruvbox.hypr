@@ -83,7 +83,11 @@ function ApplicationList() {
                       : 'application'
                   )
               }
-              cursor='pointer'>
+              cursor='pointer'
+              onClick={() => {
+                app.launch()
+                revealAppLauncher.set(false)
+              }}>
               <box spacing={8}>
                 <icon
                   className='icon'
