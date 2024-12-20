@@ -3,7 +3,7 @@ import Applications from 'gi://AstalApps'
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { Variable } from 'astal'
 
-import { FloatingWindow } from '@widgets'
+import { FloatingWindow, FlowBox } from '@widgets'
 import { revealAppLauncher } from './vars'
 
 const applications = new Applications.Apps({
@@ -34,8 +34,12 @@ function QueryBox() {
           }}
           setup={(self) => {
             self.hook(revealAppLauncher, () => {
-              if (!revealAppLauncher.get())
+              if (!revealAppLauncher.get()) {
                 self.text = ''
+                queriedApplications.set(applications.fuzzy_query(''))
+                selectedApplication.set(queriedApplications.get()[0])
+                selectedIndex.set(0)
+              }
 
               self.grab_focus()
             })
@@ -71,9 +75,10 @@ function ApplicationList() {
       className='applications'
       hexpand={true}
       vexpand={true}>
-      <box
-        vertical={true}
-        vexpand={true}>
+      <FlowBox
+        maxChildrenPerLine={4}
+        hexpand={true}
+        valign={Gtk.Align.START}>
         {queriedApplications(applications =>
           applications.map(app => (
             <button
@@ -90,21 +95,19 @@ function ApplicationList() {
                 app.launch()
                 revealAppLauncher.set(false)
               }}>
-              <box spacing={8}>
+              <box
+                spacing={8}
+                halign={Gtk.Align.CENTER}
+                valign={Gtk.Align.CENTER}>
                 <icon
                   className='icon'
                   icon={app.get_icon_name()}
-                />
-
-                <label
-                  className='name'
-                  label={app.get_name()}
                 />
               </box>
             </button>
           ))
         )}
-      </box>
+      </FlowBox>
     </scrollable>
   )
 }
