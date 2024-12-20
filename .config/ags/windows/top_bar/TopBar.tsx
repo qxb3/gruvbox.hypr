@@ -1,11 +1,13 @@
 import Hyprland from 'gi://AstalHyprland'
 import Network from 'gi://AstalNetwork'
+import Battery from 'gi://AstalBattery'
 
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { bind, Variable } from 'astal'
 
 const hyprland = Hyprland.get_default()
 const network = Network.get_default()
+const battery = Battery.get_default()
 
 const time = Variable('')
   .poll(1000, `date +"%h %d - %I:%M %p"`)
@@ -56,7 +58,7 @@ function Right() {
     <box
       className='right'
       halign={Gtk.Align.END}
-      spacing={12}>
+      spacing={10}>
       {bind(network, 'primary').as(primary => {
         if (primary === Network.Primary.UNKNOWN) {
           return (
@@ -80,6 +82,15 @@ function Right() {
           )
         }
       })}
+
+      <button
+        className='battery'
+        cursor='pointer'
+        visible={bind(battery, 'isPresent')}>
+        <icon
+          icon={bind(battery, 'iconName')}
+        />
+      </button>
 
       <button
         className='bell'
