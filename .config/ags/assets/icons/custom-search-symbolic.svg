@@ -1,7 +1,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+<svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
 <g id="SVGRepo_bgCarrier" stroke-width="0"/>
 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-<g id="SVGRepo_iconCarrier"> <g fill="none" fill-rule="evenodd"> <g transform="translate(1 1)"> <rect stroke="#C9C6BC" stroke-width="2" width="24" height="24" rx="1"/> <g transform="translate(6 6)" stroke="#C9C6BC"> <circle fill="#ffffff" cx="4.5" cy="4.5" r="4.5"/> <path d="M8 8l4.5 4.5" stroke-linecap="square"/> </g> </g> </g> </g>
+<g id="SVGRepo_iconCarrier"> <g> <g> <path d="M427.071,76.358c-7.356-0.332-13.303-6.093-13.852-13.436c-1.181-15.825-14.55-28.215-30.436-28.215 c-5.559,0-10.998,1.51-15.728,4.362c-4.857,2.928-10.97,2.767-15.667-0.413C327.86,22.72,293.094,13.583,256,13.583 s-71.86,9.139-95.386,25.076c-4.697,3.182-10.813,3.343-15.667,0.414c-4.73-2.852-10.167-4.359-15.728-4.359 c-15.887,0-29.255,12.396-30.436,28.221c-0.548,7.343-6.497,13.119-13.852,13.449c-35.145,1.58-60.836,32.384-60.836,47.844 c0,1.104,0.169,1.827,0.465,3.281h462.879c0.297-1.456,0.467-2.177,0.467-3.281C487.905,108.768,462.215,77.937,427.071,76.358z"/> </g> </g> <g> <g> <path d="M0,156.599v146.017c0,69.777,56.768,125.983,126.545,125.983h258.909c69.777,0,126.545-56.207,126.545-125.983V156.599H0z "/> </g> </g> <g> <g> <polygon points="349.101,453.5 162.899,453.583 150.634,498.417 361.373,498.417 "/> </g> </g> </g>
 </svg>
