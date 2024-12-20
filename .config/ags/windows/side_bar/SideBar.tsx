@@ -1,5 +1,5 @@
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
-import { exec, execAsync } from 'astal'
+import { execAsync } from 'astal'
 
 import { revealAppLauncher } from '@windows/app_launcher/vars'
 
@@ -29,7 +29,7 @@ function SideBar() {
             )
           }}>
           <box vertical={true}>
-            <icon icon='system-search-symbolic' />
+            <icon icon='custom-search-symbolic' />
             <label label='Apps' />
           </box>
         </button>
@@ -47,7 +47,7 @@ function SideBar() {
           className='music'
           cursor='pointer'>
           <box vertical={true}>
-            <icon icon='folder-music-symbolic' />
+            <icon icon='custom-music-symbolic' />
             <label label='Music' />
           </box>
         </button>
@@ -56,7 +56,7 @@ function SideBar() {
           className='weather'
           cursor='pointer'>
           <box vertical={true}>
-            <icon icon='weather-windy-symbolic' />
+            <icon icon='custom-weather-symbolic' />
             <label label='Weather' />
           </box>
         </button>
@@ -83,7 +83,7 @@ function SideBar() {
             execAsync(`bash -c "${USER_SETTINGS.terminal} ${USER_SETTINGS.codeEditor} ~/"`)
           }}>
           <box vertical={true}>
-            <icon icon='custom-editor-symbolic' />
+            <icon icon='custom-code-symbolic' />
             <label label='Code' />
           </box>
         </button>
