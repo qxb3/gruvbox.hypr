@@ -22,6 +22,10 @@
   }
 
   & .right {
+    & .active {
+      & label { color: #fff; }
+    }
+
     & .bell { font-size: 17px; }
   }
 }

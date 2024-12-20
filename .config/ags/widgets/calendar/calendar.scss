@@ -1,19 +1,24 @@
-.calendar {
+.calendar_widget {
+  padding: 1rem;
+
   & .month_year { font-size: 14px; }
   & .control { font-size: 16px; }
 
   & .not_incurrent {
-    color: $gray;
+    color: $bg2;
+  }
+
+  & .day {
+    padding: 4px;
   }
 
   & .today {
-    background-color: $primary;
+    background-color: #fff;
     color: $bg;
-    border-radius: 8px;
   }
 
   & .divider {
-    background-color: $gray;
+    background-color: $bg2;
     min-height: 1px;
   }
 }

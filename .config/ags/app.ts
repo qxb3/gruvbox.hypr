@@ -1,5 +1,3 @@
-#!/bin/gjs -m
-
 import './globals'
 
 import { App } from 'astal/gtk3'
@@ -10,6 +8,7 @@ import SideBar from './windows/side_bar/SideBar'
 import AppLauncher from './windows/app_launcher/AppLauncher'
 
 import requestHandler from './requestHandler'
+import Calendar from './windows/calendar/Calendar'
 
 App.start({
   css: compileScss(),
@@ -23,6 +22,7 @@ App.start({
     TopBar(mainMonitor)
 
     AppLauncher(mainMonitor)
+    Calendar(mainMonitor)
   },
   requestHandler: requestHandler
 })

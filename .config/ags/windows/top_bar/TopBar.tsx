@@ -4,6 +4,7 @@ import Battery from 'gi://AstalBattery'
 
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { bind, Variable } from 'astal'
+import { revealCalendar } from '../calendar/vars'
 
 const hyprland = Hyprland.get_default()
 const network = Network.get_default()
@@ -100,9 +101,24 @@ function Right() {
         />
       </button>
 
-      <label
-        label={time()}
-      />
+      <button
+        className={
+          revealCalendar().as(revealed =>
+            revealed
+              ? 'time active'
+              : 'time'
+          )
+        }
+        cursor='pointer'
+        onClick={() => {
+          revealCalendar.set(
+            !revealCalendar.get()
+          )
+        }}>
+        <label
+          label={time()}
+        />
+      </button>
     </box>
   )
 }

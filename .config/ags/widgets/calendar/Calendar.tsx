@@ -2,7 +2,7 @@ import { FlowBox } from '@widgets'
 import { Gtk } from 'astal/gtk3'
 import { Variable } from 'astal'
 
-// import { revealCalendarMenu } from '@windows/bar/menu/vars'
+import { revealCalendar } from '@windows/calendar/vars'
 
 export default function Calendar() {
   const currentDate = new Date()
@@ -24,15 +24,15 @@ export default function Calendar() {
     )
   })
 
-  // revealCalendarMenu.subscribe(value => {
-  //   if (!value) {
-  //     pageDate.set(currentDate)
-  //   }
-  // })
+  revealCalendar.subscribe(value => {
+    if (!value) {
+      pageDate.set(currentDate)
+    }
+  })
 
   return (
     <box
-      className='calendar'
+      className='calendar_widget'
       vertical={true}
       spacing={8}
       onDestroy={() => {
@@ -96,9 +96,8 @@ export default function Calendar() {
 
       <FlowBox
         maxChildrenPerLine={7}
-        columnSpacing={8}
-        rowSpacing={8}
-        homogeneous={true}
+        columnSpacing={4}
+        rowSpacing={4}
         hexpand={true}>
         {grid(grid =>
           grid.map(weeks =>
