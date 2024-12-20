@@ -20,7 +20,7 @@ function Left() {
       halign={Gtk.Align.START}>
       <label
         className='distro'
-        label={`${DISTRO}  技術`}
+        label={`${DISTRO}  インク`}
       />
     </box>
   )
