@@ -16,7 +16,7 @@
       "@widgets": ["./widgets/index.ts"],
       "@widgets/*": ["./widgets/*"],
       "@services/*": ["./services/*"],
-      "@themes/*": ["./themes/*"],
+      "@utils/*": ["./utils/*"],
       "@windows/*": ["./windows/*"]
     },
   }

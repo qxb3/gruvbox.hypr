@@ -2,8 +2,9 @@ import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { execAsync } from 'astal'
 
 import { revealAppLauncher } from '@windows/app_launcher/vars'
-import { revealWallpapers } from '../wallpapers/vars'
-import { revealMusicPlayer } from '../music_player/vars'
+import { revealWallpapers } from '@windows/wallpapers/vars'
+import { revealMusicPlayer } from '@windows/music_player/vars'
+import { revealWeather } from '@windows/weather/vars'
 
 function SideBar() {
   return (
@@ -83,8 +84,19 @@ function SideBar() {
         </button>
 
         <button
-          className='weather'
-          cursor='pointer'>
+          className={
+            revealWeather().as(revealed =>
+              revealed
+                ? 'weather_btn active'
+                : 'weather_btn'
+            )
+          }
+          cursor='pointer'
+          onClick={() => {
+            revealWeather.set(
+              !revealWeather.get()
+            )
+          }}>
           <box vertical={true}>
             <icon icon='custom-weather-symbolic' />
             <label label='Weather' />
