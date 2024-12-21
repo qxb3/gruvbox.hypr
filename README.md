@@ -1,21 +1,29 @@
-<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/logo.png"><br><br>
+<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/logo.png"><br><br>
 
 &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
 &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
-&ensp;[<kbd> <br> Commands <br> </kbd>](#Command-Mode-Commands)&ensp;
 <br><br></div>
+
+> [!CAUTION]
+> Under construction.
+
+> [!CAUTION]
+> Under construction.
+
+> [!CAUTION]
+> Under construction.
 
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/1.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/2.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/3.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/5.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/6.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/1.png" />
+  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/2.png" /> -->
+  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/3.png" /> -->
+  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" /> -->
+  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/5.png" /> -->
+  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/6.png" /> -->
 </p>
 
 <br>
@@ -29,7 +37,7 @@
 > Please see [Dependecies](#Dependecies)
 
 ```bash
-git clone --depth=1 --single-branch --branch vim_styled https://github.com/qxb3/gruvbox.hypr
+git clone --depth=1 --single-branch --branch ink https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
 cp -r font/* ~/.local/share/fonts
 cp -r .config/* ~/.config
@@ -80,6 +88,7 @@ cp -r .scripts ~/ # Optional
   <code>e</code><br><code>t</code><br><code>c</code></td><td><table>
   <tr><td>gvfs</td><td>mpris cover art caching</td></tr>
   <tr><td>gjs</td><td>for running the bundled ags</td></tr>
+  <tr><td>upower</td><td>battery daemon</td></tr>
   <tr><td>NetworkManager</td><td>manages network</td></tr></table>
 </td></tr></table>
 
