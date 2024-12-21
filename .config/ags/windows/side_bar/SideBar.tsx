@@ -2,6 +2,8 @@ import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { execAsync } from 'astal'
 
 import { revealAppLauncher } from '@windows/app_launcher/vars'
+import { revealWallpapers } from '../wallpapers/vars'
+import { revealMusicPlayer } from '../music_player/vars'
 
 function SideBar() {
   return (
@@ -41,8 +43,19 @@ function SideBar() {
         </button>
 
         <button
-          className='wallpaper'
-          cursor='pointer'>
+          className={
+            revealWallpapers().as(revealed =>
+              revealed
+                ? 'wallpaper active'
+                : 'wallpaper'
+            )
+          }
+          cursor='pointer'
+          onClick={() => {
+            revealWallpapers.set(
+              !revealWallpapers.get()
+            )
+          }}>
           <box vertical={true}>
             <icon icon='custom-wallpaper-symbolic' />
             <label label='Walls' />
@@ -50,8 +63,19 @@ function SideBar() {
         </button>
 
         <button
-          className='music'
-          cursor='pointer'>
+          className={
+            revealMusicPlayer().as(revealed =>
+              revealed
+                ? 'music active'
+                : 'music'
+            )
+          }
+          cursor='pointer'
+          onClick={() => {
+            revealMusicPlayer.set(
+              !revealMusicPlayer.get()
+            )
+          }}>
           <box vertical={true}>
             <icon icon='custom-music-symbolic' />
             <label label='Music' />
