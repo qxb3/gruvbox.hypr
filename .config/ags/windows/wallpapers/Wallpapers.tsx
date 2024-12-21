@@ -1,7 +1,7 @@
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { exec, execAsync } from 'astal'
 
-import { FloatingWindow } from '@root/widgets'
+import { FloatingWindow } from '@widgets'
 import { revealWallpapers } from './vars'
 
 function getWallpapers() {
