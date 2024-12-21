@@ -148,17 +148,15 @@ export default class Weather extends GObject.Object {
         readableWeather: this._get_readable_weather(WeatherCode.DEFAULT),
         icon: this._get_icon(WeatherCode.DEFAULT)
       },
-      hourly: [
-        {
-          time: Date.now(),
-          temperature: 0,
-          humidity: 0,
-          weatherCode: 0,
-          windSpeed: 0,
-          readableWeather: this._get_readable_weather(WeatherCode.DEFAULT),
-          icon: this._get_icon(WeatherCode.DEFAULT)
-        }
-      ]
+      hourly: Array.from({ length: 24 }).map(() => ({
+        time: Date.now(),
+        temperature: 1,
+        humidity: 0,
+        weatherCode: 0,
+        windSpeed: 0,
+        readableWeather: this._get_readable_weather(WeatherCode.DEFAULT),
+        icon: this._get_icon(WeatherCode.DEFAULT)
+      }))
     }
 
     this._get_weather()
