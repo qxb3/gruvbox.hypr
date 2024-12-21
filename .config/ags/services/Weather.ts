@@ -57,6 +57,7 @@ export default class Weather extends GObject.Object {
           temperature: weather.current.temperature_2m,
           humidity: weather.current.relative_humidity_2m,
           precipitation: weather.current.precipitation,
+          readableWeather: this._get_readable_weather(weather.current.weather_code),
           weatherCode: weather.current.weather_code,
           windSpeed: weather.current.wind_speed_10m,
           icon: this._get_icon(weather.current.weather_code)
@@ -67,6 +68,7 @@ export default class Weather extends GObject.Object {
           humidity: weather.hourly.relative_humidity_2m[i],
           weatherCode: weather.hourly.weather_code[i],
           windSpeed: weather.hourly.wind_speed_80m[i],
+          readableWeather: this._get_readable_weather(weather.hourly.weather_code[i]),
           icon: this._get_icon(weather.hourly.weather_code[i])
         }))
       }
@@ -99,6 +101,28 @@ export default class Weather extends GObject.Object {
     }
   }
 
+  private _get_readable_weather(weatherCode: WeatherCode) {
+    switch (weatherCode) {
+      case WeatherCode.CLEAR_SKY:
+        return 'Clear Sky'
+      case WeatherCode.CLOUDY:
+        return 'Cloudy'
+      case WeatherCode.FOGGY:
+        return 'Foggy'
+      case WeatherCode.DRIZZLE | WeatherCode.FREEZING_DRIZZLE:
+        return 'Drizzle'
+      case WeatherCode.RAIN | WeatherCode.RAIN_SHOWERS | WeatherCode.FREEZING_RAIN:
+        return 'Rain'
+      case WeatherCode.SNOW | WeatherCode.SNOW_GRAINS | WeatherCode.SNOW_SHOWERS:
+        return 'Snow'
+      case WeatherCode.THUNDERSTORM | WeatherCode.THUNDERSTORM_HEAVY_HAIL:
+        return 'Thunderstorm'
+      case WeatherCode.DEFAULT:
+      default:
+        return 'N/A'
+    }
+  }
+
   constructor() {
     super()
 
@@ -115,21 +139,23 @@ export default class Weather extends GObject.Object {
 
     this.weather = {
       current: {
-        time: 0,
+        time: Date.now(),
         temperature: 0,
         humidity: 0,
         precipitation: 0,
         weatherCode: 0,
         windSpeed: 0,
+        readableWeather: this._get_readable_weather(WeatherCode.DEFAULT),
         icon: this._get_icon(WeatherCode.DEFAULT)
       },
       hourly: [
         {
-          time: 0,
+          time: Date.now(),
           temperature: 0,
           humidity: 0,
           weatherCode: 0,
           windSpeed: 0,
+          readableWeather: this._get_readable_weather(WeatherCode.DEFAULT),
           icon: this._get_icon(WeatherCode.DEFAULT)
         }
       ]
@@ -178,6 +204,7 @@ export type WeatherData = {
     temperature: number
     humidity: number
     precipitation: number
+    readableWeather: string
     weatherCode: number
     windSpeed: number
     icon: string
@@ -186,6 +213,7 @@ export type WeatherData = {
     time: number
     temperature: number
     humidity: number
+    readableWeather: string
     weatherCode: number
     windSpeed: number
     icon: string
