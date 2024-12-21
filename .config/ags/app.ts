@@ -9,6 +9,7 @@ import AppLauncher from './windows/app_launcher/AppLauncher'
 
 import requestHandler from './requestHandler'
 import Calendar from './windows/calendar/Calendar'
+import Wallpapers from './windows/wallpapers/Wallpapers'
 
 App.start({
   css: compileScss(),
@@ -23,6 +24,7 @@ App.start({
 
     AppLauncher(mainMonitor)
     Calendar(mainMonitor)
+    Wallpapers(mainMonitor)
   },
   requestHandler: requestHandler
 })

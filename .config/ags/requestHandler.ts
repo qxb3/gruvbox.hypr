@@ -1,5 +1,7 @@
 import { Variable } from 'astal'
+
 import { revealAppLauncher } from './windows/app_launcher/vars'
+import { revealWallpapers } from './windows/wallpapers/vars'
 
 enum RevealerCommand {
   OPEN,
@@ -31,6 +33,13 @@ export default function requestHandler(request: string, res: (response: any) => 
         case 'close': return handleRevealer(RevealerCommand.CLOSE, revealAppLauncher)
         case 'toggle': return handleRevealer(RevealerCommand.TOGGLE, revealAppLauncher)
         default: return 'Unknown command for app_launcher.'
+      }
+    case 'wallpapers':
+      switch (args[1]) {
+        case 'open': return handleRevealer(RevealerCommand.OPEN, revealWallpapers)
+        case 'close': return handleRevealer(RevealerCommand.CLOSE, revealWallpapers)
+        case 'toggle': return handleRevealer(RevealerCommand.TOGGLE, revealWallpapers)
+        default: return 'Unknown command for wallpapers.'
       }
     default:
       return res('Unknown request.')

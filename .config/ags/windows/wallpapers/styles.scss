@@ -1,0 +1,18 @@
+.wallpapers {
+  min-width: 350px;
+  min-height: 400px;
+
+  & .content {
+    padding: 1rem;
+
+    & .wallpaper {
+      box-shadow:
+        -4px 0 4px rgba(42, 42, 42, 0.3),
+        4px 0  4px rgba(42, 42, 42, 0.3),
+        0 4px  4px rgba(42, 42, 42, 0.3);
+      background-size: cover;
+      background-position: center;
+      min-height: 200px;
+    }
+  }
+}
