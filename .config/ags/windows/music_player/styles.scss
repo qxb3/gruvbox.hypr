@@ -1,0 +1,49 @@
+.music_player {
+  margin-top: 80px;
+
+  & .content {
+    padding: 1.5rem;
+
+    & .cover_art {
+      background-size: cover;
+      background-position: center;
+      border: solid 6px $fg1;
+      min-width: 200px;
+      min-height: 200px;
+    }
+
+    & .meta {
+      & .title {
+        font-size: 17px;
+        font-weight: 700;
+      }
+
+      & .artist {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+
+    & .controls {
+      margin-top: 2rem;
+
+      & .icon {
+        font-size: 18px;
+      }
+    }
+
+    & .position {
+      & .progress {
+        & trough {
+          background-color: $bg2;
+          min-height: 8px;
+
+          & progress {
+            background-color: $bg;
+            min-height: 8px;
+          }
+        }
+      }
+    }
+  }
+}
