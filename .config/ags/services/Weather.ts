@@ -1,5 +1,6 @@
 import { exec, interval } from 'astal'
 import { GObject, property, register } from 'astal/gobject'
+import { fetch } from '@utils/fetch'
 
 @register()
 export default class Weather extends GObject.Object {
@@ -7,6 +8,7 @@ export default class Weather extends GObject.Object {
 
   @property(Object) declare location: Location
   @property(Object) declare weather: WeatherData
+  @property(Object) declare status: 'fetching' | 'fetched'
 
   public get_location() {
     if (this.location)
@@ -18,46 +20,60 @@ export default class Weather extends GObject.Object {
       return this.weather
   }
 
-  private _get_location() {
-    const locResponse: IpApiResponse = JSON.parse(exec('curl http://ip-api.com/json'))
-    if (locResponse.status === 'fail')
-      throw Error('Failed to fetch location')
+  private async _get_location() {
+    try {
+      const locationResponse = await fetch('http://ip-api.com/json', { method: 'GET' })
+      const location: LocationResponse = await locationResponse.json()
 
-    if (locResponse.status === 'success') {
-      this.location = {
-        country: locResponse.country,
-        regionName: locResponse.regionName,
-        city: locResponse.city,
-        timezone: locResponse.timezone,
-        latitude: locResponse.lat,
-        longitude: locResponse.lon
+      if (location.status === 'fail')
+        throw Error('Failed to fetch location')
+
+      if (location.status === 'success') {
+        this.location = {
+          country: location.country,
+          regionName: location.regionName,
+          city: location.city,
+          timezone: location.timezone,
+          latitude: location.lat,
+          longitude: location.lon
+        }
       }
+    } catch(err) {
+      console.log(`Error while fetching location: ${err}`)
     }
   }
 
-  private _get_weather() {
-    const weatherResponse: WeatherApiResult = JSON.parse(
-      exec(`curl https://api.open-meteo.com/v1/forecast?latitude=${this.location.latitude}&longitude=${this.location.longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_80m&timeformat=unixtime&timezone=auto&forecast_days=1`)
-    )
+  private async _get_weather() {
+    this.status = 'fetching'
+    await this._get_location()
 
-    this.weather = {
-      current: {
-        time: weatherResponse.current.time,
-        temperature: weatherResponse.current.temperature_2m,
-        humidity: weatherResponse.current.relative_humidity_2m,
-        precipitation: weatherResponse.current.precipitation,
-        weatherCode: weatherResponse.current.weather_code,
-        windSpeed: weatherResponse.current.wind_speed_10m,
-        icon: this._get_icon(weatherResponse.current.weather_code)
-      },
-      hourly: weatherResponse.hourly.time.map((time, i) => ({
-        time,
-        temperature: weatherResponse.hourly.temperature_2m[i],
-        humidity: weatherResponse.hourly.relative_humidity_2m[i],
-        weatherCode: weatherResponse.hourly.weather_code[i],
-        windSpeed: weatherResponse.hourly.wind_speed_80m[i],
-        icon: this._get_icon(weatherResponse.hourly.weather_code[i])
-      }))
+    try {
+      const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${this.location.latitude}&longitude=${this.location.longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_80m&timeformat=unixtime&timezone=auto&forecast_days=1`, { method: 'GET' })
+      const weather: WeatherResponse = await weatherResponse.json()
+
+      this.weather = {
+        current: {
+          time: weather.current.time,
+          temperature: weather.current.temperature_2m,
+          humidity: weather.current.relative_humidity_2m,
+          precipitation: weather.current.precipitation,
+          weatherCode: weather.current.weather_code,
+          windSpeed: weather.current.wind_speed_10m,
+          icon: this._get_icon(weather.current.weather_code)
+        },
+        hourly: weather.hourly.time.map((time, i) => ({
+          time,
+          temperature: weather.hourly.temperature_2m[i],
+          humidity: weather.hourly.relative_humidity_2m[i],
+          weatherCode: weather.hourly.weather_code[i],
+          windSpeed: weather.hourly.wind_speed_80m[i],
+          icon: this._get_icon(weather.hourly.weather_code[i])
+        }))
+      }
+
+      this.status = 'fetched'
+    } catch(err) {
+      console.log(`Error while fetching weather: ${err}`)
     }
   }
 
@@ -85,11 +101,41 @@ export default class Weather extends GObject.Object {
   constructor() {
     super()
 
-    this._get_location()
-    this._get_weather()
+    // Default values
 
+    this.location = {
+      country: 'N/A',
+      regionName: 'N/A',
+      city: 'N/A',
+      timezone: 'N/A',
+      latitude: 0,
+      longitude: 0
+    }
+
+    this.weather = {
+      current: {
+        time: 0,
+        temperature: 0,
+        humidity: 0,
+        precipitation: 0,
+        weatherCode: 0,
+        windSpeed: 0,
+        icon: 'weather-overcast-symbolic'
+      },
+      hourly: [
+        {
+          time: 0,
+          temperature: 0,
+          humidity: 0,
+          weatherCode: 0,
+          windSpeed: 0,
+          icon: 'weather-overcast-symbolic'
+        }
+      ]
+    }
+
+    this._get_weather()
     interval(600000, () => {
-      this._get_location()
       this._get_weather()
     })
   }
@@ -108,7 +154,7 @@ export type Location = {
   longitude: number
 }
 
-type IpApiResponse = {
+type LocationResponse = {
   status: 'success' | 'fail'
   country: string
   countryCode: string
@@ -145,7 +191,7 @@ export type WeatherData = {
   }[]
 }
 
-type WeatherApiResult = {
+type WeatherResponse = {
   latitude: number
   longitude: number
   generationtime_ms: number
