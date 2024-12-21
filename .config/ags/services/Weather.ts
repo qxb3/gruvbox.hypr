@@ -47,15 +47,38 @@ export default class Weather extends GObject.Object {
         humidity: weatherResponse.current.relative_humidity_2m,
         precipitation: weatherResponse.current.precipitation,
         weatherCode: weatherResponse.current.weather_code,
-        windSpeed: weatherResponse.current.wind_speed_10m
+        windSpeed: weatherResponse.current.wind_speed_10m,
+        icon: this._get_icon(weatherResponse.current.weather_code)
       },
       hourly: weatherResponse.hourly.time.map((time, i) => ({
         time,
         temperature: weatherResponse.hourly.temperature_2m[i],
         humidity: weatherResponse.hourly.relative_humidity_2m[i],
         weatherCode: weatherResponse.hourly.weather_code[i],
-        windSpeed: weatherResponse.hourly.wind_speed_80m[i]
+        windSpeed: weatherResponse.hourly.wind_speed_80m[i],
+        icon: this._get_icon(weatherResponse.hourly.weather_code[i])
       }))
+    }
+  }
+
+  private _get_icon(weatherCode: WeatherCode) {
+    switch (weatherCode) {
+      case WeatherCode.CLEAR_SKY:
+        return 'weather-clear-symbolic'
+      case WeatherCode.CLOUDY:
+        return 'weather-few-clouds-symbolic'
+      case WeatherCode.FOGGY:
+        return 'weather-fog-symbolic'
+      case WeatherCode.DRIZZLE | WeatherCode.FREEZING_DRIZZLE:
+        return 'weather-showers-scattered-symbolic'
+      case WeatherCode.RAIN | WeatherCode.RAIN_SHOWERS | WeatherCode.FREEZING_RAIN:
+        return 'weather-showers-symbolic'
+      case WeatherCode.SNOW | WeatherCode.SNOW_GRAINS | WeatherCode.SNOW_SHOWERS:
+        return 'weather-snow-symbolic'
+      case WeatherCode.THUNDERSTORM | WeatherCode.THUNDERSTORM_HEAVY_HAIL:
+        return 'weather-storm-symbolic'
+      default:
+        return 'weather-overcast-symbolic'
     }
   }
 
@@ -110,6 +133,7 @@ export type WeatherData = {
     precipitation: number
     weatherCode: number
     windSpeed: number
+    icon: string
   }
   hourly: {
     time: number
@@ -117,6 +141,7 @@ export type WeatherData = {
     humidity: number
     weatherCode: number
     windSpeed: number
+    icon: string
   }[]
 }
 
