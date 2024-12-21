@@ -1,7 +1,7 @@
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { exec, execAsync } from 'astal'
 
-import { FloatingWindow } from '@widgets'
+import { FloatingWindow, FlowBox } from '@widgets'
 import { revealWallpapers } from './vars'
 
 function getWallpapers() {
@@ -16,13 +16,15 @@ function Wallpapers() {
     <scrollable
       hexpand={true}
       vexpand={true}>
-      <box
+      <FlowBox
         className='content'
-        vertical={true}
-        spacing={12}>
+        maxChildrenPerLine={2}
+        column_spacing={8}
+        rowSpacing={8}>
         {wallpapers.map(wallpaper => (
           <button
             cursor='pointer'
+            halign={Gtk.Align.CENTER}
             onClick={() => {
               execAsync(`swww img ${wallpaper}`)
               revealWallpapers.set(false)
@@ -33,7 +35,7 @@ function Wallpapers() {
             />
           </button>
         ))}
-      </box>
+      </FlowBox>
     </scrollable>
   )
 }
