@@ -1,4 +1,4 @@
-import { exec, interval } from 'astal'
+import { interval } from 'astal'
 import { GObject, property, register } from 'astal/gobject'
 import { fetch } from '@utils/fetch'
 
@@ -93,6 +93,7 @@ export default class Weather extends GObject.Object {
         return 'weather-snow-symbolic'
       case WeatherCode.THUNDERSTORM | WeatherCode.THUNDERSTORM_HEAVY_HAIL:
         return 'weather-storm-symbolic'
+      case WeatherCode.DEFAULT:
       default:
         return 'weather-overcast-symbolic'
     }
@@ -120,7 +121,7 @@ export default class Weather extends GObject.Object {
         precipitation: 0,
         weatherCode: 0,
         windSpeed: 0,
-        icon: 'weather-overcast-symbolic'
+        icon: this._get_icon(WeatherCode.DEFAULT)
       },
       hourly: [
         {
@@ -129,7 +130,7 @@ export default class Weather extends GObject.Object {
           humidity: 0,
           weatherCode: 0,
           windSpeed: 0,
-          icon: 'weather-overcast-symbolic'
+          icon: this._get_icon(WeatherCode.DEFAULT)
         }
       ]
     }
@@ -236,6 +237,7 @@ type WeatherResponse = {
 }
 
 export enum WeatherCode {
+  DEFAULT                   = -1,
   CLEAR_SKY                 = 0,
   CLOUDY                    = 1  | 2 | 3,
   FOGGY                     = 45 | 48,
