@@ -91,6 +91,7 @@ function ApplicationList() {
                   )
               }
               cursor='pointer'
+              halign={Gtk.Align.START}
               onClick={() => {
                 app.launch()
                 revealAppLauncher.set(false)
